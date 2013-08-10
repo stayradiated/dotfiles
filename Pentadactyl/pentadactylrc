@@ -1,0 +1,127 @@
+
+"
+" ~/.pentadactylrc
+"
+
+loadplugins '\.(js|penta)$'
+group user
+
+"
+" Options
+" -----------------------------------------------------------------------------
+
+set guioptions-=br
+set guioptions+=n
+set hlfind
+
+" use colemak hints
+set hintkeys=arstdhneio
+
+
+"
+" Status line
+" -----------------------------------------------------------------------------
+
+hi -a StatusLine font-weight: normal;
+hi -a StatusLineNormal color:#C5C8C6 !important; background:#282A2E !important;
+
+"
+" Font
+" -----------------------------------------------------------------------------
+
+" set ui font
+hi FontCode -a font-family: tamzen !important; font-size: 13pt !important;
+hi FontFixed -a font-family: tamzen !important; font-size: 13pt !important;
+hi Normal -a font-family: tamzen !important; font-size: 13pt !important;
+
+" increase hints font size
+hi Hint -a font-size: 13pt !important; text-transform: uppercase;
+
+"
+" Mappings
+" -----------------------------------------------------------------------------
+
+map , <Leader>
+nmap -builtin <Leader>h :noh<CR>
+nmap -builtin ; :
+nmap -builtin : ;
+vmap -builtin ; :
+vmap -builtin : ;
+nmap -builtin <C-S-n> :tabmove! +1<CR>
+nmap -builtin <C-S-p> :tabmove! -1<CR>
+
+"
+" Toggle Styles
+" -----------------------------------------------------------------------------
+
+map -builtin <F3> :styletoggle<Space>-name<Space>hybrid<CR>
+
+"
+" Style: Hybrid Colourscheme 
+" -----------------------------------------------------------------------------
+
+style -name hybrid http://*,https://*,file://*,about:blank <<EOM
+  * {
+    color: #C5C8C6 !important;
+    background: #1D1F21 !important;
+    border-color: #282A2E !important;
+  }
+  a, a * {
+    color: #81A2BE !important;
+    text-decoration: none !important;
+  }
+  a:hover, a:hover * {
+    color: #F0C674 !important;
+  }
+  a:visited, a:visited * {
+    color: #b294bb !important;
+  }
+  a:visited:hover, a:visited:hover * {
+    color: #de935f !important;
+  }
+EOM
+styledisable -name=hybrid
+
+"
+" Style: Minimalistic Tabs 
+" -----------------------------------------------------------------------------
+
+style -name minitabs chrome://* <<EOM
+  #TabsToolbar toolbarbutton {
+    display: none !important;
+  }
+  .tabbrowser-tabs {
+    background: #282A2E !important;
+    border: none !important;
+  }
+  .tabbrowser-tab {
+    -moz-appearance: none !important;
+    border-radius: 0 !important;
+    background: #282A2E !important;
+    border: none !important;
+    color: #707880 !important;
+    font-family: "tamzen" !important;
+    font-size: 13pt !important;
+    height: 18px !important;
+    margin: 0 !important;
+    min-height: 0 !important;
+    padding: 0 0.5ex !important;
+  }
+  .tabbrowser-tab:not([pinned]) {
+    width: 200px;
+    max-width: 400px !important;
+  }
+  .tabbrowser-tab:not([fadein]) {
+    max-width: 1px !important;
+    min-width: 1px !important;
+  }
+  .tabbrowser-tab:hover {
+    background: #F0C674 !important;
+    color: #282A2E !important;
+    border-radius: 0 !important;
+  }
+  .tabbrowser-tab[selected] {
+    background: #282A2E !important;
+    color: #F0C674 !important;
+  }
+EOM
