@@ -1,0 +1,339 @@
+
+" ~/.vimrc
+"
+
+"
+" Compatability {{{
+" -----------------------------------------------------------------------------
+
+set nocompatible         " use vim defaults instead of vi
+set encoding=utf-8       " always encode in utf
+
+" }}}
+"
+" Vundle Plugins {{{
+" -----------------------------------------------------------------------------
+
+" Start Vundle
+filetype off
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+" Vundle
+Bundle 'gmarik/vundle'
+
+" Themes
+Bundle 'bling/vim-airline'
+Bundle 'w0ng/vim-github-theme'
+Bundle 'w0ng/vim-hybrid'
+
+" Extensions
+Bundle 'Shougo/unite.vim'
+Bundle 'Shougo/vimfiler.vim'
+Bundle 'tpope/vim-fugitive'
+
+" Editing
+Bundle 'scrooloose/syntastic'
+Bundle 'tpope/vim-surround'
+Bundle 'tpope/vim-unimpaired'
+Bundle 'mattn/zencoding-vim'
+Bundle 'tomtom/tcomment_vim'
+Bundle 'godlygeek/tabular'
+
+" Languages
+Bundle 'kchmck/vim-coffee-script'
+Bundle 'nelstrom/vim-markdown-folding'
+
+"
+" }}}
+"
+" Settings {{{
+" -----------------------------------------------------------------------------
+
+" Filetype dectection
+filetype plugin indent on
+syntax on
+
+" General
+set backspace=2          " enable <BS> for everything
+set colorcolumn=80       " visual indicator of column
+set scrolloff=5          " minimum lines at top/bottom when scrolling
+set completeopt-=preview " don't show preview window
+set cursorline           " highlight the line where the cursor is
+set fcs=vert:│,fold:-    " solid instead of broken line for vert splits
+set hidden               " hide when switching buffers, don't unload
+set laststatus=2         " always show the status line
+set lazyredraw           " don't update screen when executing macros
+set mouse=a              " enable mouse in all modes
+set noshowmode           " clashes with airline
+set linebreak            " break lines
+set nolist               " don't show whitespace
+set wrap                 " enable wordwrap
+set relativenumber       " show line numbers relative to the current line
+set showcmd              " show command on last line of screen
+set noshowmatch          " don't show bracket matches
+set spelllang=en_nz      " spell check with New Zealand English
+set textwidth=0          " don't break lines after some maximum width
+set title                " use filename in window title
+set wildmenu             " enhanced cmd line completion
+
+
+if has('macunix')
+  " CodeKit Compatibility
+  set nobackup
+  set nowritebackup
+  set noswapfile
+
+else
+  " Backup swap files
+  set backup
+  set backupdir=~/.vim/tmp
+  set backupskip=/tmp/*,/private/tmp/*
+  set directory=~/.vim/tmp
+  set writebackup
+endif
+
+
+" Folding
+set foldignore=          " don't ignore anything when folding
+set foldlevelstart=99    " no folds closed on open
+set foldmethod=marker    " collapse code using markers
+
+" Tabs
+set autoindent           " copy indent from previous line
+set expandtab            " replace tabs with spaces
+set shiftwidth=2         " spaces for autoindenting
+set smarttab             " <BS> removes shiftwidth worth of spaces
+set softtabstop=2        " spaces for editing, e.g. <Tab> or <BS>
+set tabstop=2            " spaces for <Tab>
+
+" Searches
+set hlsearch             " highlight search results
+set incsearch            " search whilst typing
+set ignorecase           " case insensitive searching
+set smartcase            " override ignorecase if upper case typed
+
+" Colours
+set t_Co=256
+let g:hybrid_use_Xresources = 1
+colorscheme hybrid
+
+" Fix escape key lag in terminal
+set timeoutlen=1000
+set ttimeoutlen=0
+
+" gVim
+if has('gui_running')
+
+  " Hide GUI
+  set guioptions-=m      " remove menu
+  set guioptions-=T      " remove toolbar
+  set guioptions-=r      " remove right scrollbar
+  set guioptions-=b      " remove bottom scrollbar
+  set guioptions-=L      " remove left scrollbar
+
+  " Paste from PRIMARY and CLIPBOARD
+  inoremap <silent> <M-v> <Esc>"+p`]a
+  inoremap <silent> <S-Insert> <Esc>"*p`]a
+
+  " Fonts
+  if has('macunix')
+    set guifont=PragmataPro\ for\ Powerline:h18
+  else
+    set guifont=tamsyn\ 14
+  endif
+
+endif
+
+" iTerm2
+if &term =~ "xterm"
+  " Toggle cursor shape
+  let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+  let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+endif
+
+" vimdiff
+if &diff
+  set diffopt=filler,foldcolumn:0
+endif
+
+" }}}
+"
+" Mappings {{{
+" -----------------------------------------------------------------------------
+
+" Vim Training mode
+map <Left> <Nop>
+map <Right> <Nop>
+map <Up> <Nop>
+map <Down> <Nop>
+
+" Map Leader
+let mapleader = ","
+
+" Remap Tab to %
+vnoremap <tab> %
+
+" Toggle fold
+nnoremap <space> za
+
+" Toggle spellcheck
+nnoremap <leader>s :set spell!<CR>
+
+" Toggle hlsearch for current results
+nnoremap <leader>h :nohlsearch<CR>
+
+" Search for trailing whitespace
+nnoremap <leader>w /\s\+$<CR>
+
+" Toggle last active bufer
+nnoremap <leader><Tab> :b#<CR>
+
+" Delete a buffer without closing the window
+nnoremap <leader>d :bp<bar>sp<bar>bn<bar>bd<CR>
+
+" Switch colon and semi-colon
+nnoremap ; :
+nnoremap : ;
+vnoremap ; :
+vnoremap : ;
+
+" Split windows
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
+" Remember selection when indenting
+vnoremap > >gv
+vnoremap < <gv
+
+" Better movement over wrapped lines
+nnoremap j gj
+nnoremap k gk
+
+" Paste mode for terminals
+nnoremap <F2> :set invpaste paste?<CR>
+set pastetoggle=<F2>
+
+" Toggle between light and dark colour schemes
+nnoremap <silent><F5> :call ToggleColours()<CR>
+
+nnoremap <leader>m :call ToggleFoldMethod()<CR>
+
+" Shortcut for Tabularize
+vnoremap <leader>t :Tabularize /
+
+" Check file for errors
+nnoremap <leader>c :SyntasticCheck<CR>
+
+" Show Quickfix window for Syntastic errors
+nnoremap <leader>E :Errors<CR>
+
+" Unite.vim
+nnoremap <leader>t :<C-u>Unite -no-split -buffer-name=files   -start-insert file_rec/async<CR>
+nnoremap <leader>T :<C-u>Unite -no-split -buffer-name=files   -start-insert file_rec/async:!<CR>
+nnoremap <leader>f :<C-u>Unite -no-split -buffer-name=files   -start-insert file<CR>
+nnoremap <leader>r :<C-u>Unite -no-split -buffer-name=mru     -start-insert file_mru<CR>
+nnoremap <leader>y :<C-u>Unite -no-split -buffer-name=yank    -start-insert history/yank<CR>
+nnoremap <leader>e :<C-u>Unite -no-split -buffer-name=buffer  -start-insert buffer<CR>
+
+" Shortcut for Vimfiler
+nnoremap <leader><space> :VimFilerExplorer<CR>
+
+" Keep search pattern at the center of the screen
+nnoremap <silent> n nzz
+nnoremap <silent> N Nzz
+nnoremap <silent> * *zz
+nnoremap <silent> # #zz
+
+" Toggle Line Number
+nnoremap <silent><F4> :call ToggleNumber()<CR>
+
+" }}}
+"
+" Plugin Settings {{{
+" -----------------------------------------------------------------------------
+
+" AirLine Fancy
+" let g:airline_left_sep = ''
+" let g:airline_left_alt_sep = ''
+" let g:airline_right_sep = ''
+" let g:airline_right_alt_sep = ''
+" let g:airline_branch_prefix = ' '
+" let g:airline_readonly_symbol = ''
+" let g:airline_linecolumn_prefix = ' '
+" let g:airline_theme='dark'
+
+" Airline Compatible
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+let g:airline_branch_prefix = 'b '
+let g:airline_readonly_symbol = 'R'
+let g:airline_linecolumn_prefix = ''
+let g:airline_theme='dark'
+
+" VimFiler
+let g:vimfiler_enable_auto_cd = 1
+
+" Unite
+let g:unite_source_history_yank_enable = 1
+let g:unite_source_file_rec_ignore_pattern = 'node_modules\/'
+call unite#filters#matcher_default#use(['matcher_fuzzy'])
+
+" Custom mappings for the unite buffer
+autocmd FileType unite call s:unite_settings()
+function! s:unite_settings()
+  " Enable navigation with control-j and control-k in insert mode
+  imap <buffer> <C-j>   <Plug>(unite_select_next_line)
+  imap <buffer> <C-k>   <Plug>(unite_select_previous_line)
+  " Reload directory contents
+  imap <buffer> <C-r>   <Plug>(unite_redraw)
+endfunction
+
+" }}}
+"
+" Autocommands {{{
+" -----------------------------------------------------------------------------
+
+" Indent rules
+autocmd FileType markdown setlocal ts=4 sw=4 sts=4 tw=79
+autocmd FileType python setlocal ts=4 sw=4 sts=4
+
+" Folding rules
+autocmd FileType c,cpp setlocal foldmethod=syntax
+
+" }}}
+"
+" Functions {{{
+" -----------------------------------------------------------------------------
+
+function! ToggleColours()
+if g:colors_name == 'hybrid'
+  colorscheme hybrid-light
+else
+  colorscheme hybrid
+endif
+endfunction
+
+function! ToggleFoldMethod()
+if &foldmethod == 'indent'
+  set foldmethod=marker
+  echo "foldmethod=marker"
+else
+  set foldmethod=indent
+  echo "foldmethod=indent"
+endif
+endfunction
+
+function! ToggleNumber()
+if &relativenumber
+  set number
+else
+  set relativenumber
+endif
+endfunction
+
+" }}}
