@@ -1,6 +1,6 @@
 # https://github.com/w0ng zsh theme
 
-[[ -f "$HOME/.dotfiles/git-prompt.sh" ]] && source "$HOME/.dotfiles/git-prompt.sh"
+[[ -f "$HOME/.terminal/zsh/git-prompt.sh" ]] && source "$HOME/.terminal/zsh/git-prompt.sh"
 
 GIT_PS1_SHOWDIRTYSTATE=1
 GIT_PS1_SHOWSTASHSTATE=1

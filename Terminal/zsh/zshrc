@@ -29,10 +29,10 @@ export TERM=rxvt-unicode-256color
 # pretty colours
 if hash gls 2>/dev/null; then
   alias ls="gls -hF --color=auto --group-directories-first"
-  [[ -e "$HOME/.dotfiles/dir_colours" ]] && eval $(gdircolors -b "$HOME/.dotfiles/dir_colours")
+  [[ -e "$HOME/.terminal/zsh/dir_colours" ]] && eval $(gdircolors -b "$HOME/.terminal/zsh/dir_colours")
 else
   alias ls="ls -hF --color=auto --group-directories-first"
-  [[ -e "$HOME/.dotfiles/dir_colours" ]] && eval $(dircolors -b "$HOME/.dotfiles/dir_colours")
+  [[ -e "$HOME/.terminal/zsh/dir_colours" ]] && eval $(dircolors -b "$HOME/.terminal/zsh/dir_colours")
 fi
 
 # pretty ls and grep

@@ -14,7 +14,7 @@ Xft.lcdfilter:  lcddefault
 Xcursor.theme:  Neutral
 
 ! Load Hybrid Theme
-#include "/home/stayrad/.dotfiles/colors/hybrid"
+#include "/home/stayrad/.terminal/colors/hybrid"
 
 ! URxvt Options
 URxvt.scrollstyle:     rxvt
