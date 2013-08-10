@@ -1,0 +1,6 @@
+set imap_user = "george@czabania.com"
+set imap_pass = ""
+set smtp_url = "smtp://george@czabania.com@smtp.gmail.com:587/"
+set smtp_pass = ""
+set from = "george@czabanai.com"
+set realname = "George Czabania"
