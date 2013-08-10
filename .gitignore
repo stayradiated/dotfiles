@@ -1,0 +1,10 @@
+
+# Mutt
+/Mutt/muttrc
+/Mutt/mutt/cache
+/Mutt/mutt/stayradiated.account
+/Mutt/mutt/czabania.account
+
+# Vim
+/Vim/bundle/*
+/Vim/tmp
