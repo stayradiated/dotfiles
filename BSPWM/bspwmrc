@@ -11,7 +11,7 @@ bspc rule -a Gimp -d Eight --floating
 bspc config split_ratio         0.50
 bspc config border_width        2
 bspc config window_gap          12
-bspc config borderless_monocle  true
-bspc config gapless_monocle     true
+bspc config borderless_monocle  false
+bspc config gapless_monocle     false
 
-~/bin/panel &
+~/.bar/init &

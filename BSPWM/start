@@ -2,9 +2,8 @@
 
 # Config
 PANEL_FIFO=/tmp/panel-fifo
-PANEL_BAR=~/bin/bar
-B_CONFIG=~/bin/bspwmrc
-S_CONFIG=~/bin/sxhkdrc
+B_CONFIG=~/.bspwm/bspwmrc
+S_CONFIG=~/.bspwm/sxhkdrc
 
 # Create pipe
 [ -e "$PANEL_FIFO" ] && rm "$PANEL_FIFO"
