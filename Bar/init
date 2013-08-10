@@ -1,0 +1,22 @@
+#!/bin/sh
+
+PANEL_FIFO=/tmp/panel-fifo
+PANEL_BAR=~/bin/bar/reader.sh
+
+# Tell BSPWM to log events
+bspc control --put-status
+
+# Display current title
+[[ -z "$(pidof xtitle)" ]] && xtitle -sf 'T%s' > "$PANEL_FIFO" &
+
+# Display time
+[[ -z "$(pidof clock)" ]] && clock -sf 'S%a %H:%M' > "$PANEL_FIFO" &
+
+# Display battery status
+[[ -z "$(pidof battery)" ]] && battery -sf 'B%s %u' > "$PANEL_FIFO" &
+
+# Display currently connected wifi network
+[[ -z "$(pidof essid)" ]] && essid -sf 'X%s' > "$PANEL_FIFO" &
+
+# Run bar
+cat "$PANEL_FIFO" | "$PANEL_BAR" | bar
