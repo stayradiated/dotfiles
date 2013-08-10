@@ -1,0 +1,18 @@
+#!/bin/sh
+
+# Config
+PANEL_FIFO=/tmp/panel-fifo
+PANEL_BAR=~/bin/bar
+B_CONFIG=~/bin/bspwmrc
+S_CONFIG=~/bin/sxhkdrc
+
+# Create pipe
+[ -e "$PANEL_FIFO" ] && rm "$PANEL_FIFO"
+mkfifo "$PANEL_FIFO"
+
+# Listen for keyboard shortcuts
+sxhkd -c "$S_CONFIG" &
+
+# Start window manager
+bspwm -s "$PANEL_FIFO" -c "$B_CONFIG" -p W
+
