@@ -1,0 +1,63 @@
+! ==============================================================
+! file: ~/.Xresources
+! author: George Czabania
+! ==============================================================
+
+! X Settings
+Xft.dpi:        140
+Xft.rgba:       rgb
+Xft.antialias:  true
+Xft.hinting:    true
+Xft.autohint:   false
+Xft.hintstyle:  hintslight
+Xft.lcdfilter:  lcddefault
+Xcursor.theme:  Neutral
+
+! Load Hybrid Theme
+#include "/home/stayrad/.dotfiles/colors/hybrid"
+
+! URxvt Options
+URxvt.scrollstyle:     rxvt
+URxvt.scrollBar:       False
+URxvt.urgentOnBell:    False
+URxvt.visualBell:      False
+URxvt.cursorBlink:     True
+URxvt.internalBorder:  2
+URxvt.depth:           32
+
+! bold, italic, underline
+URxvt.colorBD: #B5BD68
+URxvt.colorIT: #B294BB
+URxvt.colorUL: #81A2BE
+
+! font
+! URxvt.font:            -misc-tamsyn-medium-*-*--17-*-*-*-*-*-*-*
+! URxvt.boldFont:        -misc-tamsyn-bold-*-*--17-*-*-*-*-*-*-*
+! URxvt.italicFont:      -misc-tamsyn-medium-*-*--17-*-*-*-*-*-*-*
+! URxvt.bolditalicFont:  -misc-tamsyn-bold-*-*--17-*-*-*-*-*-*-*
+
+URxvt.font:            -misc-tamzen-medium-r-*--17-*-*-*-*-*-*-*
+URxvt.boldFont:        -misc-tamzen-bold-r-*--17-*-*-*-*-*-*-*
+URxvt.italicFont:      -misc-tamzen-medium-r-*--17-*-*-*-*-*-*-*
+URxvt.bolditalicFont:  -misc-tamzen-bold-r-*--17-*-*-*-*-*-*-*
+
+! extensions
+URxvt.perl-ext-common: default,clipboard,keyboard-select,url-select
+
+! clipboard
+URxvt.keysym.M-c:          perl:clipboard:copy
+URxvt.keysym.M-v:          perl:clipboard:paste
+URxvt.keysym.C-M-v:        perl:clipboard:paste_escaped
+URxvt.clipboard.copycmd:   xsel -ib
+URxvt.clipboard.pastecmd:  xsel -ob
+
+! keyboard-select
+URxvt.keysym.M-Escape:  perl:keyboard-select:activate
+URxvt.keysym.M-s:       perl:keyboard-select:search
+
+! url-select
+URxvt.keysym.M-u:            perl:url-select:select_next
+URxvt.url-select.autocopy:   true
+URxvt.url-select.button:     1
+URxvt.url-select.launcher:   /usr/bin/firefox
+URxvt.url-select.underline:  true
