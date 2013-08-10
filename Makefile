@@ -14,7 +14,7 @@ uninstall:
 	rm -f ~/.bin ~/.cdmrc
 	rm -f ~/.mutt ~/.muttrc
 	rm -f ~/.pentadactylrc
-	rm -f ~/.terminal ~/.Xresources ~/.zshrc
+	rm -f ~/.terminal ~/.Xresources ~/.zshrc ~/.oh-my-zsh/themes/w0ng.zsh-theme
 	rm -f ~/.vim ~/.vimrc
 	rm -f ~/.bspwm ~/.xinitrc ~/.Xmodmap
 
@@ -40,6 +40,7 @@ install:
   # Terminal
 	ln -fs $(term)/Xresources ~/.Xresources	
 	ln -fs $(term)/zsh/zshrc ~/.zshrc
+	ln -fs $(term)/zsh/w0ng.zsh-theme ~/.oh-my-zsh/themes/w0ng.zsh-theme
 	test -d ~/.terminal || ln -s $(term) ~/.terminal
 
 	# VIM
