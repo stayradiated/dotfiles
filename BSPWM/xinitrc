@@ -44,6 +44,7 @@ sh $HOME/.fehbg
 # start apps in background (only if not already running)
 [[ -z "$(pidof urxvtd)" ]] && urxvtd -q -o -f
 [[ -z "$(pidof bitlbee)" ]] && bitlbee -D
+[[ -z "$(pidof dropbox)" ]] && dropbox start
 
 # start WM 
 exec $HOME/.bspwm/start
