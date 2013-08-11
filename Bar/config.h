@@ -23,7 +23,7 @@
 #define BAR_FONT_FALLBACK_WIDTH 9
 
 /* Color palette */
-#define COLOR0  0x1D1F21 /* background */
+#define COLOR0  0x151515 /* background */
 #define COLOR1  0xC5C8C6 /* foreground */
 #define COLOR2  0x282A2E /* grey bg */
 #define COLOR3  0x707880 /* grey text */
