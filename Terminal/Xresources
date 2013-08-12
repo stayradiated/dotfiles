@@ -24,6 +24,7 @@ URxvt.visualBell:      False
 URxvt.cursorBlink:     True
 URxvt.internalBorder:  2
 URxvt.depth:           32
+URxvt.perl-lib:        /Users/Admin/.terminal/perl/
 
 ! bold, italic, underline
 URxvt.colorBD: #B5BD68
