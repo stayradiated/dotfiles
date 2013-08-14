@@ -54,54 +54,63 @@ uninstall:
 install:
 
 # Bar
-	test -d ~/.bar || ln -s $(bar) ~/.bar
+	@echo "Bar..."
+	@test -d ~/.bar || ln -s $(bar) ~/.bar
 	@if test -d ~/Github/bar; then ln -sf $(bar)/config.h ~/Github/bar/config.h; fi;
 
 # Bin
-	test -d ~/.bin || ln -s $(bin) ~/.bin
+	@echo "Bin..."
+	@test -d ~/.bin || ln -s $(bin) ~/.bin
 
 # Mutt
-	cp $(mutt)/_muttrc $(mutt)/muttrc
-	cp $(mutt)/mutt/_stayradiated.account $(mutt)/mutt/stayradiated.account
-	cp $(mutt)/mutt/_czabania.account $(mutt)/mutt/czabania.account
-	ln -fs $(mutt)/muttrc ~/.muttrc
-	test -d ~/.mutt || ln -s $(mutt)/mutt ~/.mutt
+	@echo "Mutt..."
+	@cp $(mutt)/_muttrc $(mutt)/muttrc
+	@cp $(mutt)/mutt/_stayradiated.account $(mutt)/mutt/stayradiated.account
+	@cp $(mutt)/mutt/_czabania.account $(mutt)/mutt/czabania.account
+	@ln -fs $(mutt)/muttrc ~/.muttrc
+	@test -d ~/.mutt || ln -s $(mutt)/mutt ~/.mutt
 
 # Pentadactyl
-	ln -fs $(penta)/pentadactylrc ~/.pentadactylrc
+	@echo "Pentadactyl..."
+	@ln -fs $(penta)/pentadactylrc ~/.pentadactylrc
 
 # Terminal
-	ln -fs $(term)/Xresources ~/.Xresources	
-	ln -fs $(term)/zsh/zshrc ~/.zshrc
-	ln -fs $(term)/zsh/w0ng.zsh-theme ~/.oh-my-zsh/themes/w0ng.zsh-theme
-	test -d ~/.terminal || ln -s $(term) ~/.terminal
+	@echo "Terminal..."
+	@ln -fs $(term)/Xresources ~/.Xresources	
+	@ln -fs $(term)/zsh/zshrc ~/.zshrc
+	@ln -fs $(term)/zsh/w0ng.zsh-theme ~/.oh-my-zsh/themes/w0ng.zsh-theme
+	@test -d ~/.terminal || ln -s $(term) ~/.terminal
 
 # VIM
-	mkdir -p $(vim)/tmp
-	ln -fs $(vim)/vimrc ~/.vimrc
-	test -d ~/.vim || ln -s $(vim) ~/.vim
+	@echo "Vim..."
+	@mkdir -p $(vim)/tmp
+	@ln -fs $(vim)/vimrc ~/.vimrc
+	@test -d ~/.vim || ln -s $(vim) ~/.vim
 	
 	@if test ! -d $(vim)/bundle/vundle; then\
 		git clone https://github.com/gmarik/vundle.git $(vim)/bundle/vundle;\
 	fi;
 
 # Window Manager
-	test -d ~/.bspwm || ln -s $(wm) ~/.bspwm
-	ln -fs $(wm)/xinitrc ~/.xinitrc
-	ln -fs $(wm)/Xmodmap ~/.Xmodmap
+	@echo "BSPWM..."
+	@test -d ~/.bspwm || ln -s $(wm) ~/.bspwm
+	@ln -fs $(wm)/xinitrc ~/.xinitrc
+	@ln -fs $(wm)/Xmodmap ~/.Xmodmap
 
 # Other files
-	ln -sf $(other)/cdmrc ~/.cdmrc
+	@echo "Other..."
+	@ln -sf $(other)/cdmrc ~/.cdmrc
 
 # Fonts
+	@echo "Fonts..."
 	@if test ! -d $(fonts)/tamzen; then\
 		git clone https://github.com/sunaku/tamzen-font $(fonts)/tamzen;\
 	fi;
 	@if test ! -d $(fonts)/sm4tik; then\
 		git clone https://github.com/sunaku/sm4tik-font.git $(fonts)/sm4tik;\
 	fi;
-	mkdir -p ~/.fonts
-	ln -fs $(fonts)/tamzen/*.bdf ~/.fonts/
-	ln -fs $(fonts)/sm4tik/*.bdf ~/.fonts/
-	mkfontdir $(fonts)
-	xset fp rehash
+	@mkdir -p ~/.fonts
+	@ln -fs $(fonts)/tamzen/*.bdf ~/.fonts/
+	@ln -fs $(fonts)/sm4tik/*.bdf ~/.fonts/
+	@mkfontdir $(fonts)
+	@xset fp rehash
