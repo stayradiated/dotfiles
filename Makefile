@@ -1,12 +1,16 @@
+# config
+os := osx
+
 # paths
 dir   := $(CURDIR)
 bar   := $(dir)/Bar
-bin   := $(dir)/Bin
+bin   := $(dir)/Bin/$(os)
 mutt  := $(dir)/Mutt
 penta := $(dir)/Pentadactyl
 term  := $(dir)/Terminal
 vim   := $(dir)/Vim
 wm    := $(dir)/BSPWM
+other := $(dir)/Other
 fonts := $(dir)/Fonts
 
 # Checks to see if any files are going to be overwritten
@@ -55,7 +59,6 @@ install:
 
 # Bin
 	test -d ~/.bin || ln -s $(bin) ~/.bin
-	ln -sf $(bin)/cdmrc ~/.cdmrc
 
 # Mutt
 	cp $(mutt)/_muttrc $(mutt)/muttrc
@@ -87,6 +90,8 @@ install:
 	ln -fs $(wm)/xinitrc ~/.xinitrc
 	ln -fs $(wm)/Xmodmap ~/.Xmodmap
 
+# Other files
+	ln -sf $(other)/cdmrc ~/.cdmrc
 
 # Fonts
 	@if test ! -d $(fonts)/tamzen; then\
