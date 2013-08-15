@@ -87,14 +87,19 @@ styledisable -name=hybrid
 " -----------------------------------------------------------------------------
 
 style -name minitabs chrome://* <<EOM
+  .tabbrowser-tabs * {
+    border: 0 !important;
+    background: none !important;
+  }
   #TabsToolbar toolbarbutton {
     display: none !important;
   }
   .tabbrowser-tabs {
     background: #282A2E !important;
-    border: none !important;
+    border: 0 !important;
   }
   .tabbrowser-tab {
+    border: 0 !important;
     -moz-appearance: none !important;
     border-radius: 0 !important;
     background: #282A2E !important;
