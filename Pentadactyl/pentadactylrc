@@ -17,6 +17,9 @@ set hlfind
 " use colemak hints
 set hintkeys=arstdhneio
 
+" search with duckduckgo (requires duckduckgo plugin)
+set defsearch=duckduckgo
+
 
 "
 " Status line
