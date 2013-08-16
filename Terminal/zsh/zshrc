@@ -1,6 +1,15 @@
-#
-# ~/.zshrc
-#
+# Change directory $HOME for OS X
+cd
+
+# set path for OSX
+if [ -d /opt/local/bin ]; then
+  PATH=/opt/local/bin:/opt/local/sbin:/opt/X11/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:$HOME/.bin
+  export PATH
+fi
+
+# BSPWM
+BSPWM_SOCKET=/tmp/bspwm-socket
+export BSPWM_SOCKET
 
 #
 # Terminal {{{
@@ -12,21 +21,27 @@ ZSH_THEME="w0ng"
 plugins=(git)
 source $ZSH/oh-my-zsh.sh
 
-export PATH="$PATH:$HOME/.gem/ruby/2.0.0/bin"
+HISTSIZE=1000
+SAVEHIST=1000
+HISTFILE=~/.history
+setopt APPEND_HISTORY SHARE_HISTORY
+export EDITOR=vim
+
 # Show dots
 COMPLETION_WAITING_DOTS="true"
 
 # Fix slow escape key in vim
 KEYTIMEOUT=1
 
-export TERM=rxvt-unicode-256color
+# Causes problems on mac
+# export TERM=rxvt-unicode-256color
 
 # }}}
 #
 # Aliases {{{
 # -----------------------------------------------------------------------------
 
-# pretty colours
+# pretty ls
 if hash gls 2>/dev/null; then
   alias ls="gls -hF --color=auto --group-directories-first"
   [[ -e "$HOME/.terminal/zsh/dir_colours" ]] && eval $(gdircolors -b "$HOME/.terminal/zsh/dir_colours")
@@ -35,9 +50,8 @@ else
   [[ -e "$HOME/.terminal/zsh/dir_colours" ]] && eval $(dircolors -b "$HOME/.terminal/zsh/dir_colours")
 fi
 
-# pretty ls and grep
+# pretty grep
 alias grep='grep --color=auto'
-alias ls='ls --color=auto'
 
 # make ls faster
 alias ll='ls -alhF'
@@ -70,7 +84,7 @@ alias c='clear'
 alias s='sudo'
 
 # give some protection when using rm, mv, and cp
-alias rm='rm -I'
+# alias rm='rm -i' # doesn't work on osx?
 alias cp='cp -vi'
 alias mv='mv -i'
 
@@ -119,4 +133,6 @@ cd () {
 
 # }}}
 
-# vim: ft=sh fdm=marker:
+if [ -x /urs/libexec/path_helper ]; then
+  eval `/usr/libexec/path_helper -s`
+fi

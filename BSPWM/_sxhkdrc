@@ -86,7 +86,7 @@ alt + Return
     urxvtc
 
 alt + space
-    dmenu_run -nb "#1D1F21" -nf "#C5C8C6" -sb "#282A2E" -sf "#90A959" -h 25 -p ">" -fn "-misc-tamzen-medium-r-*-*-14-*-*-*-*-*-*-*"
+    dmenu_run -nb "#1D1F21" -nf "#C5C8C6" -sb "#282A2E" -sf "#90A959" -h 25 -p ">" -fn "-*-tamzen-medium-r-*-*-14-*-*-*-*-*-*-*"
 
 # make sxhkd reload its configuration files:
 alt + Escape
