@@ -4,7 +4,7 @@ os := arch
 # paths
 dir   := $(CURDIR)
 bar   := $(dir)/Bar
-bin   := $(dir)/Bin/$(os)
+bin   := $(dir)/Bin
 mutt  := $(dir)/Mutt
 penta := $(dir)/Pentadactyl
 term  := $(dir)/Terminal
@@ -41,8 +41,13 @@ check:
 
 # Be very careful when running this
 uninstall:
+
+# Folders
+	rm -rf ~/.bin
+
+# Links
 	rm -f ~/.bar
-	rm -f ~/.bin ~/.cdmrc
+	rm -f ~/.cdmrc
 	rm -f ~/.mutt ~/.muttrc
 	rm -f ~/.pentadactylrc
 	rm -f ~/.terminal ~/.Xresources ~/.zshrc ~/.oh-my-zsh/themes/w0ng.zsh-theme
@@ -60,7 +65,9 @@ install:
 
 # Bin
 	@echo "Bin..."
-	@test -d ~/.bin || ln -s $(bin) ~/.bin
+	@mkdir -p ~/.bin
+	@if test -d $(bin)/$(os); then ln -s $(bin)/$(os)/* ~/.bin/; fi;
+	@ln -s $(bin)/all/* ~/.bin/
 
 # Mutt
 	@echo "Mutt..."
