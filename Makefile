@@ -1,5 +1,5 @@
 # config
-os := osx
+os := arch
 
 # paths
 dir   := $(CURDIR)
@@ -87,8 +87,8 @@ install:
 	@ln -fs $(vim)/vimrc ~/.vimrc
 	@test -d ~/.vim || ln -s $(vim) ~/.vim
 	
-	@if test ! -d $(vim)/bundle/vundle; then\
-		git clone https://github.com/gmarik/vundle.git $(vim)/bundle/vundle;\
+	@if test ! -d $(vim)/bundle/neobundle.vim; then\
+		git clone https://github.com/Shougo/neobundle.vim.git $(vim)/bundle/neobundle.vim;\
 	fi;
 
 # Window Manager

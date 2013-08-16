@@ -11,38 +11,53 @@ set encoding=utf-8       " always encode in utf
 
 " }}}
 "
-" Vundle Plugins {{{
+" NeoBundle Plugins {{{
 " -----------------------------------------------------------------------------
 
-" Start Vundle
-filetype off
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+if has('vim_starting')
+  set runtimepath+=~/.vim/bundle/neobundle.vim
+endif
 
-" Vundle
-Bundle 'gmarik/vundle'
+call neobundle#rc(expand('~/.vim/bundle/'))
+
+" NeoBundle
+NeoBundleFetch 'Shougo/neobundle.vim'
+
+" VimProc
+NeoBundle 'Shougo/vimproc.vim', {
+  \ 'build' : {
+  \   'mac' : 'make -f make_mac.mak',
+  \   'unix': 'make -f make_unix.mak'
+  \   }
+  \ }
 
 " Themes
-Bundle 'bling/vim-airline'
-Bundle 'w0ng/vim-github-theme'
-Bundle 'w0ng/vim-hybrid'
+NeoBundle 'bling/vim-airline'
+NeoBundle 'w0ng/vim-github-theme'
+NeoBundle 'w0ng/vim-hybrid'
 
 " Extensions
-Bundle 'Shougo/unite.vim'
-Bundle 'Shougo/vimfiler.vim'
-Bundle 'tpope/vim-fugitive'
+NeoBundle 'Shougo/unite.vim'
+NeoBundle 'Shougo/vimfiler.vim'
+NeoBundle 'tpope/vim-fugitive'
 
 " Editing
-Bundle 'scrooloose/syntastic'
-Bundle 'tpope/vim-surround'
-Bundle 'tpope/vim-unimpaired'
-Bundle 'mattn/zencoding-vim'
-Bundle 'tomtom/tcomment_vim'
-Bundle 'godlygeek/tabular'
+NeoBundle 'scrooloose/syntastic'
+NeoBundle 'tpope/vim-surround'
+NeoBundle 'tpope/vim-unimpaired'
+NeoBundle 'mattn/zencoding-vim'
+NeoBundle 'tomtom/tcomment_vim'
+NeoBundle 'godlygeek/tabular'
 
 " Languages
-Bundle 'kchmck/vim-coffee-script'
-Bundle 'nelstrom/vim-markdown-folding'
+NeoBundle 'kchmck/vim-coffee-script'
+NeoBundle 'nelstrom/vim-markdown-folding'
+
+" Filetype dectection
+filetype plugin indent on
+
+" Check plugins
+NeoBundleCheck
 
 "
 " }}}
@@ -50,8 +65,7 @@ Bundle 'nelstrom/vim-markdown-folding'
 " Settings {{{
 " -----------------------------------------------------------------------------
 
-" Filetype dectection
-filetype plugin indent on
+" Enable syntax highlighting
 syntax on
 
 " General
