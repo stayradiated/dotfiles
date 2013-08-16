@@ -11,5 +11,5 @@
 # └─╼%{$reset_color%} '
 # SPROMPT="Correct $fg_bold[red]%R$reset_color to $fg_bold[green]%r$reset_color [nyae]? "
 
-PROMPT="%{$fg[yellow]%}» "
-RPROMPT="%{$fg[yellow]%}%~%{$reset_color%}"
+PROMPT="%{$fg[green]%}» "
+RPROMPT="%{$fg[green]%}%~%{$reset_color%}"
