@@ -53,5 +53,5 @@ exists bitlbee && [[ -z $(pidof bitlbee) ]] && bitlbee -D
 exists dropbox && [[ -z $(pidof dropbox) ]] && dropbox start
 
 # start WM
-sxhkd -c ~/.bspwm/sxhkdrc &
-exec bspwm -c ~/.bspwm/bspwmrc
+sxhkd -c $HOME/.bspwm/sxhkdrc &
+exec bspwm -c $HOME/.bspwm/bspwmrc
