@@ -1,0 +1,45 @@
+#!/bin/bash
+# Color and echo
+           
+c0="\033[0m"    # Reset
+c1="\033[0;32m" # Green
+c2="\033[0;33m" # Yellow
+c3="\033[1;31m" # RED
+c4="\033[0;31m" # Red
+c5="\033[0;35m" # Purple
+c6="\033[0;36m" # Blue
+
+# OS information
+OS=$(sw_vers|awk '/ProductName/{print $2, $3, $4}')
+VERS=$(sw_vers|awk '/ProductVersion/{print $2}')
+BUILD=$(sw_vers|awk '/BuildVersion/{print $2}')
+WM=$(echo BSPWM)
+RAM=$(system_profiler SPHardwareDataType | awk '/Memory/{print $2,$3}')
+CPU_TYPE=$(system_profiler SPHardwareDataType | awk '/Processor Name/{print $3,$4,$5,$6,$7}') 
+CPU_FR=$(system_profiler SPHardwareDataType | awk '/Processor Speed/{print $3,$4,$5,$6,$7}') 
+VCARD=$(system_profiler SPDisplaysDataType | awk '/Chipset/{print $3,$4,$5}') 
+VRAM=$(system_profiler SPDisplaysDataType | awk '/VRAM/{print $3,$4,$5,$6,$7}')
+MODEL=$(system_profiler SPHardwareDataType | awk '/Model Identifier/{print $3,$4,$5,$6,$7}') 
+DISK_USAGE=$(df | awk '/disk0s2/{print$5}')
+PACKAGES=$(port installed | sed '/installed/d' | wc -l | awk '{print substr($0,6,10)}')
+SHELL=$(echo $SHELL)
+RES=$(system_profiler SPDisplaysDataType | awk '/Resolution/{print $2,$3,$4}' | head -n 1)
+UPTIME=$(system_profiler SPSoftwareDataType | awk '/boot/{print $4, $5, $6, $7, $8}')
+# Printing the apple
+
+echo -e "${c1}                :++++.         "   "${c3}`users`${c5}@${c3}`hostname`"
+echo -e "${c1}               /+++/.          "   "${c3}OS: ${c0}$OS $VERS ($BUILD)"
+echo -e "${c1}       .:-::- .+/:-\`\`.::-    "   "  ${c3}Kernel: ${c0}`uname -mrs`"
+echo -e "${c1}    .:/++++++/::::/++++++/:\`  "   " ${c3}Uptime: ${c0}$UPTIME" 
+echo -e "${c2}  .:///////////////////////:\` "   " ${c3}Packages: ${c0}$PACKAGES"
+echo -e "${c2}  ////////////////////////\`   "   " ${c3}Shell: ${c0}$SHELL"
+echo -e "${c3} -+++++++++++++++++++++++\`    "   " ${c3}Resolution: ${c0}$RES"
+echo -e "${c3} /++++++++++++++++++++++/      "   "${c3}DE: ${c0}Aqua"
+echo -e "${c4} /sssssssssssssssssssssss.     "   "${c3}WM: ${c0}$WM"
+echo -e "${c4} :ssssssssssssssssssssssss-    "   "${c3}Ram: ${c0}$RAM"
+echo -e "${c5}  osssssssssssssssssssssssso/\\"   " ${c3}Cpu: ${c0}$CPU_TYPE @ $CPU_FR"
+echo -e "${c5}  \`syyyyyyyyyyyyyyyyyyyyyyyy+\\"  " ${c3}VRam: ${c0}$VCARD @ $VRAM"
+echo -e "${c6}   \`ossssssssssssssssssssss/   "  "${c3}Model: ${c0}$MODEL"
+echo -e "${c6}     :ooooooooooooooooooo+.    "   "${c3}Disk Usage: ${c0}$DISK_USAGE"
+echo -e "${c6}      \`:+oo+/:-..-:/+o+/-   "     "   ${c3}Term: ${c0}`echo $TERM`"
+
