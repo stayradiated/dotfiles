@@ -11,3 +11,8 @@
 # Vim
 /Vim/bundle/*
 /Vim/tmp
+
+# Fonts
+/Fonts/tamzen
+/Fonts/yrmt
+/Fonts/sm4tik
