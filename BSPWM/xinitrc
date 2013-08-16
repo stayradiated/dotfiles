@@ -21,13 +21,16 @@ xset m 2
 xset -b
 
 # Map caps to ctrl
-setxkbmap -option "ctrl:nocaps,altwin:swap_lalt_lwin"
+setxkbmap -option "ctrl:nocaps"
 
 # Map control to control/escape
 $HOME/Github/xcape/xcape -e 'Control_L=Escape'
 
 # Load xmodmap for natural scrolling
 xmodmap .Xmodmap
+
+# Use a normal cursor
+xsetroot -cursor_name left_ptr
 
 # add font paths
 xset fp default
