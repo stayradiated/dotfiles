@@ -76,6 +76,7 @@ set spelllang=en_nz      " spell check with New Zealand English
 set textwidth=0          " don't break lines after some maximum width
 set title                " use filename in window title
 set wildmenu             " enhanced cmd line completion
+set gdefault             " replace everything by default
 
 
 if has('macunix')
@@ -263,7 +264,6 @@ nnoremap <silent><F4> :call ToggleNumber()<CR>
 " let g:airline_branch_prefix = ' '
 " let g:airline_readonly_symbol = ''
 " let g:airline_linecolumn_prefix = ' '
-" let g:airline_theme='dark'
 
 " Airline Compatible
 let g:airline_left_sep = ''
@@ -273,7 +273,9 @@ let g:airline_right_alt_sep = ''
 let g:airline_branch_prefix = 'b '
 let g:airline_readonly_symbol = 'R'
 let g:airline_linecolumn_prefix = ''
-let g:airline_theme='dark'
+
+" Airline theme
+let g:airline_theme='wombat'
 
 " VimFiler
 let g:vimfiler_enable_auto_cd = 1
