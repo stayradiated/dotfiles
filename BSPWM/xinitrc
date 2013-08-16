@@ -6,9 +6,14 @@ export HOME=/Users/Admin
 # Set the language
 export LANG="en_NZ.UTF-8"
 
+# Set the OS
+OS="arch"
+
 # Set the path
-PATH="$PATH:/usr/local/bin:/opt/local/bin:$HOME/.bin"
-echo $PATH > ~/path.txt
+if [ -d /opt/local/bin ]; then
+  PATH="$PATH:/usr/local/bin:/opt/local/bin:$HOME/.bin"
+  OS="osx"
+fi
 
 # increase mouse acceleration
 xset m 2
@@ -17,7 +22,7 @@ xset m 2
 xset -b
 
 # edit key layout
-setxkbmap -option "ctrl:nocaps"
+[[ $OS = "arch" ]] && setxkbmap -option "ctrl:nocaps"
 [[ -f $HOME/Github/xcape/xcape ]] && $HOME/Github/xcape/xcape -e "Control_L=Escape"
 
 # set xmodmap
@@ -48,9 +53,9 @@ xset fp rehash
 [[ -x $HOME/.fehbg ]] && $HOME/.fehbg &
 
 # start apps in background (only if not already running)
-[[ -z $(pidof urxvtd) ]] && urxvtd -q -o -f &
-exists bitlbee && [[ -z $(pidof bitlbee) ]] && bitlbee -D
-exists dropbox && [[ -z $(pidof dropbox) ]] && dropbox start
+[[ -z `pidof urxvtd` ]] && urxvtd -q -o -f &
+exists bitlbee && [[ -z `pidof bitlbee` ]] && bitlbee -D
+exists dropbox && [[ -z `pidof dropbox` ]] && dropbox start
 
 # start WM
 sxhkd -c $HOME/.bspwm/sxhkdrc &
