@@ -1,18 +1,14 @@
 #!/bin/sh
-#
-# ~/.xinitrc
-#
 
-# source xinitc.d scripts
-if [ -d /etc/X11/xinit/xinitrc.d ]; then
-  for f in /etc/X11/xinit/xinitrc.d/*; do
-    [ -x "$f" ] && . "$f"
-  done
-  unset f
-fi
+# Set the homedir
+export HOME=/Users/Admin
 
-# load .Xresources
-[[ -f $HOME/.Xresources ]] && xrdb -merge $HOME/.Xresources
+# Set the language
+export LANG="en_NZ.UTF-8"
+
+# Set the path
+PATH="$PATH:/usr/local/bin:/opt/local/bin:$HOME/.bin"
+echo $PATH > ~/path.txt
 
 # increase mouse acceleration
 xset m 2
@@ -20,14 +16,24 @@ xset m 2
 # disable that beep
 xset -b
 
-# Map caps to ctrl
-setxkbmap -option "ctrl:nocaps,altwin:swap_lalt_lwin"
+# edit key layout
+setxkbmap -option "ctrl:nocaps"
+[[ -f $HOME/Github/xcape/xcape ]] && $HOME/Github/xcape/xcape -e "Control_L=Escape"
 
-# Map control to control/escape
-$HOME/Github/xcape/xcape -e 'Control_L=Escape'
+# set xmodmap
+xmodmap $HOME/.Xmodmap
+
+# merge .Xdefaults
+xrdb -merge $HOME/.Xdefaults &
 
 # Load xmodmap for natural scrolling
-xmodmap .Xmodmap
+[[ -s $HOME/.Xmodmap ]] && xmodmap $HOME/.Xmodmap &
+
+# Set the cursor
+xsetroot -cursor_name left_ptr &
+
+# Make sure fonts.dir exists
+[[ ! -f $HOME/.fonts/fonts.dir ]] && mkfontdir $HOME/.fonts
 
 # add font paths
 xset fp default
@@ -35,16 +41,14 @@ xset fp default
 [[ -d $HOME/.fonts ]] && xset +fp $HOME/.fonts
 xset fp rehash
 
-# set WM to a name with Java recognises
-# wmname LG3D
-
 # set background
-sh $HOME/.fehbg
+[[ -x $HOME/.fehbg ]] && $HOME/.fehbg &
 
 # start apps in background (only if not already running)
-[[ -z "$(pidof urxvtd)" ]] && urxvtd -q -o -f
-[[ -z "$(pidof bitlbee)" ]] && bitlbee -D
-[[ -z "$(pidof dropbox)" ]] && dropbox start
+[[ -z $(pidof urxvtd) ]] && urxvtd -q -o -f &
+exists bitlbee && [[ -z $(pidof bitlbee) ]] && bitlbee -D
+exists dropbox && [[ -z $(pidof dropbox) ]] && dropbox start
 
-# start WM 
-exec $HOME/.bspwm/start
+# start WM
+sxhkd -c ~/.bspwm/sxhkdrc &
+exec bspwm -c ~/.bspwm/bspwmrc
