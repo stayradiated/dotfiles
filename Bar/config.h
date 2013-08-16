@@ -17,7 +17,7 @@
 #define BAR_BOTTOM 0
 
 /* The fonts used for the bar, comma separated. Only the first 2 will be used. */
-#define BAR_FONT  "-*-sm4tik-*-*-*--16-*-*-*-*-*-*-*", "-*-tamzen-medium-*-*--14-*-*-*-*-*-*-*"
+#define BAR_FONT "-misc-tamzen-medium-r-normal--14-*-*-*-*-*-*-*", "fixed"
 
 /* Some fonts don't set the right width for some chars, pheex it */
 #define BAR_FONT_FALLBACK_WIDTH 9

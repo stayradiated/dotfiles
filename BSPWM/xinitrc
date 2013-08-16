@@ -35,6 +35,9 @@ xsetroot -cursor_name left_ptr &
 # Make sure fonts.dir exists
 [[ ! -f $HOME/.fonts/fonts.dir ]] && mkfontdir $HOME/.fonts
 
+# Use a normal cursor
+xsetroot -cursor_name left_ptr
+
 # add font paths
 xset fp default
 [[ -d /usr/share/fonts/local ]] && xset +fp /usr/share/fonts/local

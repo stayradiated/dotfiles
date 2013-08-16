@@ -15,8 +15,9 @@
 # 9 = magenta
 
 # Icons
-bat=$(echo -e '\ue006') # battery
-clk=$(echo -e '\ue00e') # clock
+bat=$(echo -e '\u11B') # battery
+clk=$(echo -e '\u110') # clock
+sep=$(echo -e '\u19')  # vertical line
 
 # Tags
 zsh='ZSH'
@@ -33,7 +34,7 @@ time=""
 
 
 function print_right () {
-  right="\r\f1${essid}  \f3${bat} \f1${battery}% \f3${clk} \f1${time}\fr "
+  right="\r\f1${essid} \f5${sep} \f1${battery}% \f5${sep} \f1${time}\fr "
 }
 
 function print_title () {
