@@ -138,7 +138,7 @@ if has('gui_running')
 
   " Fonts
   if has('macunix')
-    set guifont=PragmataPro\ for\ Powerline:h18
+    set guifont=tamzen:h17
   else
     set guifont=tamsyn\ 14
   endif
