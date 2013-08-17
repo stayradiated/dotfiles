@@ -61,6 +61,14 @@ xset fp rehash
 exists bitlbee && [[ -z `pidof bitlbee` ]] && bitlbee -D
 exists dropbox && [[ -z `pidof dropbox` ]] && dropbox start
 
+# Pipe for bar
+export PANEL_FIFO=/tmp/panel-fifo
+[ -e $PANEL_FIFO ] && rm $PANEL_FIFO
+mkfifo $PANEL_FIFO
+
+# Start panel
+$HOME/.bar/init &
+
 # start WM
 sxhkd -c $HOME/.bspwm/sxhkdrc &
-exec bspwm -c $HOME/.bspwm/bspwmrc
+exec bspwm -c $HOME/.bspwm/bspwmrc -p W -s $PANEL_FIFO
