@@ -54,7 +54,7 @@ xset fp default
 xset fp rehash
 
 # set background
-[[ -x $HOME/.fehbg ]] && $HOME/.fehbg &
+[[ -x $HOME/.fehbg ]] && sh $HOME/.fehbg &
 
 # start apps in background (only if not already running)
 [[ -z `pidof urxvtd` ]] && urxvtd -q -o -f &

@@ -36,6 +36,7 @@ check:
 	@if test -f ~/.zshrc; then echo ".zshrc exists"; fi;
 	@if test -f ~/.xinitrc; then echo ".xinitrc exists"; fi;
 	@if test -f ~/.Xmodmap; then echo ".Xmodmap exists"; fi;
+	@if test -f ~/.fehbg; then echo ".fehbg exists"; fi;
 
 
 
@@ -116,6 +117,7 @@ install:
 # Other files
 	@echo "Other..."
 	@ln -sf $(other)/cdmrc ~/.cdmrc
+	@ln -sf $(other)/fehbg ~/.fehbg
 
 # Fonts
 	@echo "Fonts..."
