@@ -1,11 +1,14 @@
 # Change directory $HOME for OS X
 cd
 
+PATH=/usr/bin:/bin:/usr/sbin:/sbin/:/usr/local/bin:$HOME/.bin
+
 # set path for OSX
 if [ -d /opt/local/bin ]; then
-  PATH=/opt/local/bin:/opt/local/sbin:/opt/X11/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:$HOME/.bin
-  export PATH
+  PATH=/opt/local/bin:/opt/local/sbin:/opt/X11/bin:$PATH
 fi
+
+export PATH
 
 # BSPWM
 BSPWM_SOCKET=/tmp/bspwm-socket
