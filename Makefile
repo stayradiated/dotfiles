@@ -65,7 +65,8 @@ install:
 
 # Bin
 	@echo "Bin..."
-	@mkdir -p ~/.bin
+	@rm -r ~/.bin
+	@mkdir  ~/.bin
 	@if test -d $(bin)/$(os); then ln -s $(bin)/$(os)/* ~/.bin/; fi;
 	@ln -s $(bin)/all/* ~/.bin/
 
