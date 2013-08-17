@@ -1,7 +1,11 @@
 #!/bin/sh
 
 # Set the homedir
-export HOME=/Users/Admin
+if [ -d /home/stayrad ]; then
+  export HOME=/home/stayrad
+else
+  export HOME=/Users/Admin
+fi
 
 # Set the language
 export LANG="en_NZ.UTF-8"
