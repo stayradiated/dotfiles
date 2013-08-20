@@ -10,13 +10,9 @@ fi
 # Set the language
 export LANG="en_NZ.UTF-8"
 
-# Set the OS
-OS="arch"
-
 # Set the path
 if [ -d /opt/local/bin ]; then
   PATH="$PATH:/usr/local/bin:/opt/local/bin:$HOME/.bin"
-  OS="osx"
 fi
 
 # increase mouse acceleration
@@ -26,7 +22,7 @@ xset m 2
 xset -b
 
 # edit key layout
-[[ $OS = "arch" ]] && setxkbmap -option "ctrl:nocaps"
+setxkbmap -option "ctrl:nocaps"
 [[ -f $HOME/Github/xcape/xcape ]] && $HOME/Github/xcape/xcape -e "Control_L=Escape"
 
 # set xmodmap
@@ -58,7 +54,7 @@ xset fp rehash
 
 # start apps in background (only if not already running)
 [[ -z `pidof urxvtd` ]] && urxvtd -q -o -f &
-exists bitlbee && [[ -z `pidof bitlbee` ]] && bitlbee -D
+[[ -z `pidof bitlbee` ]] && bitlbee -D
 exists dropbox && [[ -z `pidof dropbox` ]] && dropbox start
 
 # Pipe for bar
