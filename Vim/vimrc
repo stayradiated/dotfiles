@@ -84,6 +84,7 @@ set linebreak            " break lines
 set nolist               " don't show whitespace
 set wrap                 " enable wordwrap
 set relativenumber       " show line numbers relative to the current line
+set number               " show absolute line number on current line
 set showcmd              " show command on last line of screen
 set noshowmatch          " don't show bracket matches
 set spelllang=en_nz      " spell check with New Zealand English
@@ -262,9 +263,6 @@ nnoremap <silent> N Nzz
 nnoremap <silent> * *zz
 nnoremap <silent> # #zz
 
-" Toggle Line Number
-nnoremap <silent><F4> :call ToggleNumber()<CR>
-
 " }}}
 "
 " Plugin Settings {{{
@@ -341,14 +339,6 @@ if &foldmethod == 'indent'
 else
   set foldmethod=indent
   echo "foldmethod=indent"
-endif
-endfunction
-
-function! ToggleNumber()
-if &relativenumber
-  set number
-else
-  set relativenumber
 endif
 endfunction
 
