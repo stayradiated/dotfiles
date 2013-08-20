@@ -60,7 +60,7 @@ function print_left () {
         ;;
       d*)
         # inactive but occupied desktop
-        left="$left\\u2\\f1${name}\\fr\\ur"
+        left="$left\\f1${name}\\fr"
         ;;
       E*)
         # inactive desktop
