@@ -17,7 +17,7 @@
 # Icons
 bat=$(echo -e '\u11B') # battery
 clk=$(echo -e '\u110') # clock
-sep=$(echo -e '\u19')  # vertical line
+sep="|"
 
 # Tags
 zsh='ZSH'
@@ -34,11 +34,12 @@ time=""
 
 
 function print_right () {
-  right="\r\f1${essid} \f5${sep} \f1${battery}% \f5${sep} \f1${time}\fr "
+  # right="\r\f1${essid} \f5${sep} \f1${battery}% \f5${sep} \f1${time}\fr "
+  right="\r\f1${time}\fr "
 }
 
 function print_title () {
-  title="\c${line#?}"
+  title="  ${line#?}"
 }
 
 function print_left () {
@@ -68,7 +69,7 @@ function print_left () {
         ;;
       L*)
         # layout
-        layout=$(printf "%s" "${id}" | sed 's/\(.\).*/\U\1/')
+        layout=$(printf "%s" "${id}" | sed 's/\(.\).*/\\1/')
         left="$left \\f6[ $layout ]\\fr"
         ;;
     esac
