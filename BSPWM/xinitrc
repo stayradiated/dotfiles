@@ -15,7 +15,7 @@ OS="arch"
 
 # Set the path
 if [ -d /opt/local/bin ]; then
-  PATH="$PATH:/usr/local/bin:/opt/local/bin:$HOME/.bin"
+  PATH="$PATH:/usr/local/bin:/opt/local/sbin:/opt/local/bin:$HOME/.bin"
   OS="osx"
 fi
 
@@ -54,11 +54,11 @@ xset fp default
 xset fp rehash
 
 # set background
-[[ -x $HOME/.fehbg ]] && sh $HOME/.fehbg &
+feh --bg-tile "$HOME/dotfiles/Other/dark_stripe.png"
 
 # start apps in background (only if not already running)
 [[ -z `pidof urxvtd` ]] && urxvtd -q -o -f &
-exists bitlbee && [[ -z `pidof bitlbee` ]] && bitlbee -D
+[[ -z `pidof bitlbee` ]] && bitlbee -D
 exists dropbox && [[ -z `pidof dropbox` ]] && dropbox start
 
 # Pipe for bar
