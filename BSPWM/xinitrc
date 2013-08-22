@@ -34,9 +34,6 @@ xrdb -merge $HOME/.Xdefaults &
 # Load xmodmap for natural scrolling
 [[ -s $HOME/.Xmodmap ]] && xmodmap $HOME/.Xmodmap &
 
-# Set the cursor
-xsetroot -cursor_name left_ptr &
-
 # Make sure fonts.dir exists
 [[ ! -f $HOME/.fonts/fonts.dir ]] && mkfontdir $HOME/.fonts
 
