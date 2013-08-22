@@ -295,7 +295,8 @@ let g:vimfiler_enable_auto_cd = 1
 
 " Unite
 let g:unite_source_history_yank_enable = 1
-let g:unite_source_file_rec_ignore_pattern = 'node_modules\/'
+let g:unite_source_file_rec_ignore_pattern = '\%(node_modules\/\|.sass-cache\/\|.git\/\)'
+
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
 
 " Custom mappings for the unite buffer
