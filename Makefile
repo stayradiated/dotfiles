@@ -1,10 +1,11 @@
 # config
-os := arch
+os := osx
 
 # paths
 dir   := $(CURDIR)
 bar   := $(dir)/Bar
 bin   := $(dir)/Bin
+irssi := $(dir)/Irssi
 mutt  := $(dir)/Mutt
 penta := $(dir)/Pentadactyl
 term  := $(dir)/Terminal
@@ -70,6 +71,11 @@ install:
 	@mkdir  ~/.bin
 	@if test -d $(bin)/$(os); then ln -s $(bin)/$(os)/* ~/.bin/; fi;
 	@ln -s $(bin)/all/* ~/.bin/
+
+# Irssi
+	@echo "Irssi..."
+	@mkdir -p ~/.irssi
+	@ln -fs $(irssi)/config ~/.irssi/config
 
 # Mutt
 	@echo "Mutt..."

@@ -1,7 +1,7 @@
 # Change directory $HOME for OS X
 cd
 
-PATH=/usr/bin:/bin:/usr/sbin:/sbin/:/usr/local/bin:$HOME/.bin
+PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin/:$HOME/.bin
 
 # set path for OSX
 if [ -d /opt/local/bin ]; then
