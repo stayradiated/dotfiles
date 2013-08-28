@@ -14,10 +14,10 @@ bspc control --put-status
 [[ -z "$(pidof clock)" ]] && clock -s -i 10 -f 'S%a %H:%M' > $PANEL_FIFO &
 
 # Display battery status
-exists battery && [[ -z "$(pidof battery)" ]] && battery -s -i 3 -f 'B%s %u' > $PANEL_FIFO &
+[[ -z "$(pidof battery)" ]] && battery -s -i 3 -f 'B%s %u' > $PANEL_FIFO &
 
 # Display currently connected wifi network
-exists essid && [[ -z "$(pidof essid)" ]] && essid -s -i 5 -f 'X%s' > $PANEL_FIFO &
+[[ -z "$(pidof essid)" ]] && essid -s -i 5 -f 'X%s' > $PANEL_FIFO &
 
 # Run bar
 [[ -z "$(pidof bar)" ]] && cat $PANEL_FIFO | $BAR_SCRIPT | bar
