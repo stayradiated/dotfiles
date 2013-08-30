@@ -82,7 +82,8 @@ set lazyredraw           " don't update screen when executing macros
 set mouse=a              " enable mouse in all modes
 set noshowmode           " clashes with airline
 set linebreak            " break lines
-set nolist               " don't show whitespace
+set listchars=tab:▸\ ,trail:▫
+set list                 " show whitespace
 set wrap                 " enable wordwrap
 set relativenumber       " show line numbers relative to the current line
 set number               " show absolute line number on current line
@@ -100,7 +101,6 @@ if has('macunix')
   set nobackup
   set nowritebackup
   set noswapfile
-
 else
   " Backup swap files
   set backup
@@ -255,6 +255,7 @@ nnoremap <leader>f :<C-u>Unite -no-split -buffer-name=files   -start-insert file
 nnoremap <leader>r :<C-u>Unite -no-split -buffer-name=mru     -start-insert file_mru<CR>
 nnoremap <leader>y :<C-u>Unite -no-split -buffer-name=yank    -start-insert history/yank<CR>
 nnoremap <leader>e :<C-u>Unite -no-split -buffer-name=buffer  -start-insert buffer<CR>
+nnoremap <leader>/ :<C-u>Unite -no-split -buffer-name=buffer  -start-insert grep:.<CR>
 
 " Shortcut for Vimfiler
 nnoremap <leader><space> :VimFilerExplorer<CR>
@@ -281,6 +282,11 @@ let g:vimfiler_enable_auto_cd = 1
 " Unite
 let g:unite_source_history_yank_enable = 1
 let g:unite_source_file_rec_ignore_pattern = '\%(node_modules\/\|.sass-cache\/\|.git\/\)'
+
+" Let's use ag
+let g:unite_source_grep_command = 'ag'
+let g:unite_source_grep_default_opts = '--nogroup --nocolor --column'
+let g:unite_source_grep_recursive_opt = ''
 
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
 

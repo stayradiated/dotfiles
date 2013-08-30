@@ -34,8 +34,8 @@ time=""
 
 
 function print_right () {
-  # right="\r\f1${essid} \f5${sep} \f1${battery}% \f5${sep} \f1${time}\fr "
-  right="\r\f1${time}\fr "
+  right="\r\f1${essid} \f5${sep} \f1${battery}% \f5${sep} \f1${time}\fr "
+  # right="\r\f1${time}\fr "
 }
 
 function print_title () {
@@ -69,8 +69,8 @@ function print_left () {
         ;;
       L*)
         # layout
-        layout=$(printf "%s" "${id}" | sed 's/\(.\).*/\\1/')
-        left="$left \\f6[ $layout ]\\fr"
+        label="${id:0:1}"
+        left="$left \\f6[ ${label^^} ]\\fr"
         ;;
     esac
     shift

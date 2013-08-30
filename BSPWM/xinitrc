@@ -1,12 +1,12 @@
 #!/bin/sh
 
-OS="osx"
+OS="arch"
 
 #         __   __       
 #    /\  |__) /  ` |__| 
 #   /~~\ |  \ \__, |  | 
                     
-if [ $OS = "arch"]; then
+if [ $OS = "arch" ]; then
 
   # increase mouse acceleration
   xset m 2
@@ -19,7 +19,7 @@ if [ $OS = "arch"]; then
   $HOME/Github/xcape/xcape -e "Control_L=Escape"
 
   # set xmodmap
-  xmodmap $HOME/.Xmodmap&
+  xmodmap $HOME/.Xmodmap &
 
 #    __   __      
 #   /  \ /__` \_/ 
@@ -64,7 +64,7 @@ feh --bg-tile "$HOME/dotfiles/Other/dark_stripe.png"
 # start apps in background (only if not already running)
 [[ -z `pidof urxvtd` ]] && urxvtd -q -o -f &
 [[ -z `pidof bitlbee` ]] && bitlbee -D
-exists dropbox && [[ -z `pidof dropbox` ]] && dropbox start
+exists dropbox && [[ -z `pidof dropbox` ]] && dropbox start &
 
 # Pipe for bar
 export PANEL_FIFO=/tmp/panel-fifo
