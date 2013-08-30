@@ -9,6 +9,7 @@ irssi := $(dir)/Irssi
 mutt  := $(dir)/Mutt
 penta := $(dir)/Pentadactyl
 term  := $(dir)/Terminal
+tmux  := $(dir)/Tmux
 vim   := $(dir)/Vim
 wm    := $(dir)/BSPWM
 other := $(dir)/Other
@@ -31,6 +32,7 @@ check:
 	
 # Files
 	@if test -f ~/.cdmrc; then echo ".cdmrc exists"; fi;
+	@if test -f ~/.tmux.conf; then echo ".tmux.conf exists"; fi;
 	@if test -f ~/.muttrc; then echo ".muttrc exists"; fi;
 	@if test -f ~/.pentadactylrc; then echo ".pentadactylrc exists"; fi;
 	@if test -f ~/.Xresources; then echo ".Xresources exists"; fi;
@@ -53,6 +55,7 @@ uninstall:
 	rm -f ~/.mutt ~/.muttrc
 	rm -f ~/.pentadactylrc
 	rm -f ~/.terminal ~/.Xresources ~/.zshrc ~/.oh-my-zsh/themes/w0ng.zsh-theme
+	rm -f ~/.tmux.conf
 	rm -f ~/.vim ~/.vimrc
 	rm -f ~/.bspwm ~/.xinitrc ~/.Xmodmap
 
@@ -95,6 +98,10 @@ install:
 	@ln -fs $(term)/zsh/zshrc ~/.zshrc
 	@ln -fs $(term)/zsh/w0ng.zsh-theme ~/.oh-my-zsh/themes/w0ng.zsh-theme
 	@test -d ~/.terminal || ln -s $(term) ~/.terminal
+
+# Tmux
+	@echo "Tmux..."
+	@ln -fs $(tmux)/tmux.conf ~/.tmux.conf
 
 # VIM
 	@echo "Vim..."
