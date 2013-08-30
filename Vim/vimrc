@@ -32,7 +32,7 @@ NeoBundle 'Shougo/vimproc.vim', {
   \ }
 
 " Themes
-NeoBundle 'bling/vim-airline'
+NeoBundle 'itchyny/lightline.vim'
 NeoBundle 'w0ng/vim-github-theme'
 NeoBundle 'w0ng/vim-hybrid'
 
@@ -185,6 +185,10 @@ map <Right> <Nop>
 map <Up> <Nop>
 map <Down> <Nop>
 
+" Scrolling
+map <ScrollWheelUp> <C-Y>
+map <ScrollWheelDown> <C-E>
+
 " Map Leader
 let mapleader = ","
 
@@ -233,9 +237,6 @@ nnoremap k gk
 nnoremap <F2> :set invpaste paste?<CR>
 set pastetoggle=<F2>
 
-" Toggle between light and dark colour schemes
-nnoremap <silent><F5> :call ToggleColours()<CR>
-
 nnoremap <leader>m :call ToggleFoldMethod()<CR>
 
 " Shortcut for Tabularize
@@ -270,26 +271,10 @@ nnoremap <silent> # #zz
 " Plugin Settings {{{
 " -----------------------------------------------------------------------------
 
-" AirLine Fancy
-" let g:airline_left_sep = ''
-" let g:airline_left_alt_sep = ''
-" let g:airline_right_sep = ''
-" let g:airline_right_alt_sep = ''
-" let g:airline_branch_prefix = ' '
-" let g:airline_readonly_symbol = ''
-" let g:airline_linecolumn_prefix = ' '
-
-" Airline Compatible
-let g:airline_left_sep = ''
-let g:airline_left_alt_sep = ''
-let g:airline_right_sep = ''
-let g:airline_right_alt_sep = ''
-let g:airline_branch_prefix = 'b '
-let g:airline_readonly_symbol = 'R'
-let g:airline_linecolumn_prefix = ''
-
-" Airline theme
-let g:airline_theme='wombat'
+" Lightline
+let g:lightline = {
+  \ 'colorscheme': 'wombat'
+  \ }
 
 " VimFiler
 let g:vimfiler_enable_auto_cd = 1
@@ -363,14 +348,6 @@ autocmd FileType c,cpp setlocal foldmethod=syntax
 "
 " Functions {{{
 " -----------------------------------------------------------------------------
-
-function! ToggleColours()
-if g:colors_name == 'hybrid'
-  colorscheme hybrid-light
-else
-  colorscheme hybrid
-endif
-endfunction
 
 function! ToggleFoldMethod()
 if &foldmethod == 'indent'

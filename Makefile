@@ -54,8 +54,8 @@ uninstall:
 	rm -f ~/.cdmrc
 	rm -f ~/.mutt ~/.muttrc
 	rm -f ~/.pentadactylrc
-	rm -f ~/.terminal ~/.Xresources ~/.zshrc ~/.oh-my-zsh/themes/w0ng.zsh-theme
 	rm -f ~/.tmux.conf
+	rm -f ~/.terminal ~/.Xresources ~/.zshrc ~/.oh-my-zsh/themes/stayrad.zsh-theme
 	rm -f ~/.vim ~/.vimrc
 	rm -f ~/.bspwm ~/.xinitrc ~/.Xmodmap
 
@@ -96,7 +96,7 @@ install:
 	@echo "Terminal..."
 	@ln -fs $(term)/Xresources ~/.Xresources	
 	@ln -fs $(term)/zsh/zshrc ~/.zshrc
-	@ln -fs $(term)/zsh/w0ng.zsh-theme ~/.oh-my-zsh/themes/w0ng.zsh-theme
+	@ln -fs $(term)/zsh/stayrad.zsh-theme ~/.oh-my-zsh/themes/stayrad.zsh-theme
 	@test -d ~/.terminal || ln -s $(term) ~/.terminal
 
 # Tmux
