@@ -1,11 +1,17 @@
 # Change directory $HOME for OS X
 cd
 
+export XDG_CONFIG_HOME=~/.config
+
 PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin/:$HOME/.bin
 
 # set path for OSX
 if [ -d /opt/local/bin ]; then
   PATH=/opt/local/bin:/opt/local/sbin:/opt/X11/bin:$PATH
+fi
+
+if [ -d $HOME/.gem/ruby/2.0.0/bin ]; then
+  PATH=$HOME/.gem/ruby/2.0.0/bin:$PATH
 fi
 
 export PATH
@@ -60,6 +66,11 @@ alias grep='grep --color=auto'
 alias ll='ls -alhF'
 alias la='ls -A'
 alias l='ls -CF'
+
+# systemctl commands
+alias start="sudo systemctl start"
+alias stop="sudo systemctl stop"
+alias restart="sudo systemctl restart"
 
 # file explorer
 alias range="urxvt -name ranger -e ranger"
