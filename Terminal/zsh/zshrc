@@ -103,6 +103,11 @@ alias fu='sudo $(fc -n -l -1)'
 # show a clock
 alias clock='tty-clock -scDt'
 
+# Fonts
+alias setUrxvtFont="printf '\e]710;%s\007'"
+alias Tamzen-20='setUrxvtFont -misc-tamzen-medium-r-normal--20-145-100-100-c-100-iso8859-1'
+alias Tamzen-17='setUrxvtFont -misc-tamzen-medium-r-normal--17-123-100-100-c-80-iso8859-1'
+
 # }}}
 #
 # Functions {{{
