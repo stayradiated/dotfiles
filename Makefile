@@ -77,8 +77,7 @@ install:
 
 # Irssi
 	@echo "Irssi..."
-	@mkdir -p ~/.irssi
-	@ln -fs $(irssi)/config ~/.irssi/config
+	@ln -fs $(irssi) ~/.irssi
 
 # Mutt
 	@echo "Mutt..."
