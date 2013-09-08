@@ -11,7 +11,7 @@ set encoding=utf-8       " always encode in utf
 
 " }}}
 "
-" NeoBundle Plugins {{{
+" Load Plugins {{{
 " -----------------------------------------------------------------------------
 
 if has('vim_starting')
@@ -35,6 +35,7 @@ NeoBundle 'Shougo/vimproc.vim', {
 NeoBundle 'itchyny/lightline.vim'
 NeoBundle 'w0ng/vim-github-theme'
 NeoBundle 'w0ng/vim-hybrid'
+NeoBundle 'altercation/vim-colors-solarized'
 
 " Extensions
 NeoBundle 'Shougo/unite.vim'
@@ -72,6 +73,7 @@ syntax on
 " General
 set backspace=2          " enable <BS> for everything
 set colorcolumn=80       " visual indicator of column
+let &colorcolumn=join(range(81,999),",")
 set scrolloff=5          " minimum lines at top/bottom when scrolling
 set completeopt-=preview " don't show preview window
 set cursorline           " highlight the line where the cursor is
@@ -83,7 +85,7 @@ set mouse=a              " enable mouse in all modes
 set noshowmode           " clashes with airline
 set linebreak            " break lines
 set listchars=tab:▸\ ,trail:▫
-set list                 " show whitespace
+set nolist                 " show whitespace
 set wrap                 " enable wordwrap
 set relativenumber       " show line numbers relative to the current line
 set number               " show absolute line number on current line
@@ -94,6 +96,7 @@ set textwidth=0          " don't break lines after some maximum width
 set title                " use filename in window title
 set wildmenu             " enhanced cmd line completion
 set gdefault             " replace everything by default
+set autochdir            " change directory to current buffer when opening files
 
 
 if has('macunix')
@@ -109,7 +112,6 @@ else
   set directory=~/.vim/tmp
   set writebackup
 endif
-
 
 " Folding
 set foldignore=          " don't ignore anything when folding
@@ -133,7 +135,8 @@ set smartcase            " override ignorecase if upper case typed
 " Colours
 set t_Co=256
 let g:hybrid_use_Xresources = 1
-colorscheme hybrid
+set background=light
+colorscheme solarized
 
 " Fix escape key lag in terminal
 set timeoutlen=1000
@@ -155,16 +158,18 @@ if has('gui_running')
 
   " Fonts
   if has('macunix')
-    set guifont=tamzen:h17
+    set guifont=Meslo\ LG\ M\ DZ:h14
   else
-    set guifont=tamsyn\ 14
+    set guifont=tamzen\ 14
   endif
 
 endif
 
-" iTerm2
-if &term =~ "xterm"
-  " Toggle cursor shape
+" Toggle cursor shape in iTerm2
+if exists('$TMUX')
+  let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+  let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+elseif &term =~ "xterm"
   let &t_SI = "\<Esc>]50;CursorShape=1\x7"
   let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 endif
@@ -173,6 +178,13 @@ endif
 if &diff
   set diffopt=filler,foldcolumn:0
 endif
+
+" Netrw settings
+let g:netrw_liststyle=3    " Use tree-mode as default
+let g:netrw_browse_split=4 " Open file in previous buffer
+let g:netrw_preview=1      " Show preview in a vertical split
+let g:netrw_altv=1
+let g:netrw_list_hide = ".git,.sass-cache,.*"
 
 " }}}
 "
@@ -193,6 +205,7 @@ map <ScrollWheelDown> <C-E>
 let mapleader = ","
 
 " Remap Tab to %
+nnoremap <tab> %
 vnoremap <tab> %
 
 " Toggle fold
@@ -259,6 +272,7 @@ nnoremap <leader>/ :<C-u>Unite -no-split -buffer-name=buffer  -start-insert grep
 
 " Shortcut for Vimfiler
 nnoremap <leader><space> :VimFilerExplorer<CR>
+" nnoremap <leader><space> :call ToggleVExplorer()<CR>
 
 " Keep search pattern at the center of the screen
 nnoremap <silent> n nzz
@@ -273,10 +287,11 @@ nnoremap <silent> # #zz
 
 " Lightline
 let g:lightline = {
-  \ 'colorscheme': 'wombat'
+  \ 'colorscheme': 'solarized'
   \ }
 
 " VimFiler
+let g:vimfiler_as_default_explorer = 1
 let g:vimfiler_enable_auto_cd = 1
 
 " Unite
@@ -357,6 +372,26 @@ else
   set foldmethod=indent
   echo "foldmethod=indent"
 endif
+endfunction
+
+" Toggle Vexplore
+function! ToggleVExplorer()
+  if exists("t:expl_buf_num")
+      let expl_win_num = bufwinnr(t:expl_buf_num)
+      if expl_win_num != -1
+          let cur_win_nr = winnr()
+          exec expl_win_num . 'wincmd w'
+          close
+          exec cur_win_nr . 'wincmd w'
+          unlet t:expl_buf_num
+      else
+          unlet t:expl_buf_num
+      endif
+  else
+      exec '1wincmd w'
+      Vexplore
+      let t:expl_buf_num = bufnr("%")
+  endif
 endfunction
 
 " }}}
