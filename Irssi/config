@@ -184,6 +184,7 @@ settings = {
   };
   "fe-text" = { actlist_sort = "refnum"; term_force_colors = "yes"; };
   "fe-common/core" = {
+    theme = "pbrisbin";
     autocreate_own_query = "no";
     autocreate_query_level = "DCCMSGS";
     use_status_window = "no";
