@@ -35,6 +35,7 @@ NeoBundle 'Shougo/vimproc.vim', {
 NeoBundle 'itchyny/lightline.vim'
 NeoBundle 'w0ng/vim-github-theme'
 NeoBundle 'w0ng/vim-hybrid'
+NeoBundle 'altercation/vim-colors-solarized'
 
 " Extensions
 NeoBundle 'Shougo/unite.vim'
@@ -80,7 +81,7 @@ set hidden               " hide when switching buffers, don't unload
 set laststatus=2         " always show the status line
 set lazyredraw           " don't update screen when executing macros
 set mouse=a              " enable mouse in all modes
-set noshowmode           " clashes with airline
+set noshowmode           " clashes with fancy stausline
 set linebreak            " break lines
 set listchars=tab:▸\ ,trail:▫
 set list                 " show whitespace
@@ -157,7 +158,7 @@ if has('gui_running')
   if has('macunix')
     set guifont=tamzen:h17
   else
-    set guifont=tamsyn\ 14
+    set guifont=Meslo\ LG\ M\ DZ\ 14
   endif
 
 endif
