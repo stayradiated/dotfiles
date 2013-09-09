@@ -82,7 +82,7 @@ set hidden               " hide when switching buffers, don't unload
 set laststatus=2         " always show the status line
 set lazyredraw           " don't update screen when executing macros
 set mouse=a              " enable mouse in all modes
-set noshowmode           " clashes with airline
+set noshowmode           " clashes with fancy stausline
 set linebreak            " break lines
 set listchars=tab:▸\ ,trail:▫
 set nolist                 " show whitespace
@@ -160,7 +160,7 @@ if has('gui_running')
   if has('macunix')
     set guifont=Meslo\ LG\ M\ DZ:h14
   else
-    set guifont=tamzen\ 14
+    set guifont=Meslo\ LG\ M\ DZ\ 12
   endif
 
 " Terminal vim
@@ -290,7 +290,12 @@ nnoremap <silent> # #zz
 
 " Lightline
 let g:lightline = {
-  \ 'colorscheme': 'solarized'
+  \ 'colorscheme': 'solarized',
+  \ 'component': {
+  \   'readonly': '%{&readonly?"":""}',
+  \ },
+  \ 'separator': { 'left': '', 'right': '' },
+  \ 'subseparator': { 'left': '', 'right': '' }
   \ }
 
 " VimFiler
