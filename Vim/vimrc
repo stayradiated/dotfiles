@@ -135,7 +135,6 @@ set smartcase            " override ignorecase if upper case typed
 " Colours
 set t_Co=256
 let g:hybrid_use_Xresources = 1
-set background=light
 colorscheme hybrid
 
 " Fix escape key lag in terminal
@@ -160,7 +159,7 @@ if has('gui_running')
   if has('macunix')
     set guifont=Meslo\ LG\ M\ DZ:h14
   else
-    set guifont=Meslo\ LG\ M\ DZ\ 14
+    set guifont=Meslo\ LG\ M\ DZ\ 12
   endif
 
 endif
@@ -287,7 +286,12 @@ nnoremap <silent> # #zz
 
 " Lightline
 let g:lightline = {
-  \ 'colorscheme': 'solarized'
+  \ 'colorscheme': 'solarized',
+  \ 'component': {
+  \   'readonly': '%{&readonly?"":""}',
+  \ },
+  \ 'separator': { 'left': '', 'right': '' },
+  \ 'subseparator': { 'left': '', 'right': '' }
   \ }
 
 " VimFiler
