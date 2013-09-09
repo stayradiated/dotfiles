@@ -35,7 +35,7 @@ NeoBundle 'Shougo/vimproc.vim', {
 NeoBundle 'itchyny/lightline.vim'
 NeoBundle 'w0ng/vim-github-theme'
 NeoBundle 'w0ng/vim-hybrid'
-NeoBundle 'altercation/vim-colors-solarized'
+NeoBundle 'chriskempson/base16-vim'
 
 " Extensions
 NeoBundle 'Shougo/unite.vim'
@@ -135,8 +135,8 @@ set smartcase            " override ignorecase if upper case typed
 " Colours
 set t_Co=256
 let g:hybrid_use_Xresources = 1
-set background=light
-colorscheme solarized
+set background=dark
+colorscheme base16-default
 
 " Fix escape key lag in terminal
 set timeoutlen=1000
@@ -162,6 +162,13 @@ if has('gui_running')
   else
     set guifont=tamzen\ 14
   endif
+
+" Terminal vim
+else
+
+  " Scrolling
+  map <ScrollWheelUp> <C-Y>
+  map <ScrollWheelDown> <C-E>
 
 endif
 
@@ -196,10 +203,6 @@ map <Left> <Nop>
 map <Right> <Nop>
 map <Up> <Nop>
 map <Down> <Nop>
-
-" Scrolling
-map <ScrollWheelUp> <C-Y>
-map <ScrollWheelDown> <C-E>
 
 " Map Leader
 let mapleader = ","
