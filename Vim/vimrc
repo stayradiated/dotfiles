@@ -32,16 +32,15 @@ NeoBundle 'Shougo/vimproc.vim', {
   \ }
 
 " Themes
-NeoBundle 'itchyny/lightline.vim'
 NeoBundle 'w0ng/vim-github-theme'
 NeoBundle 'w0ng/vim-hybrid'
 NeoBundle 'chriskempson/base16-vim'
+NeoBundle 'wjakob/vim-tomorrow-night'
 
 " Extensions
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/vimfiler.vim'
 NeoBundle 'Shougo/neocomplete.vim'
-NeoBundle 'tpope/vim-fugitive'
 
 " Editing
 NeoBundle 'scrooloose/syntastic'
@@ -72,31 +71,22 @@ syntax on
 
 " General
 set backspace=2          " enable <BS> for everything
-set colorcolumn=80       " visual indicator of column
-let &colorcolumn=join(range(81,999),",")
-set scrolloff=5          " minimum lines at top/bottom when scrolling
+set scrolloff=3          " minimum lines at top/bottom when scrolling
 set completeopt-=preview " don't show preview window
-set cursorline           " highlight the line where the cursor is
 set fcs=vert:│,fold:-    " solid instead of broken line for vert splits
 set hidden               " hide when switching buffers, don't unload
 set laststatus=2         " always show the status line
 set lazyredraw           " don't update screen when executing macros
 set mouse=a              " enable mouse in all modes
-set noshowmode           " clashes with fancy stausline
-set linebreak            " break lines
-set listchars=tab:▸\ ,trail:▫
-set nolist                 " show whitespace
-set wrap                 " enable wordwrap
-set relativenumber       " show line numbers relative to the current line
 set number               " show absolute line number on current line
 set showcmd              " show command on last line of screen
 set noshowmatch          " don't show bracket matches
 set spelllang=en_nz      " spell check with New Zealand English
-set textwidth=0          " don't break lines after some maximum width
 set title                " use filename in window title
 set wildmenu             " enhanced cmd line completion
 set gdefault             " replace everything by default
 set autochdir            " change directory to current buffer when opening files
+set linespace=-2         " make pipes match up (adjust for font)
 
 
 if has('macunix')
@@ -134,9 +124,9 @@ set smartcase            " override ignorecase if upper case typed
 
 " Colours
 set t_Co=256
-let g:hybrid_use_Xresources = 1
+let g:hybrid_use_Xresources=1
 set background=dark
-colorscheme base16-default
+colorscheme hybrid
 
 " Fix escape key lag in terminal
 set timeoutlen=1000
@@ -158,7 +148,7 @@ if has('gui_running')
 
   " Fonts
   if has('macunix')
-    set guifont=Meslo\ LG\ M\ DZ:h14
+    set guifont=Meslo\ LG\ M\ DZ:h13
   else
     set guifont=Meslo\ LG\ M\ DZ\ 12
   endif
@@ -253,7 +243,7 @@ nnoremap k gk
 nnoremap <F2> :set invpaste paste?<CR>
 set pastetoggle=<F2>
 
-nnoremap <leader>m :call ToggleFoldMethod()<CR>
+nnoremap <leader>m :call ToggleColorscheme()<CR>
 
 " Shortcut for Tabularize
 vnoremap <leader>t :Tabularize /
@@ -275,7 +265,6 @@ nnoremap <leader>/ :<C-u>Unite -no-split -buffer-name=buffer  -start-insert grep
 
 " Shortcut for Vimfiler
 nnoremap <leader><space> :VimFilerExplorer<CR>
-" nnoremap <leader><space> :call ToggleVExplorer()<CR>
 
 " Keep search pattern at the center of the screen
 nnoremap <silent> n nzz
@@ -290,12 +279,7 @@ nnoremap <silent> # #zz
 
 " Lightline
 let g:lightline = {
-  \ 'colorscheme': 'solarized',
-  \ 'component': {
-  \   'readonly': '%{&readonly?"":""}',
-  \ },
-  \ 'separator': { 'left': '', 'right': '' },
-  \ 'subseparator': { 'left': '', 'right': '' }
+  \ 'colorscheme': 'powerline'
   \ }
 
 " VimFiler
@@ -372,33 +356,13 @@ autocmd FileType c,cpp setlocal foldmethod=syntax
 " Functions {{{
 " -----------------------------------------------------------------------------
 
-function! ToggleFoldMethod()
-if &foldmethod == 'indent'
-  set foldmethod=marker
-  echo "foldmethod=marker"
-else
-  set foldmethod=indent
-  echo "foldmethod=indent"
-endif
-endfunction
-
-" Toggle Vexplore
-function! ToggleVExplorer()
-  if exists("t:expl_buf_num")
-      let expl_win_num = bufwinnr(t:expl_buf_num)
-      if expl_win_num != -1
-          let cur_win_nr = winnr()
-          exec expl_win_num . 'wincmd w'
-          close
-          exec cur_win_nr . 'wincmd w'
-          unlet t:expl_buf_num
-      else
-          unlet t:expl_buf_num
-      endif
+function! ToggleColorscheme()
+  if &background == 'dark'
+    set background=light
+    colorscheme Tomorrow
   else
-      exec '1wincmd w'
-      Vexplore
-      let t:expl_buf_num = bufnr("%")
+    set background=dark
+    colorscheme Base16-Tomorrow
   endif
 endfunction
 
