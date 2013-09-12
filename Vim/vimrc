@@ -285,6 +285,7 @@ let g:lightline = {
 " VimFiler
 let g:vimfiler_as_default_explorer = 1
 let g:vimfiler_enable_auto_cd = 1
+let g:vimfiler_no_default_key_mappings = 1
 
 " Unite
 let g:unite_source_history_yank_enable = 1
