@@ -39,7 +39,7 @@ NeoBundle 'wjakob/vim-tomorrow-night'
 
 " Extensions
 NeoBundle 'Shougo/unite.vim'
-NeoBundle 'Shougo/vimfiler.vim'
+NeoBundle 'stayradiated/vimfiler.vim'
 NeoBundle 'Shougo/neocomplete.vim'
 
 " Editing
@@ -263,8 +263,9 @@ nnoremap <leader>y :<C-u>Unite -no-split -buffer-name=yank    -start-insert hist
 nnoremap <leader>e :<C-u>Unite -no-split -buffer-name=buffer  -start-insert buffer<CR>
 nnoremap <leader>/ :<C-u>Unite -no-split -buffer-name=buffer  -start-insert grep:.<CR>
 
-" Shortcut for Vimfiler
+" Vimfiler
 nnoremap <leader><space> :VimFilerExplorer<CR>
+noremap <buffer> <C-l> <C-w>l
 
 " Keep search pattern at the center of the screen
 nnoremap <silent> n nzz
@@ -285,7 +286,6 @@ let g:lightline = {
 " VimFiler
 let g:vimfiler_as_default_explorer = 1
 let g:vimfiler_enable_auto_cd = 1
-let g:vimfiler_no_default_key_mappings = 1
 
 " Unite
 let g:unite_source_history_yank_enable = 1
