@@ -48,10 +48,10 @@ KEYTIMEOUT=1
 # pretty ls
 if hash gls 2>/dev/null; then
   alias ls="gls -hF --color=auto --group-directories-first"
-  [[ -e "$HOME/.terminal/zsh/dir_colours" ]] && eval $(gdircolors -b "$HOME/.terminal/zsh/dir_colours")
+  [[ -e "$HOME/.terminal/zsh/dircolors.ansi-dark" ]] && eval $(gdircolors -b "$HOME/.terminal/zsh/dircolors.ansi-dark")
 else
   alias ls="ls -hF --color=auto --group-directories-first"
-  [[ -e "$HOME/.terminal/zsh/dir_colours" ]] && eval $(dircolors -b "$HOME/.terminal/zsh/dir_colours")
+  [[ -e "$HOME/.terminal/zsh/dircolors.ansi-dark" ]] && eval $(dircolors -b "$HOME/.terminal/zsh/dircolors.ansi-dark")
 fi
 
 # pretty grep
