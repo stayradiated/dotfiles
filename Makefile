@@ -1,5 +1,5 @@
 # config
-os := osx
+os := arch
 
 # paths
 dir   := $(CURDIR)

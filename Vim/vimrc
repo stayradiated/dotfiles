@@ -219,12 +219,6 @@ nnoremap <leader><Tab> :b#<CR>
 " Delete a buffer without closing the window
 nnoremap <leader>d :bp<bar>sp<bar>bn<bar>bd<CR>
 
-" Switch colon and semi-colon
-nnoremap ; :
-nnoremap : ;
-vnoremap ; :
-vnoremap : ;
-
 " Split windows
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
@@ -347,7 +341,7 @@ autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
 " Indent rules
 autocmd FileType markdown setlocal ts=4 sw=4 sts=4 tw=79
-autocmd FileType python setlocal ts=4 sw=4 sts=4
+autocmd FileType javascript,python setlocal ts=4 sw=4 sts=4
 
 " Folding rules
 autocmd FileType c,cpp setlocal foldmethod=syntax
