@@ -35,6 +35,6 @@
 	"translate_tabs_to_spaces": true,
 	"trim_trailing_white_space_on_save": true,
 	"use_tab_stops": true,
-	"word_wrap": true,
-	"vintageous_use_sys_clipboard": true
+	"vintageous_use_sys_clipboard": true,
+	"word_wrap": true
 }

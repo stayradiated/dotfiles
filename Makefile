@@ -10,6 +10,7 @@ mutt  := $(dir)/Mutt
 penta := $(dir)/Pentadactyl
 term  := $(dir)/Terminal
 tmux  := $(dir)/Tmux
+subl  := $(dir)/Sublime
 vim   := $(dir)/Vim
 wm    := $(dir)/BSPWM
 other := $(dir)/Other
@@ -125,6 +126,12 @@ install:
 		sed -i.bak 's/alt/mod1/g' $(wm)/sxhkdrc;\
 		rm $(wm)/sxhkdrc.bak;\
 	fi;
+
+# Sublime
+	@echo "Sublime Text..."
+	@ln -fs $(subl)/Preferences.sublime-settings ~/.config/sublime-text-3/Packages/User/Preferences.sublime-settings
+	@ln -fs $(subl)/Oceanic.tmTheme ~/.config/sublime-text-3/Packages/User/Oceanic.tmTheme
+	@ln -fs $(subl)/Default.sublime-keymap ~/.config/sublime-text-3/Packages/User/Default.sublime-keymap
 
 # Other files
 	@echo "Other..."
