@@ -43,8 +43,8 @@ fi
 #   |__) \__/  |  |  | 
                    
 
-# merge .Xdefaults
-xrdb -merge $HOME/.Xdefaults &
+# merge .Xresources
+xrdb -merge $HOME/.Xresources &
 
 # Set the cursor
 xsetroot -cursor_name left_ptr &
