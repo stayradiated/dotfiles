@@ -11,8 +11,8 @@ set encoding=utf-8       " always encode in utf
 
 " }}}
 "
-" Load Plugins {{{
-" -----------------------------------------------------------------------------
+" " Load Plugins {{{
+" " -----------------------------------------------------------------------------
 
 if has('vim_starting')
   set runtimepath+=~/.vim/bundle/neobundle.vim
@@ -32,18 +32,18 @@ NeoBundle 'Shougo/vimproc.vim', {
   \ }
 
 " Themes
-NeoBundle 'w0ng/vim-github-theme'
 NeoBundle 'w0ng/vim-hybrid'
-NeoBundle 'chriskempson/base16-vim'
-NeoBundle 'wjakob/vim-tomorrow-night'
+NeoBundle 'chriskempson/vim-tomorrow-theme'
+NeoBundle 'bling/vim-airline'
 
 " Extensions
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'stayradiated/vimfiler.vim'
-NeoBundle 'Shougo/neocomplete.vim'
 
-" Editing
+" " Editing
 NeoBundle 'scrooloose/syntastic'
+NeoBundle 'tpope/vim-repeat'
+NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-unimpaired'
 NeoBundle 'mattn/emmet-vim'
@@ -65,7 +65,7 @@ NeoBundleCheck
 "
 " Settings {{{
 " -----------------------------------------------------------------------------
-
+"
 " Enable syntax highlighting
 syntax on
 
@@ -80,14 +80,15 @@ set lazyredraw           " don't update screen when executing macros
 set mouse=a              " enable mouse in all modes
 set number               " show absolute line number on current line
 set showcmd              " show command on last line of screen
+set noshowmode           " hide mode
 set noshowmatch          " don't show bracket matches
 set spelllang=en_nz      " spell check with New Zealand English
 set title                " use filename in window title
 set wildmenu             " enhanced cmd line completion
 set gdefault             " replace everything by default
 set autochdir            " change directory to current buffer when opening files
-set linespace=-2         " make pipes match up (adjust for font)
-
+set linespace=0          " make font look a bit better
+set visualbell           " stop the beep
 
 if has('macunix')
   " CodeKit Compatibility
@@ -125,6 +126,7 @@ set smartcase            " override ignorecase if upper case typed
 " Colours
 set t_Co=256
 let g:hybrid_use_Xresources=1
+
 set background=dark
 colorscheme hybrid
 
@@ -148,7 +150,8 @@ if has('gui_running')
 
   " Fonts
   if has('macunix')
-    set guifont=Meslo\ LG\ M\ DZ:h13
+    " set guifont=Tamzen\ Medium:h15
+    set guifont=Meslo\ LG\ L\ DZ:h14
   else
     set guifont=Meslo\ LG\ M\ DZ\ 12
   endif
@@ -157,8 +160,8 @@ if has('gui_running')
 else
 
   " Scrolling
-  map <ScrollWheelUp> <C-Y>
-  map <ScrollWheelDown> <C-E>
+  " map <ScrollWheelUp> <C-Y>
+  " map <ScrollWheelDown> <C-E>
 
 endif
 
@@ -188,12 +191,6 @@ let g:netrw_list_hide = ".git,.sass-cache,.*"
 " Mappings {{{
 " -----------------------------------------------------------------------------
 
-" Vim Training mode
-map <Left> <Nop>
-map <Right> <Nop>
-map <Up> <Nop>
-map <Down> <Nop>
-
 " Map Leader
 let mapleader = ","
 
@@ -203,9 +200,6 @@ vnoremap <tab> %
 
 " Toggle fold
 nnoremap <space> za
-
-" Toggle spellcheck
-nnoremap <leader>s :set spell!<CR>
 
 " Toggle hlsearch for current results
 nnoremap <leader>h :nohlsearch<CR>
@@ -218,12 +212,6 @@ nnoremap <leader><Tab> :b#<CR>
 
 " Delete a buffer without closing the window
 nnoremap <leader>d :bp<bar>sp<bar>bn<bar>bd<CR>
-
-" Switch colon and semi-colon
-nnoremap ; :
-nnoremap : ;
-vnoremap ; :
-vnoremap : ;
 
 " Split windows
 nnoremap <C-h> <C-w>h
@@ -278,10 +266,10 @@ nnoremap <silent> # #zz
 " Plugin Settings {{{
 " -----------------------------------------------------------------------------
 
-" Lightline
-let g:lightline = {
-  \ 'colorscheme': 'powerline'
-  \ }
+" Status line
+let g:airline_left_sep = ''
+let g:airline_right_sep = ''
+let g:airline_theme = 'base16'
 
 " VimFiler
 let g:vimfiler_as_default_explorer = 1
@@ -308,38 +296,6 @@ function! s:unite_settings()
   imap <buffer> <C-r>   <Plug>(unite_redraw)
 endfunction
 
-" NeoComplete settings
-let g:neocomplete#enable_at_startup = 1
-let g:neocomplete#enable_smart_case = 1
-let g:neocomplete#sources#syntax#min_keyword_length = 3
-
-" NeoComplete Keybindings
-inoremap <expr><C-g>     neocomplete#undo_completion()
-inoremap <expr><C-l>     neocomplete#complete_common_string()
-
-" Recommended key-mappings.
-" <CR>: close popup and save indent.
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-function! s:my_cr_function()
-  return neocomplete#smart_close_popup() . "\<CR>"
-  " For no inserting <CR> key.
-  "return pumvisible() ? neocomplete#close_popup() : "\<CR>"
-endfunction
-" <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-" <C-h>, <BS>: close popup and delete backword char.
-inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><C-y>  neocomplete#close_popup()
-inoremap <expr><C-e>  neocomplete#cancel_popup()
-
-" NeoComplete omni completetion
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-
 " }}}
 "
 " Autocommands {{{
@@ -347,10 +303,11 @@ autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
 " Indent rules
 autocmd FileType markdown setlocal ts=4 sw=4 sts=4 tw=79
-autocmd FileType python setlocal ts=4 sw=4 sts=4
+autocmd FileType python,javascript setlocal ts=4 sw=4 sts=4
 
 " Folding rules
 autocmd FileType c,cpp setlocal foldmethod=syntax
+autocmd FileType coffee setlocal foldmethod=indent nofoldenable
 
 " }}}
 "
@@ -363,8 +320,42 @@ function! ToggleColorscheme()
     colorscheme Tomorrow
   else
     set background=dark
-    colorscheme Base16-Tomorrow
+    colorscheme Tomorrow-Night
   endif
 endfunction
+
+" Compatible with ranger 1.4.2 through 1.6.*
+"
+" Add ranger as a file chooser in vim
+"
+" If you add this code to the .vimrc, ranger can be started using the command
+" ":RagerChooser" or the keybinding "<leader>r".  Once you select one or more
+" files, press enter and ranger will quit again and vim will open the selected
+" files.
+
+function! RangeChooser()
+    let temp = tempname()
+    " The option "--choosefiles" was added in ranger 1.5.1. Use the next line
+    " with ranger 1.4.2 through 1.5.0 instead.
+    "exec 'silent !ranger --choosefile=' . shellescape(temp)
+    exec 'silent !ranger --choosefiles=' . shellescape(temp)
+    if !filereadable(temp)
+        " Nothing to read.
+        return
+    endif
+    let names = readfile(temp)
+    if empty(names)
+        " Nothing to open.
+        return
+    endif
+    " Edit the first item.
+    exec 'edit ' . fnameescape(names[0])
+    " Add any remaning items to the arg list/buffer list.
+    for name in names[1:]
+        exec 'argadd ' . fnameescape(name)
+    endfor
+endfunction
+command! -bar RangerChooser call RangeChooser()
+nnoremap <leader>r :<C-U>RangerChooser<CR>
 
 " }}}

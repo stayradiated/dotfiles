@@ -37,7 +37,6 @@ URxvt.boldFont:        -misc-tamzen-bold-r-*--17-*-*-*-*-*-*-*
 URxvt.italicFont:      -misc-tamzen-medium-r-*--17-*-*-*-*-*-*-*
 URxvt.bolditalicFont:  -misc-tamzen-bold-r-*--17-*-*-*-*-*-*-*
 
-
 ! -----------------------------
 ! PERL EXTENSIONS
 ! -----------------------------

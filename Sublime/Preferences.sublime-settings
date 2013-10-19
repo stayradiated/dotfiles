@@ -1,0 +1,40 @@
+{
+	"caret_style": "phase",
+	"color_scheme": "Packages/User/Oceanic.tmTheme",
+	"draw_white_space": "selection",
+	"fold_buttons": false,
+	"folder_exclude_patterns":
+	[
+		".svn",
+		".git",
+		".hg",
+		"CVS",
+		"node_modules"
+	],
+	"font_face": "Panic Sans",
+	"font_options":
+	[
+		"no_italic",
+		"no_bold",
+		"subpixel_antialias"
+	],
+	"font_size": 13,
+	"highlight_line": false,
+	"ignored_packages":
+	[
+	],
+	"line_padding_bottom": 3,
+	"line_padding_top": 3,
+	"rulers":
+	[
+		79
+	],
+	"scroll_past_end": true,
+	"tab_size": 2,
+	"theme": "Soda Dark.sublime-theme",
+	"translate_tabs_to_spaces": true,
+	"trim_trailing_white_space_on_save": true,
+	"use_tab_stops": true,
+	"word_wrap": true,
+	"vintageous_use_sys_clipboard": true
+}
