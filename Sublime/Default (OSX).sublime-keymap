@@ -1,0 +1,93 @@
+[
+  {
+    "keys": [
+      ",",
+      "c"
+    ],
+    "command": "show_overlay",
+    "args": {
+      "overlay": "command_palette"
+    },
+    "context": [
+      {
+        "key": "vi_mode_normal"
+      }
+    ]
+  },
+  {
+    "keys": [
+      ",",
+      " "
+    ],
+    "command": "toggle_side_bar",
+    "context": [
+      {
+        "key": "vi_mode_normal"
+      }
+    ]
+  },
+  {
+    "keys": [
+      ",",
+      "t"
+    ],
+    "command": "show_overlay",
+    "args": {
+      "overlay": "goto",
+      "show_files": true
+    },
+    "context": [
+      {
+        "key": "setting.command_mode",
+        "operand": true
+      },
+      {
+        "key": "setting.is_widget",
+        "operand": false
+      }
+    ]
+  },
+  {
+    "keys": [
+      ",",
+      "p"
+    ],
+    "command": "prompt_select_workspace",
+    "context": [
+      {
+        "key": "vi_mode_normal"
+      }
+    ]
+  },
+  {
+    "keys": [
+      ",",
+      "r"
+    ],
+    "command": "show_overlay",
+    "args": {
+      "overlay": "goto",
+      "text": "@"
+    },
+    "context": [
+      {
+        "key": "vi_mode_normal"
+      }
+    ]
+  },
+  {
+    "keys": [
+      "ctrl+r"
+    ],
+    "command": "redo"
+  },
+  {
+    "keys": [
+      "ctrl+v"
+    ],
+    "command": "select_lines",
+    "args": {
+      "forward": true
+    }
+  }
+]
