@@ -61,7 +61,6 @@ URxvt.boldItalicFont: xft:Meslo LG M DZ for Powerline:Bold:Italic:size=11
 ! URxvt.italicFont:      -beastie-terminus14-*-*-*-*-*-*-*-*-*-*-*
 ! URxvt.bolditalicFont:  -beastie-terminus14-*-*-*-*-*-*-*-*-*-*-*
 
-
 ! -----------------------------
 ! PERL EXTENSIONS
 ! -----------------------------

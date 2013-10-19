@@ -17,9 +17,6 @@ set hlfind
 " use colemak hints
 set hintkeys=arstdhneio
 
-" search with duckduckgo (requires duckduckgo plugin)
-set defsearch=duckduckgo
-
 
 "
 " Status line
@@ -33,9 +30,9 @@ hi -a StatusLineNormal color:#C5C8C6 !important; background:#282A2E !important;
 " -----------------------------------------------------------------------------
 
 " set ui font
-hi FontCode -a font-family: tamzen !important; font-size: 13pt !important;
-hi FontFixed -a font-family: tamzen !important; font-size: 13pt !important;
-hi Normal -a font-family: tamzen !important; font-size: 13pt !important;
+hi FontCode -a font-family: "Meslo LG M DZ" !important; font-size: 10pt !important;
+hi FontFixed -a font-family: "Meslo LG M DZ" !important; font-size: 10pt !important;
+hi Normal -a font-family: "Meslo LG M DZ" !important; font-size: 10pt !important;
 
 " increase hints font size
 hi Hint -a font-size: 13pt !important; text-transform: uppercase;
@@ -90,46 +87,49 @@ styledisable -name=hybrid
 " -----------------------------------------------------------------------------
 
 style -name minitabs chrome://* <<EOM
+
+
   .tabbrowser-tabs * {
     border: 0 !important;
     background: none !important;
   }
+
+  /* Hide close and new-tab buttons */
   #TabsToolbar toolbarbutton {
     display: none !important;
   }
-  .tabbrowser-tabs {
-    background: #282A2E !important;
-    border: 0 !important;
-  }
+
+
+  /* The backgound behind the tabs */
+
+  /* A browser tab */
   .tabbrowser-tab {
+    color: #333 !important;
+    font: normal 11pt "Proxima Nova" !important;
+    height: 10px !important;
+    padding: 0 1ex !important;
+
+    text-shadow: none !important;
     border: 0 !important;
     -moz-appearance: none !important;
     border-radius: 0 !important;
-    background: #282A2E !important;
     border: none !important;
-    color: #707880 !important;
-    font-family: "tamzen" !important;
-    font-size: 13pt !important;
-    height: 18px !important;
     margin: 0 !important;
     min-height: 0 !important;
-    padding: 0 0.5ex !important;
   }
+
   .tabbrowser-tab:not([pinned]) {
-    width: 200px;
+    width: 140px;
     max-width: 400px !important;
   }
-  .tabbrowser-tab:not([fadein]) {
-    max-width: 1px !important;
-    min-width: 1px !important;
-  }
+
   .tabbrowser-tab:hover {
-    background: #F0C674 !important;
     color: #282A2E !important;
     border-radius: 0 !important;
   }
+
   .tabbrowser-tab[selected] {
-    background: #282A2E !important;
-    color: #F0C674 !important;
+    font-weight: 600 !important;
   }
+
 EOM

@@ -70,7 +70,7 @@ function print_left () {
       L*)
         # layout
         label="${id:0:1}"
-        left="$left \\f6[ ${label^^} ]\\fr"
+        left="$left \\f6[ ${label} ]\\fr"
         ;;
     esac
     shift
