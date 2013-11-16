@@ -44,10 +44,10 @@ URxvt*visualBell:         false
 ! URxvt.bolditalicFont:  -windows-dina-bold-i-*--16-*-*-*-*-*-*-*
 
 ! MESLO
-URxvt.font: xft:Meslo LG M DZ for Powerline:Regular:size=11
-URxvt.boldFont: xft:Meslo LG M DZ for Powerline:Bold:size=11
-URxvt.italicFont: xft:Meslo LG M DZ for Powerline:Italic:size=11
-URxvt.boldItalicFont: xft:Meslo LG M DZ for Powerline:Bold:Italic:size=11
+URxvt.font: xft:PanicSans:Regular:size=11
+URxvt.boldFont: xft:PanicSans:Bold:size=11
+URxvt.italicFont: xft:PanicSans:Italic:size=11
+URxvt.boldItalicFont: xft:PanicSans:Bold:Italic:size=11
 
 ! PRAGMATAPRO
 ! URxvt.font: xft:PragmataPro for Powerline:Regular:size=11

@@ -62,8 +62,8 @@ xset fp rehash
 feh --bg-tile "$HOME/dotfiles/Other/dark_stripe.png"
 
 # start apps in background (only if not already running)
-[[ -z "$(pidof tmux)" ]] && tmux &
-[[ -z `pidof urxvtd` ]] && urxvtd -q -o -f &
+[[ -z `pidof tmux`    ]] && tmux &
+[[ -z `pidof urxvtd`  ]] && urxvtd -q -o -f &
 [[ -z `pidof bitlbee` ]] && bitlbee -D
 exists dropbox && [[ -z `pidof dropbox` ]] && dropbox start &
 
