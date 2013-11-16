@@ -18,10 +18,11 @@
 		"no_bold",
 		"subpixel_antialias"
 	],
-	"font_size": 13,
+	"font_size": 11,
 	"highlight_line": false,
 	"ignored_packages":
 	[
+		"JavaScript"
 	],
 	"line_padding_bottom": 3,
 	"line_padding_top": 3,
@@ -31,7 +32,7 @@
 	],
 	"scroll_past_end": true,
 	"tab_size": 2,
-	"theme": "Soda Dark.sublime-theme",
+	"theme": "Centurion.sublime-theme",
 	"translate_tabs_to_spaces": true,
 	"trim_trailing_white_space_on_save": true,
 	"use_tab_stops": true,

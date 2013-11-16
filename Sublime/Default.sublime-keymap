@@ -89,5 +89,11 @@
     "args": {
       "forward": true
     }
+  },
+  {
+    "keys": [
+      "ctrl+super+a"
+    ],
+    "command": "align_tab"
   }
 ]
