@@ -1,7 +1,9 @@
 {
 	"caret_style": "phase",
-	"color_scheme": "Packages/User/Oceanic.tmTheme",
-	"draw_white_space": "selection",
+	"color_scheme": "Packages/Theme - Flatland/Flatland Dark.tmTheme",
+	"create_window_at_startup": true,
+	"draw_centered": false,
+	"enable_hexadecimal_encoding": false,
 	"fold_buttons": false,
 	"folder_exclude_patterns":
 	[
@@ -11,18 +13,24 @@
 		"CVS",
 		"node_modules"
 	],
-	"font_face": "Panic Sans",
+	"font_face": "tamzen7x14",
 	"font_options":
 	[
-		"no_italic",
-		"no_bold",
+		"no_round",
 		"subpixel_antialias"
 	],
 	"font_size": 11,
 	"highlight_line": false,
+	"highlight_modified_tabs": true,
+  "detect_indentation": false,
 	"ignored_packages":
 	[
 		"JavaScript"
+		"actualvim"
+	],
+	"indent_guide_options":
+	[
+		"draw_active"
 	],
 	"line_padding_bottom": 3,
 	"line_padding_top": 3,
@@ -31,11 +39,12 @@
 		79
 	],
 	"scroll_past_end": true,
+	"show_panel_on_build": true,
+	"tab_completion": false,
 	"tab_size": 2,
 	"theme": "Centurion.sublime-theme",
 	"translate_tabs_to_spaces": true,
 	"trim_trailing_white_space_on_save": true,
 	"use_tab_stops": true,
-	"vintageous_use_sys_clipboard": true,
 	"word_wrap": true
 }

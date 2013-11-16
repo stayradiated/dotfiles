@@ -1,5 +1,5 @@
 # config
-os := arch
+os := osx
 
 # paths
 dir   := $(CURDIR)
@@ -16,6 +16,12 @@ wm    := $(dir)/BSPWM
 other := $(dir)/Other
 fonts := $(dir)/Fonts
 
+ifeq ($(os), osx)
+	subl_os := ~/Library/Application\ Support/Sublime\ Text\ 3
+else
+	subl_os := ~/.config/sublime-text-3
+endif
+
 # Checks to see if any files are going to be overwritten
 check:
 
@@ -30,7 +36,7 @@ check:
 	@if test -d ~/.vim; then echo ".vim exists"; fi;
 	@if test -d ~/.vimrc; then echo ".vimrc exists"; fi;
 	@if test -d ~/.bspwm; then echo ".bspwm exists"; fi;
-	
+
 # Files
 	@if test -f ~/.cdmrc; then echo ".cdmrc exists"; fi;
 	@if test -f ~/.tmux.conf; then echo ".tmux.conf exists"; fi;
@@ -62,7 +68,13 @@ uninstall:
 
 
 # Should only be run once
-install:
+arch:
+
+# Misc.
+	@echo "Misc..."
+	@ln -sf $(other)/cdmrc ~/.cdmrc
+	@ln -sf $(other)/fehbg ~/.fehbg
+	@ln -fs $(term)/Xresources ~/.Xresources
 
 # Bar
 	@echo "Bar..."
@@ -76,9 +88,17 @@ install:
 	@if test -d $(bin)/$(os); then ln -s $(bin)/$(os)/* ~/.bin/; fi;
 	@ln -s $(bin)/all/* ~/.bin/
 
-# Irssi
-	@echo "Irssi..."
-	@ln -fs $(irssi) ~/.irssi
+# Fonts
+	@echo "Fonts..."
+	@if test ! -d $(fonts)/tamzen; then\
+		git clone https://github.com/sunaku/tamzen-font $(fonts)/tamzen;\
+	fi;
+	@if test ! -d $(fonts)/sm4tik; then\
+		git clone https://github.com/sunaku/sm4tik-font.git $(fonts)/sm4tik;\
+	fi;
+	@mkdir -p ~/.fonts
+	@ln -fs $(fonts)/tamzen/*.bdf ~/.fonts/
+	@ln -fs $(fonts)/sm4tik/*.bdf ~/.fonts/
 
 # Mutt
 	@echo "Mutt..."
@@ -91,27 +111,6 @@ install:
 # Pentadactyl
 	@echo "Pentadactyl..."
 	@ln -fs $(penta)/pentadactylrc ~/.pentadactylrc
-
-# Terminal
-	@echo "Terminal..."
-	@ln -fs $(term)/Xresources ~/.Xresources	
-	@ln -fs $(term)/zsh/zshrc ~/.zshrc
-	@ln -fs $(term)/zsh/stayrad.zsh-theme ~/.oh-my-zsh/themes/stayrad.zsh-theme
-	@test -d ~/.terminal || ln -s $(term) ~/.terminal
-
-# Tmux
-	@echo "Tmux..."
-	@ln -fs $(tmux)/tmux.conf ~/.tmux.conf
-
-# VIM
-	@echo "Vim..."
-	@mkdir -p $(vim)/tmp
-	@ln -fs $(vim)/vimrc ~/.vimrc
-	@test -d ~/.vim || ln -s $(vim) ~/.vim
-	
-	@if test ! -d $(vim)/bundle/neobundle.vim; then\
-		git clone https://github.com/Shougo/neobundle.vim.git $(vim)/bundle/neobundle.vim;\
-	fi;
 
 # Window Manager
 	@echo "BSPWM..."
@@ -127,25 +126,37 @@ install:
 		rm $(wm)/sxhkdrc.bak;\
 	fi;
 
+# Tmux
+	@echo "Tmux..."
+	@ln -fs $(tmux)/tmux.conf ~/.tmux.conf	fi;
+
+
+osx:
+
+# Terminal
+	@echo "Terminal..."
+	@ln -fs $(term)/zsh/zshrc ~/.zshrc
+	@ln -fs $(term)/zsh/stayrad.zsh-theme ~/.oh-my-zsh/themes/stayrad.zsh-theme
+	@test -d ~/.terminal || ln -s $(term) ~/.terminal
+
+# Irssi
+	@echo "Irssi..."
+	@rm -r ~/.irssi
+	@ln -fs $(irssi) ~/.irssi
+
+# Vim
+	@echo "Vim..."
+	@mkdir -p $(vim)/tmp
+	@ln -fs $(vim)/vimrc ~/.vimrc
+	@test -d ~/.vim || ln -s $(vim) ~/.vim
+
+	@if test ! -d $(vim)/bundle/neobundle.vim; then\
+		git clone https://github.com/Shougo/neobundle.vim.git $(vim)/bundle/neobundle.vim;\
+	fi;
+
 # Sublime
 	@echo "Sublime Text..."
-	@ln -fs $(subl)/Preferences.sublime-settings ~/.config/sublime-text-3/Packages/User/Preferences.sublime-settings
-	@ln -fs $(subl)/Oceanic.tmTheme ~/.config/sublime-text-3/Packages/User/Oceanic.tmTheme
-	@ln -fs $(subl)/Default.sublime-keymap ~/.config/sublime-text-3/Packages/User/Default.sublime-keymap
+	@ln -fs $(subl)/Preferences.sublime-settings $(subl_os)/Packages/User/Preferences.sublime-settings
+	@ln -fs $(subl)/Default.sublime-keymap $(subl_os)/Packages/User/Default.sublime-keymap
+	@ln -fs $(subl)/Package\ Control.sublime-settings $(subl_os)/Packages/User/Package\ Control.sublime-settings
 
-# Other files
-	@echo "Other..."
-	@ln -sf $(other)/cdmrc ~/.cdmrc
-	@ln -sf $(other)/fehbg ~/.fehbg
-
-# Fonts
-	@echo "Fonts..."
-	@if test ! -d $(fonts)/tamzen; then\
-		git clone https://github.com/sunaku/tamzen-font $(fonts)/tamzen;\
-	fi;
-	@if test ! -d $(fonts)/sm4tik; then\
-		git clone https://github.com/sunaku/sm4tik-font.git $(fonts)/sm4tik;\
-	fi;
-	@mkdir -p ~/.fonts
-	@ln -fs $(fonts)/tamzen/*.bdf ~/.fonts/
-	@ln -fs $(fonts)/sm4tik/*.bdf ~/.fonts/
