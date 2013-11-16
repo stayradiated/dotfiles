@@ -42,31 +42,37 @@ super + m
 super + {_,shift + }{h,j,k,l}
     bspc window -{f,s} {left,down,up,right}
 
+# Loop through the window frames
 super + {_,shift + }c
     bspc window -f {next,prev}
 
+# Switch each window with the frame next to it
 super + {comma,period}
     bspc desktop -C {backward,forward}
 
+# Cycle through the desktops
 super + bracket{left,right}
     bspc desktop -f {prev,next}
 
+# Split a window in half
 super + alt + {h,j,k,l}
     bspc window -p {left,down,up,right}
 
 super + ctrl + {_,shift + }space
     bspc {window -p cancel,desktop -c}
 
+# Push window
 super + ctrl + {h,j,k,l}
     bspc window -e {left,down,up,right} push
 
-super + alt + shift + {h,j,k,l}
+# Pull window
+super + ctrl + shift + {h,j,k,l}
     bspc window -e {right,up,down,left} pull
 
 super + ctrl + {1-9}
     bspc window -r 0.{1-9}
 
-super + {_,alt + }{ exclam, at, numbersign, dollar, percent, asciicircum, ampersand, asterisk, parenleft, parenright }
+super + {_,shift + }{1-9, 0}
     bspc {desktop -f,window -d} {1-9,0}
 
 :button1
