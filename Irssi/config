@@ -2,18 +2,21 @@ servers = (
   {
     address = "localhost";
     chatnet = "bitlbee";
+    port = "6667";
+    use_ssl = "no";
+    ssl_verify = "no";
     autoconnect = "yes";
   }
 );
 
 chatnets = {
   bitlbee = {
-    type = "IRC"; 
+    type = "IRC";
+    autosendcmd = "/msg &bitlbee identify stayradiated";
   };
 };
 
-channels = (
-);
+channels = ();
 
 aliases = {
   J = "join";
@@ -179,8 +182,8 @@ statusbar = {
 settings = {
   core = { 
     real_name = "George";
-    user_name = "stayradiated";
-    nick = "stayradiated";
+    user_name = "stayrad";
+    nick = "stayrad";
   };
   "fe-text" = { actlist_sort = "refnum"; term_force_colors = "yes"; };
   "fe-common/core" = {

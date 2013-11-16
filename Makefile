@@ -141,6 +141,7 @@ osx:
 
 # Irssi
 	@echo "Irssi..."
+	@rm -r ~/.irssi
 	@ln -fs $(irssi) ~/.irssi
 
 # Vim
