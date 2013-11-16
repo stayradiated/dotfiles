@@ -1,7 +1,8 @@
 {
 	"caret_style": "phase",
-	"color_scheme": "Packages/Theme - Flatland/Flatland Dark.tmTheme",
+	"color_scheme": "Packages/User/flatland-hybrid.tmTheme",
 	"create_window_at_startup": true,
+	"detect_indentation": false,
 	"draw_centered": false,
 	"enable_hexadecimal_encoding": false,
 	"fold_buttons": false,
@@ -17,12 +18,12 @@
 	"font_options":
 	[
 		"no_round",
+		"no_italic",
 		"subpixel_antialias"
 	],
 	"font_size": 14,
 	"highlight_line": false,
 	"highlight_modified_tabs": true,
-  "detect_indentation": false,
 	"ignored_packages":
 	[
 		"actualvim"
