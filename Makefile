@@ -126,10 +126,6 @@ arch:
 		rm $(wm)/sxhkdrc.bak;\
 	fi;
 
-# Tmux
-	@echo "Tmux..."
-	@ln -fs $(tmux)/tmux.conf ~/.tmux.conf	fi;
-
 
 osx:
 
@@ -138,6 +134,10 @@ osx:
 	@ln -fs $(term)/zsh/zshrc ~/.zshrc
 	@ln -fs $(term)/zsh/stayrad.zsh-theme ~/.oh-my-zsh/themes/stayrad.zsh-theme
 	@test -d ~/.terminal || ln -s $(term) ~/.terminal
+
+# Tmux
+	@echo "Tmux..."
+	@ln -fs $(tmux)/tmux.conf ~/.tmux.conf
 
 # Irssi
 	@echo "Irssi..."
