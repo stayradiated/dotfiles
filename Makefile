@@ -108,10 +108,6 @@ arch:
 	@ln -fs $(mutt)/muttrc ~/.muttrc
 	@test -d ~/.mutt || ln -s $(mutt)/mutt ~/.mutt
 
-# Pentadactyl
-	@echo "Pentadactyl..."
-	@ln -fs $(penta)/pentadactylrc ~/.pentadactylrc
-
 # Window Manager
 	@echo "BSPWM..."
 	@test -d ~/.bspwm || ln -s $(wm) ~/.bspwm
@@ -159,4 +155,8 @@ osx:
 	@ln -fs $(subl)/Preferences.sublime-settings $(subl_os)/Packages/User/Preferences.sublime-settings
 	@ln -fs $(subl)/Default.sublime-keymap $(subl_os)/Packages/User/Default.sublime-keymap
 	@ln -fs $(subl)/Package\ Control.sublime-settings $(subl_os)/Packages/User/Package\ Control.sublime-settings
+
+# Pentadactyl
+	@echo "Pentadactyl..."
+	@ln -fs $(penta)/pentadactylrc ~/.pentadactylrc
 
