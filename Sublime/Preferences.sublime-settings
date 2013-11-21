@@ -1,6 +1,6 @@
 {
 	"caret_style": "phase",
-	"color_scheme": "Packages/User/flatland-hybrid.tmTheme",
+	"color_scheme": "Packages/Github Color Theme/GitHub.tmTheme",
 	"create_window_at_startup": true,
 	"detect_indentation": false,
 	"draw_centered": false,
@@ -12,29 +12,32 @@
 		".git",
 		".hg",
 		"CVS",
-		"node_modules"
+		"node_modules",
+		".sass-cache"
 	],
 	"font_face": "tamzen7x14",
 	"font_options":
 	[
 		"no_round",
 		"no_italic",
+		"no_bold",
 		"subpixel_antialias"
 	],
-	"font_size": 11,
+	"font_size": 14,
 	"highlight_line": false,
 	"highlight_modified_tabs": true,
 	"ignored_packages":
 	[
-		"JavaScript"
+		"Markdown",
 		"actualvim"
 	],
 	"indent_guide_options":
 	[
+		"vintage",
 		"draw_active"
 	],
-	"line_padding_bottom": 3,
-	"line_padding_top": 3,
+	"line_padding_bottom": 1,
+	"line_padding_top": 1,
 	"rulers":
 	[
 		79
@@ -43,7 +46,7 @@
 	"show_panel_on_build": true,
 	"tab_completion": false,
 	"tab_size": 2,
-	"theme": "Centurion.sublime-theme",
+	"theme": "Soda Light.sublime-theme",
 	"translate_tabs_to_spaces": true,
 	"trim_trailing_white_space_on_save": true,
 	"use_tab_stops": true,
