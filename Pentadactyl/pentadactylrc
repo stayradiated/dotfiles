@@ -30,9 +30,9 @@ hi -a StatusLineNormal color:#C5C8C6 !important; background:#282A2E !important;
 " -----------------------------------------------------------------------------
 
 " set ui font
-hi FontCode -a font-family: "Meslo LG M DZ" !important; font-size: 10pt !important;
-hi FontFixed -a font-family: "Meslo LG M DZ" !important; font-size: 10pt !important;
-hi Normal -a font-family: "Meslo LG M DZ" !important; font-size: 10pt !important;
+hi FontCode -a font-family: "tamzen7x14" !important; font-size: 14px !important;
+hi FontFixed -a font-family: "tamzen7x14" !important; font-size: 14px !important;
+hi Normal -a font-family: "tamzen7x14" !important; font-size: 14px !important;
 
 " increase hints font size
 hi Hint -a font-size: 13pt !important; text-transform: uppercase;
@@ -105,7 +105,7 @@ style -name minitabs chrome://* <<EOM
   /* A browser tab */
   .tabbrowser-tab {
     color: #333 !important;
-    font: normal 11pt "Proxima Nova" !important;
+    font: normal 14px Tamzen7x14 !important;
     height: 10px !important;
     padding: 0 1ex !important;
 
