@@ -33,7 +33,6 @@ NeoBundle 'Shougo/vimproc.vim', {
 
 " Themes
 NeoBundle 'w0ng/vim-hybrid'
-NeoBundle 'chriskempson/vim-tomorrow-theme'
 NeoBundle 'bling/vim-airline'
 
 " Extensions
@@ -127,8 +126,8 @@ set smartcase            " override ignorecase if upper case typed
 set t_Co=256
 let g:hybrid_use_Xresources=1
 
-set background=dark
-colorscheme hybrid
+set background=light
+colorscheme Tomorrow
 
 " Fix escape key lag in terminal
 set timeoutlen=1000
@@ -150,8 +149,7 @@ if has('gui_running')
 
   " Fonts
   if has('macunix')
-    " set guifont=Tamzen\ Medium:h15
-    set guifont=Meslo\ LG\ L\ DZ:h14
+    set guifont=Tamzen7x14:h14
   else
     set guifont=Meslo\ LG\ M\ DZ\ 12
   endif
@@ -269,7 +267,7 @@ nnoremap <silent> # #zz
 " Status line
 let g:airline_left_sep = ''
 let g:airline_right_sep = ''
-let g:airline_theme = 'base16'
+let g:airline_theme = 'tomorrow'
 
 " VimFiler
 let g:vimfiler_as_default_explorer = 1
