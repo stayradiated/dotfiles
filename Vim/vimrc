@@ -126,8 +126,8 @@ set smartcase            " override ignorecase if upper case typed
 set t_Co=256
 let g:hybrid_use_Xresources=1
 
-set background=light
-colorscheme Tomorrow
+set background=dark
+colorscheme hybrid
 
 " Fix escape key lag in terminal
 set timeoutlen=1000
@@ -267,7 +267,7 @@ nnoremap <silent> # #zz
 " Status line
 let g:airline_left_sep = ''
 let g:airline_right_sep = ''
-let g:airline_theme = 'tomorrow'
+let g:airline_theme = 'base16'
 
 " VimFiler
 let g:vimfiler_as_default_explorer = 1
