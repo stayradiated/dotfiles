@@ -1,6 +1,6 @@
 {
 	"caret_style": "phase",
-	"color_scheme": "Packages/Github Color Theme/GitHub.tmTheme",
+	"color_scheme": "Packages/Tomorrow Color Schemes/Tomorrow-Night.tmTheme",
 	"create_window_at_startup": true,
 	"detect_indentation": false,
 	"draw_centered": false,
@@ -28,8 +28,8 @@
 	"highlight_modified_tabs": true,
 	"ignored_packages":
 	[
-		"Markdown",
-		"actualvim"
+		"actualvim",
+		"Markdown"
 	],
 	"indent_guide_options":
 	[
@@ -46,7 +46,7 @@
 	"show_panel_on_build": true,
 	"tab_completion": false,
 	"tab_size": 2,
-	"theme": "Soda Light.sublime-theme",
+	"theme": "Centurion.sublime-theme",
 	"translate_tabs_to_spaces": true,
 	"trim_trailing_white_space_on_save": true,
 	"use_tab_stops": true,
