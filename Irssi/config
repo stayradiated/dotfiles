@@ -90,7 +90,8 @@ statusbar = {
     # window_empty is printed with empty windows
     window = "{sb $winref:$tag/$itemname{sbmode $M}}";
     window_empty = "{sb $winref{sbservertag $tag}}";
-    prompt = "{prompt $[.15]itemname}";
+    # prompt = "{prompt $[.15]itemname}";
+    prompt = "$c >> ";
     prompt_empty = "{prompt $winname}";
     topic = " $topic";
     topic_empty = " Irssi v$J - http://www.irssi.org";
@@ -108,7 +109,7 @@ statusbar = {
     # the "default statusbar" to be displayed at the bottom of the window.
     # contains all the normal items.
     window = {
-      disabled = "no";
+      disabled = "yes";
 
       # window, root
       type = "window";
@@ -168,26 +169,31 @@ statusbar = {
     topic = {
       type = "root";
       placement = "top";
-      position = "1";
-      visible = "always";
+      position = "0";
+      visible = "inactive";
       items = {
         topicbarstart = { priority = "100"; };
-        topic = { };
+        # topic = { };
         topic_empty = { };
         topicbarend = { priority = "100"; alignment = "right"; };
       };
+      disabled = "yes";
     };
   };
 };
 settings = {
-  core = { 
+  core = {
     real_name = "George";
     user_name = "stayrad";
     nick = "stayrad";
   };
-  "fe-text" = { actlist_sort = "refnum"; term_force_colors = "yes"; };
+  "fe-text" = {
+    actlist_sort = "refnum";
+    term_force_colors = "yes";
+  };
   "fe-common/core" = {
     theme = "beastie";
+    timestamps = "no";
     autocreate_own_query = "no";
     autocreate_query_level = "DCCMSGS";
     use_status_window = "no";
