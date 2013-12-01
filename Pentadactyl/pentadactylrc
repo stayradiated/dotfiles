@@ -43,10 +43,6 @@ hi Hint -a font-size: 13pt !important; text-transform: uppercase;
 
 map , <Leader>
 nmap -builtin <Leader>h :noh<CR>
-nmap -builtin ; :
-nmap -builtin : ;
-vmap -builtin ; :
-vmap -builtin : ;
 nmap -builtin <C-S-n> :tabmove! +1<CR>
 nmap -builtin <C-S-p> :tabmove! -1<CR>
 
@@ -57,7 +53,7 @@ nmap -builtin <C-S-p> :tabmove! -1<CR>
 map -builtin <F3> :styletoggle<Space>-name<Space>hybrid<CR>
 
 "
-" Style: Hybrid Colourscheme 
+" Style: Hybrid Colourscheme
 " -----------------------------------------------------------------------------
 
 style -name hybrid http://*,https://*,file://*,about:blank <<EOM
@@ -83,7 +79,7 @@ EOM
 styledisable -name=hybrid
 
 "
-" Style: Minimalistic Tabs 
+" Style: Minimalistic Tabs
 " -----------------------------------------------------------------------------
 
 style -name minitabs chrome://* <<EOM
@@ -105,7 +101,7 @@ style -name minitabs chrome://* <<EOM
   /* A browser tab */
   .tabbrowser-tab {
     color: #333 !important;
-    font: normal 14px Tamzen7x14 !important;
+    font: normal 14px "Lucida Grande !important;
     height: 10px !important;
     padding: 0 1ex !important;
 
