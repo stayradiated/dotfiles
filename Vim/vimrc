@@ -264,6 +264,9 @@ nnoremap <silent> # #zz
 " Plugin Settings {{{
 " -----------------------------------------------------------------------------
 
+" Syntastic
+let g:syntastic_javascript_checkers=['jshint']
+
 " Status line
 let g:airline_left_sep = ''
 let g:airline_right_sep = ''
