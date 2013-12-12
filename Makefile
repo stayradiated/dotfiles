@@ -15,6 +15,7 @@ vim   := $(dir)/Vim
 wm    := $(dir)/BSPWM
 other := $(dir)/Other
 fonts := $(dir)/Fonts
+music := $(dir)/Music
 
 ifeq ($(os), osx)
 	subl_os := ~/Library/Application\ Support/Sublime\ Text\ 3
@@ -159,4 +160,9 @@ osx:
 # Vimperator
 	@echo "Vimperator..."
 	@ln -fs $(ffox)/vimperatorrc ~/.vimperatorrc
+
+# NCMPCPP
+	@echo "NCMPCPP..."
+	@mkdir -p ~/.ncmpcpp
+	@ln -fs $(music)/ncmpcpp_config ~/.ncmpcpp/config
 
