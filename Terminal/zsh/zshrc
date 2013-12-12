@@ -86,6 +86,7 @@ alias usbumount="sudo umount /media/usb"
 export EDITOR="vim"
 alias v='vim'
 alias sv='sudo vim'
+alias nrs='npm run-script'
 
 # terminal
 alias quit='exit'
