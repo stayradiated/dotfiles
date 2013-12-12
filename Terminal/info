@@ -30,6 +30,10 @@ RES=$(system_profiler SPDisplaysDataType | awk '/Resolution/{print $2,$3,$4}' | 
 UPTIME=$(system_profiler SPSoftwareDataType | awk '/boot/{print $4, $5, $6, $7, $8}')
 # Printing the apple
 
+$e ""
+$e ""
+$e ""
+
 $e "${c1}                :++++.         "   "${c7}`users`${c5}@${c7}`hostname`"
 $e "${c1}               /+++/.          "   "${c7}OS: ${c0}$OS $VERS ($BUILD)"
 $e "${c1}       .:-::- .+/:-\`\`.::-    "   "  ${c7}Kernel: ${c0}`uname -mrs`"
@@ -45,5 +49,10 @@ $e "${c5}  \`syyyyyyyyyyyyyyyyyyyyyyyy+\\"  " ${c7}VRam: ${c0}$VCARD @ $VRAM"
 $e "${c6}   \`ossssssssssssssssssssss/   "  "${c7}Model: ${c0}$MODEL"
 $e "${c6}     :ooooooooooooooooooo+.    "   "${c7}Disk Usage: ${c0}$DISK_USAGE"
 $e "${c6}      \`:+oo+/:-..-:/+o+/-   "     "   ${c7}Term: ${c0}iTerm2"
+
+$e ""
+$e ""
+$e ""
+$e ""
 
 ## TODO: packages-1, wm, de 1
