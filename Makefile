@@ -7,7 +7,7 @@ bar   := $(dir)/Bar
 bin   := $(dir)/Bin
 irssi := $(dir)/Irssi
 mutt  := $(dir)/Mutt
-penta := $(dir)/Pentadactyl
+ffox  := $(dir)/Firefox
 term  := $(dir)/Terminal
 tmux  := $(dir)/Tmux
 subl  := $(dir)/Sublime
@@ -41,7 +41,7 @@ check:
 	@if test -f ~/.cdmrc; then echo ".cdmrc exists"; fi;
 	@if test -f ~/.tmux.conf; then echo ".tmux.conf exists"; fi;
 	@if test -f ~/.muttrc; then echo ".muttrc exists"; fi;
-	@if test -f ~/.pentadactylrc; then echo ".pentadactylrc exists"; fi;
+	@if test -f ~/.vimperatorrc; then echo ".vimperatorrc exists"; fi;
 	@if test -f ~/.Xresources; then echo ".Xresources exists"; fi;
 	@if test -f ~/.zshrc; then echo ".zshrc exists"; fi;
 	@if test -f ~/.xinitrc; then echo ".xinitrc exists"; fi;
@@ -60,7 +60,7 @@ uninstall:
 	rm -f ~/.bar
 	rm -f ~/.cdmrc
 	rm -f ~/.mutt ~/.muttrc
-	rm -f ~/.pentadactylrc
+	rm -f ~/.vimperatorrc
 	rm -f ~/.tmux.conf
 	rm -f ~/.terminal ~/.Xresources ~/.zshrc ~/.oh-my-zsh/themes/stayrad.zsh-theme
 	rm -f ~/.vim ~/.vimrc
@@ -156,7 +156,7 @@ osx:
 	@ln -fs $(subl)/Default.sublime-keymap $(subl_os)/Packages/User/Default.sublime-keymap
 	@ln -fs $(subl)/Package\ Control.sublime-settings $(subl_os)/Packages/User/Package\ Control.sublime-settings
 
-# Pentadactyl
-	@echo "Pentadactyl..."
-	@ln -fs $(penta)/pentadactylrc ~/.pentadactylrc
+# Vimperator
+	@echo "Vimperator..."
+	@ln -fs $(ffox)/vimperatorrc ~/.vimperatorrc
 
