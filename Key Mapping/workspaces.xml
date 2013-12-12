@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<root>
+
+  <vkopenurldef>
+    <name>KeyCode::VK_OPEN_URL_SHELL_switch_workspace_1</name>
+    <url type="shell">
+      <![CDATA[ echo Wa1:d2:d3 > /tmp/bar.fifo ]]>
+    </url>
+  </vkopenurldef>
+
+  <vkopenurldef>
+    <name>KeyCode::VK_OPEN_URL_SHELL_switch_workspace_2</name>
+    <url type="shell">
+      <![CDATA[ echo Wd1:a2:d3 > /tmp/bar.fifo ]]>
+    </url>
+  </vkopenurldef>
+
+  <vkopenurldef>
+    <name>KeyCode::VK_OPEN_URL_SHELL_switch_workspace_3</name>
+    <url type="shell">
+      <![CDATA[ echo Wd1:d2:a3 > /tmp/bar.fifo ]]>
+    </url>
+  </vkopenurldef>
+
+  <item>
+    <name>Handle workspaces</name>
+    <identifier>private.workspaces</identifier>
+    <autogen>
+      __KeyToKey__
+      KeyCode::KEY_1, ModifierFlag::COMMAND_L,
+      KeyCode::VK_OPEN_URL_SHELL_switch_workspace_1,
+      KeyCode::KEY_1, ModifierFlag::CONTROL_L
+    </autogen>
+    <autogen>
+      __KeyToKey__
+      KeyCode::KEY_2, ModifierFlag::COMMAND_L,
+      KeyCode::VK_OPEN_URL_SHELL_switch_workspace_2,
+      KeyCode::KEY_2, ModifierFlag::CONTROL_L
+    </autogen>
+    <autogen>
+      __KeyToKey__
+      KeyCode::KEY_3, ModifierFlag::COMMAND_L,
+      KeyCode::VK_OPEN_URL_SHELL_switch_workspace_3,
+      KeyCode::KEY_3, ModifierFlag::CONTROL_L
+    </autogen>
+    <autogen>
+      __KeyToKey__
+      KeyCode::KEY_1, ModifierFlag::CONTROL_L,
+      KeyCode::KEY_1, ModifierFlag::COMMAND_L
+    </autogen>
+    <autogen>
+      __KeyToKey__
+      KeyCode::KEY_2, ModifierFlag::CONTROL_L,
+      KeyCode::KEY_2, ModifierFlag::COMMAND_L
+    </autogen>
+    <autogen>
+      __KeyToKey__
+      KeyCode::KEY_3, ModifierFlag::CONTROL_L,
+      KeyCode::KEY_3, ModifierFlag::COMMAND_L
+    </autogen>
+    <autogen>
+      __KeyToKey__
+      KeyCode::KEY_4, ModifierFlag::CONTROL_L,
+      KeyCode::KEY_4, ModifierFlag::COMMAND_L
+    </autogen>
+  </item>
+
+</root>
