@@ -39,7 +39,7 @@ NeoBundle 'bling/vim-airline'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'stayradiated/vimfiler.vim'
 
-" " Editing
+" Editing
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'tpope/vim-repeat'
 NeoBundle 'tpope/vim-fugitive'
@@ -88,20 +88,14 @@ set gdefault             " replace everything by default
 set autochdir            " change directory to current buffer when opening files
 set linespace=0          " make font look a bit better
 set visualbell           " stop the beep
+set noautochdir          " don't change directories when I change files
 
-if has('macunix')
-  " CodeKit Compatibility
-  set nobackup
-  set nowritebackup
-  set noswapfile
-else
-  " Backup swap files
-  set backup
-  set backupdir=~/.vim/tmp
-  set backupskip=/tmp/*,/private/tmp/*
-  set directory=~/.vim/tmp
-  set writebackup
-endif
+" Backup swap files
+set backup
+set backupdir=~/.vim/tmp
+set backupskip=/tmp/*,/private/tmp/*
+set directory=~/.vim/tmp
+set writebackup
 
 " Folding
 set foldignore=          " don't ignore anything when folding
@@ -154,13 +148,6 @@ if has('gui_running')
     set guifont=Meslo\ LG\ M\ DZ\ 12
   endif
 
-" Terminal vim
-else
-
-  " Scrolling
-  " map <ScrollWheelUp> <C-Y>
-  " map <ScrollWheelDown> <C-E>
-
 endif
 
 " Toggle cursor shape in iTerm2
@@ -176,13 +163,6 @@ endif
 if &diff
   set diffopt=filler,foldcolumn:0
 endif
-
-" Netrw settings
-let g:netrw_liststyle=3    " Use tree-mode as default
-let g:netrw_browse_split=4 " Open file in previous buffer
-let g:netrw_preview=1      " Show preview in a vertical split
-let g:netrw_altv=1
-let g:netrw_list_hide = ".git,.sass-cache,.*"
 
 " }}}
 "
@@ -229,8 +209,6 @@ nnoremap k gk
 nnoremap <F2> :set invpaste paste?<CR>
 set pastetoggle=<F2>
 
-nnoremap <leader>m :call ToggleColorscheme()<CR>
-
 " Shortcut for Tabularize
 vnoremap <leader>t :Tabularize /
 
@@ -274,7 +252,6 @@ let g:airline_theme = 'base16'
 
 " VimFiler
 let g:vimfiler_as_default_explorer = 1
-let g:vimfiler_enable_auto_cd = 1
 
 " Unite
 let g:unite_source_history_yank_enable = 1
@@ -304,59 +281,8 @@ endfunction
 
 " Indent rules
 autocmd FileType markdown setlocal ts=4 sw=4 sts=4 tw=79
-autocmd FileType python setlocal ts=4 sw=4 sts=4
 
 " Folding rules
-autocmd FileType c,cpp setlocal foldmethod=syntax
 autocmd FileType coffee setlocal foldmethod=indent nofoldenable
-
-" }}}
-"
-" Functions {{{
-" -----------------------------------------------------------------------------
-
-function! ToggleColorscheme()
-  if &background == 'dark'
-    set background=light
-    colorscheme Tomorrow
-  else
-    set background=dark
-    colorscheme Tomorrow-Night
-  endif
-endfunction
-
-" Compatible with ranger 1.4.2 through 1.6.*
-"
-" Add ranger as a file chooser in vim
-"
-" If you add this code to the .vimrc, ranger can be started using the command
-" ":RagerChooser" or the keybinding "<leader>r".  Once you select one or more
-" files, press enter and ranger will quit again and vim will open the selected
-" files.
-
-function! RangeChooser()
-    let temp = tempname()
-    " The option "--choosefiles" was added in ranger 1.5.1. Use the next line
-    " with ranger 1.4.2 through 1.5.0 instead.
-    "exec 'silent !ranger --choosefile=' . shellescape(temp)
-    exec 'silent !ranger --choosefiles=' . shellescape(temp)
-    if !filereadable(temp)
-        " Nothing to read.
-        return
-    endif
-    let names = readfile(temp)
-    if empty(names)
-        " Nothing to open.
-        return
-    endif
-    " Edit the first item.
-    exec 'edit ' . fnameescape(names[0])
-    " Add any remaning items to the arg list/buffer list.
-    for name in names[1:]
-        exec 'argadd ' . fnameescape(name)
-    endfor
-endfunction
-command! -bar RangerChooser call RangeChooser()
-nnoremap <leader>r :<C-U>RangerChooser<CR>
 
 " }}}
