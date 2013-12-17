@@ -11,8 +11,8 @@ set encoding=utf-8       " always encode in utf
 
 " }}}
 "
-" " Load Plugins {{{
-" " -----------------------------------------------------------------------------
+" Load Plugins {{{
+" -----------------------------------------------------------------------------
 
 if has('vim_starting')
   set runtimepath+=~/.vim/bundle/neobundle.vim
@@ -89,6 +89,7 @@ set autochdir            " change directory to current buffer when opening files
 set linespace=0          " make font look a bit better
 set visualbell           " stop the beep
 set noautochdir          " don't change directories when I change files
+set colorcolumn=80       " 
 
 " Backup swap files
 set backup
@@ -96,6 +97,12 @@ set backupdir=~/.vim/tmp
 set backupskip=/tmp/*,/private/tmp/*
 set directory=~/.vim/tmp
 set writebackup
+
+" Infinite undo
+set undofile
+set undodir=~/.vim/undo
+set undolevels=1000
+set undoreload=10000
 
 " Folding
 set foldignore=          " don't ignore anything when folding
@@ -244,6 +251,7 @@ nnoremap <silent> # #zz
 
 " Syntastic
 let g:syntastic_javascript_checkers=['jshint']
+let g:syntastic_coffee_coffeelint_args='-f ~/.lint.json'
 
 " Status line
 let g:airline_left_sep = ''

@@ -144,6 +144,7 @@ osx:
 # Vim
 	@echo "Vim..."
 	@mkdir -p $(vim)/tmp
+	@mkdir -p $(vim)/undo
 	@ln -fs $(vim)/vimrc ~/.vimrc
 	@test -d ~/.vim || ln -s $(vim) ~/.vim
 
