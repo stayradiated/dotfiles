@@ -209,7 +209,7 @@ settings = {
     term_force_colors = "yes";
   };
   "fe-common/core" = {
-    theme = "beastie";
+    theme = "yrmt";
     timestamps = "no";
     autocreate_own_query = "no";
     autocreate_query_level = "DCCMSGS";
