@@ -8,6 +8,7 @@
 
 set nocompatible         " use vim defaults instead of vi
 set encoding=utf-8       " always encode in utf
+set shell=/bin/zsh       " because fish shell breaks syntastic
 
 " }}}
 "
@@ -125,7 +126,7 @@ set smartcase            " override ignorecase if upper case typed
 
 " Colours
 set t_Co=256
-let g:hybrid_use_Xresources=1
+let g:hybrid_use_iTerm_colors=1
 
 set background=dark
 colorscheme hybrid
