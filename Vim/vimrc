@@ -90,7 +90,7 @@ set autochdir            " change directory to current buffer when opening files
 set linespace=0          " make font look a bit better
 set visualbell           " stop the beep
 set noautochdir          " don't change directories when I change files
-set colorcolumn=80       " 
+set colorcolumn=80       " for cleaner code
 
 " Backup swap files
 set backup

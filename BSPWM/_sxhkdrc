@@ -89,7 +89,7 @@ super + !button{1-3}
 #
 
 super + Return
-    urxvtc
+    termite
 
 super + space
     dmenu_run -nb "#1D1F21" -nf "#C5C8C6" -sb "#282A2E" -sf "#90A959" -h 25 -p ">" -fn "-misc-tamzen-medium-r-*-*-14-*-*-*-*-*-*-*"
