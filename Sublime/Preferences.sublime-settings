@@ -18,23 +18,16 @@
 	"font_face": "tamzen7x14",
 	"font_options":
 	[
-		"no_round",
 		"no_italic",
-		"no_bold",
-		"subpixel_antialias"
+		"no_bold"
 	],
 	"font_size": 14,
 	"highlight_line": false,
 	"highlight_modified_tabs": true,
 	"ignored_packages":
 	[
-		"actualvim",
-		"Markdown"
-	],
-	"indent_guide_options":
-	[
-		"vintage",
-		"draw_active"
+		"Markdown",
+		"actualvim"
 	],
 	"line_padding_bottom": 1,
 	"line_padding_top": 1,
@@ -46,7 +39,7 @@
 	"show_panel_on_build": true,
 	"tab_completion": false,
 	"tab_size": 2,
-	"theme": "Centurion.sublime-theme",
+	"theme": "Spacefunk (Grey Tuesday).sublime-theme",
 	"translate_tabs_to_spaces": true,
 	"trim_trailing_white_space_on_save": true,
 	"use_tab_stops": true,
