@@ -109,21 +109,6 @@ arch:
 	@ln -fs $(mutt)/muttrc ~/.muttrc
 	@test -d ~/.mutt || ln -s $(mutt)/mutt ~/.mutt
 
-# Window Manager
-	@echo "BSPWM..."
-	@test -d ~/.bspwm || ln -s $(wm) ~/.bspwm
-	@ln -fs $(wm)/xinitrc ~/.xinitrc
-	@ln -fs $(wm)/Xmodmap ~/.Xmodmap
-
-	@echo "SXHKD..."
-	@cp $(wm)/_sxhkdrc $(wm)/sxhkdrc
-	@if test $(os) = "osx"; then\
-		sed -i.bak 's/super/mod2/g' $(wm)/sxhkdrc;\
-		sed -i.bak 's/alt/mod1/g' $(wm)/sxhkdrc;\
-		rm $(wm)/sxhkdrc.bak;\
-	fi;
-
-
 osx:
 
 # Terminal
@@ -166,4 +151,19 @@ osx:
 	@echo "NCMPCPP..."
 	@mkdir -p ~/.ncmpcpp
 	@ln -fs $(music)/ncmpcpp_config ~/.ncmpcpp/config
+
+# Window Manager
+	@echo "BSPWM..."
+	@test -d ~/.bspwm || ln -s $(wm) ~/.bspwm
+	@ln -fs $(wm)/xinitrc ~/.xinitrc
+	@ln -fs $(wm)/Xmodmap ~/.Xmodmap
+
+	@echo "SXHKD..."
+	@cp $(wm)/_sxhkdrc $(wm)/sxhkdrc
+	@if test $(os) = "osx"; then\
+		sed -i.bak 's/super/mod2/g' $(wm)/sxhkdrc;\
+		sed -i.bak 's/alt/mod1/g' $(wm)/sxhkdrc;\
+		rm $(wm)/sxhkdrc.bak;\
+	fi;
+
 
