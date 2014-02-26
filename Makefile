@@ -93,6 +93,7 @@ arch:
 	@ln -fs $(fonts)/tamzen/*.bdf ~/.fonts/
 	@ln -fs $(fonts)/sm4tik/*.bdf ~/.fonts/
 
+<<<<<<< HEAD
 # Window Manager
 	@echo "BSPWM..."
 	@ln -fs $(wm)/xinitrc ~/.xinitrc
@@ -105,7 +106,6 @@ arch:
 		sed -i.bak 's/alt/mod1/g' $(wm)/sxhkdrc;\
 		rm $(wm)/sxhkdrc.bak;\
 	fi;
-
 
 osx:
 
@@ -148,4 +148,19 @@ osx:
 	@echo "NCMPCPP..."
 	@mkdir -p ~/.ncmpcpp
 	@ln -fs $(music)/ncmpcpp_config ~/.ncmpcpp/config
+
+# Window Manager
+	@echo "BSPWM..."
+	@test -d ~/.bspwm || ln -s $(wm) ~/.bspwm
+	@ln -fs $(wm)/xinitrc ~/.xinitrc
+	@ln -fs $(wm)/Xmodmap ~/.Xmodmap
+
+	@echo "SXHKD..."
+	@cp $(wm)/_sxhkdrc $(wm)/sxhkdrc
+	@if test $(os) = "osx"; then\
+		sed -i.bak 's/super/mod2/g' $(wm)/sxhkdrc;\
+		sed -i.bak 's/alt/mod1/g' $(wm)/sxhkdrc;\
+		rm $(wm)/sxhkdrc.bak;\
+	fi;
+
 
