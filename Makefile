@@ -29,17 +29,11 @@ check:
 	@echo 'Checking for files that will be overwritten'
 
 # Folders
-	@if test -d ~/.bar; then echo ".bar exists"; fi;
-	@if test -d ~/.bin; then echo ".bin exists"; fi;
-	@if test -d ~/.bin; then echo ".bin exists"; fi;
-	@if test -d ~/.mutt; then echo ".mutt exists"; fi;
-	@if test -d ~/.terminal; then echo ".terminal exists"; fi;
+	@if test -d ~/bin; then echo ".bin exists"; fi;
 	@if test -d ~/.vim; then echo ".vim exists"; fi;
-	@if test -d ~/.vimrc; then echo ".vimrc exists"; fi;
-	@if test -d ~/.bspwm; then echo ".bspwm exists"; fi;
 
 # Files
-	@if test -f ~/.cdmrc; then echo ".cdmrc exists"; fi;
+	@if test -d ~/.vimrc; then echo ".vimrc exists"; fi;
 	@if test -f ~/.tmux.conf; then echo ".tmux.conf exists"; fi;
 	@if test -f ~/.muttrc; then echo ".muttrc exists"; fi;
 	@if test -f ~/.vimperatorrc; then echo ".vimperatorrc exists"; fi;
@@ -63,7 +57,7 @@ uninstall:
 	rm -f ~/.mutt ~/.muttrc
 	rm -f ~/.vimperatorrc
 	rm -f ~/.tmux.conf
-	rm -f ~/.terminal ~/.Xresources ~/.zshrc ~/.oh-my-zsh/themes/stayrad.zsh-theme
+	rm -f ~/.Xresources ~/.zshrc ~/.oh-my-zsh/themes/stayrad.zsh-theme
 	rm -f ~/.vim ~/.vimrc
 	rm -f ~/.bspwm ~/.xinitrc ~/.Xmodmap
 
