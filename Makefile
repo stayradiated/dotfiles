@@ -1,5 +1,5 @@
 # config
-os := osx
+os := arch
 
 # paths
 dir   := $(CURDIR)
@@ -73,21 +73,19 @@ arch:
 
 # Misc.
 	@echo "Misc..."
-	@ln -sf $(other)/cdmrc ~/.cdmrc
 	@ln -sf $(other)/fehbg ~/.fehbg
 	@ln -fs $(term)/Xresources ~/.Xresources
 
 # Bar
 	@echo "Bar..."
-	@test -d ~/.bar || ln -s $(bar) ~/.bar
-	@if test -d ~/Github/bar; then ln -sf $(bar)/config.h ~/Github/bar/config.h; fi;
+	@if test -d ~/github/bar; then ln -sf $(bar)/config.h ~/github/bar/config.h; fi;
 
 # Bin
 	@echo "Bin..."
-	@rm -r ~/.bin
-	@mkdir  ~/.bin
+	@rm -rf ~/bin
+	@mkdir  ~/bin
 	@if test -d $(bin)/$(os); then ln -s $(bin)/$(os)/* ~/.bin/; fi;
-	@ln -s $(bin)/all/* ~/.bin/
+	@ln -s $(bin)/all/* ~/bin/
 
 # Fonts
 	@echo "Fonts..."
@@ -101,17 +99,8 @@ arch:
 	@ln -fs $(fonts)/tamzen/*.bdf ~/.fonts/
 	@ln -fs $(fonts)/sm4tik/*.bdf ~/.fonts/
 
-# Mutt
-	@echo "Mutt..."
-	@cp $(mutt)/_muttrc $(mutt)/muttrc
-	@cp $(mutt)/mutt/_stayradiated.account $(mutt)/mutt/stayradiated.account
-	@cp $(mutt)/mutt/_czabania.account $(mutt)/mutt/czabania.account
-	@ln -fs $(mutt)/muttrc ~/.muttrc
-	@test -d ~/.mutt || ln -s $(mutt)/mutt ~/.mutt
-
 # Window Manager
 	@echo "BSPWM..."
-	@test -d ~/.bspwm || ln -s $(wm) ~/.bspwm
 	@ln -fs $(wm)/xinitrc ~/.xinitrc
 	@ln -fs $(wm)/Xmodmap ~/.Xmodmap
 
@@ -130,7 +119,6 @@ osx:
 	@echo "Terminal..."
 	@ln -fs $(term)/zsh/zshrc_$(os) ~/.zshrc
 	@ln -fs $(term)/zsh/stayrad.zsh-theme ~/.oh-my-zsh/themes/stayrad.zsh-theme
-	@test -d ~/.terminal || ln -s $(term) ~/.terminal
 
 # Tmux
 	@echo "Tmux..."
@@ -138,7 +126,7 @@ osx:
 
 # Irssi
 	@echo "Irssi..."
-	@rm -r ~/.irssi
+	@rm -rf ~/.irssi
 	@ln -fs $(irssi) ~/.irssi
 
 # Vim

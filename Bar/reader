@@ -1,6 +1,6 @@
-#! /bin/sh
+#!/usr/bin/env bash
 
-source $(dirname $0)/printer.sh
+source $(dirname $0)/printer
 
 while read -r line ; do
   case $line in

@@ -11,6 +11,7 @@
 # Vim
 /Vim/bundle/*
 /Vim/tmp
+/Vim/undo
 /Vim/.netrwhist
 
 # Fonts

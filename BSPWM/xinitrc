@@ -1,80 +1,29 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
-OS="arch"
-
-#         __   __       
-#    /\  |__) /  ` |__| 
-#   /~~\ |  \ \__, |  | 
-                    
-if [ $OS = "arch" ]; then
-
-  # increase mouse acceleration
-  xset m 2
-
-  # disable that beep
-  xset -b
-
-  # edit key layout
-  setxkbmap -option "ctrl:nocaps"
-  $HOME/Github/xcape/xcape -e "Control_L=Escape"
-
-  # set xmodmap
-  xmodmap $HOME/.Xmodmap &
-
-#    __   __      
-#   /  \ /__` \_/ 
-#   \__/ .__/ / \ 
-              
-else
-
-  # Set HOME
-  export HOME=/Users/Admin
-
-  # Set the correct path
-  PATH="$PATH:/usr/local/bin:/opt/local/sin:/opt/local/bin:$HOME/.bin"
-
-  # Set the language
-  export LANG="en_NZ.UTF-8"
-
-fi
-
-#    __   __  ___      
-#   |__) /  \  |  |__| 
-#   |__) \__/  |  |  | 
-                   
+# disable that beep
+xset -b
 
 # merge .Xresources
 xrdb -merge $HOME/.Xresources &
 
-# Set the cursor
+# set the cursor
 xsetroot -cursor_name left_ptr &
 
-# Make sure fonts.dir exists
-[[ ! -f $HOME/.fonts/fonts.dir ]] && mkfontdir $HOME/.fonts
-
-# add font paths
-xset fp default
-[[ -d /usr/share/fonts/local ]] && xset +fp /usr/share/fonts/local
-[[ -d $HOME/.fonts ]] && xset +fp $HOME/.fonts
+# load fonts
+xset fp defaults
+xset +fp /usr/share/fonts/local
+xset +fp $HOME/.fonts
 xset fp rehash
 
-# set background
+# set the background
 feh --bg-tile "$HOME/dotfiles/Other/dark_stripe.png"
 
-# start apps in background (only if not already running)
-[[ -z `pidof tmux`    ]] && tmux &
-[[ -z `pidof urxvtd`  ]] && urxvtd -q -o -f &
-[[ -z `pidof bitlbee` ]] && bitlbee -D
-exists dropbox && [[ -z `pidof dropbox` ]] && dropbox start &
+# start urxvt daemon
+urxvtd -q -o -f &
 
-# Pipe for bar
+# set panel fifo pipe
 export PANEL_FIFO=/tmp/panel-fifo
-[ -e $PANEL_FIFO ] && rm $PANEL_FIFO
-mkfifo $PANEL_FIFO
+~/dotfiles/Bar/init &
 
-# Start panel
-$HOME/.bar/init &
-
-# start WM
-sxhkd -c $HOME/.bspwm/sxhkdrc &
-exec bspwm -c $HOME/.bspwm/bspwmrc -p W -s $PANEL_FIFO
+sxhkd &
+exec bspwm

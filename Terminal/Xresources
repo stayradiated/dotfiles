@@ -32,10 +32,10 @@ URxvt*visualBell:         false
 ! -----------------------------
 
 ! TAMZEN
-! URxvt.font:            -misc-tamzen-medium-r-*--15-*-*-*-*-*-*-*
-! URxvt.boldFont:        -misc-tamzen-bold-r-*--15-*-*-*-*-*-*-*
-! URxvt.italicFont:      -misc-tamzen-medium-r-*--15-*-*-*-*-*-*-*
-! URxvt.boldItalicFont:  -misc-tamzen-bold-r-*--15-*-*-*-*-*-*-*
+URxvt.font:            -misc-tamzen-medium-r-*--17-*-*-*-*-*-*-*
+URxvt.boldFont:        -misc-tamzen-bold-r-*--17-*-*-*-*-*-*-*
+URxvt.italicFont:      -misc-tamzen-medium-r-*--17-*-*-*-*-*-*-*
+URxvt.boldItalicFont:  -misc-tamzen-bold-r-*--17-*-*-*-*-*-*-*
 
 ! DINA
 ! URxvt.font:            -windows-dina-medium-r-*--16-*-*-*-*-*-*-*
@@ -44,10 +44,10 @@ URxvt*visualBell:         false
 ! URxvt.bolditalicFont:  -windows-dina-bold-i-*--16-*-*-*-*-*-*-*
 
 ! MESLO
-URxvt.font: xft:PanicSans:Regular:size=11
-URxvt.boldFont: xft:PanicSans:Bold:size=11
-URxvt.italicFont: xft:PanicSans:Italic:size=11
-URxvt.boldItalicFont: xft:PanicSans:Bold:Italic:size=11
+! URxvt.font: xft:DejaVu Sans Mono:Book:size=10
+! URxvt.boldFont: xft:DejaVu Sans Mono:Bold:size=10
+! URxvt.italicFont: xft:DejaVu Sans Mono:Oblique:size=10
+! URxvt.boldItalicFont: xft:DejaVu Sans Mono:Bold:Oblique:size=10
 
 ! PRAGMATAPRO
 ! URxvt.font: xft:PragmataPro for Powerline:Regular:size=11
