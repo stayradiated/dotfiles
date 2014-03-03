@@ -1,29 +1,45 @@
 #!/usr/bin/env bash
 
-# disable that beep
-xset -b
+case $1 in
+  
+  openbox-session)
+    exec openbox-session
+  ;;
 
-# merge .Xresources
-xrdb -merge $HOME/.Xresources &
+  *)
 
-# set the cursor
-xsetroot -cursor_name left_ptr &
+    # disable that beep
+    xset -b
 
-# load fonts
-xset fp defaults
-xset +fp /usr/share/fonts/local
-xset +fp $HOME/.fonts
-xset fp rehash
+    # merge .Xresources
+    xrdb -merge $HOME/.Xresources &
 
-# set the background
-feh --bg-tile "$HOME/dotfiles/Other/dark_stripe.png"
+    # set the cursor
+    xsetroot -cursor_name left_ptr &
 
-# start urxvt daemon
-urxvtd -q -o -f &
+    # load fonts
+    xset fp defaults
+    xset +fp /usr/share/fonts/local
+    xset +fp $HOME/.fonts
+    xset fp rehash
 
-# set panel fifo pipe
-export PANEL_FIFO=/tmp/panel-fifo
-~/dotfiles/Bar/init &
+    # set the background
+    feh --bg-tile "$HOME/dotfiles/Other/dark_stripe.png"
 
-sxhkd &
-exec bspwm
+    # start urxvt daemon
+    urxvtd -q -o -f &
+
+    # start keyring daemon
+    /usr/bin/gnome-keyring-daemon --start --components=gpg,pkcs11,secrets,ssh &
+
+    # set panel fifo pipe
+    export PANEL_FIFO=/tmp/panel-fifo
+    ~/dotfiles/Bar/init &
+
+    sxhkd &
+    exec bspwm
+
+
+  ;;
+
+esac

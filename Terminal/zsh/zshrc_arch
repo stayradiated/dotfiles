@@ -79,9 +79,9 @@ alias view="feh --full-screen --auto-zoom --force-alias --sort filename"
 
 # usb drives
 alias usb="cd /media/usb"
-alias usbmount="sudo mount -o uid=1000,fmask=113,dmask=002 /dev/sdb1 /media/usb"
+alias usbmount="sudo mount -o uid=1000,fmask=113,dmask=002 /dev/sdb2 /media/usb"
 alias usbumount="sudo umount /media/usb"
-alias sdmount="sudo mount -o uid=1000,fmask=113,dmask=002 /dev/mmcblk0p1 /media/sd"
+alias sdmount="sudo mount -o uid=1000,fmask=113,dmask=002 /dev/sdc1 /media/sd"
 alias sdumount="sudo umount /media/sd"
 
 # editing
