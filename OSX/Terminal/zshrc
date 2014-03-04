@@ -2,7 +2,9 @@
 # Terminal {{{
 # ----------------------------------------------------------------------------
 
-PATH=/usr/local/bin:/usr/local/sbin:/usr/local/heroku/bin:/usr/bin:/bin:/usr/sbin:/sbin
+PATH=/usr/pkg/bin:/usr/pkg/sbin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin
+# PATH=/usr/bin:/usr/sbin:/usr/pkg/bin:/usr/pkg/sbin:/usr/local/bin:/usr/local/sbin:/bin:/sbin
+MANPATH=/usr/pkg/man
 
 # Load Oh My Zsh
 ZSH=$HOME/.oh-my-zsh

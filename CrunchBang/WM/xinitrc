@@ -39,7 +39,6 @@ case $1 in
     sxhkd &
     exec bspwm
 
-
   ;;
 
 esac

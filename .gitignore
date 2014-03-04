@@ -1,20 +1,11 @@
 
-# BSPWM
-/BSPWM/sxhkdrc
-
-# Mutt
-/Mutt/muttrc
-/Mutt/mutt/cache
-/Mutt/mutt/stayradiated.account
-/Mutt/mutt/czabania.account
-
 # Vim
-/Vim/bundle/*
-/Vim/tmp
-/Vim/undo
-/Vim/.netrwhist
+/Shared/Vim/bundle/*
+/Shared/Vim/tmp
+/Shared/Vim/undo
+/Shared/Vim/.netrwhist
 
 # Fonts
-/Fonts/tamzen
-/Fonts/yrmt
-/Fonts/sm4tik
+/Shared/Fonts/tamzen
+/Shared/Fonts/yrmt
+/Shared/Fonts/sm4tik

@@ -1,5 +1,5 @@
 
-[[ -f "$HOME/dotfiles/Terminal/zsh/git-prompt.sh" ]] && source "$HOME/dotfiles/Terminal/zsh/git-prompt.sh"
+source "$HOME/dotfiles/Shared/Terminal/zsh/git-prompt.sh"
 
 GIT_PS1_SHOWDIRTYSTATE=1
 GIT_PS1_SHOWSTASHSTATE=1

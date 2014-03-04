@@ -1,53 +1,24 @@
 Dotfiles
 ========
 
-CAUTION: Do not run `make`. It will wipe your existing configuration files.
+> Just my configs for CrunchBang and OS X
 
-## Bar
+## Makefile
 
-_Panel_
+### make check
 
-Config and scripts for Bar Aint Recursive by LemonBoy.
+Checks for existing files that will be overwriten.
 
-## Bin
+### make crunchbang
 
-Miscellaneous scripts and config files.
+Installs crunchbang specific files
 
-## BSPWM
+### make osx
 
-_Window Manager_
+Installs OS X specific files
 
-Config for the BSP Window Manager. Includes keyboard shortcuts and X settings.
+### make shared
 
-## Fonts
+Installs app configs and fonts that are used in both systems
 
-Fonts I use.
-
-## Irssi
-
-_IRC Chat_
-
-Irssi theme and configuration.
-
-## Mutt
-
-_Email_
-
-Mutt config.
-
-## Pentadactyl
-
-_Firefox Vim Extension_
-
-Config file.
-
-## Terminal
-
-Xresources and Zsh config.
-
-## Vim
-
-_Code editor_
-
-Vim configuation and plugins.
 

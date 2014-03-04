@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+export PATH="/usr/pkg/bin:usr/pkg/sbin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/usr/local/MacGPG2/bin"
+
+# merge .Xresources
+xrdb -merge $HOME/.Xdefaults &
+
+# set the cursor
+xsetroot -cursor_name left_ptr &
+
+# load fonts
+# xset fp defaults
+# xset +fp /usr/share/fonts/local
+# xset +fp $HOME/.fonts
+# xset fp rehash
+
+# set the background
+# feh --bg-tile "$HOME/dotfiles/Other/dark_stripe.png"
+
+# start urxvt daemon
+# urxvtd -q -o -f &
+
+# set panel fifo pipe
+# export PANEL_FIFO=/tmp/panel-fifo
+# ~/dotfiles/Bar/init &
+
+# sxhkd &
+exec 2bwm

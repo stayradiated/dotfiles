@@ -1,85 +1,96 @@
-# config
-os := arch
 
 # paths
 dir   := $(CURDIR)
-bar   := $(dir)/Bar
-bin   := $(dir)/Bin
-irssi := $(dir)/Irssi
-mutt  := $(dir)/Mutt
-ffox  := $(dir)/Firefox
-term  := $(dir)/Terminal
-tmux  := $(dir)/Tmux
-subl  := $(dir)/Sublime
-vim   := $(dir)/Vim
-wm    := $(dir)/BSPWM
-other := $(dir)/Other
-fonts := $(dir)/Fonts
-music := $(dir)/Music
 
-ifeq ($(os), osx)
-	subl_os := ~/Library/Application\ Support/Sublime\ Text\ 3
-else
-	subl_os := ~/.config/sublime-text-3
-endif
+osx   := $(dir)/OSX
+cbng  := $(dir)/CrunchBang
+apps  := $(dir)/Shared
+
+bar   := $(cbng)/Bar
+bspwm := $(cbng)/WM
+
+tbwm  := $(osx)/WM
+
+irssi := $(apps)/Irssi
+mutt  := $(apps)/Mutt
+ffox  := $(apps)/Firefox
+term  := $(apps)/Terminal
+tmux  := $(apps)/Tmux
+vim   := $(apps)/Vim
+feh   := $(apps)/Feh
+fonts := $(apps)/Fonts
+music := $(apps)/Music
 
 # Checks to see if any files are going to be overwritten
 check:
-
 	@echo 'Checking for files that will be overwritten'
 
-# Folders
-	@if test -d ~/bin; then echo ".bin exists"; fi;
+# Vim
 	@if test -d ~/.vim; then echo ".vim exists"; fi;
-
-# Files
 	@if test -d ~/.vimrc; then echo ".vimrc exists"; fi;
+
+# Irssi
+	@if test -d ~/.irssi; then echo ".irssi exists"; fi;
+
+# Tmux
 	@if test -f ~/.tmux.conf; then echo ".tmux.conf exists"; fi;
-	@if test -f ~/.muttrc; then echo ".muttrc exists"; fi;
+
+# Vimperator
 	@if test -f ~/.vimperatorrc; then echo ".vimperatorrc exists"; fi;
+
+# Terminal
 	@if test -f ~/.Xresources; then echo ".Xresources exists"; fi;
 	@if test -f ~/.zshrc; then echo ".zshrc exists"; fi;
+
+# WM
 	@if test -f ~/.xinitrc; then echo ".xinitrc exists"; fi;
-	@if test -f ~/.Xmodmap; then echo ".Xmodmap exists"; fi;
-	@if test -f ~/.fehbg; then echo ".fehbg exists"; fi;
 
 
 
-# Be very careful when running this
-uninstall:
+# ============================================================================
+# CRUNCHBANG
+# ============================================================================
 
-# Folders
-	rm -rf ~/.bin
+crunchbang:
 
-# Links
-	rm -f ~/.bar
-	rm -f ~/.cdmrc
-	rm -f ~/.mutt ~/.muttrc
-	rm -f ~/.vimperatorrc
-	rm -f ~/.tmux.conf
-	rm -f ~/.Xresources ~/.zshrc ~/.oh-my-zsh/themes/stayrad.zsh-theme
-	rm -f ~/.vim ~/.vimrc
-	rm -f ~/.bspwm ~/.xinitrc ~/.Xmodmap
+# BSPWM
+	@echo "BSPWM..."
+	@ln -fs $(bspwm)/xinitrc ~/.xinitrc
+	@ln -fs $(bspwm)/Xmodmap ~/.Xmodmap
+
+# SXHKD
+	@echo "SXHKD..."
+	@cp $(bspwm)/sxhkdrc $(wm)/sxhkdrc
+
+# Terminal
+	@echo "Terminal..."
+	@ln -fs $(cbng)/Terminal/zshrc ~/.zshrc
+	@ln -fs $(cbng)/Terminal/Xresources ~/.Xresources
 
 
-# Should only be run once
-arch:
 
-# Misc.
-	@echo "Misc..."
-	@ln -sf $(other)/fehbg ~/.fehbg
-	@ln -fs $(term)/Xresources ~/.Xresources
+# ============================================================================
+# OSX
+# ============================================================================
 
-# Bar
-	@echo "Bar..."
-	@if test -d ~/github/bar; then ln -sf $(bar)/config.h ~/github/bar/config.h; fi;
+osx:
 
-# Bin
-	@echo "Bin..."
-	@rm -rf ~/bin
-	@mkdir  ~/bin
-	@if test -d $(bin)/$(os); then ln -s $(bin)/$(os)/* ~/.bin/; fi;
-	@ln -s $(bin)/all/* ~/bin/
+# 2BWM
+	@echo "2BWM..."
+	@ln -fs $(tbwm)/xinitrc ~/.xinitrc
+
+# Terminal
+	@echo "Terminal..."
+	@ln -fs $(osx)/Terminal/zshrc ~/.zshrc
+	@ln -fs $(osx)/Terminal/Xresources ~/.Xresources
+
+
+
+# ============================================================================
+# SHARED APPS
+# ============================================================================
+
+shared:
 
 # Fonts
 	@echo "Fonts..."
@@ -93,25 +104,8 @@ arch:
 	@ln -fs $(fonts)/tamzen/*.bdf ~/.fonts/
 	@ln -fs $(fonts)/sm4tik/*.bdf ~/.fonts/
 
-<<<<<<< HEAD
-# Window Manager
-	@echo "BSPWM..."
-	@ln -fs $(wm)/xinitrc ~/.xinitrc
-	@ln -fs $(wm)/Xmodmap ~/.Xmodmap
-
-	@echo "SXHKD..."
-	@cp $(wm)/_sxhkdrc $(wm)/sxhkdrc
-	@if test $(os) = "osx"; then\
-		sed -i.bak 's/super/mod2/g' $(wm)/sxhkdrc;\
-		sed -i.bak 's/alt/mod1/g' $(wm)/sxhkdrc;\
-		rm $(wm)/sxhkdrc.bak;\
-	fi;
-
-osx:
-
 # Terminal
 	@echo "Terminal..."
-	@ln -fs $(term)/zsh/zshrc_$(os) ~/.zshrc
 	@ln -fs $(term)/zsh/stayrad.zsh-theme ~/.oh-my-zsh/themes/stayrad.zsh-theme
 
 # Tmux
@@ -134,33 +128,9 @@ osx:
 		git clone https://github.com/Shougo/neobundle.vim.git $(vim)/bundle/neobundle.vim;\
 	fi;
 
-# Sublime
-	@echo "Sublime Text..."
-	@ln -fs $(subl)/Preferences.sublime-settings $(subl_os)/Packages/User/Preferences.sublime-settings
-	@ln -fs $(subl)/Default.sublime-keymap $(subl_os)/Packages/User/Default.sublime-keymap
-	@ln -fs $(subl)/Package\ Control.sublime-settings $(subl_os)/Packages/User/Package\ Control.sublime-settings
-
 # Vimperator
 	@echo "Vimperator..."
 	@ln -fs $(ffox)/vimperatorrc ~/.vimperatorrc
 
-# NCMPCPP
-	@echo "NCMPCPP..."
-	@mkdir -p ~/.ncmpcpp
-	@ln -fs $(music)/ncmpcpp_config ~/.ncmpcpp/config
 
-# Window Manager
-	@echo "BSPWM..."
-	@test -d ~/.bspwm || ln -s $(wm) ~/.bspwm
-	@ln -fs $(wm)/xinitrc ~/.xinitrc
-	@ln -fs $(wm)/Xmodmap ~/.Xmodmap
-
-	@echo "SXHKD..."
-	@cp $(wm)/_sxhkdrc $(wm)/sxhkdrc
-	@if test $(os) = "osx"; then\
-		sed -i.bak 's/super/mod2/g' $(wm)/sxhkdrc;\
-		sed -i.bak 's/alt/mod1/g' $(wm)/sxhkdrc;\
-		rm $(wm)/sxhkdrc.bak;\
-	fi;
-
-
+.PHONY: check crunchbang osx shared
