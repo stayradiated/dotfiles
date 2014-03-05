@@ -34,7 +34,6 @@ NeoBundle 'Shougo/vimproc.vim', {
 
 " Themes
 NeoBundle 'w0ng/vim-hybrid'
-NeoBundle 'bling/vim-airline'
 NeoBundle 'chriskempson/base16-vim'
 NeoBundle 'vim-scripts/Gummybears'
 NeoBundle 'sjl/badwolf'
@@ -84,7 +83,7 @@ set lazyredraw           " don't update screen when executing macros
 set mouse=a              " enable mouse in all modes
 set number               " show absolute line number on current line
 set showcmd              " show command on last line of screen
-set noshowmode           " hide mode
+" set noshowmode           " hide mode
 set noshowmatch          " don't show bracket matches
 set spelllang=en_nz      " spell check with New Zealand English
 set title                " use filename in window title
@@ -131,6 +130,7 @@ set smartcase            " override ignorecase if upper case typed
 
 " Colours
 set t_Co=256
+" let g:hybrid_use_iTerm_colors=1
 let g:hybrid_use_Xresources=1
 
 set background=dark
@@ -258,11 +258,6 @@ nnoremap <silent> # #zz
 " Syntastic
 let g:syntastic_javascript_checkers=['jshint']
 let g:syntastic_coffee_coffeelint_args='-f ~/.lint.json'
-
-" Status line
-let g:airline_left_sep = ''
-let g:airline_right_sep = ''
-let g:airline_theme = 'base16'
 
 " VimFiler
 let g:vimfiler_as_default_explorer = 1

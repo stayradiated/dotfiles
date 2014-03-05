@@ -7,7 +7,7 @@ GIT_PS1_SHOWUNTRACKEDFILES=1
 GIT_PS1_SHOWUPSTREAM="auto"
 
 PROMPT='
-%{$fg_bold[black]%}── %{$reset_color%}'
+%{$fg_bold[black]%} > %{$reset_color%}'
 
 RPROMPT='%{$fg[red]%}$(__git_ps1 "[%s]") %{$fg[green]%}%~%{$reset_color%}'
 

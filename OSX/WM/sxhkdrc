@@ -1,0 +1,103 @@
+#
+# bspwm hotkeys
+#
+
+# Quit BSPWM
+mod2 + mod1 + Escape
+    bspc quit
+
+# Close window
+mod2 + w
+    bspc window -c
+
+# Toggle layout between monocle and tiling
+mod2 + t
+    bspc desktop -l next
+
+# Balance layout so that all windows have the same area
+mod2 + b
+    bspc desktop -B
+
+# Toggle window layout between floating, fullscreen and tiled
+mod2 + {s,f}
+    bspc window -t {floating,fullscreen}
+
+# Tab between the last used window or workspace
+mod2 + {Tab,grave}
+    bspc {window,desktop} -f last
+
+# Switch window with last used window
+mod2 + apostrophe
+    bspc window -s last
+
+# Move the focused window into the 'given' window
+mod2 + y
+    bspc window -w last.manual
+
+# Move a window to the biggest layout on the desktop
+mod2 + m
+    bspc window -s biggest
+
+# Select a window or move a window
+mod2 + {_,shift + }{h,j,k,l}
+    bspc window -{f,s} {left,down,up,right}
+
+# Loop through the window frames
+mod2 + {_,shift + }c
+    bspc window -f {next,prev}
+
+# Switch each window with the frame next to it
+mod2 + {comma,period}
+    bspc desktop -C {backward,forward}
+
+# Cycle through the desktops
+mod2 + bracket{left,right}
+    bspc desktop -f {prev,next}
+
+# Split a window in half
+mod2 + mod1 + {h,j,k,l}
+    bspc window -p {left,down,up,right}
+
+mod2 + ctrl + {_,shift + }space
+    bspc {window -p cancel,desktop -c}
+
+# Push window
+mod2 + ctrl + {h,j,k,l}
+    bspc window -e {left,down,up,right} push
+
+# Pull window
+mod2 + ctrl + shift + {h,j,k,l}
+    bspc window -e {right,up,down,left} pull
+
+mod2 + ctrl + {1-9}
+    bspc window -r 0.{1-9}
+
+mod2 + {_,shift + }{1-9, 0}
+    bspc {desktop -f,window -d} {1-9,0}
+
+:button1
+    bspc pointer -g focus
+
+mod2 + button{1-3}
+    bspc pointer -g {move,resize_side,resize_corner}
+
+mod2 + !button{1-3}
+    bspc pointer -t %i %i
+
+#
+# wm independent hotkeys
+#
+
+mod2 + Return
+    urxvtc
+
+mod2 + space
+    dmenu_run -nb "#1D1F21" -nf "#C5C8C6" -sb "#282A2E" -sf "#90A959" -h 25 -p ">" -fn "-misc-tamzen-medium-r-*-*-14-*-*-*-*-*-*-*"
+
+# make sxhkd reload its configuration files:
+mod2 + Escape
+    pkill -USR1 -x sxhkd
+
+# Control audio with keyboard
+XF86Audio{Lower,Raise}Volume
+    amixer -q set Master 5%{-,+}

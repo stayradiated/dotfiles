@@ -7,9 +7,6 @@ cbng  := $(dir)/CrunchBang
 apps  := $(dir)/Shared
 
 bar   := $(cbng)/Bar
-bspwm := $(cbng)/WM
-
-tbwm  := $(osx)/WM
 
 irssi := $(apps)/Irssi
 mutt  := $(apps)/Mutt
@@ -53,14 +50,16 @@ check:
 
 crunchbang:
 
-# BSPWM
-	@echo "BSPWM..."
-	@ln -fs $(bspwm)/xinitrc ~/.xinitrc
-	@ln -fs $(bspwm)/Xmodmap ~/.Xmodmap
+# WM
+	@echo "WM..."
+	@ln -fs $(cbng)/WM/xinitrc ~/.xinitrc
+	@ln -fs $(cbng)/WM/Xmodmap ~/.Xmodmap
 
-# SXHKD
-	@echo "SXHKD..."
-	@cp $(bspwm)/sxhkdrc $(wm)/sxhkdrc
+	@mkdir -p ~/.config/bspwm
+	@ln -fs $(cbng)/WM/bspwmrc ~/.config/bspwm/bspwmrc
+
+	@mkdir -p ~/.config/sxhkd
+	@ln -fs $(cbng)/WM/sxhkdrc ~/.config/sxhkd/sxhkdrc
 
 # Terminal
 	@echo "Terminal..."
@@ -75,9 +74,15 @@ crunchbang:
 
 osx:
 
-# 2BWM
-	@echo "2BWM..."
-	@ln -fs $(tbwm)/xinitrc ~/.xinitrc
+# WM
+	@echo "WM..."
+	@ln -fs $(osx)/WM/xinitrc ~/.xinitrc
+
+	@mkdir -p ~/.config/bspwm
+	@ln -fs $(osx)/WM/bspwmrc ~/.config/bspwm/bspwmrc
+
+	@mkdir -p ~/.config/sxhkd
+	@ln -fs $(osx)/WM/sxhkdrc ~/.config/sxhkd/sxhkdrc
 
 # Terminal
 	@echo "Terminal..."

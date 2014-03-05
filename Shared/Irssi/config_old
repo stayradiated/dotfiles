@@ -35,7 +35,6 @@ channels = (
   }
 );
 
-
 aliases = {
   J = "join";
   WJOIN = "join -window";
@@ -108,10 +107,8 @@ statusbar = {
     # window_empty is printed with empty windows
     window = "{sb $winref:$tag/$itemname{sbmode $M}}";
     window_empty = "{sb $winref{sbservertag $tag}}";
-    #prompt = "{prompt $[.15]itemname}";
-    #prompt = "$c >> ";
-    #prompt = "$c%K             └─ ";
-    prompt = "$c %k$[-11]C %K└─ ";
+    # prompt = "{prompt $[.15]itemname}";
+    prompt = "$c >> ";
     prompt_empty = "{prompt $winname}";
     topic = " $topic";
     topic_empty = " Irssi v$J - http://www.irssi.org";
@@ -193,6 +190,7 @@ statusbar = {
       visible = "inactive";
       items = {
         topicbarstart = { priority = "100"; };
+        # topic = { };
         topic_empty = { };
         topicbarend = { priority = "100"; alignment = "right"; };
       };
@@ -202,19 +200,25 @@ statusbar = {
 };
 settings = {
   core = {
-    real_name = "youri mouton";
-    user_name = "youri";
-    nick = "yrmt";
-    timestamp_format = "";
+    real_name = "George";
+    user_name = "stayrad";
+    nick = "stayrad";
+    timestamp_format="";
     use_proxy = "no";
     proxy_string = "";
   };
-  "fe-text" = { actlist_sort = "refnum"; };
-  "fe-common/core" = { theme = "irssi.theme"; timestamps = "no"; };
-  "perl/core/scripts" = { splitlong_max_length = "60"; };
+  "fe-text" = {
+    actlist_sort = "refnum";
+    term_force_colors = "yes";
+  };
+  "fe-common/core" = {
+    theme = "irrsi.theme";
+    timestamps = "no";
+    autocreate_own_query = "no";
+    autocreate_query_level = "DCCMSGS";
+    use_status_window = "no";
+    use_msgs_window = "yes";
+    autoclose_windows = "no";
+    reuse_unused_windows = "yes";
+  };
 };
-ignores = (
-  { mask = "Jentuh"; level = "ALL"; },
-  { mask = "bokso"; level = "ALL"; },
-  { mask = "vypr"; level = "ALL"; }
-);
