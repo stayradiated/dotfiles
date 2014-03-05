@@ -15,6 +15,7 @@ urxvt.foreground:   #E8DFD6
 urxvt.background:   #021B21
 urxvt.cursorColor:  #2E3340
 urxvt.colorUL:      #ffaf5f
+
 urxvt.color0:       #032C36
 urxvt.color1:       #C2454E
 urxvt.color2:       #7CBF9E
