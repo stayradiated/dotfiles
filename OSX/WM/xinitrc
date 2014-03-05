@@ -10,15 +10,11 @@ xrdb -merge $HOME/.Xresources &
 # set the cursor
 xsetroot -cursor_name left_ptr &
 
-# super cursor
-xset r rate 500 25
-
 # no bell
-xset -b
+xset -b &
 
 # start urxvt daemon
 urxvtd -q -o -f &
-urxvtc &
 
 # start wm
 sxhkd &
