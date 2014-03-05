@@ -34,7 +34,7 @@ case $1 in
 
     # set panel fifo pipe
     export PANEL_FIFO=/tmp/panel-fifo
-    ~/dotfiles/Bar/init &
+    ~/dotfiles/CrunchBang/Bar/init &
 
     sxhkd &
     exec bspwm

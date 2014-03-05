@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-BAR_SCRIPT=~/dotfiles/Bar/reader
+BAR_SCRIPT=~/dotfiles/CrunchBang/Bar/reader
 unset BSPWM_SOCKET
 
 # pipe bspwm info to bar
