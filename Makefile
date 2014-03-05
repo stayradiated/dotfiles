@@ -126,8 +126,9 @@ shared:
 	@echo "Vim..."
 	@mkdir -p $(vim)/tmp
 	@mkdir -p $(vim)/undo
+
 	@ln -fs $(vim)/vimrc ~/.vimrc
-	@test -d ~/.vim || ln -s $(vim) ~/.vim
+	@ln -fs $(vim) ~/.vim
 
 	@if test ! -d $(vim)/bundle/neobundle.vim; then\
 		git clone https://github.com/Shougo/neobundle.vim.git $(vim)/bundle/neobundle.vim;\

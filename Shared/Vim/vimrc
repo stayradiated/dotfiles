@@ -34,13 +34,10 @@ NeoBundle 'Shougo/vimproc.vim', {
 
 " Themes
 NeoBundle 'w0ng/vim-hybrid'
-NeoBundle 'chriskempson/base16-vim'
-NeoBundle 'vim-scripts/Gummybears'
-NeoBundle 'sjl/badwolf'
 
 " Extensions
 NeoBundle 'Shougo/unite.vim'
-NeoBundle 'stayradiated/vimfiler.vim'
+NeoBundle 'Shougo/vimfiler.vim'
 
 " Editing
 NeoBundle 'scrooloose/syntastic'
@@ -130,11 +127,9 @@ set smartcase            " override ignorecase if upper case typed
 
 " Colours
 set t_Co=256
-" let g:hybrid_use_iTerm_colors=1
-let g:hybrid_use_Xresources=1
 
 set background=dark
-colorscheme hybrid
+colorscheme 16colors
 
 " Fix escape key lag in terminal
 set timeoutlen=1000
@@ -155,22 +150,8 @@ if has('gui_running')
   inoremap <silent> <S-Insert> <Esc>"*p`]a
 
   " Fonts
-  if has('macunix')
-    set guifont=Tamzen7x14:h14
-  else
-    set guifont=Meslo\ LG\ M\ DZ\ 12
-  endif
-
+  set guifont=Tamzen7x14:h14
 endif
-
-" Toggle cursor shape in iTerm2
-" if exists('$TMUX')
-"   let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
-"   let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
-" elseif &term =~ "xterm"
-"   let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-"   let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-" endif
 
 " vimdiff
 if &diff
@@ -242,7 +223,10 @@ nnoremap <leader>/ :<C-u>Unite -no-split -buffer-name=buffer  -start-insert grep
 
 " Vimfiler
 nnoremap <leader><space> :VimFilerExplorer<CR>
-noremap <buffer> <C-l> <C-w>l
+autocmd FileType vimfiler nmap <buffer> <Enter> <Plug>(vimfiler_execute)
+autocmd FileType vimfiler nmap <buffer> j <Plug>(vimfiler_loop_cursor_down)
+autocmd FileType vimfiler nmap <buffer> k <Plug>(vimfiler_loop_cursor_up)
+autocmd FileType vimfiler nmap <buffer> <BS> <Plug>(vimfiler_switch_to_parent_directory)
 
 " Keep search pattern at the center of the screen
 nnoremap <silent> n nzz
@@ -261,6 +245,7 @@ let g:syntastic_coffee_coffeelint_args='-f ~/.lint.json'
 
 " VimFiler
 let g:vimfiler_as_default_explorer = 1
+let g:vimfiler_no_default_key_mappings = 1
 
 " Unite
 let g:unite_source_history_yank_enable = 1

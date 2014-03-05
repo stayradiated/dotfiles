@@ -85,4 +85,4 @@ URxvt.url-select.button:     1
 URxvt.url-select.launcher:   /usr/bin/firefox
 URxvt.url-select.underline:  true
 
-#include "/home/stayrad/dotfiles/Terminal/colors/w0ng"
+#include "/home/stayrad/dotfiles/Shared/Terminal/colors/w0ng"
