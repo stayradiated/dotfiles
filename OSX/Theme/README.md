@@ -60,6 +60,8 @@ You can also adjust the width if you need to.
 
 **Edge selector (right click selection)**
 
+> Couldn't get this working
+
 - 107
 - 108
 
@@ -71,3 +73,56 @@ You can also adjust the width if you need to.
 **Full Screen Arrows**
 
 - 329-1.pdf
+
+
+# ArtFile.bin
+
+## Traffic Lights
+
+*Active + Not focused*
+
+> e.g. When you have quicklook open
+
+**Close**
+
+Active + focused: `titlebarcontrols.active.close.colorsryg.regularwin`
+
+Unsaved changes + active + focused: `titlebarcontrols.active.closedirty.colorsryg.regularwin`
+
+Active + not focused: `titlebarcontrols.activenokey.close.colorsryg.regularwin`
+
+Unsaved changes + active + not focused: `titlebarcontrols.activenokey.closedirty.colorsryg.regularwin`
+
+Disabled: `titlebarcontrols.close.colorsryg.disabled.regularwin`
+
+Inactive: `titlebarcontrols.close.colorsryg.inactive.regularwin`
+
+Inactive + unsaved changes: `titlebarcontrols.closedirty.colorsryg.inactive.regularwin`
+
+Rollover: `titlebarcontrols.close.colorsryg.regularwin.rollover`
+
+Pressed: `titlebarcontrols.close.colorsryg.regularwin.pressed`
+
+**Minimize**
+
+Active + focused: `titlebarcontrols.active.colorsryg.minimize.regularwin`
+
+Active + not focused: `titlebarcontrols.activenokey.colorsryg.minimize.regularwin`
+
+Inactive: `titlebarcontrols.colorsryg.inactive.minimize.regularwin`
+
+Rollover: `titlebarcontrols.colorsryg.minimize.regularwin.rollover.png`
+
+Pressed: `titlebarcontrols.colorsryg.minimize.pressed.regularwin`
+
+**Maximize**
+
+Active + focused: `titlebarcontrols.active.colorsryg.regularwin.zoom`
+
+Active + not focused: `titlebarcontrols.activenokey.colorsryg.regularwin.zoom`
+
+Inactive: `titlebarcontrols.colorsryg.inactive.regularwin.zoom`
+
+Rollover: `titlebarcontrols.colorsryg.regularwin.rollover.zoom`
+
+Pressed: `titlebarcontrols.colorsryg.regularwin.pressed.zoom`
