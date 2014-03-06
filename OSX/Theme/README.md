@@ -33,10 +33,10 @@ You only need to edit the version you want to use.
 
 If you fill the png with a solid colour, you will get square corners.
 
-- 54
-- 56
-- 89
-- 91
+- 54 (bottom left)
+- 56 (bottom right)
+- 89 (top left)
+- 91 (top right)
 
 **Window Titlebar Bottom**
 
@@ -87,21 +87,23 @@ You can also adjust the width if you need to.
 
 Active + focused: `titlebarcontrols.active.close.colorsryg.regularwin`
 
-Unsaved changes + active + focused: `titlebarcontrols.active.closedirty.colorsryg.regularwin`
-
 Active + not focused: `titlebarcontrols.activenokey.close.colorsryg.regularwin`
 
-Unsaved changes + active + not focused: `titlebarcontrols.activenokey.closedirty.colorsryg.regularwin`
-
-Disabled: `titlebarcontrols.close.colorsryg.disabled.regularwin`
-
 Inactive: `titlebarcontrols.close.colorsryg.inactive.regularwin`
-
-Inactive + unsaved changes: `titlebarcontrols.closedirty.colorsryg.inactive.regularwin`
 
 Rollover: `titlebarcontrols.close.colorsryg.regularwin.rollover`
 
 Pressed: `titlebarcontrols.close.colorsryg.regularwin.pressed`
+
+Disabled: `titlebarcontrols.close.colorsryg.disabled.regularwin`
+
+**Close + Unsaved Changes**
+
+Active + focused: `titlebarcontrols.active.closedirty.colorsryg.regularwin`
+
+Active + not focused: `titlebarcontrols.activenokey.closedirty.colorsryg.regularwin`
+
+Inactive: `titlebarcontrols.closedirty.colorsryg.inactive.regularwin`
 
 **Minimize**
 
@@ -111,9 +113,11 @@ Active + not focused: `titlebarcontrols.activenokey.colorsryg.minimize.regularwi
 
 Inactive: `titlebarcontrols.colorsryg.inactive.minimize.regularwin`
 
-Rollover: `titlebarcontrols.colorsryg.minimize.regularwin.rollover.png`
+Rollover: `titlebarcontrols.colorsryg.minimize.regularwin.rollover`
 
 Pressed: `titlebarcontrols.colorsryg.minimize.pressed.regularwin`
+
+Disabled: `titlebarcontrols.colorsryg.disabled.minimize.regularwin`
 
 **Maximize**
 
@@ -126,3 +130,5 @@ Inactive: `titlebarcontrols.colorsryg.inactive.regularwin.zoom`
 Rollover: `titlebarcontrols.colorsryg.regularwin.rollover.zoom`
 
 Pressed: `titlebarcontrols.colorsryg.regularwin.pressed.zoom`
+
+Disabled: `titlebarcontrols.colorsryg.disabled.regularwin.zoom`
