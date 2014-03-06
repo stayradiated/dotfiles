@@ -1,87 +1,78 @@
 # SArtFile.bin
 
+There are two versions of each `png` image.
+
+- `-1` is the 2x version for use on regular displays.
+- `-2` is a 2x version for use on retina displays.
+
+You only need to edit the version you want to use.
+
 **Hidden Bullet**
 
-- 6-1.png
+- 6
 
 **Dots for resize tab**
 
-- 7-1.png
-- 8-1.png
-- 9-1.png
-- 10-1.png
+- 7
+- 8
+- 9
+- 10
 
 **Apple logo for menubar**
 
-- 11-1.png
-- 11-2.png
+- 11
 
 **Apple logo for menubar (selected)**
 
-- 12-1.png
-- 12-2.png
+- 12
 
 **Menubar**
 
-- 48-1.png
-- 48-2.png
+- 48
 
 **Menubar text selection colour**
 
-- 49-1.png
-- 49-2.png
-- 50-1.png
-- 50-2.png
+- 49
+- 50
 
 **Window Border Radius Masks**
 
-- 54-1.png
-- 56-1.png
-- 89-1.png
-- 91-1.png
+- 54
+- 56
+- 89
+- 91
 
 **Window Titlebar Bottom?**
 
-- 51-1.png
-- 51-2.png
-- 53-1.png
-- 53-2.png
-- 55-1.png
-- 55-2.png
+- 51
+- 53
+- 55
 
 **Window Titlebar Middle**
 
-- 86-1.png
-- 86-2.png
+- 86
 
 **Window Titlebar Left Corner**
 
-- 88-1.png
-- 88-2.png
+- 88
 
 **Window Titlebar Right Corner**
 
-- 90-1.png
-- 90-2.png
+- 90
 
 **Edge selector (right click selection)**
 
-- 107-1.png
-- 107-2.png
-- 108-1.png
-- 108-2.png
+- 107
+- 108
 
 **Apparently this is the Menubar as well**
 
-- 109-1.png
-- 109-2.png
+- 109
 
 **Spotlight**
 
-- 110-1.png
-- 110-2.png
-- 111-1.png
-- 111-2.png
+- 110
+- 111
 
 **Full Screen Arrows**
 
