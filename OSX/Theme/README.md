@@ -25,12 +25,9 @@ You only need to edit the version you want to use.
 
 **Menubar**
 
-- 48
-
-**Menubar text selection colour**
-
-- 49
-- 50
+- 109 (background)
+- 49 (selected item background)
+- 50 (not sure - possibly the disabled version)
 
 **Window Border Radius Masks**
 
@@ -65,10 +62,6 @@ You can also adjust the width if you need to.
 
 - 107
 - 108
-
-**Apparently this is the Menubar as well**
-
-- 109
 
 **Spotlight**
 
