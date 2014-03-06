@@ -7,7 +7,7 @@ There are two versions of each `png` image.
 
 You only need to edit the version you want to use.
 
-**Hidden Bullet**
+**Random Bullet**
 
 - 6
 
@@ -20,11 +20,8 @@ You only need to edit the version you want to use.
 
 **Apple logo for menubar**
 
-- 11
-
-**Apple logo for menubar (selected)**
-
-- 12
+- 11 (normal state)
+- 12 (selected state)
 
 **Menubar**
 
@@ -37,12 +34,16 @@ You only need to edit the version you want to use.
 
 **Window Border Radius Masks**
 
+If you fill the png with a solid colour, you will get square corners.
+
 - 54
 - 56
 - 89
 - 91
 
 **Window Titlebar Bottom**
+
+> Actually I have no idea. Maybe I need to logout.
 
 - 51
 - 53
