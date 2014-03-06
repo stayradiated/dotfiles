@@ -1,3 +1,11 @@
+# OSX Theme
+
+**ArtFiles Path**
+
+Make sure to backup your originals first.
+
+`/System/Library/PrivateFrameworks/CoreUI.framework/Versions/A/Resources/`
+
 # SArtFile.bin
 
 There are two versions of each `png` image.
