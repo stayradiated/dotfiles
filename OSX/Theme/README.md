@@ -42,23 +42,23 @@ You only need to edit the version you want to use.
 - 89
 - 91
 
-**Window Titlebar Bottom?**
+**Window Titlebar Bottom**
 
 - 51
 - 53
 - 55
 
-**Window Titlebar Middle**
+**Window Titlebar Top**
 
-- 86
+You can edit these to replace the window titlebar background.\
 
-**Window Titlebar Left Corner**
+Just fill them with a solid colour, and increase the height to around 200px.
 
-- 88
+You can also adjust the width if you need to.
 
-**Window Titlebar Right Corner**
-
-- 90
+- 86 - Middle
+- 88 - Left
+- 90 - Right
 
 **Edge selector (right click selection)**
 
