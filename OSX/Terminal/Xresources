@@ -13,7 +13,7 @@ urxvt.matcher.button:   1
 ! http://dotshare.it/dots/634/
 urxvt.foreground:   #E8DFD6
 urxvt.background:   #021B21
-urxvt.cursorColor:  #2E3340
+urxvt.cursorColor:  #7cbf9e
 urxvt.colorUL:      #ffaf5f
 
 urxvt.color0:       #032C36
