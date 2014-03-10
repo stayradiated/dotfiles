@@ -43,7 +43,7 @@ mod2 + {_,shift + }{h,j,k,l}
     bspc window -{f,s} {left,down,up,right}
 
 # Loop through the window frames
-mod2 + {_,shift + }c
+mod2 + {_,shift + }n
     bspc window -f {next,prev}
 
 # Switch each window with the frame next to it
