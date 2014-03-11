@@ -37,7 +37,7 @@ NeoBundle 'w0ng/vim-hybrid'
 
 " Extensions
 NeoBundle 'Shougo/unite.vim'
-NeoBundle 'Shougo/vimfiler.vim'
+NeoBundle 'stayradiated/vimfiler.vim'
 
 " Editing
 NeoBundle 'scrooloose/syntastic'
@@ -201,6 +201,7 @@ nnoremap k gk
 
 " Paste mode for terminals
 nnoremap <F2> :set invpaste paste?<CR>
+map <C-p> :r !pbpaste<CR>
 set pastetoggle=<F2>
 
 " Shortcut for Tabularize
@@ -223,10 +224,6 @@ nnoremap <leader>/ :<C-u>Unite -no-split -buffer-name=buffer  -start-insert grep
 
 " Vimfiler
 nnoremap <leader><space> :VimFilerExplorer<CR>
-autocmd FileType vimfiler nmap <buffer> <Enter> <Plug>(vimfiler_execute)
-autocmd FileType vimfiler nmap <buffer> j <Plug>(vimfiler_loop_cursor_down)
-autocmd FileType vimfiler nmap <buffer> k <Plug>(vimfiler_loop_cursor_up)
-autocmd FileType vimfiler nmap <buffer> <BS> <Plug>(vimfiler_switch_to_parent_directory)
 
 " Keep search pattern at the center of the screen
 nnoremap <silent> n nzz
@@ -245,7 +242,6 @@ let g:syntastic_coffee_coffeelint_args='-f ~/.lint.json'
 
 " VimFiler
 let g:vimfiler_as_default_explorer = 1
-let g:vimfiler_no_default_key_mappings = 1
 
 " Unite
 let g:unite_source_history_yank_enable = 1
