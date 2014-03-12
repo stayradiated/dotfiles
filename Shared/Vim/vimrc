@@ -201,7 +201,7 @@ nnoremap k gk
 
 " Paste mode for terminals
 nnoremap <F2> :set invpaste paste?<CR>
-map <C-p> :r !pbpaste<CR>
+map <M-p> :r !pbpaste<CR>
 set pastetoggle=<F2>
 
 " Shortcut for Tabularize
