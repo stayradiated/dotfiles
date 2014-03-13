@@ -1,8 +1,8 @@
 ! Basic Term appearence
-*boldMode:        false
-*scrollBar:       false
-*internalBorder:  4
-*termName:        rxvt-256color
+urxvt.boldMode:        false
+urxvt.scrollBar:       false
+urxvt.internalBorder:  4
+urxvt.termName:        rxvt-256color
 
 urxvt.perl-lib: /Volumes/Home/dotfiles/Shared/Terminal/perl
 urxvt.perl-ext-common:  default,clipboard
@@ -13,99 +13,93 @@ urxvt.keysym.M-v: perl:clipboard:paste
 urxvt.clipboard.copycmd: pbcopy
 urxvt.clipboard.pastecmd: pbpaste
 
-! Colors from hal at
-! http://dotshare.it/dots/634/
-! urxvt.foreground:   #E8DFD6
-! urxvt.background:   #021B21
-! urxvt.cursorColor:  #7cbf9e
-! urxvt.colorUL:      #ffaf5f
-! urxvt.color0:       #032C36
-! urxvt.color1:       #C2454E
-! urxvt.color2:       #7CBF9E
-! urxvt.color3:       #8A7A63
-! urxvt.color4:       #2E3340
-! urxvt.color5:       #FF5879
-! urxvt.color6:       #44B5B1
-! urxvt.color7:       #F2F1B9
-! urxvt.color8:       #065F73
-! urxvt.color9:       #EF5847
-! urxvt.color10:      #A2D9B1
-! urxvt.color11:      #BEB090
-! urxvt.color12:      #61778D
-! urxvt.color13:      #FF99A1
-! urxvt.color14:      #9ED9D8
-! urxvt.color15:      #F6F6C9
-
 urxvt.xftAntialias:  false
 urxvt.font:          xft:tamzen7x14:pixelsize=14
 urxvt.boldFont:      xft:tamzen7x14:pixelsize=14
 
-!black
-urxvt.color0:  #2C3E50
-urxvt.color8:  #34495E
-!red
-urxvt.color1:  #C0392B
-urxvt.color9:  #E74C3C
-!green
-urxvt.color2:  #27AE60
-urxvt.color10: #2ECC71
-!yellow
-urxvt.color3:  #F39C12
-urxvt.color11: #F1C40F
-!blue
-urxvt.color4:  #2980B9
-urxvt.color12: #3498DB
-!magenta
-urxvt.color5:  #8E44AD
-urxvt.color13: #9B59B6
-!cyan
-urxvt.color6:  #16A085
-urxvt.color14: #1ABC9C
-!white
-urxvt.color7:  #BDC3C7
-urxvt.color15: #ECF0F1
+! Tomorrow-Night Palette
+#define t_background #1D1F21
+#define t_current_line #282A2E
+#define t_selection #373B41
+#define t_foreground #C5C8C6
+#define t_comment #707880
+#define t_red #CC6666
+#define t_orange #DE935F
+#define t_yellow #F0C674
+#define t_green #B5BD68
+#define t_aqua #8ABEB7
+#define t_blue #81A2BE
+#define t_purple #B294BB
 
+! base16-default Palette (slightly darker)
+#define b_background #151515
+#define b_current_line #202020
+#define b_selection #303030
+#define b_foreground #C5C8C6
+#define b_comment #505050
+#define b_red #AC4142
+#define b_orange #D28445
+#define b_yellow #F4BF75
+#define b_green #90A959
+#define b_aqua #75B5AA
+#define b_blue #6A9FB5
+#define b_purple #AA759F
 
-! Dark green
-! #1ABC9C
-! #16A085
-!
-! Light green
-! #2ECC71
-! #27AE60
-!
-! Light blue
-! #3498DB
-! #2980B9
-!
-! Purple
-! #9B59B6
-! #8E44AD
-!
-! Dark
-! #34495E
-! #2C3E50
-!
-! Yellow
-! #F1C40F
-! #F39C12
-!
-! Orange
-! #E67E22
-! #D35400
-!
-! Red
-! #E74C3C
-! #C0392B
-!
-! White
-! #ECF0F1
-! #BDC3C7
-!
-! Grey
-! #95A5A6
-! #7F8C8D
+! Codeacademy Palette (dark blue background)
+#define c_background #232C31
+#define c_current_line #2D3C46
+#define c_selection #425059
+#define c_comment #6C7A80
 
-urxvt.foreground:   #eeeeee
-urxvt.background:   #021b21
-urxvt.cursorColor:  #fafdf6
+! Navy/Ivory pallette
+#define n_foreground #E8DFD6
+#define n_background #021B21
+
+! urxvt.background: b_background
+! urxvt.foreground: b_foreground
+! urxvt.background: t_background
+! urxvt.foreground: t_foreground
+urxvt.background: n_background
+urxvt.foreground: n_foreground
+
+! black
+!urxvt.color0: b_current_line
+!urxvt.color8: b_selection
+urxvt.color0: t_current_line
+urxvt.color8: t_selection
+!urxvt.color0: c_current_line
+!urxvt.color8: c_selection
+
+! red
+urxvt.color1: b_red
+urxvt.color9: t_red
+
+! green
+urxvt.color2: b_green
+urxvt.color10: t_green
+
+! yellow
+!urxvt.color3: b_orange
+!urxvt.color11: b_yellow
+urxvt.color3: t_orange
+urxvt.color11: t_yellow
+
+! blue
+urxvt.color4: b_blue
+urxvt.color12: t_blue
+
+! magenta
+urxvt.color5: b_purple
+urxvt.color13: t_purple
+
+! cyan
+urxvt.color6: b_aqua
+urxvt.color14: t_aqua
+
+! white
+!urxvt.color7: b_comment
+!urxvt.color15: b_foreground
+urxvt.color7: t_comment
+urxvt.color15: t_foreground
+!urxvt.color7: c_comment
+!urxvt.color15: t_foreground

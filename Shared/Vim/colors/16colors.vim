@@ -4,13 +4,13 @@ let g:colors_name = "16color"
 hi Normal                  ctermfg=none
 
 " true/false
-hi Boolean                 ctermfg=14
+hi Boolean                 ctermfg=9
 
 " comments
-hi Comment                 ctermfg=12
+hi Comment                 ctermfg=8
 
 " if keyword
-hi Conditional             ctermfg=6
+hi Conditional             ctermfg=12
 
 " CAPS + event, self
 hi Constant                ctermfg=1
@@ -60,7 +60,7 @@ hi Folded                  ctermfg=2   ctermbg=none
 hi Function                ctermfg=12
 
 " variables and object keys + var, this
-hi Identifier              ctermfg=3   cterm=none
+hi Identifier              ctermfg=4
 
 " live search
 hi IncSearch               ctermfg=9 ctermbg=7
@@ -77,10 +77,13 @@ hi MatchParen              ctermfg=15   ctermbg=0
 hi ModeMsg                 ctermfg=7
 hi MoreMsg                 ctermfg=7
 hi NonText                 ctermfg=7 
-hi Number                  ctermfg=12
+
+" numbers
+hi Number                  ctermfg=2
 
 " brackets
-hi Operator                ctermfg=2 
+hi Operator                ctermfg=14
+
 hi PreCondit               ctermfg=15
 hi PreProc                 ctermfg=5
 hi Question                ctermfg=10
@@ -94,6 +97,7 @@ hi StorageClass            ctermfg=7
 
 " literal strings
 hi String                  ctermfg=3
+
 hi Structure               ctermfg=13
 hi Tag                     ctermfg=5
 hi Title                   ctermfg=3   ctermbg=none cterm=bold
@@ -102,7 +106,8 @@ hi Typedef                 ctermfg=3
 
 
 " keyword: prototype
-hi Type                    ctermfg=5
+hi Type                    ctermfg=9
+
 hi Underlined              ctermfg=104 ctermbg=232
 hi VertSplit               ctermfg=0  ctermbg=0 cterm=none
 hi Visual                  ctermfg=210 ctermbg=235
