@@ -202,9 +202,9 @@ statusbar = {
 };
 settings = {
   core = {
-    real_name = "youri mouton";
-    user_name = "youri";
-    nick = "yrmt";
+    real_name = "george czabania";
+    user_name = "george";
+    nick = "stayrad";
     timestamp_format = "";
     use_proxy = "no";
     proxy_string = "";
