@@ -39,8 +39,8 @@ NeoBundle 'christoomey/vim-tmux-navigator'
 " Extensions
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'stayradiated/vimfiler.vim'
-NeoBundle 'tpope/vim-dispatch'
-NeoBundle 'airblade/vim-gitgutter'
+" NeoBundle 'tpope/vim-dispatch'
+" NeoBundle 'airblade/vim-gitgutter'
 
 " Editing
 NeoBundle 'scrooloose/syntastic'
@@ -83,7 +83,6 @@ set lazyredraw           " don't update screen when executing macros
 set mouse=a              " enable mouse in all modes
 set number               " show absolute line number on current line
 set showcmd              " show command on last line of screen
-" set noshowmode           " hide mode
 set noshowmatch          " don't show bracket matches
 set spelllang=en_nz      " spell check with New Zealand English
 set title                " use filename in window title
