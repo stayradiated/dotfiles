@@ -54,6 +54,8 @@ urxvt.boldFont:      xft:tamzen7x14:pixelsize=14
 ! Navy/Ivory pallette
 #define n_foreground #E8DFD6
 #define n_background #021B21
+#define n_current_line #08313B
+#define n_selection  #134E5F
 
 ! urxvt.background: b_background
 ! urxvt.foreground: b_foreground
@@ -63,12 +65,12 @@ urxvt.background: n_background
 urxvt.foreground: n_foreground
 
 ! black
-!urxvt.color0: b_current_line
-!urxvt.color8: b_selection
-urxvt.color0: t_current_line
-urxvt.color8: t_selection
-!urxvt.color0: c_current_line
-!urxvt.color8: c_selection
+! urxvt.color0: b_current_line
+! urxvt.color8: b_selection
+! urxvt.color0: t_current_line
+! urxvt.color8: t_selection
+urxvt.color0: n_current_line
+urxvt.color8: n_selection
 
 ! red
 urxvt.color1: b_red
