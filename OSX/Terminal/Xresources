@@ -17,4 +17,4 @@ urxvt.xftAntialias:  false
 urxvt.font:          xft:tamzen7x14:pixelsize=14
 urxvt.boldFont:      xft:tamzen7x14:pixelsize=14
 
-#include "/Volumes/Home/dotfiles/Shared/Terminal/Xcolors"
+#include "/Volumes/Home/dotfiles/Shared/Terminal/Xresources"
