@@ -33,9 +33,9 @@ URxvt*visualBell:         false
 
 ! TAMZEN
 URxvt.font:            -misc-tamzen-medium-r-*--17-*-*-*-*-*-*-*
-URxvt.boldFont:        -misc-tamzen-bold-r-*--17-*-*-*-*-*-*-*
+URxvt.boldFont:        -misc-tamzen-medium-r-*--17-*-*-*-*-*-*-*
 URxvt.italicFont:      -misc-tamzen-medium-r-*--17-*-*-*-*-*-*-*
-URxvt.boldItalicFont:  -misc-tamzen-bold-r-*--17-*-*-*-*-*-*-*
+URxvt.boldItalicFont:  -misc-tamzen-medium-r-*--17-*-*-*-*-*-*-*
 
 ! DINA
 ! URxvt.font:            -windows-dina-medium-r-*--16-*-*-*-*-*-*-*
@@ -85,4 +85,4 @@ URxvt.url-select.button:     1
 URxvt.url-select.launcher:   /usr/bin/firefox
 URxvt.url-select.underline:  true
 
-#include "/home/stayrad/dotfiles/Shared/Terminal/colors/w0ng"
+#include "/home/stayrad/dotfiles/Shared/Terminal/Xresources"

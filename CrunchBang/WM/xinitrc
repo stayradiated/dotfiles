@@ -8,6 +8,9 @@ case $1 in
 
   *)
 
+    ck-launch-session &
+    dbus-launch &
+
     # disable that beep
     xset -b
 
