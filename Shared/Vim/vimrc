@@ -1,18 +1,5 @@
 
-" ~/.vimrc
-"
-
-"
-" Compatability {{{
-" -----------------------------------------------------------------------------
-
-set nocompatible         " use vim defaults instead of vi
-set encoding=utf-8       " always encode in utf
-set shell=/bin/zsh       " because fish shell breaks syntastic
-
-" }}}
-"
-" Load Plugins {{{
+" Load Plugins
 " -----------------------------------------------------------------------------
 
 if has('vim_starting')
@@ -40,7 +27,7 @@ NeoBundle 'christoomey/vim-tmux-navigator'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'stayradiated/vimfiler.vim'
 NeoBundle 'tpope/vim-dispatch'
-" NeoBundle 'airblade/vim-gitgutter'
+NeoBundle 'tpope/vim-sensible'
 
 " Editing
 NeoBundle 'scrooloose/syntastic'
@@ -57,119 +44,65 @@ NeoBundle 'kchmck/vim-coffee-script'
 NeoBundle 'nelstrom/vim-markdown-folding'
 NeoBundle 'jelera/vim-javascript-syntax'
 
-" Filetype dectection
-filetype plugin indent on
-
 " Check plugins
 NeoBundleCheck
 
-"
-" }}}
-"
-" Settings {{{
+" Settings
 " -----------------------------------------------------------------------------
-"
-" Enable syntax highlighting
-syntax on
 
 " General
-set backspace=2          " enable <BS> for everything
-set scrolloff=3          " minimum lines at top/bottom when scrolling
 set completeopt-=preview " don't show preview window
 set fcs=vert:│,fold:-    " solid instead of broken line for vert splits
 set hidden               " hide when switching buffers, don't unload
-set laststatus=2         " always show the status line
 set lazyredraw           " don't update screen when executing macros
 set mouse=a              " enable mouse in all modes
 set number               " show absolute line number on current line
-set showcmd              " show command on last line of screen
-set noshowmatch          " don't show bracket matches
 set spelllang=en_nz      " spell check with New Zealand English
 set title                " use filename in window title
-set wildmenu             " enhanced cmd line completion
 set gdefault             " replace everything by default
-set autochdir            " change directory to current buffer when opening files
-set linespace=0          " make font look a bit better
 set visualbell           " stop the beep
-set noautochdir          " don't change directories when I change files
 set colorcolumn=80       " for cleaner code
-set listchars=eol:¬,tab:▸\ ,trail:~,extends:>,precedes:<
-
+ 
 " Backup swap files
 set backup
 set backupdir=~/.vim/tmp
 set backupskip=/tmp/*,/private/tmp/*
 set directory=~/.vim/tmp
 set writebackup
-
+ 
 " Infinite undo
 set undofile
 set undodir=~/.vim/undo
 set undolevels=1000
 set undoreload=10000
-
+ 
 " Folding
 set foldignore=          " don't ignore anything when folding
 set foldlevelstart=99    " no folds closed on open
 set foldmethod=marker    " collapse code using markers
 
 " Tabs
-set autoindent           " copy indent from previous line
 set expandtab            " replace tabs with spaces
 set shiftwidth=2         " spaces for autoindenting
-set smarttab             " <BS> removes shiftwidth worth of spaces
 set softtabstop=2        " spaces for editing, e.g. <Tab> or <BS>
 set tabstop=2            " spaces for <Tab>
 
 " Searches
 set hlsearch             " highlight search results
-set incsearch            " search whilst typing
 set ignorecase           " case insensitive searching
 set smartcase            " override ignorecase if upper case typed
-
+ 
 " Colours
 set t_Co=256
 let hybrid_use_Xresources=1
 
 set background=dark
 colorscheme hybrid_2
-
-" Fix escape key lag in terminal
-set timeoutlen=1000
-set ttimeoutlen=0
-
-" gVim
-if has('gui_running')
-
-  " Hide GUI
-  set guioptions-=m      " remove menu
-  set guioptions-=T      " remove toolbar
-  set guioptions-=r      " remove right scrollbar
-  set guioptions-=b      " remove bottom scrollbar
-  set guioptions-=L      " remove left scrollbar
-
-  " Paste from PRIMARY and CLIPBOARD
-  inoremap <silent> <M-v> <Esc>"+p`]a
-  inoremap <silent> <S-Insert> <Esc>"*p`]a
-
-  " Fonts
-  set guifont=Tamzen7x14:h14
-
-else
-
-  map <ScrollWheelUp> <C-Y>
-  map <ScrollWheelDown> <C-E>
-
-endif
-
-" vimdiff
-if &diff
-  set diffopt=filler,foldcolumn:0
-endif
-
-" }}}
-"
-" Mappings {{{
+ 
+map <ScrollWheelUp> <C-Y>
+map <ScrollWheelDown> <C-E>
+ 
+" Mapping
 " -----------------------------------------------------------------------------
 
 " Map Leader
@@ -194,12 +127,6 @@ nnoremap <leader><Tab> :b#<CR>
 " Delete a buffer without closing the window
 nnoremap <leader>d :bp<bar>sp<bar>bn<bar>bd<CR>
 
-" Split windows
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
-
 " Remember selection when indenting
 vnoremap > >gv
 vnoremap < <gv
@@ -220,15 +147,12 @@ vnoremap <leader>t :Tabularize /
 nnoremap <leader>c :SyntasticCheck<CR>
 
 " Show Quickfix window for Syntastic errors
-nnoremap <leader>E :Errors<CR>
+nnoremap <leader>e :Errors<CR>
 
 " Unite.vim
 nnoremap <leader>t :<C-u>Unite -no-split -buffer-name=files   -start-insert file_rec/async<CR>
-nnoremap <leader>T :<C-u>Unite -no-split -buffer-name=files   -start-insert file_rec/async:!<CR>
 nnoremap <leader>f :<C-u>Unite -no-split -buffer-name=files   -start-insert file<CR>
-nnoremap <leader>r :<C-u>Unite -no-split -buffer-name=mru     -start-insert file_mru<CR>
-nnoremap <leader>y :<C-u>Unite -no-split -buffer-name=yank    -start-insert history/yank<CR>
-nnoremap <leader>e :<C-u>Unite -no-split -buffer-name=buffer  -start-insert buffer<CR>
+nnoremap <leader>b :<C-u>Unite -no-split -buffer-name=buffer  -start-insert buffer<CR>
 nnoremap <leader>/ :<C-u>Unite -no-split -buffer-name=buffer  -start-insert grep:.<CR>
 
 " Vimfiler
@@ -240,12 +164,10 @@ nnoremap <silent> N Nzz
 nnoremap <silent> * *zz
 nnoremap <silent> # #zz
 
-" }}}
-"
-" Plugin Settings {{{
+" Plugin Settings 
 " -----------------------------------------------------------------------------
 
-" Syntastic
+" " Syntastic
 let g:syntastic_javascript_checkers=['jshint']
 let g:syntastic_coffee_coffeelint_args='-f ~/.lint.json'
 
@@ -271,9 +193,7 @@ function! s:unite_settings()
   imap <buffer> <C-r>   <Plug>(unite_redraw)
 endfunction
 
-" }}}
-"
-" Autocommands {{{
+" Autocommands
 " -----------------------------------------------------------------------------
 
 " Indent rules
@@ -281,5 +201,3 @@ autocmd FileType markdown setlocal ts=4 sw=4 sts=4 tw=79
 
 " Folding rules
 autocmd FileType coffee setlocal foldmethod=indent nofoldenable
-
-" }}}
