@@ -109,8 +109,7 @@ map <ScrollWheelDown> <C-E>
 let mapleader = ","
 
 " Remap Tab to %
-nnoremap <tab> %
-vnoremap <tab> %
+map <BS> %
 
 " Toggle fold
 nnoremap <space> za
