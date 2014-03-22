@@ -1,9 +1,10 @@
-! Basic Term appearence
+! Appearence
 urxvt.boldMode:        false
 urxvt.scrollBar:       false
 urxvt.internalBorder:  4
 urxvt.termName:        rxvt-256color
 
+! Plugins
 urxvt.perl-lib: /Volumes/Home/dotfiles/Shared/Terminal/perl
 urxvt.perl-ext-common:  default,clipboard
 
@@ -13,8 +14,9 @@ urxvt.keysym.M-v: perl:clipboard:paste
 urxvt.clipboard.copycmd: pbcopy
 urxvt.clipboard.pastecmd: pbpaste
 
-urxvt.xftAntialias:  false
-urxvt.font:          xft:tamzen7x14:pixelsize=14
-urxvt.boldFont:      xft:tamzen7x14:pixelsize=14
+! Fonts
+urxvt.font:      -misc-tamzen-medium-r-*--14-*-*-*-*-*-*-*
+urxvt.boldFont:  -misc-tamzen-medium-r-*--14-*-*-*-*-*-*-*
 
+! Colors
 #include "/Volumes/Home/dotfiles/Shared/Terminal/Xresources"
