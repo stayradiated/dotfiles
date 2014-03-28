@@ -32,6 +32,7 @@ NeoBundle 'tpope/vim-sensible'
 " Editing
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'tpope/vim-repeat'
+NeoBundle 'tpope/vim-abolish'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-unimpaired'
@@ -138,6 +139,9 @@ nnoremap k gk
 nnoremap <F2> :set invpaste paste?<CR>
 map <C-p> :r !pbpaste<CR>
 set pastetoggle=<F2>
+
+" Quick save
+nnoremap <leader>s :w<CR>
 
 " Shortcut for Tabularize
 vnoremap <leader>t :Tabularize /
