@@ -5,7 +5,7 @@ urxvt.termName:        rxvt-256color
 
 ! Plugins
 urxvt.perl-lib: /Volumes/Home/dotfiles/Shared/Terminal/perl
-urxvt.perl-ext-common:  default,clipboard
+urxvt.perl-ext-common:  default,-selection-popup,-option-popup,clipboard
 
 ! Clipboard
 urxvt.keysym.M-c: perl:clipboard:copy
