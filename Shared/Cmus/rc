@@ -1,0 +1,191 @@
+# auto_reshuffle (true)
+# Reshuffle playlist when end of shuffle list is reached.
+set auto_reshuffle=true
+
+# aaa_mode (all) [all, artist, album]
+# Defines what tracks should be played in the library view.  Not used in the
+# other views. For example if set to \fBartist\fR the player behaves like there
+# were only the files of the currently playing artist in the library.
+set aaa_mode=all
+
+# altformat_current [Format String]
+# Alternative format string for the line displaying currently playing track.
+set altformat_current= %F 
+
+# altformat_playlist [Format String]
+# Alternative format string for the list views (2-4).
+set altformat_playlist= %-50F %d
+
+# altformat_title [Format String]
+# Alternative format string for terminal title.  NOTE: not all terminals
+# support changing window title.
+set altformat_title=%f
+
+# altformat_trackwin [Format String]
+# Alternative format string for the tree view's (1) track window.
+set altformat_trackwin= %f%= %d 
+
+# buffer_seconds (10) [1-300]
+# Size of player buffer in seconds.
+set buffer_seconds=10
+
+# confirm_run (true)
+# Ask for confirmation before executing \fB:run\fR
+set confirm_run=true
+
+# continue (true)
+# Continue playing after current track finishes.
+set continue=true
+
+# device (/dev/cdrom)
+# CDDA device file.
+set device=/dev/cdrom
+
+# display_artist_sort_name (false)
+# If enabled, always displays artist names used for sorting instead of regular
+# ones in tree view (e.g. "Artist, The" instead of "The Artist"), so that
+# artists column looks alphabetically sorted.
+set display_artist_sort_name=false
+
+# format_current [Format String]
+# Format string for the line displaying currently playing track.
+set format_current= %a -- %t%= %l -- %y 
+
+# format_playlist [Format String]
+# Format string for the list views (2-4).
+set format_playlist= %-40a %t
+
+# format_playlist_va [Format String]
+# Format string for the list views (2-4), if a track is assumed to be a part of
+# compilation (see \fILIBRARY VIEW SORTING\fR for details).
+set format_playlist_va= %-40a %t
+
+# format_title [Format String]
+# Format string for terminal title.
+# NOTE: not all terminals support changing window title.
+set format_title=%a - %l - %t (%y)
+
+# format_trackwin [Format String]
+# Format string for the tree view's (1) track window.
+set format_trackwin=%3n. %t%= %y %d 
+
+# format_trackwin_va [Format String]
+# Format string for the tree view's (1) track window, if a track is assumed to
+# be a part of compilation (see \fILIBRARY VIEW SORTING\fR for details).
+set format_trackwin_va=%3n. %t (%a)%= %y %d 
+
+# smart_artist_sort (true)
+# If enabled, makes tree view sorting ignore "The" in front of artist names,
+# preventing artists starting with "The" from clumping together. Real
+# \fIartistsort\fR tags override this option, when present.
+set smart_artist_sort=true
+
+# id3_default_charset (ISO-8859-1)
+# Default character set to use for ID3v1 and broken ID3v2 tags.
+# NOTE:  This is used only if the tag is not valid UTF-8.
+set id3_default_charset=ISO-8859-1
+
+# icecast_default_charset (ISO-8859-1)
+# Default character set to use for non-UTF-8 icecast stream metadata.
+# NOTE:  This is used only if the metadata is not valid UTF-8.
+set icecast_default_charset=ISO-8859-1
+
+# lib_sort (artist album discnumber tracknumber title filename) [Sort Keys]
+# Sort keys for the sorted library view (2).
+set lib_sort=albumartist date album discnumber tracknumber title filename
+
+# output_plugin [roar, pulse, alsa, arts, oss, sun]
+# Name of output plugin.
+set output_plugin=ao
+
+# pl_sort () [Sort Keys]
+# Sort keys for the playlist view (3).  Empty value disables sorting and
+# enables manually moving tracks.
+set pl_sort=
+
+# play_library (true)
+# Play tracks from the library instead of playlist.
+set play_library=true
+
+# play_sorted (false)
+# Play tracks from the library in the sorted view (2) order instead of tree
+# view (1) order.  Used only when play_library is true.
+set play_sorted=true
+
+# repeat (false)
+# Repeat after all tracks played.
+set repeat=true
+
+# repeat_current (false)
+# Repeat current track forever.
+set repeat_current=false
+
+# replaygain (disabled)
+# Enable Replay Gain. Default is "disabled". Set to "track", "album",
+# "track-preferred" or "album-preferred".
+set replaygain=disabled
+
+# replaygain_limit (true)
+# Use replay gain limiting when clipping.
+set replaygain_limit=true
+
+# replaygain_preamp (6.0)
+# Replay gain preamplification in decibels.
+set replaygain_preamp=6.000000
+
+# resume (false)
+# Resume playback on startup.
+set resume=false
+
+# scroll_offset (2) [0-9999]
+# Minimal number of screen lines to keep above and below the cursor.
+set scroll_offset=9999
+
+# show_hidden (false)
+# Display hidden files in browser.
+set show_hidden=false
+
+# show_current_bitrate (false)
+# Display current bitrate in the status lines.
+set show_current_bitrate=false
+
+# show_remaining_time (false)
+# Display remaining time instead of elapsed time.
+set show_remaining_time=false
+
+# shuffle (false)
+# Play in shuffled order.  Shuffle works in the library views (1-2) and
+# playlist view (3).
+set shuffle=true
+
+# skip_track_info (false)
+# Don't load metadata when adding tracks. Useful when using network file system
+# and having huge amount of files. Tags can be loaded using 'update-cache' or
+# 'win-update-cache' commands.
+set skip_track_info=false
+
+# softvol (false)
+# Use software volume control.
+# NOTE: You should probably set this to false when using \fBao\fR as
+# \fBoutput_plugin\fR to output to wav files.
+set softvol=false
+
+# softvol_state (100 100)
+# Used to save left and right channel values for software volume control.  Two
+# integers in range 0..100 separated by a space.  This option is not usually
+# changed directly since \fBvol\fR command does same thing if \fBsoftvol\fR is
+# true.
+set softvol_state=0 0
+
+# status_display_program () [command]
+# This command, if not empty, is run every time cmus' status changes. It can be
+# used to display currently playing track on desktop background or panel for
+# example.  See \fI/usr/share/doc/cmus/examples/cmus-status-display\fR.
+set status_display_program=
+
+# wrap_search (true)
+# Controls whether the search wraps around the end.
+set wrap_search=true
+
+# colorscheme
+colorscheme custom

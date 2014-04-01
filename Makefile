@@ -8,6 +8,7 @@ apps  := $(dir)/Shared
 
 bar   := $(cbng)/Bar
 
+cmus  := $(apps)/Cmus
 irssi := $(apps)/Irssi
 mutt  := $(apps)/Mutt
 ffox  := $(apps)/Firefox
@@ -41,6 +42,9 @@ check:
 
 # WM
 	@if test -f ~/.xinitrc; then echo ".xinitrc exists"; fi;
+
+# CMUS
+	@if test -f ~/.cmus/rc; then echo ".cmus/rc exists"; fi;
 
 
 
@@ -96,6 +100,12 @@ osx:
 # ============================================================================
 
 shared:
+
+# Cmus
+	@echo "Cmus..."
+	@mkdir -p ~/.cmus
+	@ln -fs $(cmus)/rc ~/.cmus/rc
+	@ln -fs $(cmus)/custom.theme ~/.cmus/custom.theme
 
 # Fonts
 	@echo "Fonts..."
