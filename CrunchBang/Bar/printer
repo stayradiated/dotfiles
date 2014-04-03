@@ -74,11 +74,11 @@ function print_left () {
     case $item in
       O*)
         # focused occupied desktop
-        left="$left\\u5\\b2\\f5${name}\\ur\\br\\fr"
+        left="$left\\u4\\f4${name}\\ur\\fr"
         ;;
       F*)
         # focused free desktop
-        left="$left\\u2\\b2\\f1${name}\\ur\\br\\fr"
+        left="$left\\u2\\f1${name}\\ur\\fr"
         ;;
       U*)
         # focused urgent desktop
@@ -86,7 +86,7 @@ function print_left () {
         ;;
       o*)
         # occupied desktop
-        left="$left\\u5\\f1${name}\\ur\\fr"
+        left="$left\\u4\\f1${name}\\ur\\fr"
         ;;
       f*)
         # free desktop
@@ -94,7 +94,7 @@ function print_left () {
         ;;
       u*)
         # urgent desktop
-        left="$left\\b1${name}\\br"
+        left="$left"
         ;;
       L*)
         # layout

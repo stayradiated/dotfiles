@@ -27,7 +27,7 @@ case $1 in
     xset fp rehash
 
     # set the background
-    feh --bg-tile "$HOME/dotfiles/Other/dark_stripe.png"
+    sh $HOME/.fehbg &
 
     # start urxvt daemon
     urxvtd -q -o -f &

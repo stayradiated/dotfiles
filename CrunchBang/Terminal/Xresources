@@ -64,7 +64,7 @@ URxvt.boldItalicFont:  -misc-tamzen-medium-r-*--17-*-*-*-*-*-*-*
 ! -----------------------------
 ! PERL EXTENSIONS
 ! -----------------------------
-URxvt.perl-lib:        /opt/local/lib/urxvt/perl/
+URxvt.perl-lib:        /home/stayrad/dotfiles/Shared/Terminal/perl
 URxvt.perl-ext-common: default,clipboard,keyboard-select,url-select
 
 ! clipboard

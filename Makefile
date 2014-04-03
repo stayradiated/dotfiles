@@ -107,6 +107,10 @@ shared:
 	@ln -fs $(cmus)/rc ~/.cmus/rc
 	@ln -fs $(cmus)/custom.theme ~/.cmus/custom.theme
 
+# Feh
+	@echo "Feh..."
+	@ln -fs $(feh)/fehbg ~/.fehbg
+
 # Fonts
 	@echo "Fonts..."
 	@if test ! -d $(fonts)/tamzen; then\
