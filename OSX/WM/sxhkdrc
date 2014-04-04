@@ -87,6 +87,19 @@ mod2 + !button{1-3}
 mod2 + @button{1-3}
     bspc pointer -u
 
+# Change desktop padding
+mod1 + {bracketleft,bracketright}
+  bspc config -d focused right_padding $((`bspc config -d focused right_padding` {+,-} 20 ))
+
+mod1 + shift + {bracketleft,bracketright}
+  bspc config -d focused left_padding $((`bspc config -d focused left_padding` {+,-} 20 ))
+
+ctrl + {bracketleft,bracketright}
+  bspc config -d focused bottom_padding $((`bspc config -d focused bottom_padding` {+,-} 20 ))
+
+ctrl + shift + {bracketleft,bracketright}
+  bspc config -d focused top_padding $((`bspc config -d focused top_padding` {+,-} 20 ))
+
 #
 # monitors
 #
