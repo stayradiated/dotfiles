@@ -17,18 +17,17 @@
 # Icons
 bat=$(echo -e '\u11B') # battery
 clk=$(echo -e '\u110') # clock
-sep="|"
+sep="\f5|\fr"
 
 battery=""
 time=""
 
 function print_right () {
-  right="\r\f1${essid} \f5${sep} \f1${battery}% \f5${sep} \f1${time}\fr "
-  # right="\r\f1${time}\fr "
+  right="\r\f1${essid} ${sep} \f1${battery}% ${sep} \f1${time}\fr "
 }
 
 function print_title () {
-  title="  ${line#?}"
+  title="${line#?}"
 }
 
 function print_left () {
@@ -74,19 +73,19 @@ function print_left () {
     case $item in
       O*)
         # focused occupied desktop
-        left="$left\\u4\\f4${name}\\ur\\fr"
+        left="$left\\u4\\b4${name}\\ur\\br"
         ;;
       F*)
         # focused free desktop
-        left="$left\\u2\\f1${name}\\ur\\fr"
+        left="$left\\u2\\b4${name}\\ur\\br"
+        ;;
+      o*)
+        # occupied desktop
+        left="$left\\u4${name}\\ur"
         ;;
       U*)
         # focused urgent desktop
         left="$left\\u9\\f0${name}\\ur\\f0"
-        ;;
-      o*)
-        # occupied desktop
-        left="$left\\u4\\f1${name}\\ur\\fr"
         ;;
       f*)
         # free desktop

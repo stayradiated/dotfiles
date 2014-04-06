@@ -23,5 +23,5 @@ while read -r line ; do
       print_left
       ;;
   esac
-  printf "%s\n" "$left $title $right"
+  printf "%s\n" "$left$title$right"
 done
