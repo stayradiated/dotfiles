@@ -21,13 +21,13 @@ NeoBundle 'Shougo/vimproc.vim', {
 
 " Themes
 NeoBundle 'w0ng/vim-hybrid'
-NeoBundle 'christoomey/vim-tmux-navigator'
 
 " Extensions
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'stayradiated/vimfiler.vim'
 NeoBundle 'tpope/vim-dispatch'
 NeoBundle 'tpope/vim-sensible'
+NeoBundle 'christoomey/vim-tmux-navigator'
 
 " Editing
 NeoBundle 'scrooloose/syntastic'
