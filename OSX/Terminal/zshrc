@@ -2,7 +2,7 @@
 # Terminal {{{
 # ----------------------------------------------------------------------------
 
-export PATH=/usr/pkg/bin:/usr/pkg/sbin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin
+export PATH=/usr/pkg/bin:/usr/pkg/sbin:/usr/local/bin:/usr/local/sbin:/usr/local/heroku/bin:/usr/bin:/bin:/usr/sbin:/sbin
 export MANPATH=/usr/pkg/man:/usr/pkg/share/man:/usr/local/share/man:/usr/share/man
 export LANG=en_NZ.UTF-8
 export LC_CTYPE=en_NZ.UTF-8
