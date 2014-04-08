@@ -1,36 +1,38 @@
-! Tomorrow-Night Palette
-#define t_background #1D1F21
-#define t_current_line #282A2E
-#define t_selection #373B41
-#define t_foreground #C5C8C6
-#define t_comment #707880
-#define t_red #CC6666
-#define t_orange #DE935F
-#define t_yellow #F0C674
-#define t_green #B5BD68
-#define t_aqua #8ABEB7
-#define t_blue #81A2BE
-#define t_purple #B294BB
+! Base16 - Tomorrow
+#define t_background   #1d1f21
+#define t_current_line #282a2e
+#define t_selection    #373b41
+#define t_comment      #969896
+#define t_mid_grey     #b4b7b4
+#define t_foreground   #c5c8c6
+#define t_light_grey   #e0e0e0
+#define t_white        #ffffff
+#define t_red          #cc6666
+#define t_orange       #de935f
+#define t_yellow       #f0c674
+#define t_green        #b5bd68
+#define t_aqua         #8abeb7
+#define t_blue         #81a2be
+#define t_purple       #b294bb
+#define t_brown        #a3685a
 
-! base16-default Palette (slightly darker)
-#define b_background #151515
-#define b_current_line #202020
-#define b_selection #303030
-#define b_foreground #C5C8C6
-#define b_comment #505050
-#define b_red #AC4142
-#define b_orange #D28445
-#define b_yellow #F4BF75
-#define b_green #90A959
-#define b_aqua #75B5AA
-#define b_blue #6A9FB5
-#define b_purple #AA759F
-
-! Codeacademy Palette (dark blue background)
-#define c_background #232C31
-#define c_current_line #2D3C46
-#define c_selection #425059
-#define c_comment #6C7A80
+! Base16 - Default
+#define d_background   #151515
+#define d_current_line #202020
+#define d_selection    #303030
+#define d_comment      #505050
+#define d_mid_grey     #b0b0b0
+#define d_foreground   #d0d0d0
+#define d_light_grey   #e0e0e0
+#define d_white        #f5f5f5
+#define d_red          #ac4142
+#define d_orange       #d28445
+#define d_yellow       #f4bf75
+#define d_green        #90a959
+#define d_aqua         #75b5aa
+#define d_blue         #6a9fb5
+#define d_purple       #aa759f
+#define d_brown        #8f5536
 
 ! Navy/Ivory pallette
 #define n_foreground #E8DFD6
@@ -38,51 +40,37 @@
 #define n_current_line #08313B
 #define n_selection  #134E5F
 
-! urxvt.background: b_background
-! urxvt.foreground: b_foreground
-! urxvt.background: t_background
-! urxvt.foreground: t_foreground
-urxvt.background: n_background
-urxvt.foreground: n_foreground
+urxvt.background:  n_background
+urxvt.foreground:  n_foreground
 
 ! black
-! urxvt.color0: b_current_line
-! urxvt.color8: b_selection
-! urxvt.color0: t_current_line
-! urxvt.color8: t_selection
-urxvt.color0: n_current_line
-urxvt.color8: n_selection
+urxvt.color0:      n_current_line
+urxvt.color8:      n_selection
 
 ! red
-urxvt.color1: b_red
-urxvt.color9: t_red
+urxvt.color1:      d_red
+urxvt.color9:      t_red
 
 ! green
-urxvt.color2: b_green
-urxvt.color10: t_green
+urxvt.color2:      d_green
+urxvt.color10:     t_green
 
 ! yellow
-!urxvt.color3: b_orange
-!urxvt.color11: b_yellow
-urxvt.color3: t_orange
-urxvt.color11: t_yellow
+urxvt.color3:      d_orange
+urxvt.color11:     t_yellow
 
 ! blue
-urxvt.color4: b_blue
-urxvt.color12: t_blue
+urxvt.color4:      d_blue
+urxvt.color12:     t_blue
 
 ! magenta
-urxvt.color5: b_purple
-urxvt.color13: t_purple
+urxvt.color5:      d_purple
+urxvt.color13:     t_purple
 
 ! cyan
-urxvt.color6: b_aqua
-urxvt.color14: t_aqua
+urxvt.color6:      d_aqua
+urxvt.color14:     t_aqua
 
 ! white
-!urxvt.color7: b_comment
-!urxvt.color15: b_foreground
-urxvt.color7: t_comment
-urxvt.color15: t_foreground
-!urxvt.color7: c_comment
-!urxvt.color15: t_foreground
+urxvt.color7:      t_comment
+urxvt.color15:     t_foreground
