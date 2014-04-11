@@ -42,6 +42,7 @@ NeoBundle 'godlygeek/tabular'
 
 " Languages
 NeoBundle 'kchmck/vim-coffee-script'
+NeoBundle 'leafgarland/typescript-vim'
 NeoBundle 'nelstrom/vim-markdown-folding'
 NeoBundle 'jelera/vim-javascript-syntax'
 
