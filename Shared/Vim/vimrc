@@ -21,6 +21,7 @@ NeoBundle 'Shougo/vimproc.vim', {
 
 " Themes
 NeoBundle 'w0ng/vim-hybrid'
+NeoBundle 'stayradiated/vim-termorrow'
 
 " Extensions
 NeoBundle 'Shougo/unite.vim'
@@ -97,11 +98,7 @@ set ignorecase           " case insensitive searching
 set smartcase            " override ignorecase if upper case typed
  
 " Colours
-set t_Co=256
-let hybrid_use_Xresources=1
-
-set background=dark
-colorscheme hybrid_2
+colorscheme termorrow
  
 map <ScrollWheelUp> <C-Y>
 map <ScrollWheelDown> <C-E>
