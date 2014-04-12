@@ -15,15 +15,15 @@
 # 9 = magenta
 
 # Icons
-bat=$(echo -e '\u11B') # battery
-clk=$(echo -e '\u110') # clock
-sep="\f5|\fr"
+bat=$(echo -e '\ue006') # battery
+clk=$(echo -e '\ue00E') # clock
+sep="\f0$(echo -e '\u002')\fr"
 
 battery=""
 time=""
 
 function print_right () {
-  right="\r\f1${essid} ${sep} \f1${battery}% ${sep} \f1${time}\fr "
+  right="\r\f1${essid} ${sep} \f1${bat} ${battery}% ${sep} \f1${clk} ${time}\fr "
 }
 
 function print_title () {
@@ -31,77 +31,30 @@ function print_title () {
 }
 
 function print_left () {
-  # left=""
-  # IFS=':'
-  # set -- ${line#?}
-  # while [ $# -gt 0 ] ; do
-  #   item=$1
-  #   id=${item#?}
-  #   name="  ${tags[$id]}  "
-  #   case $item in
-  #     u*)
-  #       # urgent desktop
-  #       left="$left\\b2\\f0${name}\\fr\\br"
-  #       ;;
-  #     [DU][0-9])
-  #       # active desktop
-  #       left="$left\\u5\\b2\\f5${name}\\fr\\br\\ur"
-  #       ;;
-  #     d*)
-  #       # inactive but occupied desktop
-  #       left="$left\\f1${name}\\fr"
-  #       ;;
-  #     E*)
-  #       # inactive desktop
-  #       left="$left\\f3${name}\\fr"
-  #       ;;
-  #     L*)
-  #       # layout
-  #       label="${id:0:1}"
-  #       left="$left \\f6[ ${label} ]\\fr"
-  #       ;;
-  #   esac
-  #   shift
-  # done
-
   left=""
   IFS=':'
   set -- ${line#?}
   while [ $# -gt 0 ] ; do
     item=$1
-    name="  ${item#?}  "
+    name="    "
     case $item in
       O*)
-        # focused occupied desktop
-        left="$left\\u4\\b4${name}\\ur\\br"
+        # focused occupied
+        left="$left\\b1\\u1${name}\\br\\ur"
         ;;
       F*)
-        # focused free desktop
-        left="$left\\u2\\b4${name}\\ur\\br"
+        # focused empty
+        left="$left\\b0\\u0${name}\\br\\ur"
         ;;
       o*)
-        # occupied desktop
-        left="$left\\u4${name}\\ur"
-        ;;
-      U*)
-        # focused urgent desktop
-        left="$left\\u9\\f0${name}\\ur\\f0"
+        # occupied
+        left="$left\\f1${name}\\fr"
         ;;
       f*)
-        # free desktop
-        left="$left\\f3${name}\\fr"
-        ;;
-      u*)
-        # urgent desktop
-        left="$left"
-        ;;
-      L*)
-        # layout
-        layout=$(printf "%s" "${name}" | sed 's/\(.\).*/\U\1/')
-        left="$left \\f2$layout\\fr"
+        # empty
+        left="$left\\f0${name}\\fr"
         ;;
     esac
     shift
   done
-
 }
