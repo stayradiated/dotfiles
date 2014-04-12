@@ -14,8 +14,9 @@ urxvt.clipboard.copycmd: pbcopy
 urxvt.clipboard.pastecmd: pbpaste
 
 ! Fonts
-urxvt.font:      -misc-tamzen-medium-r-*--14-*-*-*-*-*-*-*
-urxvt.boldFont:  -misc-tamzen-medium-r-*--14-*-*-*-*-*-*-*
+
+urxvt.font:      -misc-tamzen-medium-r-*--14-*-*-*-*-*-*-*, -*-tewi-medium-*-*--11-*-*-*-*-*-*-*
+urxvt.boldFont:  -misc-tamzen-medium-r-*--14-*-*-*-*-*-*-*, -*-tewi-medium-*-*--11-*-*-*-*-*-*-*
 
 ! Colors
 #include "/Volumes/Home/dotfiles/Shared/Terminal/Xresources"
