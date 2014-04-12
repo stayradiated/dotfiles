@@ -3,6 +3,7 @@
 /Shared/Vim/bundle/*
 /Shared/Vim/tmp
 /Shared/Vim/undo
+/Shared/Vim/spell
 /Shared/Vim/.netrwhist
 
 # Fonts
