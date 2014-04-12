@@ -49,7 +49,7 @@ set display_artist_sort_name=false
 
 # format_current [Format String]
 # Format string for the line displaying currently playing track.
-set format_current= %a -- %t%= %l -- %y 
+set format_current= %a :: %t%=%y 
 
 # format_playlist [Format String]
 # Format string for the list views (2-4).
