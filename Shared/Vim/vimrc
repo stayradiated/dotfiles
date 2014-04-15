@@ -107,13 +107,13 @@ map <ScrollWheelDown> <C-E>
 " -----------------------------------------------------------------------------
 
 " Map Leader
-let mapleader = ","
+let mapleader = " "
 
 " Remap Tab to %
 map <BS> %
 
 " Toggle fold
-nnoremap <space> za
+nnoremap <leader><space> za
 
 " Toggle hlsearch for current results
 nnoremap <leader>h :nohlsearch<CR>
