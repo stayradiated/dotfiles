@@ -32,33 +32,9 @@ URxvt*visualBell:         false
 
 ! TAMZEN
 URxvt.font:            -misc-tamzen-medium-r-*--17-*-*-*-*-*-*-*
-URxvt.boldFont:        -misc-tamzen-medium-r-*--17-*-*-*-*-*-*-*
+URxvt.boldFont:        -misc-tamzen-bold-r-*--17-*-*-*-*-*-*-*
 URxvt.italicFont:      -misc-tamzen-medium-r-*--17-*-*-*-*-*-*-*
-URxvt.boldItalicFont:  -misc-tamzen-medium-r-*--17-*-*-*-*-*-*-*
-
-! DINA
-! URxvt.font:            -windows-dina-medium-r-*--16-*-*-*-*-*-*-*
-! URxvt.boldFont:        -windows-dina-bold-r-*--16-*-*-*-*-*-*-*
-! URxvt.italicFont:      -windows-dina-medium-i-*--16-*-*-*-*-*-*-*
-! URxvt.bolditalicFont:  -windows-dina-bold-i-*--16-*-*-*-*-*-*-*
-
-! MESLO
-! URxvt.font: xft:DejaVu Sans Mono:Book:size=10
-! URxvt.boldFont: xft:DejaVu Sans Mono:Bold:size=10
-! URxvt.italicFont: xft:DejaVu Sans Mono:Oblique:size=10
-! URxvt.boldItalicFont: xft:DejaVu Sans Mono:Bold:Oblique:size=10
-
-! PRAGMATAPRO
-! URxvt.font: xft:PragmataPro for Powerline:Regular:size=11
-! URxvt.boldFont: xft:PragmataPro for Powerline:Bold:size=11
-! URxvt.italicFont: xft:PragmataPro for Powerline:Italic:size=11
-! URxvt.boldItalicFont: xft:PragmataPro for Powerline:Bold:Italic:size=11
-
-! TERMINUS
-! URxvt.font:            -beastie-terminus14-*-*-*-*-*-*-*-*-*-*-*
-! URxvt.boldFont:        -beastie-terminus14-*-*-*-*-*-*-*-*-*-*-*
-! URxvt.italicFont:      -beastie-terminus14-*-*-*-*-*-*-*-*-*-*-*
-! URxvt.bolditalicFont:  -beastie-terminus14-*-*-*-*-*-*-*-*-*-*-*
+URxvt.boldItalicFont:  -misc-tamzen-bold-r-*--17-*-*-*-*-*-*-*
 
 ! -----------------------------
 ! PERL EXTENSIONS
