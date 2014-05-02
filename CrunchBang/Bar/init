@@ -10,6 +10,8 @@ mkfifo $PANEL_FIFO
 # Tell BSPWM to log events
 bspc control --subscribe > $PANEL_FIFO &
 
+BAR_OPTIONS='-g 1920x25+0+0 -f -misc-tamzen-medium-r-normal--14-*-*-*-*-*-*-*,-misc-sm4tik-medium-r-normal--16-*-*-*-*-*-*-* -B #021B21 -F #E8DFD6 -p'
+
 # Display current title
 [[ -z "$(pidof xtitle)" ]] && xtitle -sf 'T%s' > $PANEL_FIFO &
 
@@ -23,4 +25,4 @@ bspc control --subscribe > $PANEL_FIFO &
 [[ -z "$(pidof essid)" ]] && essid -s -i 5 -f 'X%s' > $PANEL_FIFO &
 
 # Run bar
-[[ -z "$(pidof bar)" ]] && cat $PANEL_FIFO | $BAR_SCRIPT | bar
+[[ -z "$(pidof bar)" ]] && cat $PANEL_FIFO | $BAR_SCRIPT | bar ${BAR_OPTIONS}

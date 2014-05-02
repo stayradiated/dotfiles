@@ -2,28 +2,34 @@
 
 # Takes the input from reader and returns the formatted output
 
-# Bar Colours
-# 0 = background
-# 1 = foreground
-# 2 = grey bg
-# 3 = grey text
-# 4 = red
-# 5 = green
-# 6 = orange
-# 7 = yellow
-# 8 = blue
-# 9 = magenta
+# Colors
+c0="#FF08313B" # black
+c1="#FFac4142" # red
+c2="#FF90a959" # green
+c3="#FFd28445" # yellow
+c4="#FF6a9fb5" # blue
+c5="#FFaa759f" # magenta
+c6="#FF75b5aa" # cyan
+c7="#FF969896" # white
+c8="#FF134E5F" # + black
+c9="#FFcc6666" # + red
+c10="#FFb5bd68" # + green
+c11="#FFf0c674" # + yellow
+c12="#FF81a2be" # + blue
+c13="#FFb294bb" # + magenta
+c14="#FF8abeb7" # + cyan
+c15="#FFc5c8c6" # + white
 
 # Icons
 bat=$(echo -e '\ue006') # battery
 clk=$(echo -e '\ue00E') # clock
-sep="\f0$(echo -e '\u002')\fr"
+sep="%{F$c0}$(echo -e '\u002')%{F-}"
 
 battery=""
 time=""
 
 function print_right () {
-  right="\r\f1${essid} ${sep} \f1${bat} ${battery}% ${sep} \f1${clk} ${time}\fr "
+  right="%{r F$c1}${essid} ${sep} %{F$c1}${bat} ${battery}% ${sep} %{F$c1}${clk} ${time}%{F-} "
 }
 
 function print_title () {
@@ -40,19 +46,19 @@ function print_left () {
     case $item in
       O*)
         # focused occupied
-        left="$left\\b1\\u1${name}\\br\\ur"
+        left="$left%{B$c1 U$c1}${name}%{B- U-}"
         ;;
       F*)
         # focused empty
-        left="$left\\b0\\u0${name}\\br\\ur"
+        left="$left%{B$c0 U$c0}${name}%{B- U-}"
         ;;
       o*)
         # occupied
-        left="$left\\f1${name}\\fr"
+        left="$left%{F$c1}${name}%{F-}"
         ;;
       f*)
         # empty
-        left="$left\\f0${name}\\fr"
+        left="$left%{F$c0}${name}%{F-}"
         ;;
     esac
     shift
