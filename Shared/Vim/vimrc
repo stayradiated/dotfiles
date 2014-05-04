@@ -44,8 +44,12 @@ NeoBundle 'godlygeek/tabular'
 " Languages
 NeoBundle 'kchmck/vim-coffee-script'
 NeoBundle 'nelstrom/vim-markdown-folding'
-NeoBundle 'jelera/vim-javascript-syntax'
+NeoBundle 'pangloss/vim-javascript'
 NeoBundle 'digitaltoad/vim-jade'
+NeoBundle 'mxw/vim-jsx'
+
+" Disabled
+" NeoBundle 'jelera/vim-javascript-syntax'
 " NeoBundle 'kien/rainbow_parentheses.vim'
 " NeoBundle 'guns/vim-clojure-static'
 " NeoBundle 'guns/vim-clojure-highlight'
@@ -172,7 +176,7 @@ nnoremap <silent> # #zz
 " -----------------------------------------------------------------------------
 
 " " Syntastic
-let g:syntastic_javascript_checkers=['jshint']
+let g:syntastic_javascript_checkers=['jsxhint']
 let g:syntastic_coffee_coffeelint_args='-f ~/.lint.json'
 
 " VimFiler
