@@ -10,6 +10,7 @@ export LD_LIBRARY_PATH=/usr/include
 export TERM=xterm-256color
 
 xset r rate 500 25
+stty -ixon
 
 # Go home if we start in root
 if [ `pwd` = "/" ]; then
