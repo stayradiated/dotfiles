@@ -22,6 +22,7 @@ NeoBundle 'Shougo/vimproc.vim', {
 " Themes
 NeoBundle 'w0ng/vim-hybrid'
 NeoBundle 'stayradiated/vim-termorrow'
+NeoBundle 'noahfrederick/vim-noctu'
 
 " Extensions
 NeoBundle 'Shougo/unite.vim'
