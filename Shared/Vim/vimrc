@@ -142,9 +142,7 @@ nnoremap j gj
 nnoremap k gk
 
 " Paste mode for terminals
-nnoremap <F2> :set invpaste paste?<CR>
-map <C-p> :r !pbpaste<CR>
-set pastetoggle=<F2>
+nnoremap <leader>p :set invpaste paste?<CR>
 
 " Quick save
 nnoremap <leader>s :w<CR>
@@ -210,3 +208,6 @@ autocmd FileType markdown setlocal ts=4 sw=4 sts=4 tw=79
 
 " Folding rules
 autocmd FileType coffee setlocal foldmethod=indent nofoldenable
+
+" Silverstripe
+au BufNewFile,BufRead *.ss setfiletype xhtml
