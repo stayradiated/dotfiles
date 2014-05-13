@@ -151,7 +151,9 @@ apps:
 	@mkdir -p $(vim)/undo
 
 	@ln -fs $(vim)/vimrc ~/.vimrc
-	@ln -fs $(vim) ~/.vim
+	@if test ! -d ~/.vim; then\
+		ln -fs $(vim) ~/.vim;\
+	fi;
 
 	@if test ! -d $(vim)/bundle/neobundle.vim; then\
 		git clone https://github.com/Shougo/neobundle.vim.git $(vim)/bundle/neobundle.vim;\
