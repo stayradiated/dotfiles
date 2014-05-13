@@ -1,12 +1,10 @@
 
 # Vim
-/Shared/Vim/bundle/*
-/Shared/Vim/tmp
-/Shared/Vim/undo
-/Shared/Vim/spell
-/Shared/Vim/.netrwhist
+/apps/vim/bundle/*
+/apps/vim/tmp/*
+/apps/vim/undo/*
 
 # Fonts
-/Shared/Fonts/tamzen
-/Shared/Fonts/yrmt
-/Shared/Fonts/sm4tik
+/apps/fonts/tamzen
+/apps/fonts/yrmt
+/apps/fonts/sm4tik

@@ -1,7 +1,7 @@
 Dotfiles
 ========
 
-> Just my configs for CrunchBang and OS X
+> Just my configs for Crux and OS X
 
 ## Makefile
 
@@ -9,15 +9,15 @@ Dotfiles
 
 Checks for existing files that will be overwriten.
 
-### make crunchbang
+### make crux
 
-Installs crunchbang specific files
+Installs Crux specific files
 
 ### make osx
 
 Installs OS X specific files
 
-### make shared
+### make apps
 
 Installs app configs and fonts that are used in both systems
 
