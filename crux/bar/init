@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+BAR_SCRIPT=~/dotfiles/crux/bar/reader
+
+# pipe bspwm info to bar
+[ -e $PANEL_FIFO ] & rm $PANEL_FIFO
+mkfifo $PANEL_FIFO
+
+# Tell BSPWM to log events
+bspc control --subscribe > $PANEL_FIFO &
+
+BAR_OPTIONS='-g 1920x25+0+0 -f -misc-tamzen-medium-r-normal--14-*-*-*-*-*-*-*,-misc-sm4tik-medium-r-normal--16-*-*-*-*-*-*-* -B #021B21 -F #E8DFD6 -p'
+
+# Display current title
+[[ -z "$(pidof xtitle)" ]] && xtitle -sf 'T%s' > $PANEL_FIFO &
+
+# Display time
+[[ -z "$(pidof clock)" ]] && clock -s -i 10 -f 'S%a %H:%M' > $PANEL_FIFO &
+
+# Display battery status
+[[ -z "$(pidof battery)" ]] && battery -s -i 3 -f 'B%s %i' > $PANEL_FIFO &
+
+# Display currently connected wifi network
+# [[ -z "$(pidof essid)" ]] && essid -s -i 5 -f 'X%s' > $PANEL_FIFO &
+
+# Run bar
+[[ -z "$(pidof bar)" ]] && cat $PANEL_FIFO | $BAR_SCRIPT | bar ${BAR_OPTIONS}

@@ -1,0 +1,13 @@
+--- dmenu.c	2012-01-08 13:18:43.000000000 +0100
++++ dmenu.c	2012-02-07 12:12:28.353854342 +0100
+@@ -179,8 +181,8 @@
+ 	/* draw input field */
+ 	dc->w = (lines > 0 || !matches) ? mw - dc->x : inputw;
+ 	drawtext(dc, text, normcol);
+- if((curpos = textnw(dc, text, cursor) + dc->h/2 - 2) < dc->w)
+-	  drawrect(dc, curpos, 2, 1, dc->h - 4, True, normcol->FG);
++	if((curpos = textnw(dc, text, cursor) + dc->font.height/2) < dc->w)
++		drawrect(dc, curpos, (dc->h - dc->font.height)/2 + 1, 1, dc->font.height - 1, True, normcol->FG);
+ 
+ 	if(lines > 0) {
+ 		/* draw vertical list */

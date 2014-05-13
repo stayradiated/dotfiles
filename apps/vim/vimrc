@@ -1,0 +1,213 @@
+
+" Load Plugins
+" -----------------------------------------------------------------------------
+
+if has('vim_starting')
+  set runtimepath+=~/.vim/bundle/neobundle.vim
+endif
+
+call neobundle#rc(expand('~/.vim/bundle/'))
+
+" NeoBundle
+NeoBundleFetch 'Shougo/neobundle.vim'
+
+" VimProc
+NeoBundle 'Shougo/vimproc.vim', {
+  \ 'build' : {
+  \   'mac' : 'make -f make_mac.mak',
+  \   'unix': 'make -f make_unix.mak'
+  \   }
+  \ }
+
+" Themes
+NeoBundle 'w0ng/vim-hybrid'
+NeoBundle 'stayradiated/vim-termorrow'
+NeoBundle 'noahfrederick/vim-noctu'
+
+" Extensions
+NeoBundle 'Shougo/unite.vim'
+NeoBundle 'stayradiated/vimfiler.vim'
+NeoBundle 'tpope/vim-dispatch'
+NeoBundle 'tpope/vim-sensible'
+NeoBundle 'christoomey/vim-tmux-navigator'
+
+" Editing
+NeoBundle 'scrooloose/syntastic'
+NeoBundle 'tpope/vim-repeat'
+NeoBundle 'tpope/vim-abolish'
+NeoBundle 'tpope/vim-fugitive'
+NeoBundle 'tpope/vim-surround'
+NeoBundle 'tpope/vim-unimpaired'
+NeoBundle 'mattn/emmet-vim'
+NeoBundle 'tomtom/tcomment_vim'
+NeoBundle 'godlygeek/tabular'
+
+" Languages
+NeoBundle 'kchmck/vim-coffee-script'
+NeoBundle 'nelstrom/vim-markdown-folding'
+NeoBundle 'pangloss/vim-javascript'
+NeoBundle 'digitaltoad/vim-jade'
+NeoBundle 'mxw/vim-jsx'
+
+" Disabled
+" NeoBundle 'jelera/vim-javascript-syntax'
+" NeoBundle 'kien/rainbow_parentheses.vim'
+" NeoBundle 'guns/vim-clojure-static'
+" NeoBundle 'guns/vim-clojure-highlight'
+
+" Check plugins
+NeoBundleCheck
+
+" Settings
+" -----------------------------------------------------------------------------
+
+" General
+set completeopt-=preview " don't show preview window
+" set fcs=vert:│,fold:-    " solid instead of broken line for vert splits
+set hidden               " hide when switching buffers, don't unload
+set lazyredraw           " don't update screen when executing macros
+set mouse=a              " enable mouse in all modes
+set number               " show absolute line number on current line
+set spelllang=en_nz      " spell check with New Zealand English
+set title                " use filename in window title
+set gdefault             " replace everything by default
+set visualbell           " stop the beep
+set colorcolumn=80       " for cleaner code
+ 
+" Backup swap files
+set backup
+set backupdir=~/.vim/tmp
+set backupskip=/tmp/*,/private/tmp/*
+set directory=~/.vim/tmp
+set writebackup
+ 
+" Infinite undo
+set undofile
+set undodir=~/.vim/undo
+set undolevels=1000
+set undoreload=10000
+ 
+" Folding
+set foldignore=          " don't ignore anything when folding
+set foldlevelstart=99    " no folds closed on open
+set foldmethod=marker    " collapse code using markers
+
+" Tabs
+set expandtab            " replace tabs with spaces
+set shiftwidth=2         " spaces for autoindenting
+set softtabstop=2        " spaces for editing, e.g. <Tab> or <BS>
+set tabstop=2            " spaces for <Tab>
+
+" Searches
+set hlsearch             " highlight search results
+set ignorecase           " case insensitive searching
+set smartcase            " override ignorecase if upper case typed
+ 
+" Colours
+colorscheme termorrow
+ 
+map <ScrollWheelUp> <C-Y>
+map <ScrollWheelDown> <C-E>
+ 
+" Mapping
+" -----------------------------------------------------------------------------
+
+" Map Leader
+let mapleader = " "
+
+" Remap Tab to %
+map <BS> %
+
+" Toggle fold
+nnoremap <leader><space> za
+
+" Toggle hlsearch for current results
+nnoremap <leader>h :nohlsearch<CR>
+
+" Search for trailing whitespace
+nnoremap <leader>w /\s\+$<CR>
+
+" Toggle last active bufer
+nnoremap <leader><Tab> :b#<CR>
+
+" Delete a buffer without closing the window
+nnoremap <leader>d :bp<bar>sp<bar>bn<bar>bd<CR>
+
+" Remember selection when indenting
+vnoremap > >gv
+vnoremap < <gv
+
+" Better movement over wrapped lines
+nnoremap j gj
+nnoremap k gk
+
+" Paste mode for terminals
+nnoremap <leader>p :set invpaste paste?<CR>
+
+" Quick save
+nnoremap <leader>s :w<CR>
+
+" Shortcut for Tabularize
+vnoremap <leader>t :Tabularize /
+
+" Check file for errors
+nnoremap <leader>c :SyntasticCheck<CR>
+
+" Show Quickfix window for Syntastic errors
+nnoremap <leader>e :Errors<CR>
+
+" Unite.vim
+nnoremap <leader>t :<C-u>Unite -no-split -buffer-name=files   -start-insert file_rec/async<CR>
+nnoremap <leader>f :<C-u>Unite -no-split -buffer-name=files   -start-insert file<CR>
+nnoremap <leader>b :<C-u>Unite -no-split -buffer-name=buffer  -start-insert buffer<CR>
+nnoremap <leader>/ :<C-u>Unite -no-split -buffer-name=buffer  -start-insert grep:.<CR>
+
+" Vimfiler
+nnoremap <leader><space> :VimFilerExplorer<CR>
+
+" Keep search pattern at the center of the screen
+nnoremap <silent> n nzz
+nnoremap <silent> N Nzz
+nnoremap <silent> * *zz
+nnoremap <silent> # #zz
+
+" Plugin Settings 
+" -----------------------------------------------------------------------------
+
+" " Syntastic
+let g:syntastic_javascript_checkers=['jsxhint']
+let g:syntastic_coffee_coffeelint_args='-f ~/.lint.json'
+
+" VimFiler
+let g:vimfiler_as_default_explorer = 1
+
+" Unite
+let g:unite_source_history_yank_enable = 1
+let g:unite_source_file_rec_ignore_pattern = '\%(node_modules\/\|.sass-cache\/\|.git\/\)'
+
+" Let's use ag
+let g:unite_source_grep_command = 'ag'
+let g:unite_source_grep_default_opts = '--nogroup --nocolor --column -S'
+let g:unite_source_grep_recursive_opt = ''
+
+" Custom mappings for the unite buffer
+autocmd FileType unite call s:unite_settings()
+function! s:unite_settings()
+  " Enable navigation with control-j and control-k in insert mode
+  imap <buffer> <C-j>   <Plug>(unite_select_next_line)
+  imap <buffer> <C-k>   <Plug>(unite_select_previous_line)
+  " Reload directory contents
+  imap <buffer> <C-r>   <Plug>(unite_redraw)
+endfunction
+
+" Autocommands
+" -----------------------------------------------------------------------------
+
+" Indent rules
+autocmd FileType markdown setlocal ts=4 sw=4 sts=4 tw=79
+
+" Folding rules
+autocmd FileType coffee setlocal foldmethod=indent nofoldenable
+
+" Silverstripe
+au BufNewFile,BufRead *.ss setfiletype xhtml
