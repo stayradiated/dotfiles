@@ -6,22 +6,36 @@ BAR_SCRIPT=~/dotfiles/crux/bar/reader
 [ -e $PANEL_FIFO ] & rm $PANEL_FIFO
 mkfifo $PANEL_FIFO
 
-# Tell BSPWM to log events
-bspc control --subscribe > $PANEL_FIFO &
 
-BAR_OPTIONS='-g 1920x25+0+0 -f -misc-tamzen-medium-r-normal--14-*-*-*-*-*-*-*,-misc-sm4tik-medium-r-normal--16-*-*-*-*-*-*-* -B #021B21 -F #E8DFD6 -p'
 
-# Display current title
-[[ -z "$(pidof xtitle)" ]] && xtitle -sf 'T%s' > $PANEL_FIFO &
+# BSPWM events
+bspc control --subscribe | uq > $PANEL_FIFO &
 
-# Display time
-[[ -z "$(pidof clock)" ]] && clock -s -i 10 -f 'S%a %H:%M' > $PANEL_FIFO &
+# Active window title
+xtitle -sf 'T%s' | uq > $PANEL_FIFO &
 
-# Display battery status
-[[ -z "$(pidof battery)" ]] && battery -s -i 3 -f 'B%s %i%%' > $PANEL_FIFO &
+# Date
+clock -s -i 60 -f 'D%a %m/%y' | uq > $PANEL_FIFO &
 
-# Display currently connected wifi network
-# [[ -z "$(pidof essid)" ]] && essid -s -i 5 -f 'X%s' > $PANEL_FIFO &
+# Time
+clock -s -i 10 -f 'C%H:%M' | uq > $PANEL_FIFO &
+
+# Battery state
+battery -s -i 5 -f 'B%s' | uq > $PANEL_FIFO &
+
+# Battery percentage
+battery -s -i 15 -f 'P%i' | uq > $PANEL_FIFO &
+
+# Current wifi status
+essid -s -i 5 -f 'X%s' | uq > $PANEL_FIFO &
+
 
 # Run bar
-[[ -z "$(pidof bar)" ]] && cat $PANEL_FIFO | $BAR_SCRIPT | bar ${BAR_OPTIONS}
+BAR_SIZE='1920x25+0+0'
+BAR_FONT_1='-misc-tamzen-medium-r-normal--14-*-*-*-*-*-*-*'
+BAR_FONT_2='-misc-sm4tik-medium-r-normal--16-*-*-*-*-*-*-*'
+BAR_FG='#E8DFD6'
+BAR_BG='#021B21'
+BAR_OPTIONS="-g $BAR_SIZE -f $BAR_FONT_1,$BAR_FONT_2 -B $BAR_BG -F $BAR_FG -p"
+
+cat $PANEL_FIFO | $BAR_SCRIPT | bar $BAR_OPTIONS

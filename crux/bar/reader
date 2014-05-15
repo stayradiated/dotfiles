@@ -9,19 +9,28 @@ while read -r line ; do
       print_right
       ;;
     B*)
-      battery="${line#?}"
+      battery_status="${line#?}"
       print_right
       ;;
-    S*)
+    P*)
+      battery_charge="${line#?}"
+      print_right
+      ;;
+    C*)
       time="${line#?}"
       print_right
       ;;
-    T*)
-      print_title
+    D*)
+      date="${line#?}"
+      print_right
       ;;
-    W*)
+    T*)
+      title="${line#?}"
       print_left
       ;;
+    W*)
+      print_center
+      ;;
   esac
-  printf "%s\n" "$left$title$right"
+  echo "$l $c $r"
 done
