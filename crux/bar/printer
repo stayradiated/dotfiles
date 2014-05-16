@@ -49,15 +49,15 @@ function print_right () {
   [[ $essid ]]   && r="$r  %{F$c2}$net $essid"
 
   r="$r  "
-  if [[ $battery_charge < 20 ]]; then
+  if [[ $battery_charge -lt 20 ]]; then
     r="$r%{F$c1}"
   else
     r="$r%{F$c6}"
   fi
-  if [[ $battery_status == Charging ]]; then
-    r="$r$btc"
-  else
+  if [[ $battery_status -eq Discharging ]]; then
     r="$r$btd"
+  else
+    r="$r$btc"
   fi
   r="$r $battery_charge%%"
 
