@@ -31,10 +31,10 @@ URxvt*visualBell:         false
 ! -----------------------------
 
 ! TAMZEN
-URxvt.font:            -misc-tamzen-medium-r-*--17-*-*-*-*-*-*-*
-URxvt.boldFont:        -misc-tamzen-bold-r-*--17-*-*-*-*-*-*-*
-URxvt.italicFont:      -misc-tamzen-medium-r-*--17-*-*-*-*-*-*-*
-URxvt.boldItalicFont:  -misc-tamzen-bold-r-*--17-*-*-*-*-*-*-*
+URxvt.font:            -misc-tamzen-medium-r-*--17-*-*-*-*-*-*-*, \
+                       -lucy-tewi-medium-r-normal--11-90-75-75-p-58-iso10646-1
+URxvt.boldFont:        -misc-tamzen-bold-r-*--17-*-*-*-*-*-*-*, \
+                       -lucy-tewi-bold-r-normal--11-90-75-75-p-58-iso10646-1
 
 ! -----------------------------
 ! PERL EXTENSIONS
