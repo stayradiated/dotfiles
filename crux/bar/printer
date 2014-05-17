@@ -54,7 +54,7 @@ function print_right () {
   else
     r="$r%{F$c6}"
   fi
-  if [[ $battery_status -eq Discharging ]]; then
+  if [[ $battery_status == Discharging ]]; then
     r="$r$btd"
   else
     r="$r$btc"
