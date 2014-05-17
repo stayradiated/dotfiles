@@ -143,6 +143,10 @@ mcd () {
     mkdir $@ && cd $_
 }
 
+brightness () {
+  sudo echo $1 > /sys/class/backlight/acpi_video0/brightness
+}
+
 # auto-ls after changing directory
 cd () {
   builtin cd $@ && ls -CF
