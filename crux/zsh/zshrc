@@ -1,156 +1,135 @@
-PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin/:$HOME/.bin
 
-# set path for OSX
-if [ -d /opt/local/bin ]; then
-  PATH=/opt/local/bin:/opt/local/sbin:/opt/X11/bin:$PATH
-fi
+# timezone + locale
+export TZ=Pacific/Auckland
+export LANG=en_NZ.UTF-8
 
-if [ -d $HOME/.gem/ruby/2.0.0/bin ]; then
-  PATH=$HOME/.gem/ruby/2.0.0/bin:$PATH
-fi
+# history
+HISTFILE=~/.zsh_history
+HISTSIZE=3000               # keep last 3000 lines in memory
+SAVEHIST=10000              # nice for logging
+setopt extended_history     # save timestamp
+setopt share_history        # import commands from history file
 
-export PATH
+# path
+export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin/
 
-# BSPWM
-BSPWM_SOCKET=/tmp/bspwm-socket
-export BSPWM_SOCKET
-
-#
-# Terminal {{{
-# ----------------------------------------------------------------------------
-
-# Load Oh My Zsh
-ZSH=$HOME/.oh-my-zsh
-ZSH_THEME="stayrad"
-plugins=(git)
-source $ZSH/oh-my-zsh.sh
-
-HISTSIZE=1000
-SAVEHIST=1000
-HISTFILE=~/.history
-setopt APPEND_HISTORY SHARE_HISTORY
+# programs
+export TERM=rxvt-256color
 export EDITOR=vim
+export PAGER=less
 
-# Show dots
-COMPLETION_WAITING_DOTS="true"
+# options
+setopt autopushd
+setopt NOTIFY
 
-# Fix slow escape key in vim
-KEYTIMEOUT=1
+# use vi mode
+bindkey -v
 
-# Causes problems on mac
-# export TERM=rxvt-unicode-256color
+# prompt
+PROMPT='%B%F{black}> %f%b'
 
-# }}}
-#
-# Aliases {{{
-# -----------------------------------------------------------------------------
+# live coloring
+ZLE_RESERVED_WORD_STYLE='fg=yellow,bold'
+ZLE_ALIAS_STYLE='fg=magenta,bold'
+ZLE_BUILTIN_STYLE='fg=cyan,bold'
+ZLE_FUNCTION_STYLE='fg=blue,bold'
+ZLE_COMMAND_STYLE='fg=green,bold'
+ZLE_COMMAND_UNKNOWN_TOKEN_STYLE='fg=red,bold'
+ZLE_HYPHEN_CLI_OPTION='fg=yellow,bold'
+ZLE_DOUBLE_HYPHEN_CLI_OPTION='fg=green,bold'
+ZLE_SINGLE_QUOTED='fg=magenta,bold'
+ZLE_DOUBLE_QUOTED='fg=red,bold'
+ZLE_BACK_QUOTED='fg=cyan,bold'
+ZLE_GLOBING='fg=blue,bold'
+ZLE_DEFAULT='fg=white,bold'
+ZLE_TOKENS_FOLLOWED_BY_COMMANDS=('|' '||' ';' '&' '&&' 'sudo' 'start' 'time' 'strace' '§')
 
-# pretty ls
-if hash gls 2>/dev/null; then
-  alias ls="gls -hF --color=auto --group-directories-first"
-  [[ -e "$HOME/dotfiles/Terminal/zsh/dircolors.ansi-dark" ]] && eval $(gdircolors -b "$HOME/dotfiles/Terminal/zsh/dircolors.ansi-dark")
+# recolorize the current ZLE buffer
+colorize-zle-buffer() {
+  region_highlight=()
+  colorize=true
+start_pos=0
+  for arg in ${(z)BUFFER}; do
+    ((start_pos+=${#BUFFER[$start_pos+1,-1]}-${#${BUFFER[$start_pos+1,-1]## #}}))
+    ((end_pos=$start_pos+${#arg}))
+    if $colorize; then
+colorize=false
+res=$(LC_ALL=C builtin type $arg 2>/dev/null)
+      case $res in
+        *'reserved word'*) style=$ZLE_RESERVED_WORD_STYLE;;
+        *'an alias'*) style=$ZLE_ALIAS_STYLE;;
+        *'shell builtin'*) style=$ZLE_BUILTIN_STYLE;;
+        *'shell function'*) style=$ZLE_FUNCTION_STYLE;;
+        *"$cmd is"*) style=$ZLE_COMMAND_STYLE;;
+        *) style=$ZLE_COMMAND_UNKNOWN_TOKEN_STYLE;;
+      esac
 else
-  alias ls="ls -hF --color=auto --group-directories-first"
-  [[ -e "$HOME/dotfiles/Terminal/zsh/dircolors.ansi-dark" ]] && eval $(dircolors -b "$HOME/dotfiles/Terminal/zsh/dircolors.ansi-dark")
+case $arg in
+'--'*) style=$ZLE_DOUBLE_HYPHEN_CLI_OPTION;;
+'-'*) style=$ZLE_HYPHEN_CLI_OPTION;;
+"'"*"'") style=$ZLE_SINGLE_QUOTED;;
+'"'*'"') style=$ZLE_DOUBLE_QUOTED;;
+'`'*'`') style=$ZLE_BACK_QUOTED;;
+*"*"*) style=$ZLE_GLOBING;;
+*) style=$ZLE_DEFAULT;;
+esac
 fi
+region_highlight+=("$start_pos $end_pos $style")
+    [[ ${${ZLE_TOKENS_FOLLOWED_BY_COMMANDS[(r)${arg//|/\|}]}:+yes} = 'yes' ]] && colorize=true
+start_pos=$end_pos
+  done
+}
 
-# pretty grep
-alias grep='grep --color=auto'
+# Bind the function to ZLE events.
+ZLE_COLORED_FUNCTIONS=(
+    self-insert
+    delete-char
+    backward-delete-char
+    kill-word
+    backward-kill-word
+    up-line-or-history
+    down-line-or-history
+    beginning-of-history
+    end-of-history
+    undo
+    redo
+    yank
+)
 
-# make ls faster
-alias ll='ls -alhF'
-alias la='ls -A'
-alias l='ls -CF'
+for f in $ZLE_COLORED_FUNCTIONS; do
+eval "$f() { zle .$f && colorize-zle-buffer } ; zle -N $f"
+done
 
-# systemctl commands
-alias start="sudo systemctl start"
-alias stop="sudo systemctl stop"
-alias restart="sudo systemctl restart"
+# key setup
+bindkey '^E' backward-char
+bindkey "^P" up-line-or-search
+bindkey "^N" down-line-or-search
+bindkey "^A" beginning-of-line
+bindkey "^O" end-of-line
 
-# file explorer
-alias range="urxvt -name ranger -e ranger"
-
-# make feh useable as an image viewer
-alias view="feh --full-screen --auto-zoom --force-alias --sort filename"
-
-# node-webkit
-[[ -e "$HOME/Applications/node-webkit.app" ]] && alias nw="~/Applications/node-webkit.app/Contents/MacOS/node-webkit"
-[[ -e "$HOME/Applications/node-webkit/nw" ]] && alias nw="~/Applications/node-webkit/nw"
-
-# usb drives
-alias usb="cd /media/usb"
-alias usbmount="sudo mount -o uid=1000,fmask=113,dmask=002 /dev/sdb1 /media/usb"
-alias usbumount="sudo umount /media/usb"
-alias sdmount="sudo mount -o uid=1000,fmask=113,dmask=002 /dev/sdc1 /media/sd"
-alias sdumount="sudo umount /media/sd"
-
-# editing
-export EDITOR="vim"
-alias v='vim'
-alias sv='sudo vim'
-alias nrs='npm run-script'
-
-# terminal
-alias quit='exit'
-alias c='clear'
-alias s='sudo'
-
-# give some protection when using rm, mv, and cp
-# alias rm='rm -i' # doesn't work on osx?
-alias cp='cp -vi'
-alias mv='mv -i'
-
-# sudo make me a sandwich
+# aliases
+alias ls='ls --color=auto'
 alias fu='sudo $(fc -n -l -1)'
 
-# show a clock
-alias clock='tty-clock -scDt'
-
-# Fonts
-alias setUrxvtFont="printf '\e]710;%s\007'"
-alias Tamzen-20='setUrxvtFont -misc-tamzen-medium-r-normal--20-145-100-100-c-100-iso8859-1'
-alias Tamzen-17='setUrxvtFont -misc-tamzen-medium-r-normal--17-123-100-100-c-80-iso8859-1'
-
-# }}}
-#
-# Functions {{{
-# -----------------------------------------------------------------------------
-
-# easier extraction
-extract () {
-    if [ -f $1 ] ; then
-        case $1 in
-            *.tar.bz2) tar xvjf $1;;
-            *.tar.gz) tar xvzf $1;;
-            *.bz2) bunzip2 $1;;
-            *.rar) unrar x $1;;
-            *.gz) gunzip $1;;
-            *.tar) tar xvf $1;;
-            *.tbz2) tar xvjf $1;;
-            *.tgz) tar xvzf $1;;
-            *.zip) unzip $1;;
-            *.Z) uncompress $1;;
-            *.7z) 7za x $1;;
-            *) echo "'$1' cannot be extracted via >extract<" ;;
-        esac
-    else
-        echo "'$1' is not a valid file"
-    fi
-}
-
-# auto-cd into a created directory
+# functions
 mcd () {
-    mkdir $@ && cd $_
+  mkdir $@ && cd $_
 }
 
-brightness () {
-  sudo echo $1 > /sys/class/backlight/acpi_video0/brightness
-}
-
-# auto-ls after changing directory
 cd () {
-  builtin cd $@ && ls -CF
+  builtin cd $@ && ls
 }
 
-# }}}
+# ls colors
+eval $(dircolors -b ~/dotfiles/apps/zsh/dircolors)
 
+# The following lines were added by compinstall
+zstyle ':completion:*' completer _expand _complete _ignored _correct _approximate
+zstyle ':completion:*' matcher-list '' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'r:|[._-]=** r:|=**' 'l:|=* r:|=*'
+zstyle ':completion:*' max-errors 2 numeric
+zstyle ':completion:*' prompt 'Correct errors: %e'
+zstyle :compinstall filename '/home/stayrad/.zshrc'
+
+autoload -Uz compinit
+compinit
+# End of lines added by compinstall
