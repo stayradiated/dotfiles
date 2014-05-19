@@ -17,6 +17,7 @@ xsetroot -cursor_name left_ptr &
 xset fp defaults
 xset +fp $HOME/.fonts
 xset +fp /usr/share/fonts/misc
+xset +fp /usr/share/fonts/local
 xset fp rehash
 
 # set the background
