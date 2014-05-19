@@ -66,10 +66,10 @@ TERM xterm-debian
 # Background color codes:
 # 40=black 41=red 42=green 43=yellow 44=blue 45=magenta 46=cyan 47=white
 #NORMAL 00 # no color code at all
-#FILE 00 # regular file: use no color at all
+FILE 37 # regular file: use no color at all
 RESET 0 # reset to "normal" color
-DIR 01;34 # directory
-LINK 01;36 # symbolic link. (If you set this to 'target' instead of a
+DIR 34 # directory
+LINK 36 # symbolic link. (If you set this to 'target' instead of a
  # numerical value, the color is as for the file pointed to.)
 MULTIHARDLINK 00 # regular file with more than one link
 FIFO 40;33 # pipe
@@ -110,7 +110,7 @@ EXEC 01;32
 .deb 00;31
 .dz 00;31
 .ear 00;31
-.gz 00;31
+.gz 00;33
 .jar 00;31
 .lz 00;31
 .lzh 00;31
@@ -199,4 +199,8 @@ EXEC 01;32
 .oga 00;36
 .spx 00;36
 .xspf 00;36
-# http://wiki.xiph.org/index.php/MIME_Types_and_File_Extensions
+# code
+.js 32
+.jsx 33
+.json 40;97
+.md 40;96

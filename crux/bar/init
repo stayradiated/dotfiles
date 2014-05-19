@@ -15,7 +15,7 @@ bspc control --subscribe | uq > $PANEL_FIFO &
 xtitle -sf 'T%s' | uq > $PANEL_FIFO &
 
 # Date
-clock -s -i 60 -f 'D%a %m/%y' | uq > $PANEL_FIFO &
+clock -s -i 60 -f 'D%a %d/%m' | uq > $PANEL_FIFO &
 
 # Time
 clock -s -i 10 -f 'C%H:%M' | uq > $PANEL_FIFO &

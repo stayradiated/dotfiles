@@ -40,37 +40,37 @@
 #define n_current_line #08313B
 #define n_selection  #134E5F
 
-urxvt.background:  n_background
-urxvt.foreground:  n_foreground
+*.background:  n_background
+*.foreground:  n_foreground
 
 ! black
-urxvt.color0:      n_current_line
-urxvt.color8:      n_selection
+*.color0:      n_current_line
+*.color8:      n_selection
 
 ! red
-urxvt.color1:      d_red
-urxvt.color9:      t_red
+*.color1:      d_red
+*.color9:      t_red
 
 ! green
-urxvt.color2:      d_green
-urxvt.color10:     t_green
+*.color2:      d_green
+*.color10:     t_green
 
 ! yellow
-urxvt.color3:      d_orange
-urxvt.color11:     t_yellow
+*.color3:      d_orange
+*.color11:     t_yellow
 
 ! blue
-urxvt.color4:      d_blue
-urxvt.color12:     t_blue
+*.color4:      d_blue
+*.color12:     t_blue
 
 ! magenta
-urxvt.color5:      d_purple
-urxvt.color13:     t_purple
+*.color5:      d_purple
+*.color13:     t_purple
 
 ! cyan
-urxvt.color6:      d_aqua
-urxvt.color14:     t_aqua
+*.color6:      d_aqua
+*.color14:     t_aqua
 
 ! white
-urxvt.color7:      t_comment
-urxvt.color15:     t_foreground
+*.color7:      t_comment
+*.color15:     t_foreground
