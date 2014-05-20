@@ -35,7 +35,7 @@ bindkey "^A" beginning-of-line
 bindkey "^O" end-of-line
 
 # aliases
-alias ls='ls --color=auto'
+alias ls='ls -hF --color=auto --group-directories-first'
 alias fu='sudo $(fc -n -l -1)'
 alias grep='grep --color=auto'
 alias cp='cp -vi'
