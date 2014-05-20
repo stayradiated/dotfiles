@@ -14,7 +14,7 @@ xrdb -merge $HOME/.Xresources &
 xsetroot -cursor_name left_ptr &
 
 # load fonts
-xset fp defaults
+xset fp default
 xset +fp $HOME/.fonts
 xset +fp /usr/share/fonts/misc
 xset +fp /usr/share/fonts/local
