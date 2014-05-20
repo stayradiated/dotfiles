@@ -4,7 +4,7 @@ urxvt.internalBorder:  4
 urxvt.termName:        rxvt-256color
 
 ! Plugins
-urxvt.perl-lib: /Volumes/Home/dotfiles/Shared/Terminal/perl
+urxvt.perl-lib: /Volumes/Home/dotfiles/apps/urxvt/plugins
 urxvt.perl-ext-common:  default,-selection-popup,-option-popup,clipboard
 
 ! Clipboard
