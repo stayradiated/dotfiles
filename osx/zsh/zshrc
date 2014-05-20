@@ -1,4 +1,9 @@
 
+# osx only
+cd $HOME
+xset r rate 500 25
+stty -ixon
+
 # timezone + locale
 export TZ=Pacific/Auckland
 export LANG=en_NZ.UTF-8
@@ -11,7 +16,8 @@ setopt extended_history     # save timestamp
 setopt share_history        # import commands from history file
 
 # path
-export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin/
+export PATH=/usr/pkg/bin:/usr/local/bin:/usr/bin:/bin:/usr/pkg/sbin:/usr/sbin:/sbin:/usr/local/heroku/bin
+export MANPATH=/usr/pkg/man:/usr/pkg/share/man:/usr/local/share/man:/usr/share/man
 
 # programs
 export TERM=rxvt-256color
@@ -35,7 +41,7 @@ bindkey "^A" beginning-of-line
 bindkey "^O" end-of-line
 
 # aliases
-alias ls='ls --color=auto'
+alias ls='gls -hF --color=auto --group-directories-first'
 alias fu='sudo $(fc -n -l -1)'
 alias grep='grep --color=auto'
 alias cp='cp -vi'
@@ -52,7 +58,7 @@ cd () {
 }
 
 # ls colors
-eval $(dircolors -b ~/dotfiles/apps/zsh/dircolors)
+eval $(gdircolors -b ~/dotfiles/apps/zsh/dircolors)
 
 # The following lines were added by compinstall
 
