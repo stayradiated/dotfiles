@@ -21,4 +21,4 @@ urxvt.boldFont:  -misc-tamzen-medium-r-*--14-*-*-*-*-*-*-*, \
                  -*-tewi-medium-*-*--11-*-*-*-*-*-*-*
 
 ! Colors
-#include "/Volumes/Home/dotfiles/Shared/Terminal/Xresources"
+#include "/Volumes/Home/dotfiles/apps/urxvt/Xresources"
