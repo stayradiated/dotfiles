@@ -114,6 +114,10 @@ super + space
 super + Escape
     pkill -USR1 -x sxhkd
 
-# Control audio with keyboard
+# audio 
 XF86Audio{Lower,Raise}Volume
     amixer -q set Master 5%{-,+}
+
+# backlight
+super + shift + {comma,period}
+    xbacklight -{dec,inc} 20
