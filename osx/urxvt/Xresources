@@ -1,7 +1,7 @@
 ! Appearence
 urxvt.scrollBar:       false
 urxvt.internalBorder:  4
-urxvt.termName:        rxvt-256color
+URxvt.termName:        rxvt
 
 ! Plugins
 urxvt.perl-lib: /Volumes/Home/dotfiles/apps/urxvt/plugins
