@@ -489,13 +489,13 @@
 	<key>NSWindow Frame NSFontPanel</key>
 	<string>1016 174 459 270 0 0 1920 1080 </string>
 	<key>NSWindow Frame Preferences</key>
-	<string>530 462 924 485 0 0 1920 1080 </string>
+	<string>530 445 924 485 0 0 1920 1058 </string>
 	<key>NSWindow Frame SUStatusFrame</key>
 	<string>760 697 400 129 0 0 1920 1058 </string>
 	<key>NSWindow Frame SUUpdateAlertFrame</key>
 	<string>671 517 578 392 0 0 1920 1080 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>972 723 570 307 0 0 1920 1080 </string>
+	<string>640 237 490 267 0 0 1920 1058 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>975 564 930 464 0 0 1920 1058 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
@@ -1105,7 +1105,7 @@
 			<key>Non-ASCII Anti Aliased</key>
 			<false/>
 			<key>Normal Font</key>
-			<string>Tamzen7x14Medium 14</string>
+			<string>gohufont11 11</string>
 			<key>Option Key Sends</key>
 			<integer>0</integer>
 			<key>Prevent Opening in a Tab</key>
@@ -2165,7 +2165,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2014-04-23T01:53:51Z</date>
+	<date>2014-05-26T02:24:11Z</date>
 	<key>SavePasteHistory</key>
 	<false/>
 	<key>Secure Input</key>
@@ -2215,6 +2215,6 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>1.0.0.20140421-nightly</string>
+	<string>1.0.0.20140525-nightly</string>
 </dict>
 </plist>
