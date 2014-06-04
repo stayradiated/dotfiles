@@ -106,8 +106,8 @@ set smartcase            " override ignorecase if upper case typed
 " Colours
 colorscheme termorrow
  
-map <ScrollWheelUp> <C-Y>
-map <ScrollWheelDown> <C-E>
+" map <ScrollWheelUp> <C-Y>
+" map <ScrollWheelDown> <C-E>
  
 " Mapping
 " -----------------------------------------------------------------------------
