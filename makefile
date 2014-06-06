@@ -123,12 +123,9 @@ apps:
 	@if test ! -d $(fonts)/tamzen; then\
 		git clone https://github.com/sunaku/tamzen-font $(fonts)/tamzen;\
 	fi;
-	@if test ! -d $(fonts)/sm4tik; then\
-		git clone https://github.com/sunaku/sm4tik-font.git $(fonts)/sm4tik;\
-	fi;
 	@mkdir -p ~/.fonts
 	@ln -fs $(fonts)/tamzen/*.bdf ~/.fonts/
-	@ln -fs $(fonts)/sm4tik/*.bdf ~/.fonts/
+	@ln -fs $(fonts)/envypn/*.pcf ~/.fonts/
 
 # Zsh
 	@echo "Zsh..."
