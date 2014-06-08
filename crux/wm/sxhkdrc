@@ -100,6 +100,14 @@ ctrl + {bracketleft,bracketright}
 ctrl + shift + {bracketleft,bracketright}
   bspc config -d focused top_padding $((`bspc config -d focused top_padding` {+,-} 20 ))
 
+# Move floating windows (requires baskerville's xdo)
+super + {Left,Right,Up,Down}
+    xdo move {-x -20,-x +20,-y -20,-y +20}
+
+# Resize floating windows
+super + shift + {Left,Right,Up,Down}
+    xdo resize {-w -20,-w +20,-h -20,-h +20}
+
 #
 # wm independent hotkeys
 #
