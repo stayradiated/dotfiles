@@ -31,9 +31,9 @@ URxvt*visualBell:         false
 ! -----------------------------
 
 ! TAMZEN
-URxvt.font:            -misc-tamzen-medium-r-*--17-*-*-*-*-*-*-*, \
+URxvt.font:            -ypn-envypn-medium-r-normal--15-150-75-75-c-90-iso8859-1, \
                        -lucy-tewi-medium-r-normal--11-90-75-75-p-58-iso10646-1
-URxvt.boldFont:        -misc-tamzen-medium-r-*--17-*-*-*-*-*-*-*, \
+URxvt.boldFont:        -ypn-envypn-medium-r-normal--15-150-75-75-c-90-iso8859-1, \
                        -lucy-tewi-medium-r-normal--11-90-75-75-p-58-iso10646-1
 
 ! -----------------------------
