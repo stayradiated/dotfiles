@@ -1,1 +1,1 @@
-feh  --bg-fill '/home/stayrad/dotfiles/apps/feh/pattern_3.png' 
+feh  --image-bg black --bg-center '/home/stayrad/dotfiles/apps/feh/tycho_diamond.jpg' 
