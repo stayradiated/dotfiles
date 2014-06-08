@@ -8,15 +8,14 @@ HISTFILE=~/.zsh_history
 HISTSIZE=3000               # keep last 3000 lines in memory
 SAVEHIST=10000              # nice for logging
 setopt extended_history     # save timestamp
-setopt share_history        # import commands from history file
 
 # path
 export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin/
 
 # programs
-export TERM=rxvt-256color
+export TERM=xterm-256color
 export EDITOR=vim
-export PAGER=less
+export PAGER='less -isR'
 
 # options
 setopt autocd
@@ -49,6 +48,14 @@ mcd () {
 
 cd () {
   builtin cd $@ && ls
+}
+
+tmux-capture () {
+  rm -f ~/tmux.hardcopy
+  tmux capture-pane -eJ
+  tmux save-buffer ~/tmux.hardcopy
+  tmux delete-buffer
+  cat ~/tmux.hardcopy | termio > $@
 }
 
 # ls colors
