@@ -13,11 +13,15 @@ xrdb -merge $HOME/.Xresources &
 # set the cursor
 xsetroot -cursor_name left_ptr &
 
+# rebind caps lock to hyper
+xmodmap -e 'keysym Caps_Lock = Hyper_L'
+
 # load fonts
 xset fp default
 xset +fp $HOME/.fonts
 xset +fp /usr/share/fonts/misc
 xset +fp /usr/share/fonts/local
+xset +fp /usr/share/fonts/envypn
 xset fp rehash
 
 # set the background
