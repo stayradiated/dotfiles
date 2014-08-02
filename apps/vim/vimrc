@@ -48,6 +48,7 @@ NeoBundle 'nelstrom/vim-markdown-folding'
 NeoBundle 'pangloss/vim-javascript'
 NeoBundle 'digitaltoad/vim-jade'
 NeoBundle 'mxw/vim-jsx'
+NeoBundle 'fatih/vim-go'
 
 " Disabled
 " NeoBundle 'jelera/vim-javascript-syntax'
@@ -175,7 +176,7 @@ nnoremap <silent> # #zz
 " -----------------------------------------------------------------------------
 
 " " Syntastic
-let g:syntastic_javascript_checkers=['jsxhint']
+let g:syntastic_javascript_checkers=['jshint']
 let g:syntastic_coffee_coffeelint_args='-f ~/.lint.json'
 
 " VimFiler

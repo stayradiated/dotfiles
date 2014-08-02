@@ -16,11 +16,12 @@ setopt extended_history     # save timestamp
 setopt share_history        # import commands from history file
 
 # path
-export PATH=/usr/pkg/bin:/usr/local/bin:/usr/bin:/bin:/usr/pkg/sbin:/usr/sbin:/sbin:/usr/local/heroku/bin
+export GOPATH=$HOME/go
+export PATH=/usr/pkg/bin:/usr/local/bin:/usr/bin:/bin:/usr/pkg/sbin:/usr/sbin:/sbin:/usr/local/heroku/bin:/usr/local/go/bin:$GOPATH/bin
 export MANPATH=/usr/pkg/man:/usr/pkg/share/man:/usr/local/share/man:/usr/share/man
 
 # programs
-export TERM=rxvt-256color
+export TERM=xterm-256color
 export EDITOR=vim
 export PAGER=less
 
@@ -39,6 +40,12 @@ bindkey "^P" up-line-or-search
 bindkey "^N" down-line-or-search
 bindkey "^A" beginning-of-line
 bindkey "^O" end-of-line
+bindkey -M viins '^r' history-incremental-search-backward
+bindkey -M vicmd '^r' history-incremental-search-backward
+bindkey "^W" backward-kill-word 
+bindkey "^?" backward-delete-char
+bindkey "^H" backward-delete-char
+bindkey "^U" backward-kill-line  
 
 # aliases
 alias ls='gls -hF --color=auto --group-directories-first'
