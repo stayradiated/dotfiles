@@ -34,11 +34,11 @@ bindkey -v
 PROMPT='%B%F{black}> %f%b'
 
 # key setup
-bindkey '^E' backward-char
+bindkey '^O' backward-char
 bindkey "^P" up-line-or-search
 bindkey "^N" down-line-or-search
 bindkey "^A" beginning-of-line
-bindkey "^O" end-of-line
+bindkey "^E" end-of-line
 bindkey -M viins '^r' history-incremental-search-backward
 bindkey -M vicmd '^r' history-incremental-search-backward
 # bindkey "^W" backward-kill-word 

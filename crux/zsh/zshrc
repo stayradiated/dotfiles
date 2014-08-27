@@ -10,7 +10,8 @@ SAVEHIST=10000              # nice for logging
 setopt extended_history     # save timestamp
 
 # path
-export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin/
+export GOPATH=$HOME/go
+export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin/:$GOPATH/bin
 
 # programs
 export TERM=xterm-256color
@@ -27,11 +28,17 @@ bindkey -v
 PROMPT='%B%F{black}> %f%b'
 
 # key setup
-bindkey '^E' backward-char
+bindkey '^O' backward-char
 bindkey "^P" up-line-or-search
 bindkey "^N" down-line-or-search
 bindkey "^A" beginning-of-line
-bindkey "^O" end-of-line
+bindkey "^E" end-of-line
+bindkey -M viins '^r' history-incremental-search-backward
+bindkey -M vicmd '^r' history-incremental-search-backward
+bindkey "^W" backward-kill-word 
+bindkey "^?" backward-delete-char
+bindkey "^H" backward-delete-char
+bindkey "^U" backward-kill-line  
 
 # aliases
 alias ls='ls -hF --color=auto --group-directories-first'
@@ -55,7 +62,7 @@ tmux-capture () {
   tmux capture-pane -eJ
   tmux save-buffer ~/tmux.hardcopy
   tmux delete-buffer
-  cat ~/tmux.hardcopy | termio > $@
+  cat ~/tmux.hardcopy | termio
 }
 
 # ls colors
