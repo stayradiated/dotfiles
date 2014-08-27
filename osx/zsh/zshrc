@@ -13,7 +13,6 @@ HISTFILE=~/.zsh_history
 HISTSIZE=3000               # keep last 3000 lines in memory
 SAVEHIST=10000              # nice for logging
 setopt extended_history     # save timestamp
-setopt share_history        # import commands from history file
 
 # path
 export GOPATH=$HOME/go
@@ -42,7 +41,7 @@ bindkey "^A" beginning-of-line
 bindkey "^O" end-of-line
 bindkey -M viins '^r' history-incremental-search-backward
 bindkey -M vicmd '^r' history-incremental-search-backward
-bindkey "^W" backward-kill-word 
+# bindkey "^W" backward-kill-word 
 bindkey "^?" backward-delete-char
 bindkey "^H" backward-delete-char
 bindkey "^U" backward-kill-line  
