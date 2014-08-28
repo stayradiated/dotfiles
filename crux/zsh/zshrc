@@ -47,6 +47,7 @@ alias grep='grep --color=auto'
 alias cp='cp -vi'
 alias mv='mv -i'
 alias rm='rm -i'
+alias cdgo='cd ~/go/src/github.com/stayradiated'
 
 # functions
 mcd () {
@@ -55,6 +56,10 @@ mcd () {
 
 cd () {
   builtin cd $@ && ls
+}
+
+mcs () {
+  command mcs $@.cs && mono $@.exe
 }
 
 tmux-capture () {
