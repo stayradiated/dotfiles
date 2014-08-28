@@ -49,6 +49,7 @@ NeoBundle 'pangloss/vim-javascript'
 NeoBundle 'digitaltoad/vim-jade'
 NeoBundle 'mxw/vim-jsx'
 NeoBundle 'fatih/vim-go'
+NeoBundle 'elzr/vim-json'
 
 call neobundle#end()
 
@@ -184,7 +185,10 @@ nnoremap <silent> # #zz
 
 " " Syntastic
 let g:syntastic_javascript_checkers=['jshint']
+let g:syntastic_json_checkers=['jsonlint']
 let g:syntastic_coffee_coffeelint_args='-f ~/.lint.json'
+let g:syntastic_error_symbol = '✗'
+let g:syntastic_warning_symbol = '!'
 
 " VimFiler
 let g:vimfiler_as_default_explorer = 1
@@ -233,3 +237,6 @@ autocmd FileType coffee setlocal foldmethod=indent nofoldenable
 
 " Silverstripe
 au BufNewFile,BufRead *.ss setfiletype xhtml
+
+" JSON
+au BufRead,BufNewFile *.json setfiletype json
