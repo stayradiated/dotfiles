@@ -19,6 +19,7 @@ vim   := $(apps)/vim
 feh   := $(apps)/feh
 fonts := $(apps)/fonts
 music := $(apps)/music
+dev   := $(apps)/dev
 
 # Checks to see if any files are going to be overwritten
 check:
@@ -46,6 +47,9 @@ check:
 
 # CMUS
 	@if test -f ~/.cmus/rc; then echo ".cmus/rc exists"; fi;
+
+# DEV
+	@if test -f ~/.jshintrc; then echo ".jshintrc exists"; fi;
 
 
 
@@ -159,6 +163,10 @@ apps:
 # Vimperator
 	@echo "Vimperator..."
 	@ln -fs $(ffox)/vimperatorrc ~/.vimperatorrc
+
+# Dev
+	@echo "Dev..."
+	@ln -fs $(dev)/jshintrc ~/.jshintrc
 
 
 .PHONY: check crux osx apps
