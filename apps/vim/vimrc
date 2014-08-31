@@ -45,19 +45,14 @@ NeoBundle 'godlygeek/tabular'
 " Languages
 NeoBundle 'kchmck/vim-coffee-script'
 NeoBundle 'nelstrom/vim-markdown-folding'
-NeoBundle 'pangloss/vim-javascript'
+" NeoBundle 'pangloss/vim-javascript'
+NeoBundle 'jelera/vim-javascript-syntax'
 NeoBundle 'digitaltoad/vim-jade'
 NeoBundle 'mxw/vim-jsx'
 NeoBundle 'fatih/vim-go'
 NeoBundle 'elzr/vim-json'
 
 call neobundle#end()
-
-" Disabled
-" NeoBundle 'jelera/vim-javascript-syntax'
-" NeoBundle 'kien/rainbow_parentheses.vim'
-" NeoBundle 'guns/vim-clojure-static'
-" NeoBundle 'guns/vim-clojure-highlight'
 
 filetype plugin indent on
 
