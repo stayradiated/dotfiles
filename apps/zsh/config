@@ -1,0 +1,84 @@
+# timezone + locale
+export TZ=Pacific/Auckland
+export LANG=en_NZ.UTF-8
+
+# history
+HISTFILE=~/.zsh_history
+HISTSIZE=3000               # keep last 3000 lines in memory
+SAVEHIST=10000              # nice for logging
+setopt extended_history     # save timestamp
+
+# programs
+export TERM=xterm-256color
+export EDITOR=vim
+export PAGER=less
+
+# options
+setopt autocd
+
+# use vi mode
+bindkey -v
+
+# prompt
+PROMPT='%B%F{black}> %f%b'
+
+# key setup
+bindkey '^O' backward-char
+bindkey "^P" up-line-or-search
+bindkey "^N" down-line-or-search
+bindkey "^A" beginning-of-line
+bindkey "^E" end-of-line
+bindkey -M viins '^r' history-incremental-search-backward
+bindkey -M vicmd '^r' history-incremental-search-backward
+# bindkey "^W" backward-kill-word 
+bindkey "^?" backward-delete-char
+bindkey "^H" backward-delete-char
+bindkey "^U" backward-kill-line  
+
+# aliases
+alias ls='gls -hF --color=auto --group-directories-first'
+alias fu='sudo $(fc -n -l -1)'
+alias grep='grep --color=auto'
+alias cp='cp -vi'
+alias mv='mv -i'
+alias rm='rm -i'
+alias cdgo='cd ~/go/src/github.com/stayradiated'
+
+# functions
+mcd () {
+  mkdir $@ && cd $_
+}
+
+cd () {
+  builtin cd $@ && ls
+}
+
+tmux-capture () {
+  rm -f ~/tmux.hardcopy
+  tmux capture-pane -eJ
+  tmux save-buffer ~/tmux.hardcopy
+  tmux delete-buffer
+  cat ~/tmux.hardcopy | termio
+}
+
+mcs () {
+  command mcs $@.cs && mono $@.exe
+}
+
+# ls colors
+eval $(gdircolors -b ~/dotfiles/apps/zsh/dircolors)
+
+# The following lines were added by compinstall
+
+zstyle ':completion:*' completer _expand _complete _ignored _correct _approximate
+zstyle ':completion:*' matcher-list '' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'r:|[._-]=** r:|=**' 'l:|=* r:|=*'
+zstyle ':completion:*' max-errors 2
+zstyle ':completion:*' prompt 'Correct errors: %e'
+zstyle :compinstall filename '~/.zshrc'
+
+autoload -Uz compinit
+compinit
+# End of lines added by compinstall
+
+# added by travis gem
+[ -f /home/stayrad/.travis/travis.sh ] && source /home/stayrad/.travis/travis.sh
