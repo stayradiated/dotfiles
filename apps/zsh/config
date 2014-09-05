@@ -36,7 +36,6 @@ bindkey "^H" backward-delete-char
 bindkey "^U" backward-kill-line  
 
 # aliases
-alias ls='gls -hF --color=auto --group-directories-first'
 alias fu='sudo $(fc -n -l -1)'
 alias grep='grep --color=auto'
 alias cp='cp -vi'
@@ -64,9 +63,6 @@ tmux-capture () {
 mcs () {
   command mcs $@.cs && mono $@.exe
 }
-
-# ls colors
-eval $(gdircolors -b ~/dotfiles/apps/zsh/dircolors)
 
 # The following lines were added by compinstall
 

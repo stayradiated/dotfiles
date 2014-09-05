@@ -9,3 +9,7 @@ export PATH=/usr/pkg/bin:/usr/local/bin:/usr/bin:/bin:/usr/pkg/sbin:/usr/sbin:/s
 export MANPATH=/usr/pkg/man:/usr/pkg/share/man:/usr/local/share/man:/usr/share/man
 
 source ~/dotfiles/apps/zsh/config
+
+# ls colors
+alias ls='gls -hF --color=auto --group-directories-first'
+eval $(gdircolors -b ~/dotfiles/apps/zsh/dircolors)
