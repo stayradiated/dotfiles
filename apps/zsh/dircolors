@@ -85,7 +85,7 @@ STICKY_OTHER_WRITABLE 30;42 # dir that is sticky and other-writable (+t,o+w)
 OTHER_WRITABLE 30;42 # dir that is other-writable (o+w) and not sticky
 STICKY 30;44 # dir with the sticky bit set (+t) and not other-writable
 # This is for files with execute permission:
-EXEC 01;32
+EXEC 01;31
 # List any file extensions like '.gz' or '.tar' that you would like ls
 # to colorize below. Put the extension, a space, and the color init string.
 # (and any comments you want to add after a '#')

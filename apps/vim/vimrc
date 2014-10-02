@@ -20,12 +20,14 @@ NeoBundle 'Shougo/vimproc.vim', {
   \ }
 
 " Themes
-NeoBundle 'w0ng/vim-hybrid'
 NeoBundle 'stayradiated/vim-termorrow'
-NeoBundle 'noahfrederick/vim-noctu'
+NeoBundle 'w0ng/vim-hybrid'
+NeoBundle 'stayradiated/vim-gotham'
+" NeoBundle 'noahfrederick/vim-noctu'
 
 " Extensions
 NeoBundle 'Shougo/unite.vim'
+NeoBundle 'Shougo/neomru.vim'
 NeoBundle 'stayradiated/vimfiler.vim'
 NeoBundle 'tpope/vim-dispatch'
 NeoBundle 'tpope/vim-sensible'
@@ -50,6 +52,8 @@ NeoBundle 'digitaltoad/vim-jade'
 NeoBundle 'mxw/vim-jsx'
 NeoBundle 'fatih/vim-go'
 NeoBundle 'elzr/vim-json'
+NeoBundle 'cespare/vim-toml'
+NeoBundle 'cespare/vim-go-templates'
 
 call neobundle#end()
 
@@ -65,7 +69,8 @@ NeoBundleCheck
 set completeopt-=preview " don't show preview window
 " set fcs=vert:│,fold:-    " solid instead of broken line for vert splits
 set hidden               " hide when switching buffers, don't unload
-set lazyredraw           " don't update screen when executing macros
+" set lazyredraw           " don't update screen when executing macros
+set ttyfast            "
 set mouse=a              " enable mouse in all modes
 set number               " show absolute line number on current line
 set spelllang=en_nz      " spell check with New Zealand English
@@ -104,7 +109,7 @@ set ignorecase           " case insensitive searching
 set smartcase            " override ignorecase if upper case typed
  
 " Colours
-colorscheme termorrow
+colorscheme gotham
  
 " map <ScrollWheelUp> <C-Y>
 " map <ScrollWheelDown> <C-E>
@@ -163,7 +168,8 @@ nnoremap <leader>e :Errors<CR>
 nnoremap <leader>t :<C-u>Unite -no-split -buffer-name=files   -start-insert file_rec/async<CR>
 nnoremap <leader>f :<C-u>Unite -no-split -buffer-name=files   -start-insert file<CR>
 nnoremap <leader>b :<C-u>Unite -no-split -buffer-name=buffer  -start-insert buffer<CR>
-nnoremap <leader>/ :<C-u>Unite -no-split -buffer-name=buffer  -start-insert grep:.<CR>
+nnoremap <leader>/ :<C-u>Unite -no-split -buffer-name=buffer  -start-insert line<CR>
+nnoremap <leader>a :<C-u>Unite -no-split -buffer-name=buffer  -start-insert grep:.<CR>
 
 " Vimfiler
 nnoremap <leader><space> :VimFilerExplorer<CR>
@@ -175,9 +181,12 @@ nnoremap <silent> * *zz
 nnoremap <silent> # #zz
 
 " Plugin Settings 
-" -----------------------------------------------------------------------------
+" ----------------------------------------------------------------------------
 
-" " Syntastic
+" vim-go
+" let g:go_fmt_command = "goimports"
+
+" Syntastic
 let g:syntastic_javascript_checkers=['jshint']
 let g:syntastic_json_checkers=['jsonlint']
 let g:syntastic_coffee_coffeelint_args='-f ~/.lint.json'
@@ -187,9 +196,12 @@ let g:syntastic_warning_symbol = '!'
 " VimFiler
 let g:vimfiler_as_default_explorer = 1
 
-" Unite
+" Unite.vim
 let g:unite_source_history_yank_enable = 1
 let g:unite_source_grep_max_candidates = 200
+
+" call unite#custom#profile('default', 'context', { 'marked_icon':'✓'})
+" call unite#custom_default_action('directory,directory_mru', 'cd')
 
 " Let's use ag
 let g:unite_source_rec_async_command =

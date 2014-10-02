@@ -20,7 +20,7 @@ setopt autocd
 bindkey -v
 
 # prompt
-PROMPT='%B%F{black}> %f%b'
+PROMPT='%B%F{blue}> %f%b'
 
 # key setup
 bindkey '^O' backward-char
@@ -42,6 +42,7 @@ alias cp='cp -vi'
 alias mv='mv -i'
 alias rm='rm -i'
 alias cdgo='cd ~/go/src/github.com/stayradiated'
+alias deploy='./.git/hooks/post-push'
 
 # functions
 mcd () {

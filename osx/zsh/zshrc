@@ -7,6 +7,9 @@ stty -ixon
 export GOPATH=$HOME/go
 export PATH=/usr/pkg/bin:/usr/local/bin:/usr/bin:/bin:/usr/pkg/sbin:/usr/sbin:/sbin:/usr/local/heroku/bin:/usr/local/go/bin:$GOPATH/bin
 export MANPATH=/usr/pkg/man:/usr/pkg/share/man:/usr/local/share/man:/usr/share/man
+export _PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin
+
+alias enup='sudo ifconfig en0 down && sudo ifconfig en0 up'
 
 source ~/dotfiles/apps/zsh/config
 

@@ -13,10 +13,10 @@ bspc config gapless_monocle     false
 # Window colours
 
 # focused window
-bspc config focused_border_color '#84252c'
+bspc config focused_border_color '#9a2f28'
 
 # unfocused window
-bspc config normal_border_color  '#1e2f41'
+bspc config normal_border_color  '#081f2d'
 
 # preselection border
-bspc config presel_border_color  '#d6c08f'
+bspc config presel_border_color  '#599caa'
