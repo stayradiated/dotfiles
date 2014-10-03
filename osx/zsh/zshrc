@@ -11,8 +11,9 @@ export _PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin
 
 alias enup='sudo ifconfig en0 down && sudo ifconfig en0 up'
 
-source ~/dotfiles/apps/zsh/config
-
 # ls colors
 alias ls='gls -hF --color=auto --group-directories-first'
 eval $(gdircolors -b ~/dotfiles/apps/zsh/dircolors)
+
+source ~/dotfiles/apps/zsh/config
+
