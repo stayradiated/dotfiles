@@ -1,0 +1,25 @@
+#! perl -w
+use strict;
+
+sub sudolikeaboss {
+	my ($self) = @_;
+
+	my $str = `SUDOLIKEABOSS_WEBSOCKET_URI="ws://127.0.0.1:16263/slab" /usr/local/bin/sudolikeaboss`;
+	if ($? == 0) {
+		$self->tt_paste($str);
+	} else {
+		print STDERR "error running sudolikeaboss: $!\n";
+	}
+
+	()
+}
+
+sub on_user_command {
+	my ($self, $cmd) = @_;
+
+	if ($cmd eq "sudolikeaboss") {
+	   $self->sudolikeaboss;
+	}
+
+	()
+}

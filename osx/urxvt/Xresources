@@ -5,11 +5,14 @@ URxvt.termName:        rxvt
 
 ! Plugins
 urxvt.perl-lib: /Volumes/Home/dotfiles/apps/urxvt/plugins
-urxvt.perl-ext-common:  default,-selection-popup,-option-popup,clipboard
+urxvt.perl-ext-common:  default,-selection-popup,-option-popup,clipboard,sudolikeaboss
 
 ! Clipboard
 urxvt.keysym.M-c: perl:clipboard:copy
 urxvt.keysym.M-v: perl:clipboard:paste
+urxvt.keysym.M-C-v: perl:clipboard:paste_escaped
+urxvt.keysym.M-slash: perl:sudolikeaboss
+
 urxvt.clipboard.copycmd: pbcopy
 urxvt.clipboard.pastecmd: pbpaste
 
