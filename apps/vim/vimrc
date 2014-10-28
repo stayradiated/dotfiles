@@ -28,7 +28,8 @@ NeoBundle 'whatyouhide/vim-gotham'
 " Extensions
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/neomru.vim'
-NeoBundle 'stayradiated/vimfiler.vim'
+" NeoBundle 'stayradiated/vimfiler.vim'
+NeoBundle 'jeetsukumaran/vim-filebeagle'
 NeoBundle 'tpope/vim-dispatch'
 NeoBundle 'tpope/vim-sensible'
 NeoBundle 'christoomey/vim-tmux-navigator'
@@ -166,13 +167,13 @@ nnoremap <leader>e :Errors<CR>
 
 " Unite.vim
 nnoremap <leader>t :<C-u>Unite -no-split -buffer-name=files   -start-insert file_rec/async<CR>
-nnoremap <leader>f :<C-u>Unite -no-split -buffer-name=files   -start-insert file<CR>
+" nnoremap <leader>f :<C-u>Unite -no-split -buffer-name=files   -start-insert file<CR>
 nnoremap <leader>b :<C-u>Unite -no-split -buffer-name=buffer  -start-insert buffer<CR>
 nnoremap <leader>/ :<C-u>Unite -no-split -buffer-name=buffer  -start-insert line<CR>
 nnoremap <leader>a :<C-u>Unite -no-split -buffer-name=buffer  -start-insert grep:.<CR>
 
 " Vimfiler
-nnoremap <leader><space> :VimFilerExplorer<CR>
+" nnoremap <leader><space> :VimFilerExplorer<CR>
 
 " Keep search pattern at the center of the screen
 nnoremap <silent> n nzz
@@ -184,7 +185,7 @@ nnoremap <silent> # #zz
 " ----------------------------------------------------------------------------
 
 " vim-go
-" let g:go_fmt_command = "goimports"
+let g:go_fmt_command = "goimports"
 
 " Syntastic
 let g:syntastic_javascript_checkers=['jshint']
@@ -194,7 +195,7 @@ let g:syntastic_error_symbol = '✗'
 let g:syntastic_warning_symbol = '!'
 
 " VimFiler
-let g:vimfiler_as_default_explorer = 1
+" let g:vimfiler_as_default_explorer = 1
 
 " Unite.vim
 let g:unite_source_history_yank_enable = 1
@@ -242,7 +243,7 @@ autocmd FileType markdown setlocal ts=4 sw=4 sts=4 tw=79
 autocmd FileType coffee setlocal foldmethod=indent nofoldenable
 
 " Silverstripe
-au BufNewFile,BufRead *.ss setfiletype xhtml
+au BufNewFile,BufRead *.ss set ft=html
 
 " JSON
 au BufRead,BufNewFile *.json setfiletype json
