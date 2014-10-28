@@ -43,6 +43,7 @@ alias mv='mv -i'
 alias rm='rm -i'
 alias cdgo='cd ~/go/src/github.com/stayradiated'
 alias deploy='./.git/hooks/post-push'
+alias ag='ag --color-path="1;36"'
 
 # functions
 mcd () {
