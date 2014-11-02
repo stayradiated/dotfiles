@@ -110,19 +110,22 @@ osx:
 # SHARED APPS
 # ============================================================================
 
-apps:
+apps: cmus feh fonts zsh tmux irssi vim vimperator dev
 
-# Cmus
+cmus:
+
 	@echo "Cmus..."
 	@mkdir -p ~/.cmus
 	@ln -fs $(cmus)/rc ~/.cmus/rc
 	@ln -fs $(cmus)/custom.theme ~/.cmus/custom.theme
 
-# Feh
+feh:
+
 	@echo "Feh..."
 	@ln -fs $(feh)/fehbg ~/.fehbg
 
-# Fonts
+fonts:
+
 	@echo "Fonts..."
 	@if test ! -d $(fonts)/tamzen; then\
 		git clone https://github.com/sunaku/tamzen-font $(fonts)/tamzen;\
@@ -131,22 +134,26 @@ apps:
 	@ln -fs $(fonts)/tamzen/*.bdf ~/.fonts/
 	@ln -fs $(fonts)/envypn/*.pcf ~/.fonts/
 
-# Zsh
+zsh:
+
 	@echo "Zsh..."
 	@if test -d ~/.oh-my-zsh; then\
 		ln -fs $(zsh)/stayrad.zsh-theme ~/.oh-my-zsh/themes/stayrad.zsh-theme;\
 	fi;
 
-# Tmux
+tmux:
+
 	@echo "Tmux..."
 	@ln -fs $(tmux)/tmux.conf ~/.tmux.conf
 
-# Irssi
+irrsi:
+
 	@echo "Irssi..."
 	@rm -rf ~/.irssi
 	@ln -fs $(irssi) ~/.irssi
 
-# Vim
+vim:
+
 	@echo "Vim..."
 	@mkdir -p $(vim)/tmp
 	@mkdir -p $(vim)/undo
@@ -160,13 +167,14 @@ apps:
 		git clone https://github.com/Shougo/neobundle.vim.git $(vim)/bundle/neobundle.vim;\
 	fi;
 
-# Vimperator
+vimperator:
+
 	@echo "Vimperator..."
 	@ln -fs $(ffox)/vimperatorrc ~/.vimperatorrc
 
-# Dev
+dev:
+
 	@echo "Dev..."
 	@ln -fs $(dev)/jshintrc ~/.jshintrc
 
-
-.PHONY: check crux osx apps
+.PHONY: check crux osx apps cmus feh fonts zsh tmux irssi vim vimperator dev
