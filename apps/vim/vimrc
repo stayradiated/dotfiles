@@ -36,6 +36,7 @@ NeoBundle 'jeetsukumaran/vim-filebeagle'
 NeoBundle 'tpope/vim-dispatch'
 NeoBundle 'tpope/vim-sensible'
 NeoBundle 'christoomey/vim-tmux-navigator'
+NeoBundle 'zhaocai/GoldenView.Vim'
 
 " Editing
 NeoBundle 'scrooloose/syntastic'
@@ -184,6 +185,11 @@ nnoremap <silent> N Nzz
 nnoremap <silent> * *zz
 nnoremap <silent> # #zz
 
+" GoldenView
+nmap <leader>x <Plug>GoldenViewSplit
+nmap <silent> <C-N> <Plug>GoldenViewNext
+nmap <silent> <C-P> <Plug>GoldenViewPrevious
+
 " Plugin Settings 
 " ----------------------------------------------------------------------------
 
@@ -199,6 +205,9 @@ let g:syntastic_warning_symbol = '!'
 
 " VimFiler
 " let g:vimfiler_as_default_explorer = 1
+
+" GoldenView
+let g:goldenview__enable_default_mapping = 0
 
 " Unite.vim
 let g:unite_source_history_yank_enable = 1
