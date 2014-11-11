@@ -13,7 +13,6 @@ irssi := $(apps)/irssi
 mutt  := $(apps)/mutt
 ffox  := $(apps)/firefox
 rxvt  := $(apps)/urxvt
-zsh   := $(apps)/zsh
 tmux  := $(apps)/tmux
 vim   := $(apps)/vim
 feh   := $(apps)/feh
@@ -40,7 +39,6 @@ check:
 
 # Terminal
 	@if test -f ~/.Xresources; then echo ".Xresources exists"; fi;
-	@if test -f ~/.zshrc; then echo ".zshrc exists"; fi;
 
 # WM
 	@if test -f ~/.xinitrc; then echo ".xinitrc exists"; fi;
@@ -75,9 +73,8 @@ crux:
 	@ln -fs $(crux)/urxvt/Xresources ~/.Xresources
 
 # ZSH
-	@echo "Zsh..."
-	@ln -fs $(crux)/zsh/zshrc ~/.zshrc
-
+#	@echo "Zsh..."
+#	@ln -fs $(crux)/zsh/zshrc ~/.zshrc
 
 
 # ============================================================================
@@ -99,10 +96,6 @@ osx:
 # Terminal
 	@echo "Terminal..."
 	@ln -fs $(osx)/urxvt/Xresources ~/.Xresources
-
-# ZSH
-	@echo "Zsh..."
-	@ln -fs $(osx)/zsh/zshrc ~/.zshrc
 
 
 
@@ -137,8 +130,12 @@ fonts:
 zsh:
 
 	@echo "Zsh..."
-	@if test -d ~/.oh-my-zsh; then\
-		ln -fs $(zsh)/stayrad.zsh-theme ~/.oh-my-zsh/themes/stayrad.zsh-theme;\
+	@if test ! -d ~/.zprezto; then\
+		git clone --recursive https://github.com/stayradiated/prezto.git ~/.zprezto;\
+		setopt EXTENDED_GLOB;\
+		for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do;\
+			ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}";\
+		done;\
 	fi;
 
 tmux:
