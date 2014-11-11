@@ -37,6 +37,7 @@ NeoBundle 'tpope/vim-dispatch'
 NeoBundle 'tpope/vim-sensible'
 NeoBundle 'christoomey/vim-tmux-navigator'
 NeoBundle 'zhaocai/GoldenView.Vim'
+NeoBundle 'szw/vim-ctrlspace'
 
 " Editing
 NeoBundle 'scrooloose/syntastic'
@@ -83,20 +84,20 @@ set title                " use filename in window title
 set gdefault             " replace everything by default
 set visualbell           " stop the beep
 set colorcolumn=80       " for cleaner code
- 
+
 " Backup swap files
 set backup
 set backupdir=~/.vim/tmp
 set backupskip=/tmp/*,/private/tmp/*
 set directory=~/.vim/tmp
 set writebackup
- 
+
 " Infinite undo
 set undofile
 set undodir=~/.vim/undo
 set undolevels=1000
 set undoreload=10000
- 
+
 " Folding
 set foldignore=          " don't ignore anything when folding
 set foldlevelstart=99    " no folds closed on open
@@ -112,13 +113,14 @@ set tabstop=2            " spaces for <Tab>
 set hlsearch             " highlight search results
 set ignorecase           " case insensitive searching
 set smartcase            " override ignorecase if upper case typed
- 
+
 " Colours
-colorscheme gotham
- 
+let g:hybrid_use_Xresources = 1
+colorscheme hybrid
+
 " map <ScrollWheelUp> <C-Y>
 " map <ScrollWheelDown> <C-E>
- 
+
 " Mapping
 " -----------------------------------------------------------------------------
 
@@ -135,7 +137,7 @@ nnoremap <leader><space> za
 nnoremap <leader>h :nohlsearch<CR>
 
 " Search for trailing whitespace
-nnoremap <leader>w /\s\+$<CR>
+nnoremap <leader>W /\s\+$<CR>
 
 " Toggle last active bufer
 nnoremap <leader><Tab> :b#<CR>
@@ -158,7 +160,7 @@ vnoremap <leader>d d:call ClipboardYank()<cr>
 nnoremap <leader>p :call ClipboardPaste()<cr>p
 
 " Quick save
-nnoremap <leader>s :w<CR>
+nnoremap <leader>w :w<CR>
 
 " Shortcut for Tabularize
 vnoremap <leader>t :Tabularize /
@@ -176,9 +178,6 @@ nnoremap <leader>b :<C-u>Unite -no-split -buffer-name=buffer  -start-insert buff
 nnoremap <leader>/ :<C-u>Unite -no-split -buffer-name=buffer  -start-insert line<CR>
 nnoremap <leader>a :<C-u>Unite -no-split -buffer-name=buffer  -start-insert grep:.<CR>
 
-" Vimfiler
-" nnoremap <leader><space> :VimFilerExplorer<CR>
-
 " Keep search pattern at the center of the screen
 nnoremap <silent> n nzz
 nnoremap <silent> N Nzz
@@ -190,14 +189,19 @@ nmap <leader>x <Plug>GoldenViewSplit
 nmap <silent> <C-N> <Plug>GoldenViewNext
 nmap <silent> <C-P> <Plug>GoldenViewPrevious
 
-" Plugin Settings 
+" Quick search
+nnoremap <leader>r :%s/<C-r><C-w>/
+nnoremap <leader>R :%s/<C-r><C-a>/
+vnoremap <leader>s :%s/\%V<c-r><c-w>/
+
+" Plugin Settings
 " ----------------------------------------------------------------------------
 
 " vim-go
 let g:go_fmt_command = "goimports"
 
 " Syntastic
-let g:syntastic_javascript_checkers=['jshint']
+let g:syntastic_javascript_checkers=['jsxhint']
 let g:syntastic_json_checkers=['jsonlint']
 let g:syntastic_coffee_coffeelint_args='-f ~/.lint.json'
 let g:syntastic_error_symbol = '✗'
