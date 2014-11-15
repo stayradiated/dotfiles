@@ -1,3 +1,4 @@
+SHELL := /bin/bash
 
 # paths
 dir   := $(CURDIR)
@@ -72,10 +73,6 @@ crux:
 	@echo "Terminal..."
 	@ln -fs $(crux)/urxvt/Xresources ~/.Xresources
 
-# ZSH
-#	@echo "Zsh..."
-#	@ln -fs $(crux)/zsh/zshrc ~/.zshrc
-
 
 # ============================================================================
 # OSX
@@ -131,11 +128,13 @@ zsh:
 
 	@echo "Zsh..."
 	@if test ! -d ~/.zprezto; then\
-		git clone --recursive https://github.com/stayradiated/prezto.git ~/.zprezto;\
-		setopt EXTENDED_GLOB;\
-		for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do;\
-			ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}";\
-		done;\
+		git clone --recursive https://github.com/stayradiated/prezto.git ~/.zprezto; \
+		ln -fs ~/.zprezto/runcoms/zlogin ~/.zlogin; \
+		ln -fs ~/.zprezto/runcoms/zlogout ~/.zlogout; \
+		ln -fs ~/.zprezto/runcoms/zpreztorc ~/.zpreztorc; \
+		ln -fs ~/.zprezto/runcoms/zprofile ~/.zprofile; \
+		ln -fs ~/.zprezto/runcoms/zshenv ~/.zshenv; \
+		ln -fs ~/.zprezto/runcoms/zshrc ~/.zshrc; \
 	fi;
 
 tmux:
