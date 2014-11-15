@@ -26,12 +26,11 @@ NeoBundle 'Shougo/vimproc.vim', {
 NeoBundle 'stayradiated/vim-termorrow'
 NeoBundle 'w0ng/vim-hybrid'
 NeoBundle 'whatyouhide/vim-gotham'
-" NeoBundle 'noahfrederick/vim-noctu'
+NeoBundle 'noahfrederick/vim-noctu'
 
 " Extensions
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/neomru.vim'
-" NeoBundle 'stayradiated/vimfiler.vim'
 NeoBundle 'jeetsukumaran/vim-filebeagle'
 NeoBundle 'tpope/vim-dispatch'
 NeoBundle 'tpope/vim-sensible'
@@ -73,10 +72,8 @@ NeoBundleCheck
 
 " General
 set completeopt-=preview " don't show preview window
-" set fcs=vert:│,fold:-    " solid instead of broken line for vert splits
 set hidden               " hide when switching buffers, don't unload
-" set lazyredraw           " don't update screen when executing macros
-set ttyfast            "
+set ttyfast              " performance?
 set mouse=a              " enable mouse in all modes
 set number               " show absolute line number on current line
 set spelllang=en_nz      " spell check with New Zealand English
@@ -84,6 +81,7 @@ set title                " use filename in window title
 set gdefault             " replace everything by default
 set visualbell           " stop the beep
 set colorcolumn=80       " for cleaner code
+set showtabline=0        " hide tab line
 
 " Backup swap files
 set backup
@@ -116,10 +114,8 @@ set smartcase            " override ignorecase if upper case typed
 
 " Colours
 let g:hybrid_use_Xresources = 1
-colorscheme hybrid
+colorscheme termorrow
 
-" map <ScrollWheelUp> <C-Y>
-" map <ScrollWheelDown> <C-E>
 
 " Mapping
 " -----------------------------------------------------------------------------
@@ -217,7 +213,7 @@ let g:goldenview__enable_default_mapping = 0
 let g:unite_source_history_yank_enable = 1
 let g:unite_source_grep_max_candidates = 200
 
-" call unite#custom#profile('default', 'context', { 'marked_icon':'✓'})
+call unite#custom#profile('default', 'context', { 'marked_icon':'✓'})
 " call unite#custom_default_action('directory,directory_mru', 'cd')
 
 " Let's use ag
