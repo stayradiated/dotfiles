@@ -129,13 +129,13 @@ zsh:
 	@echo "Zsh..."
 	@if test ! -d ~/.zprezto; then\
 		git clone --recursive https://github.com/stayradiated/prezto.git ~/.zprezto; \
-		ln -fs ~/.zprezto/runcoms/zlogin ~/.zlogin; \
-		ln -fs ~/.zprezto/runcoms/zlogout ~/.zlogout; \
-		ln -fs ~/.zprezto/runcoms/zpreztorc ~/.zpreztorc; \
-		ln -fs ~/.zprezto/runcoms/zprofile ~/.zprofile; \
-		ln -fs ~/.zprezto/runcoms/zshenv ~/.zshenv; \
-		ln -fs ~/.zprezto/runcoms/zshrc ~/.zshrc; \
 	fi;
+	@ln -fs ~/.zprezto/runcoms/zlogin    ~/.zlogin
+	@ln -fs ~/.zprezto/runcoms/zlogout   ~/.zlogout
+	@ln -fs ~/.zprezto/runcoms/zpreztorc ~/.zpreztorc
+	@ln -fs ~/.zprezto/runcoms/zprofile  ~/.zprofile
+	@ln -fs ~/.zprezto/runcoms/zshenv    ~/.zshenv
+	@ln -fs ~/.zprezto/runcoms/zshrc     ~/.zshrc
 
 tmux:
 
