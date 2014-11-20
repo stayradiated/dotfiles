@@ -37,6 +37,7 @@ NeoBundle 'tpope/vim-sensible'
 NeoBundle 'christoomey/vim-tmux-navigator'
 NeoBundle 'zhaocai/GoldenView.Vim'
 NeoBundle 'szw/vim-ctrlspace'
+NeoBundle 'sjl/gundo.vim'
 
 " Editing
 NeoBundle 'scrooloose/syntastic'
