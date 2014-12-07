@@ -3,22 +3,22 @@
 # Takes the input from reader and returns the formatted output
 
 # Colors
-c0='#FF08313B'  # black
-c1='#FFac4142'  # red
-c2='#FF90a959'  # green
-c3='#FFd28445'  # yellow
-c4='#FF6a9fb5'  # blue
-c5='#FFaa759f'  # magenta
-c6='#FF75b5aa'  # cyan
-c7='#FF969896'  # white
-c8='#FF134E5F'  # + black
-c9='#FFcc6666'  # + red
-c10='#FFb5bd68' # + green
-c11='#FFf0c674' # + yellow
-c12='#FF81a2be' # + blue
-c13='#FFb294bb' # + magenta
-c14='#FF8abeb7' # + cyan
-c15='#FFc5c8c6' # + white
+c0='#FFEBC9B4'  # black
+c1='#FF992E2E'  # red
+c2='#FF4C3226'  # green
+c3='#FFA67C53'  # yellow
+c4='#FF4C7399'  # blue
+c5='#FFBF9986'  # magenta
+c6='#FFD97742'  # cyan
+c7='#FF34302D'  # white
+c8='#FF6B5C52'  # + black
+c9='#FFB23636'  # + red
+c10='#FF664233' # + green
+c11='#FFBF8F60' # + yellow
+c12='#FF5986B2' # + blue
+c13='#FFD9AE98' # + magenta
+c14='#FFF2854A' # + cyan
+c15='#FF4C4742' # + white
 
 # Icons
 btd=$(echo -e '\ue03F') # battery discharging
@@ -78,11 +78,11 @@ function print_center () {
     case $item in
       O*)
         # focused occupied
-        c="$c%{F$c1} $dot %{B- U-}"
+        c="$c%{F$c12} $dot %{B- U-}"
         ;;
       F*)
         # focused empty
-        c="$c%{F$c1} $dtt %{B- U-}"
+        c="$c%{F$c13} $dtt %{B- U-}"
         ;;
       o*)
         # occupied

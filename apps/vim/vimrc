@@ -114,7 +114,6 @@ set ignorecase           " case insensitive searching
 set smartcase            " override ignorecase if upper case typed
 
 " Colours
-let g:hybrid_use_Xresources = 1
 colorscheme termorrow
 
 

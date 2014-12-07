@@ -116,7 +116,7 @@ super + Return
     urxvtc
 
 super + space
-    dmenu_run -nb "#021B21" -nf "#707880" -sb "#AC4142" -sf "#E8DFD6" -h 25 -fn "-misc-tamzen-medium-*-*-*-14-*-*-*-*-*-*-*"
+    dmenu_run -nb "#f5e7de" -nf "#34302d" -sb "#5986b2" -sf "#f5e7de" -h 25 -fn "-misc-tamzen-medium-*-*-*-14-*-*-*-*-*-*-*"
 
 # make sxhkd reload its configuration files
 super + Escape

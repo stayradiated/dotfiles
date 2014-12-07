@@ -34,8 +34,8 @@ essid -s -i 5 -f 'X%s' | uq > $PANEL_FIFO &
 BAR_SIZE='1920x25+0+0'
 BAR_FONT_1='-misc-tamzen-medium-r-normal--14-*-*-*-*-*-*-*'
 BAR_FONT_2='-misc-stlarch-medium-r-normal--10-*-*-*-*-*-*-*'
-BAR_FG='#E8DFD6'
-BAR_BG='#021B21'
+BAR_FG='#34302d'
+BAR_BG='#f5e7de'
 BAR_OPTIONS="-g $BAR_SIZE -f $BAR_FONT_1,$BAR_FONT_2 -B $BAR_BG -F $BAR_FG -p"
 
 cat $PANEL_FIFO | $BAR_SCRIPT | bar $BAR_OPTIONS
