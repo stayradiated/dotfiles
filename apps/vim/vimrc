@@ -39,7 +39,7 @@ NeoBundle 'szw/vim-ctrlspace'
 NeoBundle 'sjl/gundo.vim'
 
 " Editing
-" NeoBundle 'scrooloose/syntastic'
+NeoBundle 'scrooloose/syntastic'
 NeoBundle 'tpope/vim-repeat'
 NeoBundle 'tpope/vim-abolish'
 NeoBundle 'tpope/vim-fugitive'
