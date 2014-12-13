@@ -3,9 +3,10 @@ SHELL := /bin/bash
 # paths
 dir   := $(CURDIR)
 
-osx   := $(dir)/osx
-crux  := $(dir)/crux
-apps  := $(dir)/apps
+osx      := $(dir)/osx
+crux     := $(dir)/crux
+apps     := $(dir)/apps
+chromeos := $(dir)/chromeos
 
 bar   := $(crux)/bar
 
@@ -75,6 +76,27 @@ crux:
 
 
 # ============================================================================
+# CHROME OS
+# ============================================================================
+
+chromeos:
+
+# WM
+	@echo "WM..."
+	@ln -fs $(chromeos)/wm/xinitrc ~/.xinitrc
+
+	@mkdir -p ~/.config/bspwm
+	@ln -fs $(chromeos)/wm/bspwmrc ~/.config/bspwm/bspwmrc
+
+	@mkdir -p ~/.config/sxhkd
+	@ln -fs $(chromeos)/wm/sxhkdrc ~/.config/sxhkd/sxhkdrc
+
+# URXVT
+	@echo "Terminal..."
+	@ln -fs $(chromeos)/urxvt/Xresources ~/.Xresources
+
+
+# ============================================================================
 # OSX
 # ============================================================================
 
@@ -120,7 +142,11 @@ fonts:
 	@if test ! -d $(fonts)/tamzen; then\
 		git clone https://github.com/sunaku/tamzen-font $(fonts)/tamzen;\
 	fi;
+	@if test ! -d $(fonts)/tewi; then\
+		git clone https://github.com/lucy/tewi-font $(fonts)/tewi;\
+	fi;
 	@mkdir -p ~/.fonts
+	@ln -fs $(fonts)/tewi/*.bdf ~/.fonts/
 	@ln -fs $(fonts)/tamzen/*.bdf ~/.fonts/
 	@ln -fs $(fonts)/envypn/*.pcf ~/.fonts/
 
@@ -173,4 +199,4 @@ dev:
 	@echo "Dev..."
 	@ln -fs $(dev)/jshintrc ~/.jshintrc
 
-.PHONY: check crux osx apps cmus feh fonts zsh tmux irssi vim vimperator dev
+.PHONY: check crux chromeos osx apps cmus feh fonts zsh tmux irssi vim vimperator dev

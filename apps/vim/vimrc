@@ -1,4 +1,3 @@
-
 " Load Plugins
 " -----------------------------------------------------------------------------
 
@@ -40,7 +39,7 @@ NeoBundle 'szw/vim-ctrlspace'
 NeoBundle 'sjl/gundo.vim'
 
 " Editing
-NeoBundle 'scrooloose/syntastic'
+" NeoBundle 'scrooloose/syntastic'
 NeoBundle 'tpope/vim-repeat'
 NeoBundle 'tpope/vim-abolish'
 NeoBundle 'tpope/vim-fugitive'
@@ -75,7 +74,6 @@ NeoBundleCheck
 set completeopt-=preview " don't show preview window
 set hidden               " hide when switching buffers, don't unload
 set ttyfast              " performance?
-set mouse=a              " enable mouse in all modes
 set number               " show absolute line number on current line
 set spelllang=en_nz      " spell check with New Zealand English
 set title                " use filename in window title
@@ -197,7 +195,7 @@ vnoremap <leader>s :%s/\%V<c-r><c-w>/
 let g:go_fmt_command = "goimports"
 
 " Syntastic
-let g:syntastic_javascript_checkers=['jsxhint']
+let g:syntastic_javascript_checkers=['jsxhint', 'jshint']
 let g:syntastic_json_checkers=['jsonlint']
 let g:syntastic_coffee_coffeelint_args='-f ~/.lint.json'
 let g:syntastic_error_symbol = '✗'
@@ -239,10 +237,10 @@ endfunction
 " -----------------------------------------------------------------------------
 
 function! ClipboardYank()
-  call system('pbcopy', @@)
+  call system('xsel -i', @@)
 endfunction
 function! ClipboardPaste()
-  let @@ = system('pbpaste')
+  let @@ = system('xsel -o')
 endfunction
 
 " Autocommands
