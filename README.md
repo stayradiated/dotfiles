@@ -1,7 +1,7 @@
 Dotfiles
 ========
 
-> Just my configs for Crux and OS X
+> Just my configs for Crux, OS X and ChromeOS
 
 ## Makefile
 

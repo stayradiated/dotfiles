@@ -67,11 +67,11 @@
     "yui"           : false,
 
     "globals"       : {
-      "describe": true,
-      "it": true,
-      "beforeEach": true,
-      "afterEach": true,
-      "jest": true,
-      "expect": true
+      "describe"   : true,
+      "it"         : true,
+      "beforeEach" : true,
+      "afterEach"  : true,
+      "jest"       : true,
+      "expect"     : true
     }
 }
