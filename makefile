@@ -3,10 +3,10 @@ SHELL := /bin/bash
 # paths
 dir   := $(CURDIR)
 
-osx      := $(dir)/osx
-crux     := $(dir)/crux
-apps     := $(dir)/apps
-chromeos := $(dir)/chromeos
+osx   := $(dir)/osx
+crux  := $(dir)/crux
+apps  := $(dir)/apps
+cbook := $(dir)/chromebook
 
 bar   := $(crux)/bar
 
@@ -76,24 +76,24 @@ crux:
 
 
 # ============================================================================
-# CHROME OS
+# CHROMEBOOK
 # ============================================================================
 
-chromeos:
+chromebook:
 
 # WM
 	@echo "WM..."
-	@ln -fs $(chromeos)/wm/xinitrc ~/.xinitrc
+	@ln -fs $(cbook)/wm/xinitrc ~/.xinitrc
 
 	@mkdir -p ~/.config/bspwm
-	@ln -fs $(chromeos)/wm/bspwmrc ~/.config/bspwm/bspwmrc
+	@ln -fs $(cbook)/wm/bspwmrc ~/.config/bspwm/bspwmrc
 
 	@mkdir -p ~/.config/sxhkd
-	@ln -fs $(chromeos)/wm/sxhkdrc ~/.config/sxhkd/sxhkdrc
+	@ln -fs $(cbook)/wm/sxhkdrc ~/.config/sxhkd/sxhkdrc
 
 # URXVT
 	@echo "Terminal..."
-	@ln -fs $(chromeos)/urxvt/Xresources ~/.Xresources
+	@ln -fs $(cbook)/urxvt/Xresources ~/.Xresources
 
 
 # ============================================================================
@@ -199,4 +199,4 @@ dev:
 	@echo "Dev..."
 	@ln -fs $(dev)/jshintrc ~/.jshintrc
 
-.PHONY: check crux chromeos osx apps cmus feh fonts zsh tmux irssi vim vimperator dev
+.PHONY: check crux chromebook osx apps cmus feh fonts zsh tmux irssi vim vimperator dev
