@@ -81,6 +81,7 @@ set gdefault             " replace everything by default
 set visualbell           " stop the beep
 set colorcolumn=80       " for cleaner code
 set showtabline=0        " hide tab line
+set mouse=a
 
 " Backup swap files
 set backup
@@ -146,6 +147,8 @@ vnoremap < <gv
 " Better movement over wrapped lines
 nnoremap j gj
 nnoremap k gk
+nnoremap gk k
+nnoremap gk j
 
 " Paste mode for terminals
 nnoremap <leader>P :set invpaste paste?<CR>

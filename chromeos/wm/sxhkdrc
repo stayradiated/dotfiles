@@ -113,7 +113,7 @@ super + shift + {Left,Right,Up,Down}
 #
 
 super + Return
-    urxvtc
+    urxvt
 
 super + space
     dmenu_run -nb "#f5e7de" -nf "#34302d" -sb "#5986b2" -sf "#f5e7de" -h 25 -fn "-misc-tamzen-medium-*-*-*-14-*-*-*-*-*-*-*"
@@ -123,9 +123,9 @@ super + Escape
     pkill -USR1 -x sxhkd
 
 # audio 
-XF86Audio{Lower,Raise}Volume
-    amixer -q set Master 5%{-,+}
+{F9,F10}
+    amixer -q set Master 3%{-,+}
 
 # backlight
 super + shift + {comma,period}
-    xbacklight -{dec,inc} 20
+    xbacklight -{dec,inc} 5

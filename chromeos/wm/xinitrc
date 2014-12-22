@@ -3,15 +3,17 @@ export LC_CTYPE="en_US.UTF-8"
 
 xrdb -merge $HOME/.Xresources
 
-xmodmap $HOME/.Xmodmap
-
 sh $HOME/.fehbg
 
-setxkbmap -model pc104 -layout us -variant colemak
-
 xset fp default
+xset +fp /usr/share/fonts/local
 xset +fp ~/.fonts
 xset fp rehash
+
+syndaemon -t -k -i 2 &
+
+export PANEL_FIFO=/tmp/panel-fifo
+$HOME/dotfiles/chromeos/bar/init &
 
 sxhkd &
 urxvtd -q -o -f &

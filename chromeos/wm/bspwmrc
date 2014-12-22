@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Config
-# bspc config top_padding         25
+bspc config bottom_padding      12
 bspc config borderless_monocle  true
 bspc config gapless_monocle     true
 
