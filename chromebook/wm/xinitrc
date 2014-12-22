@@ -13,7 +13,7 @@ xset fp rehash
 syndaemon -t -k -i 2 &
 
 export PANEL_FIFO=/tmp/panel-fifo
-$HOME/dotfiles/chromeos/bar/init &
+$HOME/dotfiles/chromebook/bar/init &
 
 sxhkd &
 urxvtd -q -o -f &

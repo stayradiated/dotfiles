@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-BAR_SCRIPT=~/dotfiles/chromeos/bar/reader
+BAR_SCRIPT=~/dotfiles/chromebook/bar/reader
 
 # pipe bspwm info to bar
 [ -e $PANEL_FIFO ] & rm $PANEL_FIFO
