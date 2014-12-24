@@ -1,36 +1,38 @@
 ! special
-*.foreground:   #34302d
-*.background:   #f5e7de
-*.cursorColor:  #34302d
+*.foreground:   #424242
+*.background:   #f1f1f1
+*.cursorColor:  #20bbfc
 
 ! black
-*.color0:       #ebc9b4
-*.color8:       #6b5c52
+*.color0:       #212121
+*.color8:       #424242
 
 ! red
-*.color1:       #992e2e
-*.color9:       #b23636
+*.color1:       #c30771
+*.color9:       #fb007a
 
 ! green
-*.color2:       #4c3226
-*.color10:      #664233
+*.color2:       #10a778
+*.color10:      #5fd7af
 
 ! yellow
-*.color3:       #a67c53
-*.color11:      #bf8f60
+*.color3:       #a89c14
+*.color11:      #f3e430
 
 ! blue
-*.color4:       #4c7399
-*.color12:      #5986b2
+*.color4:       #008ec4
+*.color12:      #20bbfc
 
 ! magenta
-*.color5:       #bf9986
-*.color13:      #d9ae98
+*.color5:       #523c79
+*.color13:      #6855de
 
 ! cyan
-*.color6:       #d97742
-*.color14:      #f2854a
+*.color6:       #20a5ba
+*.color14:      #4fb8cc
 
 ! white
-*.color7:       #34302d
-*.color15:      #4c4742
+*.color7:       #d9d9d9
+*.color15:      #f1f1f1
+
+! vim:filetype=xdefaults

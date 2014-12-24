@@ -25,8 +25,7 @@ battery -s -i 5 -f 'B%s' | uq > $PANEL_FIFO &
 battery -s -i 15 -f 'P%i' | uq > $PANEL_FIFO &
 
 # Current wifi status
-# essid -s -i 5 -f 'X%s' | uq > $PANEL_FIFO &
-
+essid -w wlp1s0 -s -i 5 -f 'X%s' | uq > $PANEL_FIFO &
 
 # Run bar
 BAR_SIZE='1366x25+0+0'
