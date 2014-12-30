@@ -1,4 +1,3 @@
-
 ! -----------------------------
 ! XFT SETTINGS
 ! -----------------------------
@@ -60,4 +59,4 @@ URxvt.url-select.button:     1
 URxvt.url-select.launcher:   /usr/bin/firefox
 URxvt.url-select.underline:  true
 
-#include "/home/stayrad/dotfiles/crux/urxvt/colors"
+#include "/home/stayrad/dotfiles/apps/urxvt/light_colors"
