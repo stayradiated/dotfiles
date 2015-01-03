@@ -242,10 +242,19 @@ endfunction
 " -----------------------------------------------------------------------------
 
 function! ClipboardYank()
-  call system('xsel -i', @@)
+  if has("unix")
+    call system('pbcopy', @@)
+  else
+    call system('xsel -i', @@)
+  endif
 endfunction
+
 function! ClipboardPaste()
-  let @@ = system('xsel -o')
+  if has("unix")
+    let @@ = system('pbpaste')
+  else
+    let @@ = system('xsel -o')
+  endif
 endfunction
 
 " Autocommands
