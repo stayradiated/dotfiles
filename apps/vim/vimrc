@@ -114,7 +114,7 @@ set ignorecase           " case insensitive searching
 set smartcase            " override ignorecase if upper case typed
 
 " Colours
-set background=light
+set background=dark
 colorscheme pencil
 
 
@@ -200,7 +200,7 @@ vnoremap <leader>s :%s/\%V<c-r><c-w>/
 let g:go_fmt_command = "goimports"
 
 " Syntastic
-let g:syntastic_javascript_checkers=['jsxhint', 'jshint']
+let g:syntastic_javascript_checkers=['jsxhint']
 let g:syntastic_json_checkers=['jsonlint']
 let g:syntastic_coffee_coffeelint_args='-f ~/.lint.json'
 let g:syntastic_error_symbol = '✗'
@@ -260,14 +260,15 @@ endfunction
 " Autocommands
 " -----------------------------------------------------------------------------
 
-" Indent rules
+" Markdown
+autocmd BufNewFile,BufRead *.md set filetype=markdown
 autocmd FileType markdown setlocal ts=4 sw=4 sts=4 tw=79
 
-" Folding rules
+" CoffeeScript
 autocmd FileType coffee setlocal foldmethod=indent nofoldenable
 
 " Silverstripe
-au BufNewFile,BufRead *.ss set ft=html
+autocmd BufNewFile,BufRead *.ss set filetype=html
 
 " JSON
-au BufRead,BufNewFile *.json setfiletype json
+autocmd BufRead,BufNewFile *.json set filetype=json
