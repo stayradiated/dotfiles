@@ -2,10 +2,6 @@
 # bspwm hotkeys
 #
 
-# Quit BSPWM
-super + alt + Escape
-    bspc quit
-
 # Close window
 super + w
     bspc window -c
@@ -112,17 +108,24 @@ super + shift + {Left,Right,Up,Down}
 # wm independent hotkeys
 #
 
+# Open terminal
 super + Return
     urxvt
 
+# Launch dmenu
 super + space
-    dmenu_run -b -nb "#2C102A" -nf "#A67C53" -sb "#4C7399" -sf "#FEDCC8" -h 25 -fn "-misc-tamzen-medium-*-*-*-14-*-*-*-*-*-*-*"
+    dmenu_run -nb "#d8e2eb" -nf "#232328" -sb "#599bb5" -sf "#eaf5ff" -h 25 -fn "-misc-tamzen-medium-*-*-*-14-*-*-*-*-*-*-*"
 
-# make sxhkd reload its configuration files
+# Quit BSPWM
+super + alt + Escape
+    bspc quit
+
+
+# Make sxhkd reload its configuration files
 super + Escape
     pkill -USR1 -x sxhkd
 
-# audio 
+# Audio 
 {F9,F10}
     amixer -q set Master 3%{-,+}
 

@@ -2,23 +2,37 @@
 
 # Takes the input from reader and returns the formatted output
 
-# Colors
-c0='#FFEBC9B4'  # black
-c1='#FF992E2E'  # red
-c2='#FF4C3226'  # green
-c3='#FFA67C53'  # yellow
-c4='#FF4C7399'  # blue
-c5='#FFBF9986'  # magenta
-c6='#FFD97742'  # cyan
-c7='#FF34302D'  # white
-c8='#FF6B5C52'  # + black
-c9='#FFB23636'  # + red
-c10='#FF664233' # + green
-c11='#FFBF8F60' # + yellow
-c12='#FF5986B2' # + blue
-c13='#FFD9AE98' # + magenta
-c14='#FFF2854A' # + cyan
-c15='#FF4C4742' # + white
+# black
+c0='#FFEAF5FF'
+c8='#FF82888D'
+
+# red
+c1='#FFD80642'
+c9='#FFFF5787'
+
+# green
+c2='#FFE79A64'
+c10='#FF89C200'
+
+# yellow
+c3='#FF96C400'
+c11='#FFC4B994'
+
+# blue
+c4='#FF599BB5'
+c12='#FF5799B0'
+
+# magenta
+c5='#FF6C3899'
+c13='#FFB777FB'
+
+# cyan
+c6='#FF573A2C'
+c14='#FFBF8061'
+
+# white
+c7='#FF766690'
+c15='#FF868F96'
 
 # Icons
 btd=$(echo -e '\ue03F') # battery discharging
