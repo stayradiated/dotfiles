@@ -1,6 +1,5 @@
 SHELL := /bin/bash
 
-# paths
 dir   := $(CURDIR)
 
 osx   := $(dir)/osx
@@ -8,19 +7,19 @@ crux  := $(dir)/crux
 apps  := $(dir)/apps
 cbook := $(dir)/chromebook
 
-bar   := $(crux)/bar
-
-cmus  := $(apps)/cmus
-irssi := $(apps)/irssi
-mutt  := $(apps)/mutt
-ffox  := $(apps)/firefox
-rxvt  := $(apps)/urxvt
-tmux  := $(apps)/tmux
-vim   := $(apps)/vim
-feh   := $(apps)/feh
-fonts := $(apps)/fonts
-music := $(apps)/music
-dev   := $(apps)/dev
+bar     := $(crux)/bar
+cmus    := $(apps)/cmus
+irssi   := $(apps)/irssi
+mutt    := $(apps)/mutt
+firefox := $(apps)/firefox
+urxvt   := $(apps)/urxvt
+tmux    := $(apps)/tmux
+vim     := $(apps)/vim
+feh     := $(apps)/feh
+fonts   := $(apps)/fonts
+music   := $(apps)/music
+dev     := $(apps)/dev
+termite := $(apps)/termite
 
 # Checks to see if any files are going to be overwritten
 check:
@@ -122,7 +121,7 @@ osx:
 # SHARED APPS
 # ============================================================================
 
-apps: cmus feh fonts zsh tmux irssi vim vimperator dev
+apps: cmus feh fonts zsh termite tmux irssi vim vimperator dev
 
 cmus:
 
@@ -163,6 +162,12 @@ zsh:
 	@ln -fs ~/.zprezto/runcoms/zshenv    ~/.zshenv
 	@ln -fs ~/.zprezto/runcoms/zshrc     ~/.zshrc
 
+termite:
+
+	@echo "Termite..."
+	@mkdir -p ~/.config/termite
+	@ln -fs $(termite)/config ~/.config/termite/config
+
 tmux:
 
 	@echo "Tmux..."
@@ -192,11 +197,11 @@ vim:
 vimperator:
 
 	@echo "Vimperator..."
-	@ln -fs "$(ffox)/vimperatorrc" ~/.vimperatorrc
+	@ln -fs $(firefox)/vimperatorrc ~/.vimperatorrc
 
 dev:
 
 	@echo "Dev..."
 	@ln -fs "$(dev)/jshintrc" ~/.jshintrc
 
-.PHONY: check crux chromebook osx apps cmus feh fonts zsh tmux irssi vim vimperator dev
+.PHONY: check crux chromebook osx apps cmus feh fonts zsh termite tmux irssi vim vimperator dev

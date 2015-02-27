@@ -31,11 +31,9 @@ URxvt.letterSpace:        0
 ! FONTS
 ! -----------------------------
 
-URxvt.font:     -ypn-envypn-medium-r-normal--15-*-*-*-*-*-*-*,\
-                -lucy-tewi-bold-r-normal--11-*-*-*-*-*-*-*
-
-URxvt.boldFont: -ypn-envypn-medium-r-normal--15-*-*-*-*-*-*-*,\
-                -lucy-tewi-bold-r-normal--11-*-*-*-*-*-*-*
+URxvt.font:     xft:Envy Code R:style=Regular
+URxvt.boldFont: xft:Envy Code R:style=Bold
+URxvt.italicFont: xft:Envy Code R:style=Italic
 
 ! -----------------------------
 ! PERL EXTENSIONS

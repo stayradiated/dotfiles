@@ -246,7 +246,7 @@ function! ClipboardYank()
   if has("unix")
     call system('pbcopy', @@)
   else
-    call system('xsel -i', @@)
+    call system('xsel -b', @@)
   endif
 endfunction
 
@@ -254,7 +254,7 @@ function! ClipboardPaste()
   if has("unix")
     let @@ = system('pbpaste')
   else
-    let @@ = system('xsel -o')
+    let @@ = system('xsel -b')
   endif
 endfunction
 
