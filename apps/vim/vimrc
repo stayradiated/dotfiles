@@ -27,6 +27,7 @@ NeoBundle 'w0ng/vim-hybrid'
 NeoBundle 'whatyouhide/vim-gotham'
 NeoBundle 'noahfrederick/vim-noctu'
 NeoBundle 'reedes/vim-colors-pencil'
+NeoBundle 'lucy/term.vim'
 
 " Extensions
 NeoBundle 'Shougo/unite.vim'
@@ -115,7 +116,7 @@ set smartcase            " override ignorecase if upper case typed
 
 " Colours
 set background=dark
-colorscheme pencil
+colorscheme termorrow
 
 
 " Mapping
