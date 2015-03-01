@@ -63,7 +63,7 @@ function print_left () {
 
 function print_right () {
   r="%{r}"
-  [[ $essid ]] && r="$r  %{F$c2}$net $essid"
+  [[ $essid ]] && r="$r  %{F$c5}$net $essid"
 
   r="$r  "
   if [[ $battery_charge -lt 20 ]]; then
@@ -79,7 +79,7 @@ function print_right () {
   r="$r $battery_charge%%"
 
   r="$r  %{F$c4}$cal $date"
-  r="$r  %{F$c3}$clk $time"
+  r="$r  %{F$c6}$clk $time"
   r="$r  %{F-}"
 }
 
@@ -92,11 +92,11 @@ function print_center () {
     case $item in
       O*)
         # focused occupied
-        c="$c%{F$c12} $dot %{B- U-}"
+        c="$c%{F$c0} $dot %{B- U-}"
         ;;
       F*)
         # focused empty
-        c="$c%{F$c13} $dtt %{B- U-}"
+        c="$c%{F$c0} $dtt %{B- U-}"
         ;;
       o*)
         # occupied

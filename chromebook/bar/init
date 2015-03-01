@@ -32,7 +32,7 @@ BAR_SIZE='1366x25+0+0'
 BAR_FONT_1='-misc-tamzen-medium-r-normal--14-*-*-*-*-*-*-*'
 BAR_FONT_2='-misc-stlarch-medium-r-normal--10-*-*-*-*-*-*-*'
 BAR_FG='#FF232328'
-BAR_BG='#FFD8E2EB'
+BAR_BG='#FFC5CED6'
 BAR_OPTIONS="-g $BAR_SIZE -f $BAR_FONT_1,$BAR_FONT_2 -B $BAR_BG -F $BAR_FG -p"
 
 cat $PANEL_FIFO | $BAR_SCRIPT | bar $BAR_OPTIONS
