@@ -24,6 +24,10 @@ while read -r line ; do
       date="${line#?}"
       print_right
       ;;
+    V*)
+      volume="${line#?}"
+      print_right
+      ;;
     T*)
       title="${line#?}"
       print_left

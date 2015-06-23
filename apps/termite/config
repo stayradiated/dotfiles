@@ -7,7 +7,7 @@ allow_bold = false
 dynamic_title = true
 urgent_on_bell = true
 clickable_url = true
-font = envypn 11
+font = Envy Code R 13
 scrollback_lines = 1000
 search_wrap = true
 #icon_name = terminal
@@ -28,39 +28,8 @@ browser = google-chrome-stable
 # emit escape sequences for other keys modified by Control
 #modify_other_keys = false
 
-[colors]
-#cursor = #dcdccc
-foreground = #dcdccc
-foreground_bold = #ffffff
-background = #3f3f3f
-
-# 20% background transparency (requires a compositor)
-#background = rgba(63, 63, 63, 0.8)
-
-# if unset, will reverse foreground and background
-highlight = #2f2f2f
-
-# colors from color0 to color254 can be set
-color0 = #3f3f3f
-color1 = #705050
-color2 = #60b48a
-color3 = #dfaf8f
-color4 = #506070
-color5 = #dc8cc3
-color6 = #8cd0d3
-color7 = #dcdccc
-color8 = #709080
-color9 = #dca3a3
-color10 = #c3bf9f
-color11 = #f0dfaf
-color12 = #94bff3
-color13 = #ec93d3
-color14 = #93e0e3
-color15 = #ffffff
-
 [hints]
 padding = 15
-#font = Monospace 12
 foreground = #dcdccc
 background = #3f3f3f
 active_foreground = #e68080
@@ -69,4 +38,64 @@ border = #3f3f3f
 border_width = 0.5
 roundness = 2.0
 
-# vim: ft=dosini cms=#%s
+# Dark
+[colors]
+# Base
+background = #212121
+foreground = #d9d9d9
+cursorColor = #20bbfc
+# Black
+color0 = #212121
+color8 = #424242
+# Red
+color1 = #c30771
+color9 = #fb007a
+# Green
+color2 = #10a778
+color10 = #5fd7af
+# Yellow
+color3 = #a89c14
+color11 = #f3e430
+# Blue
+color4 = #008ec4
+color12 = #20bbfc
+# Magenta
+color5 = #523c79
+color13 = #6855de
+# Cyan
+color6 = #20a5ba
+color14 = #4fb8cc
+# White
+color7 = #d9d9d9
+color15 = #f1f1f1
+
+# Light
+[colors]
+# Base
+background = #f1f1f1
+foreground = #424242
+cursorColor = #20bbfc
+# Black
+color0 = #212121
+color8 = #424242
+# Red
+color1 = #c30771
+color9 = #fb007a
+# Green
+color2 = #10a778
+color10 = #5fd7af
+# Yellow
+color3 = #a89c14
+color11 = #f3e430
+# Blue
+color4 = #008ec4
+color12 = #20bbfc
+# Magenta
+color5 = #523c79
+color13 = #6855de
+# Cyan
+color6 = #20a5ba
+color14 = #4fb8cc
+# White
+color7 = #d9d9d9
+color15 = #f1f1f1

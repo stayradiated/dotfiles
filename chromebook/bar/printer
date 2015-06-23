@@ -45,12 +45,14 @@ ard=$(echo -e '\ue026') # arrow down
 pac=$(echo -e '\ue02A') # pacman
 dot=$(echo -e '\ue057') # square
 dtt=$(echo -e '\ue005') # partial
+vol=$(echo -e '\ue05d') # volume
 
 battery_status=''
 battery_charge=''
 time=''
 date=''
 title=''
+volume=''
 
 l=''
 c=''
@@ -78,6 +80,7 @@ function print_right () {
   fi
   r="$r $battery_charge%%"
 
+  r="$r  %{F$c6}$vol $volume%%"
   r="$r  %{F$c4}$cal $date"
   r="$r  %{F$c6}$clk $time"
   r="$r  %{F-}"

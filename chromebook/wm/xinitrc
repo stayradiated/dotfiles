@@ -15,6 +15,5 @@ syndaemon -t -k -i 2 &
 export PANEL_FIFO=/tmp/panel-fifo
 $HOME/dotfiles/chromebook/bar/init &
 
-sxhkd &
-urxvtd -q -o -f &
+sxhkd -m 1 &
 exec bspwm

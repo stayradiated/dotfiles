@@ -27,6 +27,9 @@ battery -s -i 15 -f 'P%i' | uq > $PANEL_FIFO &
 # Current wifi status
 essid -w wlp1s0 -s -i 5 -f 'X%s' | uq > $PANEL_FIFO &
 
+# Volume
+volume -s -i 2 -f 'V%i' | uq > $PANEL_FIFO &
+
 # Run bar
 BAR_SIZE='1366x25+0+0'
 BAR_FONT_1='-misc-tamzen-medium-r-normal--14-*-*-*-*-*-*-*'

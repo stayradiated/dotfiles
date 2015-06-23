@@ -36,7 +36,7 @@ NeoBundle 'jeetsukumaran/vim-filebeagle'
 NeoBundle 'tpope/vim-dispatch'
 NeoBundle 'tpope/vim-sensible'
 NeoBundle 'christoomey/vim-tmux-navigator'
-NeoBundle 'zhaocai/GoldenView.Vim'
+" NeoBundle 'zhaocai/GoldenView.Vim'
 NeoBundle 'szw/vim-ctrlspace'
 NeoBundle 'sjl/gundo.vim'
 
@@ -61,6 +61,7 @@ NeoBundle 'fatih/vim-go'
 NeoBundle 'elzr/vim-json'
 NeoBundle 'cespare/vim-toml'
 NeoBundle 'cespare/vim-go-templates'
+NeoBundle 'jeroenbourgois/vim-actionscript'
 
 call neobundle#end()
 
@@ -116,7 +117,7 @@ set smartcase            " override ignorecase if upper case typed
 
 " Colours
 set background=dark
-colorscheme termorrow
+colorscheme pencil
 
 
 " Mapping
@@ -243,15 +244,15 @@ endfunction
 " -----------------------------------------------------------------------------
 
 function! ClipboardYank()
-  if has("unix")
+  if has('mac')
     call system('pbcopy', @@)
   else
-    call system('xsel -b', @@)
+    call system('xsel -i -b', @@)
   endif
 endfunction
 
 function! ClipboardPaste()
-  if has("unix")
+  if has('mac')
     let @@ = system('pbpaste')
   else
     let @@ = system('xsel -b')

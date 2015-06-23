@@ -110,7 +110,7 @@ super + shift + {Left,Right,Up,Down}
 
 # Open terminal
 super + Return
-    urxvt
+    termite
 
 # Launch dmenu
 super + space
