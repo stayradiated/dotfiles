@@ -116,7 +116,7 @@ set ignorecase           " case insensitive searching
 set smartcase            " override ignorecase if upper case typed
 
 " Colours
-set background=dark
+set background=light
 colorscheme pencil
 
 
@@ -202,7 +202,7 @@ vnoremap <leader>s :%s/\%V<c-r><c-w>/
 let g:go_fmt_command = "goimports"
 
 " Syntastic
-let g:syntastic_javascript_checkers=['jsxhint']
+let g:syntastic_javascript_checkers=['eslint']
 let g:syntastic_json_checkers=['jsonlint']
 let g:syntastic_coffee_coffeelint_args='-f ~/.lint.json'
 let g:syntastic_error_symbol = '✗'

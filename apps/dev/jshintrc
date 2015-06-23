@@ -31,7 +31,7 @@
     "debug"         : false,
     "eqnull"        : true,
     "es5"           : false,
-    "esnext"        : false,
+    "esnext"        : true,
     "moz"           : false,
 
     "evil"          : false,

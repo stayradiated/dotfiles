@@ -146,7 +146,7 @@ fonts:
 	fi;
 	@mkdir -p ~/.fonts
 	@ln -fs "$(fonts)/tewi/*.bdf" ~/.fonts/
-	@ln -fs "$(fonts)/tamzen/*.bdf" ~/.fonts/
+	@ln -fs "$(fonts)/tamzen/bdf/*.bdf" ~/.fonts/
 	@ln -fs "$(fonts)/envypn/*.pcf" ~/.fonts/
 
 zsh:
