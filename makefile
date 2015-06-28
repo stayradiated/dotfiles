@@ -28,6 +28,7 @@ check:
 # Vim
 	@if test -d ~/.vim; then echo ".vim exists"; fi;
 	@if test -d ~/.vimrc; then echo ".vimrc exists"; fi;
+	@if test -d ~/.nvimrc; then echo ".nvimrc exists"; fi;
 
 # Irssi
 	@if test -d ~/.irssi; then echo ".irssi exists"; fi;
@@ -186,6 +187,7 @@ vim:
 	@mkdir -p "$(vim)/undo"
 
 	@ln -fs "$(vim)/vimrc" ~/.vimrc
+	@ln -fs "$(vim)/vimrc" ~/.nvimrc
 	@if test ! -d ~/.vim; then\
 		ln -fs "$(vim)" ~/.vim;\
 	fi;

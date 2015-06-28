@@ -1,1 +1,2 @@
+#!/bin/sh
 feh  --bg-scale '/home/stayrad/dotfiles/apps/feh/penguins-by-edinatw.jpg' 

@@ -129,6 +129,9 @@ let mapleader = " "
 " Remap Tab to %
 map <BS> %
 
+" Escape terminal mode
+tnoremap <leader>e <c-\><c-n>
+
 " Toggle fold
 nnoremap <leader><space> za
 
