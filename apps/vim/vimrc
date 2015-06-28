@@ -36,7 +36,6 @@ NeoBundle 'jeetsukumaran/vim-filebeagle'
 NeoBundle 'tpope/vim-dispatch'
 NeoBundle 'tpope/vim-sensible'
 NeoBundle 'christoomey/vim-tmux-navigator'
-" NeoBundle 'zhaocai/GoldenView.Vim'
 NeoBundle 'szw/vim-ctrlspace'
 NeoBundle 'sjl/gundo.vim'
 
@@ -53,7 +52,7 @@ NeoBundle 'godlygeek/tabular'
 
 " Languages
 NeoBundle 'kchmck/vim-coffee-script'
-NeoBundle 'nelstrom/vim-markdown-folding'
+" NeoBundle 'nelstrom/vim-markdown-folding'
 NeoBundle 'pangloss/vim-javascript'
 NeoBundle 'digitaltoad/vim-jade'
 NeoBundle 'mxw/vim-jsx'
@@ -116,6 +115,9 @@ set ignorecase           " case insensitive searching
 set smartcase            " override ignorecase if upper case typed
 
 " Colours
+
+let g:pencil_terminal_italics=1
+let g:pencil_spell_undercurl=1
 set background=light
 colorscheme pencil
 
