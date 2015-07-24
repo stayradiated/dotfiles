@@ -22,45 +22,46 @@ NeoBundle 'Shougo/vimproc.vim', {
 \ }
 
 " Themes
-NeoBundle 'stayradiated/vim-termorrow'
-NeoBundle 'w0ng/vim-hybrid'
-NeoBundle 'whatyouhide/vim-gotham'
-NeoBundle 'noahfrederick/vim-noctu'
-NeoBundle 'reedes/vim-colors-pencil'
-NeoBundle 'lucy/term.vim'
+" NeoBundle 'stayradiated/vim-termorrow'
+" NeoBundle 'w0ng/vim-hybrid'
+" NeoBundle 'whatyouhide/vim-gotham'
+" NeoBundle 'noahfrederick/vim-noctu'
+" NeoBundle 'reedes/vim-colors-pencil'
+" NeoBundle 'lucy/term.vim'
+NeoBundle 'chriskempson/base16-vim'
 
 " Extensions
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/neomru.vim'
 NeoBundle 'jeetsukumaran/vim-filebeagle'
-NeoBundle 'tpope/vim-dispatch'
+" NeoBundle 'tpope/vim-dispatch'
 NeoBundle 'tpope/vim-sensible'
 NeoBundle 'christoomey/vim-tmux-navigator'
-NeoBundle 'szw/vim-ctrlspace'
-NeoBundle 'sjl/gundo.vim'
+" NeoBundle 'szw/vim-ctrlspace'
+" NeoBundle 'sjl/gundo.vim'
 
 " Editing
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'tpope/vim-repeat'
-NeoBundle 'tpope/vim-abolish'
-NeoBundle 'tpope/vim-fugitive'
+" NeoBundle 'tpope/vim-abolish'
+" NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-unimpaired'
-NeoBundle 'mattn/emmet-vim'
+" NeoBundle 'mattn/emmet-vim'
 NeoBundle 'tomtom/tcomment_vim'
 NeoBundle 'godlygeek/tabular'
 
 " Languages
-NeoBundle 'kchmck/vim-coffee-script'
+" NeoBundle 'kchmck/vim-coffee-script'
 " NeoBundle 'nelstrom/vim-markdown-folding'
 NeoBundle 'pangloss/vim-javascript'
-NeoBundle 'digitaltoad/vim-jade'
-NeoBundle 'mxw/vim-jsx'
+" NeoBundle 'digitaltoad/vim-jade'
+" NeoBundle 'mxw/vim-jsx'
 NeoBundle 'fatih/vim-go'
 NeoBundle 'elzr/vim-json'
-NeoBundle 'cespare/vim-toml'
-NeoBundle 'cespare/vim-go-templates'
-NeoBundle 'jeroenbourgois/vim-actionscript'
+" NeoBundle 'cespare/vim-toml'
+" NeoBundle 'cespare/vim-go-templates'
+" NeoBundle 'jeroenbourgois/vim-actionscript'
 
 call neobundle#end()
 
@@ -75,15 +76,13 @@ NeoBundleCheck
 " General
 set completeopt-=preview " don't show preview window
 set hidden               " hide when switching buffers, don't unload
-set ttyfast              " performance?
-set number               " show absolute line number on current line
 set spelllang=en_nz      " spell check with New Zealand English
 set title                " use filename in window title
 set gdefault             " replace everything by default
 set visualbell           " stop the beep
 set colorcolumn=80       " for cleaner code
 set showtabline=0        " hide tab line
-set mouse=a
+set synmaxcol=120        " Limit syntax highlighting
 
 " Backup swap files
 set backup
@@ -105,27 +104,26 @@ set foldmethod=marker    " collapse code using markers
 
 " Tabs
 set expandtab            " replace tabs with spaces
-set shiftwidth=2         " spaces for autoindenting
-set softtabstop=2        " spaces for editing, e.g. <Tab> or <BS>
-set tabstop=2            " spaces for <Tab>
+set shiftwidth=4         " spaces for autoindenting
+set softtabstop=4        " spaces for editing, e.g. <Tab> or <BS>
+set tabstop=4            " spaces for <Tab>
 
 " Searches
 set hlsearch             " highlight search results
 set ignorecase           " case insensitive searching
 set smartcase            " override ignorecase if upper case typed
 
-" Colours
-
+" Colourscheme
 let g:pencil_terminal_italics=1
 let g:pencil_spell_undercurl=1
-set background=light
-colorscheme pencil
-
+let g:hybrid_use_Xresources = 1
+set background=dark
+colorscheme base16-ocean
 
 " Mapping
 " -----------------------------------------------------------------------------
 
-" Map Leader
+" Map Leader to space
 let mapleader = " "
 
 " Remap Tab to %
@@ -179,7 +177,6 @@ nnoremap <leader>e :Errors<CR>
 
 " Unite.vim
 nnoremap <leader>t :<C-u>Unite -no-split -buffer-name=files   -start-insert file_rec/async<CR>
-" nnoremap <leader>f :<C-u>Unite -no-split -buffer-name=files   -start-insert file<CR>
 nnoremap <leader>b :<C-u>Unite -no-split -buffer-name=buffer  -start-insert buffer<CR>
 nnoremap <leader>/ :<C-u>Unite -no-split -buffer-name=buffer  -start-insert line<CR>
 nnoremap <leader>a :<C-u>Unite -no-split -buffer-name=buffer  -start-insert grep:.<CR>
@@ -189,11 +186,6 @@ nnoremap <silent> n nzz
 nnoremap <silent> N Nzz
 nnoremap <silent> * *zz
 nnoremap <silent> # #zz
-
-" GoldenView
-nmap <leader>x <Plug>GoldenViewSplit
-nmap <silent> <C-N> <Plug>GoldenViewNext
-nmap <silent> <C-P> <Plug>GoldenViewPrevious
 
 " Quick search
 nnoremap <leader>r :%s/<C-r><C-w>/
@@ -207,17 +199,11 @@ vnoremap <leader>s :%s/\%V<c-r><c-w>/
 let g:go_fmt_command = "goimports"
 
 " Syntastic
-let g:syntastic_javascript_checkers=['eslint']
+let g:syntastic_javascript_checkers=['jshint', 'eslint']
 let g:syntastic_json_checkers=['jsonlint']
 let g:syntastic_coffee_coffeelint_args='-f ~/.lint.json'
 let g:syntastic_error_symbol = '✗'
 let g:syntastic_warning_symbol = '!'
-
-" VimFiler
-" let g:vimfiler_as_default_explorer = 1
-
-" GoldenView
-let g:goldenview__enable_default_mapping = 0
 
 " Unite.vim
 let g:unite_source_history_yank_enable = 1
@@ -269,13 +255,10 @@ endfunction
 
 " Markdown
 autocmd BufNewFile,BufRead *.md set filetype=markdown
-autocmd FileType markdown setlocal ts=4 sw=4 sts=4 tw=79
-
-" CoffeeScript
-autocmd FileType coffee setlocal foldmethod=indent nofoldenable
+autocmd FileType markdown setlocal tw=79
 
 " Silverstripe
 autocmd BufNewFile,BufRead *.ss set filetype=html
 
-" JSON
-autocmd BufRead,BufNewFile *.json set filetype=json
+" Go
+autocmd FileType go setlocal ts=2 sw=2 sts=2

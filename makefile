@@ -146,9 +146,11 @@ fonts:
 		git clone https://github.com/lucy/tewi-font "$(fonts)/tewi";\
 	fi;
 	@mkdir -p ~/.fonts
-	@ln -fs "$(fonts)/tewi/*.bdf" ~/.fonts/
-	@ln -fs "$(fonts)/tamzen/bdf/*.bdf" ~/.fonts/
-	@ln -fs "$(fonts)/envypn/*.pcf" ~/.fonts/
+	@ln -fs "$(fonts)/tewi/tewi-bold-11.bdf" ~/.fonts/
+	@ln -fs "$(fonts)/tewi/tewi-normal-11.bdf" ~/.fonts/
+	@ln -fs "$(fonts)/tamzen/bdf/Tamzen7x14b.bdf" ~/.fonts/
+	@ln -fs "$(fonts)/tamzen/bdf/Tamzen7x14r.bdf" ~/.fonts/
+	@ln -fs "$(fonts)/envypn/envypn7x15.pcf" ~/.fonts/
 
 zsh:
 

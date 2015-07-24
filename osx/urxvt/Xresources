@@ -1,17 +1,16 @@
 ! Appearence
 urxvt.scrollBar:       false
 urxvt.internalBorder:  4
-URxvt.termName:        rxvt-unicode-256color
+URxvt.termName:        rxvt
 
 ! Plugins
-urxvt.perl-lib: /Volumes/Home/dotfiles/apps/urxvt/plugins
-urxvt.perl-ext-common:  default,-selection-popup,-option-popup,clipboard,sudolikeaboss
+urxvt.perl-lib: /Users/georgeczabania/dotfiles/apps/urxvt/plugins
+urxvt.perl-ext-common:  default,-selection-popup,-option-popup,clipboard
 
 ! Clipboard
 urxvt.keysym.M-c: perl:clipboard:copy
 urxvt.keysym.M-v: perl:clipboard:paste
 urxvt.keysym.M-C-v: perl:clipboard:paste_escaped
-urxvt.keysym.M-slash: perl:sudolikeaboss
 
 urxvt.clipboard.copycmd: pbcopy
 urxvt.clipboard.pastecmd: pbpaste
@@ -28,4 +27,4 @@ urxvt.boldItalicFont: -ypn-envypn-medium-r-normal--15-150-75-75-c-90-iso8859-1,\
                       -*-tewi-medium-*-*--11-*-*-*-*-*-*-*
 
 ! Colors
-#include "/Volumes/Home/dotfiles/apps/urxvt/noctu_colors"
+#include "/Users/georgeczabania/dotfiles/apps/urxvt/chroma_colors"

@@ -20,7 +20,7 @@ done
 # Window colours
 
 # focused window
-bspc config focused_border_color '#9a2f28'
+bspc config focused_border_color '#BF616A'
 
 # unfocused window
 bspc config normal_border_color  '#081f2d'
