@@ -55,7 +55,7 @@ mod2 + bracket{left,right}
     bspc desktop -f {prev,next}
 
 # Split a window in half
-mod2 + mod1 + shift + ctrl + {h,j,k,l}
+mod2 + mod1 + {h,j,k,l}
     bspc window -p {left,down,up,right}
 
 mod2 + ctrl + {_,shift + }space

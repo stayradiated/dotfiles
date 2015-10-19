@@ -22,12 +22,12 @@ NeoBundle 'Shougo/vimproc.vim', {
 \ }
 
 " Themes
-" NeoBundle 'stayradiated/vim-termorrow'
-" NeoBundle 'w0ng/vim-hybrid'
+NeoBundle 'stayradiated/vim-termorrow'
+NeoBundle 'w0ng/vim-hybrid'
 " NeoBundle 'whatyouhide/vim-gotham'
 " NeoBundle 'noahfrederick/vim-noctu'
-" NeoBundle 'reedes/vim-colors-pencil'
-" NeoBundle 'lucy/term.vim'
+NeoBundle 'reedes/vim-colors-pencil'
+NeoBundle 'lucy/term.vim'
 NeoBundle 'chriskempson/base16-vim'
 
 " Extensions
@@ -43,20 +43,25 @@ NeoBundle 'christoomey/vim-tmux-navigator'
 " Editing
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'tpope/vim-repeat'
-" NeoBundle 'tpope/vim-abolish'
-" NeoBundle 'tpope/vim-fugitive'
+NeoBundle 'tpope/vim-abolish'
+NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-unimpaired'
 " NeoBundle 'mattn/emmet-vim'
 NeoBundle 'tomtom/tcomment_vim'
 NeoBundle 'godlygeek/tabular'
+NeoBundle 'rizzatti/dash.vim'
+NeoBundle 'danro/rename.vim'
+
+NeoBundle 'junegunn/fzf'
 
 " Languages
 " NeoBundle 'kchmck/vim-coffee-script'
 " NeoBundle 'nelstrom/vim-markdown-folding'
 NeoBundle 'pangloss/vim-javascript'
+NeoBundle 'mxw/vim-jsx'
+" NeoBundle 'othree/yajs.vim'
 " NeoBundle 'digitaltoad/vim-jade'
-" NeoBundle 'mxw/vim-jsx'
 NeoBundle 'fatih/vim-go'
 NeoBundle 'elzr/vim-json'
 " NeoBundle 'cespare/vim-toml'
@@ -82,7 +87,9 @@ set gdefault             " replace everything by default
 set visualbell           " stop the beep
 set colorcolumn=80       " for cleaner code
 set showtabline=0        " hide tab line
-set synmaxcol=120        " Limit syntax highlighting
+" set synmaxcol=120        " Limit syntax highlighting
+set number
+set relativenumber
 
 " Backup swap files
 set backup
@@ -104,9 +111,9 @@ set foldmethod=marker    " collapse code using markers
 
 " Tabs
 set expandtab            " replace tabs with spaces
-set shiftwidth=4         " spaces for autoindenting
-set softtabstop=4        " spaces for editing, e.g. <Tab> or <BS>
-set tabstop=4            " spaces for <Tab>
+set shiftwidth=2         " spaces for autoindenting
+set softtabstop=2        " spaces for editing, e.g. <Tab> or <BS>
+set tabstop=2            " spaces for <Tab>
 
 " Searches
 set hlsearch             " highlight search results
@@ -117,8 +124,11 @@ set smartcase            " override ignorecase if upper case typed
 let g:pencil_terminal_italics=1
 let g:pencil_spell_undercurl=1
 let g:hybrid_use_Xresources = 1
+
 set background=dark
-colorscheme base16-ocean
+colorscheme termorrow
+" set background=light
+" colorscheme pencil
 
 " Mapping
 " -----------------------------------------------------------------------------
@@ -159,15 +169,16 @@ nnoremap gk j
 
 " Paste mode for terminals
 nnoremap <leader>P :set invpaste paste?<CR>
-vnoremap <leader>y y:call ClipboardYank()<cr>
-vnoremap <leader>d d:call ClipboardYank()<cr>
-nnoremap <leader>p :call ClipboardPaste()<cr>p
+vnoremap <leader>y y:call ClipboardYank()<CR>
+vnoremap <leader>d d:call ClipboardYank()<CR>
+nnoremap <leader>p :call ClipboardPaste()<CR>p
 
 " Quick save
 nnoremap <leader>w :w<CR>
 
 " Shortcut for Tabularize
 vnoremap <leader>t :Tabularize /
+vnoremap <leader>T :Tabularize /:\zs/l0l1<CR>
 
 " Check file for errors
 nnoremap <leader>c :SyntasticCheck<CR>
@@ -175,8 +186,11 @@ nnoremap <leader>c :SyntasticCheck<CR>
 " Show Quickfix window for Syntastic errors
 nnoremap <leader>e :Errors<CR>
 
+" FZF
+nnoremap <leader>t :FZF<CR>
+
 " Unite.vim
-nnoremap <leader>t :<C-u>Unite -no-split -buffer-name=files   -start-insert file_rec/async<CR>
+" nnoremap <leader>t :<C-u>Unite -no-split -buffer-name=files   -start-insert file_rec/async<CR>
 nnoremap <leader>b :<C-u>Unite -no-split -buffer-name=buffer  -start-insert buffer<CR>
 nnoremap <leader>/ :<C-u>Unite -no-split -buffer-name=buffer  -start-insert line<CR>
 nnoremap <leader>a :<C-u>Unite -no-split -buffer-name=buffer  -start-insert grep:.<CR>
@@ -192,18 +206,24 @@ nnoremap <leader>r :%s/<C-r><C-w>/
 nnoremap <leader>R :%s/<C-r><C-a>/
 vnoremap <leader>s :%s/\%V<c-r><c-w>/
 
+" Dash
+nmap <silent> K <Plug>DashSearch
+
 " Plugin Settings
 " ----------------------------------------------------------------------------
 
 " vim-go
-let g:go_fmt_command = "goimports"
+" let g:go_fmt_command = "goimports"
 
 " Syntastic
-let g:syntastic_javascript_checkers=['jshint', 'eslint']
+let g:syntastic_javascript_checkers=['eslint']
+" let g:syntastic_javascript_checkers=['jshint']
 let g:syntastic_json_checkers=['jsonlint']
 let g:syntastic_coffee_coffeelint_args='-f ~/.lint.json'
 let g:syntastic_error_symbol = '✗'
 let g:syntastic_warning_symbol = '!'
+let g:syntastic_html_checkers=['']
+let g:syntastic_always_populate_loc_list = 1
 
 " Unite.vim
 let g:unite_source_history_yank_enable = 1
@@ -230,6 +250,9 @@ function! s:unite_settings()
   " Reload directory contents
   imap <buffer> <C-r>   <Plug>(unite_redraw)
 endfunction
+
+" JSX
+let g:jsx_ext_required = 0
 
 " Functions
 " -----------------------------------------------------------------------------
