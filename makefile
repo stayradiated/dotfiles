@@ -26,9 +26,7 @@ check:
 	@echo 'Checking for files that will be overwritten'
 
 # Vim
-	@if test -d ~/.vim; then echo ".vim exists"; fi;
-	@if test -d ~/.vimrc; then echo ".vimrc exists"; fi;
-	@if test -d ~/.nvimrc; then echo ".nvimrc exists"; fi;
+	@if test -d ~/.config/nvim; then echo ".config/nvim exists"; fi;
 
 # Irssi
 	@if test -d ~/.irssi; then echo ".irssi exists"; fi;
@@ -188,11 +186,10 @@ vim:
 	@mkdir -p "$(vim)/tmp"
 	@mkdir -p "$(vim)/undo"
 
-	@ln -fs "$(vim)/vimrc" ~/.vimrc
-	@ln -fs "$(vim)/vimrc" ~/.nvimrc
-	@if test ! -d ~/.vim; then\
-		ln -fs "$(vim)" ~/.vim;\
+	@if test ! -d ~/.config/nvim; then\
+		ln -fs "$(vim)" ~/.config/nvim;\
 	fi;
+	@ln -fs "$(vim)/vimrc" ~/.config/nvim/init.vim
 
 	@if test ! -d "$(vim)/bundle/neobundle.vim"; then\
 		git clone https://github.com/Shougo/neobundle.vim.git "$(vim)/bundle/neobundle.vim";\
