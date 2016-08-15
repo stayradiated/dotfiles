@@ -109,7 +109,7 @@ set undoreload=10000
 set foldignore=          " don't ignore anything when folding
 set foldlevelstart=99    " no folds closed on open
 set foldmethod=marker    " collapse code using markers
-set foldmarker={,}
+set foldmarker={,}       " set markers
 
 " Tabs
 set expandtab            " replace tabs with spaces
@@ -125,7 +125,7 @@ set smartcase            " override ignorecase if upper case typed
 " Colourscheme
 let g:pencil_terminal_italics=1
 let g:pencil_spell_undercurl=1
-let g:hybrid_use_Xresources = 1
+let g:hybrid_use_Xresources=1
 
 set background=dark
 colorscheme termorrow
