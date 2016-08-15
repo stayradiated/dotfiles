@@ -4,7 +4,7 @@ urxvt.internalBorder:  4
 URxvt.termName:        xterm-256color
 
 ! Plugins
-urxvt.perl-lib: /Users/georgeczabania/dotfiles/apps/urxvt/plugins
+urxvt.perl-lib: /Users/home/dotfiles/apps/urxvt/plugins
 urxvt.perl-ext-common:  default,-selection-popup,-option-popup,clipboard
 
 ! Clipboard
@@ -27,4 +27,4 @@ urxvt.boldItalicFont: -ypn-envypn-medium-r-normal--15-150-75-75-c-90-iso8859-1,\
                       -*-tewi-medium-*-*--11-*-*-*-*-*-*-*
 
 ! Colors
-#include "/Users/georgeczabania/dotfiles/apps/urxvt/poly_colors"
+#include "/Users/home/dotfiles/apps/urxvt/poly_colors"
