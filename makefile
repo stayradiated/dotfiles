@@ -172,6 +172,10 @@ termite:
 tmux:
 
 	@echo "Tmux..."
+	@if test ! -d "~/.tmux/plugins/tpm"; then\
+		mkdir -p ~/.tmux/plugins;\
+		git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm;\
+	fi;
 	@ln -fs "$(tmux)/tmux.conf" ~/.tmux.conf
 
 irrsi:
@@ -189,8 +193,6 @@ vim:
 	@if test ! -d ~/.config/nvim; then\
 		ln -fs "$(vim)" ~/.config/nvim;\
 	fi;
-	@ln -fs "$(vim)/vimrc" ~/.config/nvim/init.vim
-
 	@if test ! -d "$(vim)/bundle/neobundle.vim"; then\
 		git clone https://github.com/Shougo/neobundle.vim.git "$(vim)/bundle/neobundle.vim";\
 	fi;
