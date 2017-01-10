@@ -7,7 +7,7 @@ BAR_SCRIPT=~/dotfiles/chromebook/bar/reader
 mkfifo $PANEL_FIFO
 
 # BSPWM events
-bspc control --subscribe | uq > $PANEL_FIFO &
+bspc subscribe report | uq > $PANEL_FIFO &
 
 # Active window title
 xtitle -sf 'T%s' | uq > $PANEL_FIFO &

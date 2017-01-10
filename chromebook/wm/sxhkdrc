@@ -2,45 +2,49 @@
 # bspwm hotkeys
 #
 
-# Close window
-super + w
-    bspc window -c
+# Close/Kill window
+super + {_,shift + }w
+    bspc node -{c,k}
 
 # Toggle layout between monocle and tiling
-super + t
+super + m
     bspc desktop -l next
 
 # Balance layout so that all windows have the same area
-super + b
-    bspc desktop -B
+# super + b
+#     bspc desktop -B
 
 # Toggle window layout between floating, fullscreen and tiled
-super + {s,f}
-    bspc window -t {floating,fullscreen}
+super + {t,shift + t,s,f}
+    bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
+
+# set the node flags
+super + ctrl + {x,y,z}
+    bspc node -g {locked,sticky,private}
 
 # Tab between the last used window or workspace
 super + {Tab,grave}
-    bspc {window,desktop} -f last
+    bspc {node,desktop} -f last
 
 # Switch window with last used window
 super + apostrophe
-    bspc window -s last
+    bspc node -s last
 
 # Move the focused window into the 'given' window
 super + y
-    bspc window -w last.manual
+    bspc node -w last.manual
 
 # Move a window to the biggest layout on the desktop
-super + m
-    bspc window -s biggest
+# super + m
+#     bspc node -s biggest
 
 # Select a window or move a window
 super + {_,shift + }{h,j,k,l}
-    bspc window -{f,s} {left,down,up,right}
+    bspc node -{f,s} {west,south,north,east}
 
 # Loop through the window frames
 super + {_,shift + }c
-    bspc window -f {next,prev}
+    bspc node -f {next,prev}
 
 # Switch each window with the frame next to it
 super + {comma,period}
@@ -52,24 +56,24 @@ super + bracket{left,right}
 
 # Split a window in half
 super + alt + {h,j,k,l}
-    bspc window -p {left,down,up,right}
+    bspc node -p {left,down,up,right}
 
 super + ctrl + {_,shift + }space
-    bspc {window -p cancel,desktop -c}
+    bspc {node -p cancel,desktop -c}
 
 # Push window
 super + ctrl + {h,j,k,l}
-    bspc window -e {left -50,down +50,up -50,right +50}
+    bspc node -e {left -50,down +50,up -50,right +50}
 
 # Pull window
 super + ctrl + shift + {h,j,k,l}
-    bspc window -e {right -50,up +50,down -50,left +50}
+    bspc node -e {right -50,up +50,down -50,left +50}
 
 super + ctrl + {1-9}
-    bspc window -r 0.{1-9}
+    bspc node -r 0.{1-9}
 
 super + {_,shift + }{1-9, 0}
-    bspc {desktop -f,window -d} ^{1-9,10}
+    bspc {desktop -f,node -d} ^{1-9,10}
 
 ~button1
     bspc pointer -g focus
@@ -110,7 +114,7 @@ super + shift + {Left,Right,Up,Down}
 
 # Open terminal
 super + Return
-    termite
+    alacritty
 
 # Launch dmenu
 super + space

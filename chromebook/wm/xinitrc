@@ -12,8 +12,5 @@ xset fp rehash
 
 syndaemon -t -k -i 2 &
 
-export PANEL_FIFO=/tmp/panel-fifo
-$HOME/dotfiles/chromebook/bar/init &
-
 sxhkd -m 1 &
 exec bspwm
