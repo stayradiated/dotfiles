@@ -23,19 +23,18 @@ NeoBundle 'Shougo/vimproc.vim', {
 
 " Themes
 NeoBundle 'stayradiated/vim-termorrow'
-NeoBundle 'w0ng/vim-hybrid'
+" NeoBundle 'w0ng/vim-hybrid'
 " NeoBundle 'whatyouhide/vim-gotham'
 " NeoBundle 'noahfrederick/vim-noctu'
-NeoBundle 'reedes/vim-colors-pencil'
-NeoBundle 'lucy/term.vim'
-NeoBundle 'chriskempson/base16-vim'
+" NeoBundle 'reedes/vim-colors-pencil'
+" NeoBundle 'lucy/term.vim'
+" NeoBundle 'chriskempson/base16-vim'
 
 " Extensions
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/neomru.vim'
 NeoBundle 'jeetsukumaran/vim-filebeagle'
 " NeoBundle 'tpope/vim-dispatch'
-NeoBundle 'tpope/vim-sensible'
 NeoBundle 'christoomey/vim-tmux-navigator'
 " NeoBundle 'floobits/floobits-neovim'
 " NeoBundle 'sjl/gundo.vim'
@@ -51,9 +50,8 @@ NeoBundle 'tpope/vim-unimpaired'
 " NeoBundle 'mattn/emmet-vim'
 NeoBundle 'tomtom/tcomment_vim'
 NeoBundle 'godlygeek/tabular'
-NeoBundle 'rizzatti/dash.vim'
+" NeoBundle 'rizzatti/dash.vim'
 NeoBundle 'danro/rename.vim'
-
 NeoBundle 'junegunn/fzf'
 
 " Languages
@@ -88,9 +86,10 @@ set gdefault             " replace everything by default
 set visualbell           " stop the beep
 set colorcolumn=80       " for cleaner code
 set showtabline=0        " hide tab line
-" set synmaxcol=120        " Limit syntax highlighting
+" set synmaxcol=120      " Limit syntax highlighting
 set number
 set relativenumber
+set inccommand=split     " live substitution
 
 " Backup swap files
 set backup
@@ -188,7 +187,10 @@ vnoremap <leader>T :Tabularize /:\zs/l0l1<CR>
 nnoremap <leader>c :SyntasticCheck<CR>
 
 " Show Quickfix window for Syntastic errors
-nnoremap <leader>e :Errors<CR>
+nnoremap <leader>E :Errors<CR>
+
+" Edit current file path
+map <Leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
 
 " FZF
 nnoremap <leader>t :FZF<CR>
