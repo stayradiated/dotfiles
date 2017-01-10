@@ -98,6 +98,10 @@ set backupskip=/tmp/*,/private/tmp/*
 set directory=~/.config/nvim/tmp
 set writebackup
 
+" Fix for webpack-dev-server not catching file writes
+" https://github.com/webpack/webpack/issues/781
+set backupcopy=yes
+
 " Infinite undo
 set undofile
 set undodir=~/.config/nvim/undo
@@ -126,9 +130,9 @@ let g:pencil_terminal_italics=1
 let g:pencil_spell_undercurl=1
 let g:hybrid_use_Xresources=1
 
-set background=dark
-colorscheme termorrow
-" set background=light
+" set background=dark
+colorscheme pencil
+set background=light
 " colorscheme pencil
 
 " Mapping
@@ -242,7 +246,7 @@ call unite#custom#profile('default', 'context', { 'marked_icon':'✓'})
 
 " Let's use pt
 let g:unite_source_grep_command = 'pt'
-let g:unite_source_grep_default_opts = '--nogroup --nocolor -i'
+let g:unite_source_grep_default_opts = '--home-ptignore --nogroup --nocolor -i'
 let g:unite_source_grep_recursive_opt = ''
 let g:unite_source_grep_encoding = 'utf-8'
 
