@@ -228,10 +228,9 @@ let g:syntastic_go_checkers = ['golint', 'go vet', 'errcheck']
 let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
 
 " Syntastic
-let g:syntastic_javascript_checkers=['eslint']
-" let g:syntastic_javascript_checkers=['jshint']
+" let g:syntastic_javascript_checkers=['eslint']
+let g:syntastic_javascript_checkers=['standard']
 let g:syntastic_json_checkers=['jsonlint']
-let g:syntastic_coffee_coffeelint_args='-f ~/.lint.json'
 let g:syntastic_error_symbol = '✗'
 let g:syntastic_warning_symbol = '!'
 let g:syntastic_html_checkers=['']
