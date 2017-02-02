@@ -1,6 +1,6 @@
 
 # Vim
-/apps/vim/bundle/*
+/apps/vim/bundles/*
 /apps/vim/tmp/*
 /apps/vim/undo/*
 
