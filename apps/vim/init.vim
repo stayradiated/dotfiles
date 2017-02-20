@@ -130,9 +130,9 @@ let g:pencil_spell_undercurl=1
 let g:hybrid_use_Xresources=1
 
 " set background=dark
-" colorscheme pencil
-" set background=light
-colorscheme termorrow
+colorscheme pencil
+set background=light
+" colorscheme termorrow
 
 " Mapping
 " -----------------------------------------------------------------------------
@@ -228,6 +228,7 @@ let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
 
 " Syntastic
 let g:syntastic_javascript_checkers=['eslint']
+let g:syntastic_javascript_eslint_args=['-c', 'mishguru']
 let g:syntastic_json_checkers=['jsonlint']
 let g:syntastic_error_symbol = '✗'
 let g:syntastic_warning_symbol = '!'
