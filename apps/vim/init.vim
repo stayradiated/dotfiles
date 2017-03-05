@@ -5,12 +5,12 @@
 if &compatible
   set nocompatible
 endif
-set runtimepath+=$HOME/src/github.com/Shougo/dein.vim/
+set runtimepath+=$HOME/.config/nvim/dein.vim/
 
 if dein#load_state('$HOME/.config/nvim/bundles')
   call dein#begin('$HOME/.config/nvim/bundles')
 
-  call dein#add('$HOME/src/github.com/Shougo/dein.vim')
+  call dein#add('$HOME/.config/nvim/dein.vim')
   " call dein#add('Shougo/neocomplete.vim')
 
   " Themes
@@ -129,9 +129,9 @@ let g:pencil_terminal_italics=1
 let g:pencil_spell_undercurl=1
 let g:hybrid_use_Xresources=1
 
-" set background=dark
+set background=dark
 colorscheme pencil
-set background=light
+" set background=light
 " colorscheme termorrow
 
 " Mapping
@@ -228,7 +228,7 @@ let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
 
 " Syntastic
 let g:syntastic_javascript_checkers=['eslint']
-let g:syntastic_javascript_eslint_args=['-c', 'mishguru']
+let g:syntastic_javascript_eslint_args=['-c', 'stayradiated']
 let g:syntastic_json_checkers=['jsonlint']
 let g:syntastic_error_symbol = '✗'
 let g:syntastic_warning_symbol = '!'
@@ -276,7 +276,7 @@ function! ClipboardPaste()
 endfunction
 
 function! Standard()
-  let g:syntastic_javascript_checkers=['standard']
+  let g:syntastic_javascript_eslint_args=['-c', 'mishguru']
   SyntasticCheck
 endfunction
 

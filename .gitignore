@@ -3,6 +3,7 @@
 /apps/vim/bundles/*
 /apps/vim/tmp/*
 /apps/vim/undo/*
+/apps/vim/dein.vim/*
 
 # Fonts
 /apps/fonts/tamzen

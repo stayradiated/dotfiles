@@ -193,8 +193,8 @@ vim:
 	@if test ! -d ~/.config/nvim; then\
 		ln -fs "$(vim)" ~/.config/nvim;\
 	fi;
-	@if test ! -d "$(vim)/bundle/neobundle.vim"; then\
-		git clone https://github.com/Shougo/neobundle.vim.git "$(vim)/bundle/neobundle.vim";\
+	@if test ! -d "$(vim)/dein.vim"; then\
+		git clone https://github.com/Shougo/dein.vim.git "$(vim)/dein.vim";\
 	fi;
 
 vimperator:
