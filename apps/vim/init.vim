@@ -34,7 +34,7 @@ if dein#load_state('$HOME/.config/nvim/bundles')
 
   " Editing
   call dein#add('scrooloose/syntastic')
-  call dein#add('mtscout6/syntastic-local-eslint.vim')
+  " call dein#add('mtscout6/syntastic-local-eslint.vim')
   call dein#add('tpope/vim-repeat')
   call dein#add('tpope/vim-abolish')
   call dein#add('tpope/vim-fugitive')
@@ -130,9 +130,9 @@ let g:pencil_spell_undercurl=1
 let g:hybrid_use_Xresources=1
 
 set background=dark
-colorscheme pencil
+" colorscheme pencil
 " set background=light
-" colorscheme termorrow
+colorscheme termorrow
 
 " Mapping
 " -----------------------------------------------------------------------------
@@ -228,7 +228,7 @@ let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
 
 " Syntastic
 let g:syntastic_javascript_checkers=['eslint']
-let g:syntastic_javascript_eslint_args=['-c', 'stayradiated']
+let g:syntastic_javascript_eslint_args=['-c', 'mishguru', '--ext', '.js,.jsx']
 let g:syntastic_json_checkers=['jsonlint']
 let g:syntastic_error_symbol = '✗'
 let g:syntastic_warning_symbol = '!'
