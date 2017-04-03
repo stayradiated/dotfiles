@@ -129,10 +129,10 @@ let g:pencil_terminal_italics=1
 let g:pencil_spell_undercurl=1
 let g:hybrid_use_Xresources=1
 
-set background=dark
-" colorscheme pencil
-" set background=light
-colorscheme termorrow
+" set background=dark
+colorscheme pencil
+set background=light
+" colorscheme termorrow
 
 " Mapping
 " -----------------------------------------------------------------------------
@@ -275,7 +275,7 @@ function! ClipboardPaste()
   endif
 endfunction
 
-function! Standard()
+function! MishGuru()
   let g:syntastic_javascript_eslint_args=['-c', 'mishguru', '--ext', '.js,.jsx']
   SyntasticCheck
 endfunction
