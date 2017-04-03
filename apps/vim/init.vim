@@ -228,7 +228,7 @@ let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
 
 " Syntastic
 let g:syntastic_javascript_checkers=['eslint']
-let g:syntastic_javascript_eslint_args=['-c', 'mishguru', '--ext', '.js,.jsx']
+let g:syntastic_javascript_eslint_args=['-c', 'stayradiated', '--ext', '.js,.jsx']
 let g:syntastic_json_checkers=['jsonlint']
 let g:syntastic_error_symbol = '✗'
 let g:syntastic_warning_symbol = '!'
@@ -276,7 +276,7 @@ function! ClipboardPaste()
 endfunction
 
 function! Standard()
-  let g:syntastic_javascript_eslint_args=['-c', 'mishguru']
+  let g:syntastic_javascript_eslint_args=['-c', 'mishguru', '--ext', '.js,.jsx']
   SyntasticCheck
 endfunction
 
