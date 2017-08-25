@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+# Config
+bspc config top_padding         25
+bspc config borderless_monocle  true
+bspc config gapless_monocle     true
+bspc config click_to_focus      true
+
+# Create monitors
+bspc monitor -d 1 2 3 4 5 6 7 8 9 10
+
+# Set windows styles
+for desktop in $(bspc query -D); do
+  bspc config -d $desktop border_width 2
+  bspc config -d $desktop window_gap   15
+done
+
+# focused window
+bspc config focused_border_color         '#5986B2'
+
+# unfocused window
+bspc config normal_border_color          '#BF9986'
+
+# preselection border
+bspc config presel_feedback_color        '#B23636'
+
+# export PANEL_FIFO=/tmp/panel-fifo
+# $HOME/dotfiles/chromebook/bar/init &

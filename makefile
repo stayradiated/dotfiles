@@ -6,6 +6,7 @@ osx   := $(dir)/osx
 crux  := $(dir)/crux
 apps  := $(dir)/apps
 cbook := $(dir)/chromebook
+zen   := $(dir)/zenbook
 
 bar     := $(crux)/bar
 cmus    := $(apps)/cmus
@@ -93,6 +94,22 @@ chromebook:
 	@echo "Terminal..."
 	@ln -fs "$(cbook)/urxvt/Xresources" ~/.Xresources
 
+
+# ============================================================================
+# ZENBOOK
+# ============================================================================
+
+zenbook:
+
+# WM
+	@echo "WM..."
+	@ln -fs "$(zen)/wm/xinitrc" ~/.xinitrc
+
+	@mkdir -p ~/.config/bspwm
+	@ln -fs "$(zen)/wm/bspwmrc" ~/.config/bspwm/bspwmrc
+
+	@mkdir -p ~/.config/sxhkd
+	@ln -fs "$(zen)/wm/sxhkdrc" ~/.config/sxhkd/sxhkdrc
 
 # ============================================================================
 # OSX
@@ -207,4 +224,4 @@ dev:
 	@echo "Dev..."
 	@ln -fs "$(dev)/jshintrc" ~/.jshintrc
 
-.PHONY: check crux chromebook osx apps cmus feh fonts zsh termite tmux irssi vim vimperator dev
+.PHONY: check crux chromebook zenbook osx apps cmus feh fonts zsh termite tmux irssi vim vimperator dev
