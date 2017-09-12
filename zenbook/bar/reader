@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+
+source $(dirname $0)/printer
+
+while read -r line ; do
+  case $line in
+    X*)
+      essid="${line#?}"
+      print_right
+      ;;
+    B*)
+      battery_status="${line#?}"
+      print_right
+      ;;
+    P*)
+      battery_charge="${line#?}"
+      print_right
+      ;;
+    C*)
+      time="${line#?}"
+      print_right
+      ;;
+    D*)
+      date="${line#?}"
+      print_right
+      ;;
+    V*)
+      volume="${line#?}"
+      print_right
+      ;;
+    T*)
+      title="${line#?}"
+      print_left
+      ;;
+    W*)
+      print_center
+      ;;
+  esac
+  echo "$l $c $r"
+done

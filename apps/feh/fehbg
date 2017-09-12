@@ -1,2 +1,2 @@
 #!/bin/sh
-feh  --bg-scale '/home/george/dotfiles/apps/feh/penguins-by-edinatw.jpg' 
+feh  --bg-fill '/home/george/Downloads/1f3542.png' 

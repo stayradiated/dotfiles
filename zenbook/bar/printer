@@ -1,0 +1,115 @@
+#!/usr/bin/env/bash
+
+# Takes the input from reader and returns the formatted output
+
+# black
+c0='#FF1f3542'
+c8='#FF182c35'
+
+# red
+c1='#FF5c7190'
+c9='#FF404e63'
+
+# green
+c2='#FFa0a5b0'
+c10='#FF747880'
+
+# yellow
+c3='#FF6693a6'
+c11='#FF4e707e'
+
+# blue
+c4='#FF574f64'
+c12='#FF3b3644'
+
+# magenta
+c5='#FF1f74a3'
+c13='#FF0d4d6e'
+
+# cyan
+c6='#FFd29a3d'
+c14='#FF9b722d'
+
+# white
+c7='#FFd0cfd9'
+c15='#FF9e9da5'
+
+# Icons
+btd=$(echo -e '\ue03F') # battery discharging
+btc=$(echo -e '\ue09E') # battery charging
+clk=$(echo -e '\ue081') # clock
+cal=$(echo -e '\ue001') # calendar
+net=$(echo -e '\ue048') # wifi
+aru=$(echo -e '\ue023') # arrow up
+ard=$(echo -e '\ue026') # arrow down
+pac=$(echo -e '\ue02A') # pacman
+dot=$(echo -e '\ue057') # square
+dtt=$(echo -e '\ue005') # partial
+vol=$(echo -e '\ue05d') # volume
+
+battery_status=''
+battery_charge=''
+time=''
+date=''
+title=''
+volume=''
+
+l=''
+c=''
+r=''
+
+function print_left () {
+  l="%{l}"
+  [[ $title ]] && l="$l%{F$c6} $title %{F-}"
+}
+
+function print_right () {
+  r="%{r}"
+  [[ $essid ]] && r="$r  %{F$c5}$net $essid"
+
+  r="$r  "
+  if [[ $battery_charge -lt 20 ]]; then
+    r="$r%{F$c1}"
+  else
+    r="$r%{F$c6}"
+  fi
+  if [[ $battery_status == Discharging ]]; then
+    r="$r$btd"
+  else
+    r="$r$btc"
+  fi
+  r="$r $battery_charge%%"
+
+  r="$r  %{F$c6}$vol $volume%%"
+  r="$r  %{F$c4}$cal $date"
+  r="$r  %{F$c6}$clk $time"
+  r="$r  %{F-}"
+}
+
+function print_center () {
+  c='%{c}'
+  IFS=':'
+  set -- ${line#?}
+  while [ $# -gt 0 ] ; do
+    item=$1
+    case $item in
+      O*)
+        # focused occupied
+        c="$c%{F$c0} $dot %{B- U-}"
+        ;;
+      F*)
+        # focused empty
+        c="$c%{F$c0} $dtt %{B- U-}"
+        ;;
+      o*)
+        # occupied
+        c="$c%{F$c8} $dot %{F-}"
+        ;;
+      f*)
+        # empty
+        c="$c%{F$c8} $dtt %{F-}"
+        ;;
+    esac
+    shift
+  done
+}

@@ -87,7 +87,7 @@ set colorcolumn=80       " for cleaner code
 set showtabline=0        " hide tab line
 " set synmaxcol=120      " Limit syntax highlighting
 set number
-set relativenumber
+" set relativenumber
 set inccommand=split     " live substitution
 
 " Backup swap files
@@ -129,10 +129,8 @@ let g:pencil_terminal_italics=1
 let g:pencil_spell_undercurl=1
 let g:hybrid_use_Xresources=1
 
-" set background=dark
-colorscheme pencil
-set background=light
-" colorscheme termorrow
+colorscheme termorrow
+set background=dark
 
 " Mapping
 " -----------------------------------------------------------------------------
@@ -228,7 +226,7 @@ let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
 
 " Syntastic
 let g:syntastic_javascript_checkers=['eslint']
-let g:syntastic_javascript_eslint_args=['-c', 'stayradiated', '--ext', '.js,.jsx']
+let g:syntastic_javascript_eslint_args=['-c', 'mishguru', '--ext', '.js,.jsx']
 let g:syntastic_json_checkers=['jsonlint']
 let g:syntastic_error_symbol = '✗'
 let g:syntastic_warning_symbol = '!'
@@ -275,8 +273,8 @@ function! ClipboardPaste()
   endif
 endfunction
 
-function! MishGuru()
-  let g:syntastic_javascript_eslint_args=['-c', 'mishguru', '--ext', '.js,.jsx']
+function! Lint()
+  let g:syntastic_javascript_eslint_args=['-c', 'stayradiated', '--ext', '.js,.jsx']
   SyntasticCheck
 endfunction
 

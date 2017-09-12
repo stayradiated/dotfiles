@@ -10,10 +10,6 @@ super + {_,shift + }w
 super + m
     bspc desktop -l next
 
-# Balance layout so that all windows have the same area
-# super + b
-#     bspc desktop -B
-
 # Toggle window layout between floating, fullscreen and tiled
 super + {t,shift + t,s,f}
     bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
@@ -34,10 +30,6 @@ super + apostrophe
 super + y
     bspc node -w last.manual
 
-# Move a window to the biggest layout on the desktop
-# super + m
-#     bspc node -s biggest
-
 # Select a window or move a window
 super + {_,shift + }{h,j,k,l}
     bspc node -{f,s} {west,south,north,east}
@@ -54,12 +46,13 @@ super + {comma,period}
 super + bracket{left,right}
     bspc desktop -f {prev,next}
 
-# Split a window in half
-super + alt + {h,j,k,l}
-    bspc node -p {left,down,up,right}
+# Preselect a window half
+super + ctrl + {h,j,k,l}
+    bspc node -p {west,south,north,east}
 
-super + ctrl + {_,shift + }space
-    bspc {node -p cancel,desktop -c}
+# Cancel preselection
+super + ctrl + space
+    bspc node -p cancel
 
 # Push window
 super + ctrl + {h,j,k,l}
@@ -118,7 +111,7 @@ super + Return
 
 # Launch dmenu
 super + space
-    dmenu_run -nb "#d8e2eb" -nf "#232328" -sb "#599bb5" -sf "#eaf5ff" -h 25 -fn "-misc-tamzen-medium-*-*-*-14-*-*-*-*-*-*-*"
+    dmenu_run -nb "#040305" -nf "#c9c2d4" -sb "#574f64" -sf "#c9c2d4" -h 25 -fn "-misc-tamzen-medium-*-*-*-14-*-*-*-*-*-*-*"
 
 # Quit BSPWM
 super + alt + Escape
@@ -130,7 +123,7 @@ super + Escape
     pkill -USR1 -x sxhkd
 
 # Audio 
-{F9,F10}
+{F11,F12}
     amixer -q set Master 3%{-,+}
 
 # backlight
