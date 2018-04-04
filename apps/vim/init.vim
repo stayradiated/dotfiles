@@ -64,9 +64,9 @@ if dein#load_state('$HOME/.config/nvim/bundles')
   call dein#save_state()
 endif
 
-" if dein#check_install()
-"   call dein#install()
-" endif
+if dein#check_install()
+ silent call dein#install()
+endif
 
 call deoplete#enable()
 
