@@ -10,17 +10,18 @@ zen   := $(dir)/zenbook
 
 bar     := $(crux)/bar
 cmus    := $(apps)/cmus
-irssi   := $(apps)/irssi
-mutt    := $(apps)/mutt
-firefox := $(apps)/firefox
-urxvt   := $(apps)/urxvt
-tmux    := $(apps)/tmux
-vim     := $(apps)/vim
-feh     := $(apps)/feh
-fonts   := $(apps)/fonts
-music   := $(apps)/music
 dev     := $(apps)/dev
+fasd    := $(apps)/fasd
+feh     := $(apps)/feh
+firefox := $(apps)/firefox
+fonts   := $(apps)/fonts
+irssi   := $(apps)/irssi
+music   := $(apps)/music
+mutt    := $(apps)/mutt
 termite := $(apps)/termite
+tmux    := $(apps)/tmux
+urxvt   := $(apps)/urxvt
+vim     := $(apps)/vim
 
 # Checks to see if any files are going to be overwritten
 check:
@@ -218,6 +219,10 @@ vimperator:
 
 	@echo "Vimperator..."
 	@ln -fs $(firefox)/vimperatorrc ~/.vimperatorrc
+
+fasd:
+	@echo "fasd..."
+	@ln -fs $(fasd)/fasdrc ~/.fasdrc
 
 dev:
 
