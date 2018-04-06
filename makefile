@@ -138,7 +138,7 @@ osx:
 # SHARED APPS
 # ============================================================================
 
-apps: cmus feh fonts zsh termite tmux irssi vim vimperator dev
+apps: cmus feh fonts zsh termite tmux irssi vim vimperator dev fasd
 
 cmus:
 
