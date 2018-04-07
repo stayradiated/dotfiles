@@ -155,10 +155,10 @@ feh:
 fonts:
 
 	@echo "Fonts..."
-	@if test ! -d "$(fonts)/tamzen"; then\
+	@if test ! -d $(fonts)/tamzen; then\
 		git clone https://github.com/sunaku/tamzen-font "$(fonts)/tamzen";\
 	fi;
-	@if test ! -d "$(fonts)/tewi"; then\
+	@if test ! -d $(fonts)/tewi; then\
 		git clone https://github.com/lucy/tewi-font "$(fonts)/tewi";\
 	fi;
 	@mkdir -p ~/.fonts
@@ -190,7 +190,7 @@ termite:
 tmux:
 
 	@echo "Tmux..."
-	@if test ! -d "~/.tmux/plugins/tpm"; then\
+	@if test ! -d ~/.tmux/plugins/tpm; then\
 		mkdir -p ~/.tmux/plugins;\
 		git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm;\
 	fi;
@@ -211,7 +211,7 @@ vim:
 	@if test ! -d ~/.config/nvim; then\
 		ln -fs "$(vim)" ~/.config/nvim;\
 	fi;
-	@if test ! -d "$(vim)/dein.vim"; then\
+	@if test ! -d $(vim)/dein.vim; then\
 		git clone https://github.com/Shougo/dein.vim.git "$(vim)/dein.vim";\
 	fi;
 
