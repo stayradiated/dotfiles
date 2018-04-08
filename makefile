@@ -43,6 +43,7 @@ vim:
 	@mkdir -p "$(vim)/undo"
 
 	@if test ! -d ~/.config/nvim; then\
+		mkdir -p ~/.config;\
 		ln -fs "$(vim)" ~/.config/nvim;\
 	fi;
 	@if test ! -d $(vim)/dein.vim; then\
