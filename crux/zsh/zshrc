@@ -1,9 +1,0 @@
-# path
-export GOPATH=$HOME/go
-export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin/:$GOPATH/bin
-
-source ~/dotfiles/apps/zsh/config
-
-# ls colors
-alias ls='ls -hF --color=auto --group-directories-first'
-eval $(dircolors -b ~/dotfiles/apps/zsh/dircolors)
