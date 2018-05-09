@@ -1,18 +1,10 @@
 SHELL := /bin/bash
 
-dir   := $(CURDIR)
+apps := $(CURDIR)/apps
 
-apps  := $(dir)/apps
+apps: zsh tmux vim fasd urlview
 
-fasd    := $(apps)/fasd
-tmux    := $(apps)/tmux
-vim     := $(apps)/vim
-
-# ============================================================================
-# SHARED APPS
-# ============================================================================
-
-apps: zsh tmux vim fasd
+.PHONY: apps zsh tmux vim fasd
 
 zsh:
 
@@ -34,25 +26,28 @@ tmux:
 		mkdir -p ~/.tmux/plugins;\
 		git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm;\
 	fi;
-	@ln -fs "$(tmux)/tmux.conf" ~/.tmux.conf
+	@ln -fs "$(apps)/tmux/tmux.conf" ~/.tmux.conf
 
 vim:
 
 	@echo "Vim..."
-	@mkdir -p "$(vim)/tmp"
-	@mkdir -p "$(vim)/undo"
+	@mkdir -p "$(apps)/vim/tmp"
+	@mkdir -p "$(apps)/vim/undo"
 
 	@if test ! -d ~/.config/nvim; then\
 		mkdir -p ~/.config;\
-		ln -fs "$(vim)" ~/.config/nvim;\
+		ln -fs "$(apps)/vim" ~/.config/nvim;\
 	fi;
-	@if test ! -d $(vim)/dein.vim; then\
-		git clone https://github.com/Shougo/dein.vim.git "$(vim)/dein.vim";\
+	@if test ! -d $(apps)/vim/dein.vim; then\
+		git clone https://github.com/Shougo/dein.vim.git "$(apps)/vim/dein.vim";\
 	fi;
 
 fasd:
 
 	@echo "fasd..."
-	@ln -fs $(fasd)/fasdrc ~/.fasdrc
+	@ln -fs $(apps)/fasd/fasdrc ~/.fasdrc
 
-.PHONY: apps zsh tmux vim fasd
+urlview:
+
+	@echo "urlview...."
+	@ln -fs $(apps)/urlview/urlview ~/.urlview
