@@ -1,10 +1,12 @@
-
-# Vim
+# vim
 /apps/vim/bundles/*
 /apps/vim/tmp/*
 /apps/vim/undo/*
 /apps/vim/dein.vim
 
-# Fonts
-/apps/fonts/tamzen
-/apps/fonts/tewi
+# weechat
+/apps/weechat/passphrase_file
+/apps/weechat/logs
+/apps/weechat/perl
+/apps/weechat/python
+/apps/weechat/*.log

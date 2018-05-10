@@ -2,9 +2,9 @@ SHELL := /bin/bash
 
 apps := $(CURDIR)/apps
 
-apps: zsh tmux vim fasd urlview
+apps: zsh tmux vim fasd urlview weechat
 
-.PHONY: apps zsh tmux vim fasd
+.PHONY: apps zsh tmux vim fasd urlview weechat
 
 zsh:
 
@@ -51,3 +51,17 @@ urlview:
 
 	@echo "urlview...."
 	@ln -fs $(apps)/urlview/urlview ~/.urlview
+
+weechat:
+
+	@echo "weechat..."
+	@if test ! -d ~/.weechat; then\
+		ln -fs $(apps)/weechat ~/.weechat;\
+		mkdir -p ~/.weechat/python/autoload;\
+		mkdir -p ~/.weechat/perl/autoload;\
+		wget 'https://raw.githubusercontent.com/wee-slack/wee-slack/master/wee_slack.py' -O ~/.weechat/python/autoload/wee_slack.py;\
+		wget 'https://raw.githubusercontent.com/de-vri-es/weechat-autosort/master/autosort.py' -O ~/.weechat/python/autoload/autosort.py;\
+		wget 'https://raw.githubusercontent.com/keith/edit-weechat/master/edit.py' -O ~/.weechat/python/autoload/edit.py;\
+		wget 'https://raw.githubusercontent.com/weechat/scripts/master/python/go.py' -O ~/.weechat/python/autoload/go.py;\
+		wget 'https://raw.githubusercontent.com/weechat/scripts/master/perl/colorize_lines.pl' -O ~/.weechat/perl/autoload/colorize_lines.pl;\
+	fi;
