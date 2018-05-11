@@ -55,8 +55,13 @@ urlview:
 weechat:
 
 	@echo "weechat..."
+	@if test -f ~/.weechat/passphrase_file; then\
+		mv ~/.weechat/passphrase_file $(apps)/weechat/passphrase_file;\
+	fi;
 	@if test ! -d ~/.weechat; then\
 		ln -fs $(apps)/weechat ~/.weechat;\
+	fi;
+	@if test ! -f ~/.weechat/python/autoload/wee_slack.py; then\
 		mkdir -p ~/.weechat/python/autoload;\
 		mkdir -p ~/.weechat/perl/autoload;\
 		wget 'https://raw.githubusercontent.com/wee-slack/wee-slack/master/wee_slack.py' -O ~/.weechat/python/autoload/wee_slack.py;\
