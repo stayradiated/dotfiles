@@ -57,6 +57,7 @@ weechat:
 	@echo "weechat..."
 	@if test -f ~/.weechat/passphrase_file; then\
 		mv ~/.weechat/passphrase_file $(apps)/weechat/passphrase_file;\
+		rm -rf ~/.weechat;\
 	fi;
 	@if test ! -d ~/.weechat; then\
 		ln -fs $(apps)/weechat ~/.weechat;\
