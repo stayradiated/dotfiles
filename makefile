@@ -22,13 +22,13 @@ zsh:
 tmux:
 
 	@echo "Tmux..."
+	@ln -fs "$(apps)/tmux/tmux.conf" ~/.tmux.conf
 	@if test ! -d ~/.tmux/plugins/tpm; then\
 		export TMUX_PLUGIN_MANAGER_PATH '$HOME/.tmux/plugins/';\
 		mkdir -p ~/.tmux/plugins;\
 		git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm;\
 		~/.tmux/plugins/tpm/bin/install_plugins;\
 	fi;
-	@ln -fs "$(apps)/tmux/tmux.conf" ~/.tmux.conf
 
 vim:
 
