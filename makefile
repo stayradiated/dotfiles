@@ -2,13 +2,18 @@ SHELL := /bin/bash
 
 apps := $(CURDIR)/apps
 
-apps: zsh tmux vim fasd urlview weechat
+apps: git zsh tmux vim fasd urlview weechat
 
-.PHONY: apps zsh tmux vim fasd urlview weechat
+.PHONY: apps git zsh tmux vim fasd urlview weechat
+
+git:
+
+	@echo "git..."
+	@ln -fs "$(apps)/git/config" ~/.gitconfig
 
 zsh:
 
-	@echo "Zsh..."
+	@echo "zsh..."
 	@if test ! -d ~/.zprezto; then\
 		git clone --recursive https://github.com/stayradiated/prezto.git ~/.zprezto; \
 	fi;
@@ -21,7 +26,7 @@ zsh:
 
 tmux:
 
-	@echo "Tmux..."
+	@echo "tmux..."
 	@ln -fs "$(apps)/tmux/tmux.conf" ~/.tmux.conf
 	@if test ! -d ~/.tmux/plugins/tpm; then\
 		export TMUX_PLUGIN_MANAGER_PATH '$HOME/.tmux/plugins/';\
@@ -32,7 +37,7 @@ tmux:
 
 vim:
 
-	@echo "Vim..."
+	@echo "vim..."
 	@mkdir -p "$(apps)/vim/tmp"
 	@mkdir -p "$(apps)/vim/undo"
 
