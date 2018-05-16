@@ -2,7 +2,7 @@ SHELL := /bin/bash
 
 apps := $(CURDIR)/apps
 
-apps: git zsh tmux vim fasd urlview weechat
+apps: zsh tmux vim fasd urlview weechat git
 
 .PHONY: apps git zsh tmux vim fasd urlview weechat
 
