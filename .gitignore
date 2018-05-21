@@ -1,8 +1,7 @@
 # vim
-/apps/vim/bundles/*
+/apps/vim/dein/*
 /apps/vim/tmp/*
 /apps/vim/undo/*
-/apps/vim/dein.vim
 
 # weechat
 /apps/weechat/passphrase_file

@@ -5,70 +5,45 @@
 if &compatible
   set nocompatible
 endif
-set runtimepath+=$HOME/.config/nvim/dein.vim/
 
-if dein#load_state('$HOME/.config/nvim/bundles')
-  call dein#begin('$HOME/.config/nvim/bundles')
+" Add the dein installation directory into runtimepath
+set runtimepath+=$HOME/.config/nvim/dein/repos/github.com/Shougo/dein.vim
 
-  call dein#add('$HOME/.config/nvim/dein.vim')
-  " call dein#add('Shougo/neocomplete.vim')
+if dein#load_state('~/.config/nvim/dein')
+ call dein#begin('~/.config/nvim/dein')
+ call dein#add('~/.config/nvim/dein')
 
   " Themes
   call dein#add('stayradiated/vim-termorrow')
-  " call dein#add('w0ng/vim-hybrid')
-  " call dein#add('whatyouhide/vim-gotham')
-  " call dein#add('noahfrederick/vim-noctu')
   call dein#add('reedes/vim-colors-pencil')
-  " call dein#add('lucy/term.vim')
-  " call dein#add('chriskempson/base16-vim')
 
   " Extensions
   call dein#add('Shougo/deoplete.nvim')
   call dein#add('Shougo/denite.nvim')
-  " call dein#add('Shougo/neomru.vim')
   call dein#add('jeetsukumaran/vim-filebeagle')
-  " call dein#add('tpope/vim-dispatch')
   call dein#add('christoomey/vim-tmux-navigator')
-  " call dein#add('floobits/floobits-neovim')
-  " call dein#add('sjl/gundo.vim')
 
   " Editing
   call dein#add('scrooloose/syntastic')
-  " call dein#add('mtscout6/syntastic-local-eslint.vim')
   call dein#add('tpope/vim-repeat')
   call dein#add('tpope/vim-abolish')
   call dein#add('tpope/vim-fugitive')
   call dein#add('tpope/vim-surround')
   call dein#add('tpope/vim-unimpaired')
-  " call dein#add('mattn/emmet-vim')
   call dein#add('tomtom/tcomment_vim')
   call dein#add('godlygeek/tabular')
-  " call dein#add('rizzatti/dash.vim')
   call dein#add('danro/rename.vim')
   call dein#add('junegunn/fzf')
 
   " Languages
-  " call dein#add('kchmck/vim-coffee-script')
-  " call dein#add('nelstrom/vim-markdown-folding')
   call dein#add('pangloss/vim-javascript')
   call dein#add('mxw/vim-jsx')
-  " call dein#add('othree/yajs.vim')
-  " call dein#add('digitaltoad/vim-jade')
   call dein#add('fatih/vim-go')
   call dein#add('elzr/vim-json')
-  " call dein#add('cespare/vim-toml')
-  " call dein#add('cespare/vim-go-templates')
-  " call dein#add('jeroenbourgois/vim-actionscript')
 
-  call dein#end()
-  call dein#save_state()
+ call dein#end()
+ call dein#save_state()
 endif
-
-if dein#check_install()
- silent call dein#install()
-endif
-
-call deoplete#enable()
 
 filetype plugin indent on
 syntax enable

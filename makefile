@@ -38,6 +38,7 @@ tmux:
 vim:
 
 	@echo "vim..."
+	@mkdir -p "$(apps)/vim/dein"
 	@mkdir -p "$(apps)/vim/tmp"
 	@mkdir -p "$(apps)/vim/undo"
 
@@ -45,8 +46,8 @@ vim:
 		mkdir -p ~/.config;\
 		ln -fs "$(apps)/vim" ~/.config/nvim;\
 	fi;
-	@if test ! -d $(apps)/vim/dein.vim; then\
-		git clone https://github.com/Shougo/dein.vim.git "$(apps)/vim/dein.vim";\
+	@if test ! -d $(apps)/vim/dein/repos/github.com/Shougo/dein.vim; then\
+		git clone https://github.com/Shougo/dein.vim.git "$(apps)/vim/dein/repos/github.com/Shougo/dein.vim";\
 	fi;
 
 fasd:
