@@ -9,9 +9,9 @@ endif
 " Add the dein installation directory into runtimepath
 set runtimepath+=$HOME/.config/nvim/dein/repos/github.com/Shougo/dein.vim
 
-if dein#load_state('~/.config/nvim/dein')
- call dein#begin('~/.config/nvim/dein')
- call dein#add('~/.config/nvim/dein')
+if dein#load_state('$HOME/.config/nvim/dein')
+ call dein#begin('$HOME/.config/nvim/dein')
+ call dein#add('$HOME/.config/nvim/dein')
 
   " Themes
   call dein#add('stayradiated/vim-termorrow')
@@ -67,9 +67,9 @@ set inccommand=split     " live substitution
 
 " Backup swap files
 set backup
-set backupdir=~/.config/nvim/tmp
+set backupdir=$HOME/.config/nvim/tmp
 set backupskip=/tmp/*,/private/tmp/*
-set directory=~/.config/nvim/tmp
+set directory=$HOME/.config/nvim/tmp
 set writebackup
 
 " Fix for webpack-dev-server not catching file writes
@@ -78,7 +78,7 @@ set backupcopy=yes
 
 " Infinite undo
 set undofile
-set undodir=~/.config/nvim/undo
+set undodir=$HOME/.config/nvim/undo
 set undolevels=1000
 set undoreload=10000
 

@@ -2,6 +2,7 @@
 /apps/vim/dein/*
 /apps/vim/tmp/*
 /apps/vim/undo/*
+/apps/vim/.netrwhist
 
 # weechat
 /apps/weechat/passphrase_file
