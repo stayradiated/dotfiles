@@ -24,3 +24,11 @@
 	old = red bold
 	new = green bold
 	whitespace = red reverse
+[http "https://git.demo.localflynn.com"]
+	sslCAInfo = /home/admin/.flynn/ca-certs/default.pem
+[credential "https://git.demo.localflynn.com"]
+	helper = /home/admin/bin/flynn git-credentials
+[http "https://git.flynn.stayradiated.com"]
+	sslCAInfo = /home/admin/.flynn/ca-certs/stayradiated.pem
+[credential "https://git.flynn.stayradiated.com"]
+	helper = /home/admin/bin/flynn git-credentials
