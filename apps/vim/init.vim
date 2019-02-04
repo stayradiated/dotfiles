@@ -36,6 +36,7 @@ if dein#load_state('$HOME/.config/nvim/dein')
   call dein#add('junegunn/fzf')
 
   " Languages
+  call dein#add('leafgarland/typescript-vim')
   call dein#add('pangloss/vim-javascript')
   call dein#add('mxw/vim-jsx')
   call dein#add('fatih/vim-go')
@@ -236,7 +237,7 @@ function! ClipboardYank()
   if has('mac')
     call system('pbcopy', @@)
   else
-    call system('xsel -i -b', @@)
+    call system('xclip -i -selection clipboard', @@)
   endif
 endfunction
 
@@ -244,7 +245,7 @@ function! ClipboardPaste()
   if has('mac')
     let @@ = system('pbpaste')
   else
-    let @@ = system('xsel -b')
+    let @@ = system('xclip -o -selection clipboard')
   endif
 endfunction
 
