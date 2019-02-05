@@ -150,6 +150,8 @@ nnoremap gk j
 " Paste mode for terminals
 nnoremap <leader>P :set invpaste paste?<CR>
 vnoremap <leader>y y:call ClipboardYank()<CR>
+nnoremap <leader>Y :redir @+> \| echon fnamemodify(expand("%"), ":~:.") \| redir END<CR>
+
 vnoremap <leader>d d:call ClipboardYank()<CR>
 nnoremap <leader>p :call ClipboardPaste()<CR>p
 
