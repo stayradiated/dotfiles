@@ -20,6 +20,8 @@ if dein#load_state('$HOME/.config/nvim/dein')
   " Extensions
   call dein#add('Shougo/deoplete.nvim')
   call dein#add('Shougo/denite.nvim')
+  call dein#add('wsdjeg/dein-ui.vim')
+  call dein#add('neoclide/denite-git')
   call dein#add('jeetsukumaran/vim-filebeagle')
   call dein#add('christoomey/vim-tmux-navigator')
 
@@ -196,6 +198,8 @@ nmap <silent> K <Plug>DashSearch
 
 " Plugin Settings
 " ----------------------------------------------------------------------------
+
+let g:deoplete#enable_at_startup = 1
 
 " vim-go
 " let g:go_fmt_command = "goimports"
