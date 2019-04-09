@@ -174,8 +174,8 @@ nnoremap <leader>E :Errors<CR>
 map <Leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
 
 " FZF
-nnoremap <leader>t :FZF<CR>
-" nnoremap <leader>t :<C-u>Denite -buffer-name=files file_rec/async<CR>
+" nnoremap <leader>t :FZF<CR>
+nnoremap <leader>t :<C-u>Denite -buffer-name=files file/rec<CR>
 
 " denite.vim
 nnoremap <leader>b :<C-u>Denite -buffer-name=buffer buffer<CR>
@@ -216,8 +216,10 @@ let g:syntastic_html_checkers=['']
 let g:syntastic_always_populate_loc_list = 1
 
 " denite.nvim
-call denite#custom#var('file_rec', 'command', ['pt', '--follow', '--nocolor', '--nogroup', '-g:', ''])
-call denite#custom#var('grep', 'command', ['pt', '--nogroup', '--nocolor', '--smart-case', '--hidden'])
+call denite#custom#var('file/rec', 'command', ['pt', '--follow', '--nocolor', '--nogroup', '--home-ptignore', '-g=', ''])
+call denite#custom#source('file/rec', 'sorters', ['sorter/sublime'])
+
+call denite#custom#var('grep', 'command', ['pt', '--nogroup', '--nocolor', '--smart-case', '--hidden', '--home-ptignore'])
 call denite#custom#var('grep', 'default_opts', [])
 call denite#custom#var('grep', 'recursive_opts', [])
 call denite#custom#map(
