@@ -220,11 +220,11 @@ let g:syntastic_html_checkers=['']
 let g:syntastic_always_populate_loc_list = 1
 
 " denite.nvim
-call denite#custom#var('file/rec', 'command', ['pt', '--follow', '--nocolor', '--nogroup', '--home-ptignore', '-g=', ''])
+call denite#custom#var('file/rec', 'command', ['rg', '--files', '--glob', '!.git'])
 call denite#custom#source('file/rec', 'sorters', ['sorter/sublime'])
 
-call denite#custom#var('grep', 'command', ['pt', '--nogroup', '--nocolor', '--smart-case', '--hidden', '--home-ptignore'])
-call denite#custom#var('grep', 'default_opts', [])
+call denite#custom#var('grep', 'command', ['rg'])
+call denite#custom#var('grep', 'default_opts', ['-i', '--glob', '!package-lock.json', '--vimgrep', '--no-heading'])
 call denite#custom#var('grep', 'recursive_opts', [])
 call denite#custom#map(
       \ 'insert',
