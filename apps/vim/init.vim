@@ -199,6 +199,10 @@ nmap <silent> K <Plug>DashSearch
 " Plugin Settings
 " ----------------------------------------------------------------------------
 
+let g:dein#install_message_type = "none"
+let g:dein#types#git#clone_depth = 1
+let g:dein#notification_time = 0
+
 let g:deoplete#enable_at_startup = 1
 
 " vim-go
