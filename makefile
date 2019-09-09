@@ -16,6 +16,9 @@ zsh:
 	@echo "zsh..."
 	@if test ! -d ~/.zprezto; then\
 		git clone --recursive https://github.com/stayradiated/prezto.git ~/.zprezto; \
+		pushd ~/.zprezto; \
+		git remote add upstream https://github.com/sorin-ionescu/prezto; \
+		popd; \
 	fi;
 	@ln -fs ~/.zprezto/runcoms/zlogin    ~/.zlogin
 	@ln -fs ~/.zprezto/runcoms/zlogout   ~/.zlogout
