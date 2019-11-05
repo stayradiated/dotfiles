@@ -20,7 +20,6 @@ if dein#load_state('$HOME/.config/nvim/dein')
   " Extensions
   call dein#add('Shougo/deoplete.nvim')
   call dein#add('Shougo/denite.nvim')
-  call dein#add('wsdjeg/dein-ui.vim')
   call dein#add('neoclide/denite-git')
   call dein#add('jeetsukumaran/vim-filebeagle')
   call dein#add('christoomey/vim-tmux-navigator')
@@ -43,6 +42,7 @@ if dein#load_state('$HOME/.config/nvim/dein')
   call dein#add('mxw/vim-jsx')
   call dein#add('fatih/vim-go')
   call dein#add('elzr/vim-json')
+  call dein#add('GutenYe/json5.vim')
 
  call dein#end()
  call dein#save_state()
@@ -181,6 +181,7 @@ nnoremap <leader>t :<C-u>Denite -buffer-name=files file/rec<CR>
 nnoremap <leader>b :<C-u>Denite -buffer-name=buffer buffer<CR>
 nnoremap <leader>/ :<C-u>Denite -buffer-name=line line<CR>
 nnoremap <leader>a :<C-u>Denite -buffer-name=grep grep:.<CR>
+nnoremap <leader>k :<C-u>DeniteCursorWord grep<CR>
 
 " Keep search pattern at the center of the screen
 nnoremap <silent> n nzz
