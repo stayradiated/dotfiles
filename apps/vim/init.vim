@@ -188,6 +188,7 @@ nnoremap <leader>r :%s/<C-r><C-w>/
 nnoremap <leader>R :%s/<C-r><C-a>/
 vnoremap <leader>s :%s/\%V<c-r><c-w>/
 
+
 " Plugin Settings
 " ----------------------------------------------------------------------------
 
@@ -237,6 +238,14 @@ function! ClipboardPaste()
   else
     let @@ = system('xclip -o -selection clipboard')
   endif
+endfunction
+
+" CodeMods
+" -----------------------------------------------------------------------------
+
+" `const x = require('x')` --> `import x from 'x'`
+function! CodeModImport()
+  %s/\v(const|let|var)\s+([A-z0-9{}: ]+)\s*\=\s*require\('([^']+)'\)/import \2 from '\3'
 endfunction
 
 " Autocommands
