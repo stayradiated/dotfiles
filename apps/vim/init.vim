@@ -25,7 +25,6 @@ if dein#load_state('$HOME/.config/nvim/dein')
   call dein#add('christoomey/vim-tmux-navigator')
 
   " Editing
-  call dein#add('scrooloose/syntastic')
   call dein#add('tpope/vim-repeat')
   call dein#add('tpope/vim-abolish')
   call dein#add('tpope/vim-fugitive')
@@ -35,6 +34,7 @@ if dein#load_state('$HOME/.config/nvim/dein')
   call dein#add('godlygeek/tabular')
   call dein#add('danro/rename.vim')
   call dein#add('junegunn/fzf')
+  call dein#add('wellle/tmux-complete.vim')
 
   " Languages
   call dein#add('leafgarland/typescript-vim')
@@ -164,12 +164,6 @@ nnoremap <leader>w :w<CR>
 vnoremap <leader>t :Tabularize /
 vnoremap <leader>T :Tabularize /:\zs/l0l1<CR>
 
-" Check file for errors
-nnoremap <leader>c :SyntasticCheck<CR>
-
-" Show Quickfix window for Syntastic errors
-nnoremap <leader>E :Errors<CR>
-
 " Edit current file path
 map <Leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
 
@@ -204,21 +198,10 @@ let g:dein#install_message_type = "none"
 let g:dein#types#git#clone_depth = 1
 let g:dein#notification_time = 0
 
+" https://github.com/wellle/tmux-complete.vim
+let g:tmuxcomplete#trigger = ''
+
 let g:deoplete#enable_at_startup = 1
-
-" vim-go
-" let g:go_fmt_command = "goimports"
-let g:syntastic_go_checkers = ['golint', 'go vet', 'errcheck']
-let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
-
-" Syntastic
-let g:syntastic_javascript_checkers=['eslint']
-let g:syntastic_javascript_eslint_args=['-c', 'mishguru', '--ext', '.js,.jsx']
-let g:syntastic_json_checkers=['jsonlint']
-let g:syntastic_error_symbol = '✗'
-let g:syntastic_warning_symbol = '!'
-let g:syntastic_html_checkers=['']
-let g:syntastic_always_populate_loc_list = 1
 
 " denite.nvim
 call denite#custom#var('file/rec', 'command', ['rg', '--files', '--glob', '!.git'])
@@ -257,11 +240,6 @@ function! ClipboardPaste()
   else
     let @@ = system('xclip -o -selection clipboard')
   endif
-endfunction
-
-function! Lint()
-  let g:syntastic_javascript_eslint_args=['-c', 'stayradiated', '--ext', '.js,.jsx']
-  SyntasticCheck
 endfunction
 
 " Autocommands
