@@ -245,7 +245,7 @@ endfunction
 
 " `const x = require('x')` --> `import x from 'x'`
 function! CodeModImport()
-  %s/\v(const|let|var)\s+([A-z0-9{}: ]+)\s*\=\s*require\('([^']+)'\)/import \2 from '\3'
+  %s/\v(const|let|var)\s+([A-z0-9{},: ]+)\s*\=\s*require\(['"]([^']+)['"]\)/import \2 from '\3'
 endfunction
 
 " Autocommands
