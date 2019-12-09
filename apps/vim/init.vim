@@ -256,7 +256,7 @@ autocmd BufNewFile,BufRead *.md set filetype=markdown
 autocmd FileType markdown setlocal tw=79
 
 " Silverstripe
-autocmd BufNewFile,BufRead *.ss set filetype=html
+autocmd BufNewFile,BufRead *.tsx set filetype=typescript
 
 " Go
 autocmd FileType go setlocal ts=2 sw=2 sts=2
