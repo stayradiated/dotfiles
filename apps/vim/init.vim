@@ -40,6 +40,8 @@ if dein#load_state('$HOME/.config/nvim/dein')
   call dein#add('leafgarland/typescript-vim')
   call dein#add('pangloss/vim-javascript')
   call dein#add('mxw/vim-jsx')
+  call dein#add('mxw/vim-prolog')
+  call dein#add('jxnblk/vim-mdx-js')
   call dein#add('fatih/vim-go')
   call dein#add('elzr/vim-json')
   call dein#add('GutenYe/json5.vim')
@@ -255,8 +257,11 @@ endfunction
 autocmd BufNewFile,BufRead *.md set filetype=markdown
 autocmd FileType markdown setlocal tw=79
 
-" Silverstripe
+" Typescript
 autocmd BufNewFile,BufRead *.tsx set filetype=typescript
+
+" Markdown JSX
+autocmd BufNewFile,BufRead *.mdx set filetype=javascript
 
 " Go
 autocmd FileType go setlocal ts=2 sw=2 sts=2
