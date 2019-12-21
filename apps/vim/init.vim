@@ -190,6 +190,8 @@ nnoremap <leader>r :%s/<C-r><C-w>/
 nnoremap <leader>R :%s/<C-r><C-a>/
 vnoremap <leader>s :%s/\%V<c-r><c-w>/
 
+" Insert current date
+nnoremap <leader>D :r!date --iso-8601=seconds<CR>
 
 " Plugin Settings
 " ----------------------------------------------------------------------------
