@@ -1,6 +1,6 @@
 " Load Plugins
 "
-" -----------------------------------------------------------------------------
+" ------------------------------------------------------------------------------
 
 if &compatible
   set nocompatible
@@ -54,7 +54,7 @@ filetype plugin indent on
 syntax enable
 
 " Settings
-" -----------------------------------------------------------------------------
+" ------------------------------------------------------------------------------
 
 " General
 set completeopt-=preview " don't show preview window
@@ -63,7 +63,7 @@ set spelllang=en_nz      " spell check with New Zealand English
 set title                " use filename in window title
 set gdefault             " replace everything by default
 set visualbell           " stop the beep
-set colorcolumn=80       " for cleaner code
+set colorcolumn=81       " for cleaner code
 set showtabline=0        " hide tab line
 " set synmaxcol=120      " Limit syntax highlighting
 set number
@@ -113,7 +113,7 @@ colorscheme termorrow
 set background=dark
 
 " Mapping
-" -----------------------------------------------------------------------------
+" ------------------------------------------------------------------------------
 
 " Map Leader to space
 let mapleader = " "
@@ -194,7 +194,7 @@ vnoremap <leader>s :%s/\%V<c-r><c-w>/
 nnoremap <leader>D :r!date --iso-8601=seconds<CR>
 
 " Plugin Settings
-" ----------------------------------------------------------------------------
+" ------------------------------------------------------------------------------
 
 let g:dein#install_message_type = "none"
 let g:dein#types#git#clone_depth = 1
@@ -226,7 +226,7 @@ endfunction
 let g:jsx_ext_required = 0
 
 " Functions
-" -----------------------------------------------------------------------------
+" ------------------------------------------------------------------------------
 
 function! ClipboardYank()
   if has('mac')
@@ -245,7 +245,7 @@ function! ClipboardPaste()
 endfunction
 
 " CodeMods
-" -----------------------------------------------------------------------------
+" ------------------------------------------------------------------------------
 
 " `const x = require('x')` --> `import x from 'x'`
 function! CodeModImport()
@@ -253,7 +253,7 @@ function! CodeModImport()
 endfunction
 
 " Autocommands
-" -----------------------------------------------------------------------------
+" ------------------------------------------------------------------------------
 
 " Markdown
 autocmd BufNewFile,BufRead *.md set filetype=markdown
