@@ -1,10 +1,30 @@
 Dotfiles
 ========
 
-> Just my configs
+> My personal config files and shell scripts
 
-## Makefile
+Popular Apps
+------------
 
-### make apps
+- [vim](./apps/vim/init.vim)
+- [tmux](./apps/tmux/tmux.conf)
 
-Link all app dotfiles
+Window Manager
+--------------
+
+- [bspwm](./apps/bspwm/bspwmrc)
+- [sxhkd](./apps/sxhkd/sxhkdrc)
+- [.xinitrc](./apps/x11/xinitrc)
+
+### Installation
+
+```shell
+git clone https://github.com/stayradiated/dotfiles
+cd dotfiles
+
+# decrypt encrypted files
+git-crypt unlock ~/secret-key
+
+# install symlinks and plugins
+make apps
+```
