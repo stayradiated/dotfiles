@@ -1,0 +1,113 @@
+#
+# bspwm hotkeys
+#
+
+# Close/Kill window
+super + {_,shift + }w
+    bspc node -{c,k}
+
+# Toggle layout between monocle and tiling
+super + m
+    bspc desktop -l next
+
+# Toggle window layout between floating, fullscreen and tiled
+super + {t,shift + t,s,f}
+    bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
+
+# set the node flags
+super + ctrl + {x,y,z}
+    bspc node -g {locked,sticky,private}
+
+# Tab between the last used window or workspace
+super + {Tab,grave}
+    bspc {node,desktop} -f last
+
+# Switch window with last used window
+super + apostrophe
+    bspc node -s last
+
+# Move the focused window into the 'given' window
+super + y
+    bspc node -w last.manual
+
+# Select a window or move a window
+super + {_,shift + }{h,j,k,l}
+    bspc node -{f,s} {west,south,north,east}
+
+# Loop through the window frames
+super + {_,shift + }c
+    bspc node -f {next,prev}
+
+# Switch each window with the frame next to it
+super + {comma,period}
+    bspc desktop -C {backward,forward}
+
+# Cycle through the desktops
+super + bracket{left,right}
+    bspc desktop -f {prev,next}
+
+# Preselect a window half
+super + ctrl + {h,j,k,l}
+    bspc node -p {west,south,north,east}
+
+# Cancel preselection
+super + ctrl + space
+    bspc node -p cancel
+
+# Push window
+super + ctrl + {h,j,k,l}
+    bspc node -e {left -50,down +50,up -50,right +50}
+
+# Pull window
+super + ctrl + shift + {h,j,k,l}
+    bspc node -e {right -50,up +50,down -50,left +50}
+
+super + ctrl + {1-9}
+    bspc node -r 0.{1-9}
+
+super + {_,shift + }{1-9, 0}
+    bspc {desktop -f,node -d} ^{1-9,10}
+
+# Move floating windows (requires baskerville's xdo)
+super + {Left,Right,Up,Down}
+    xdo move {-x -20,-x +20,-y -20,-y +20}
+
+# Resize floating windows
+super + shift + {Left,Right,Up,Down}
+    xdo resize {-w -20,-w +20,-h -20,-h +20}
+
+#
+# wm independent hotkeys
+#
+
+# Open terminal
+super + Return
+    alacritty
+
+# Launch dmenu
+super + space
+    rofi -show run -modi run,window,ssh -font 'Gomme 12' -terminal 'alacritty'
+
+# Quit BSPWM
+super + alt + Escape
+    bspc quit
+
+# Make sxhkd reload its configuration files
+super + Escape
+    pkill -USR1 -x sxhkd
+
+# Audio 
+{F2,F3}
+    pactl -- set-sink-volume 0 {-,+}3%
+
+# backlight
+super + shift + {comma,period}
+    light -{U,A} 5
+
+# redshift
+super + shift + slash
+    redshift {-O 4000,-O 3000,-O 2000,-O 1000,-x}
+
+# scrot
+ctrl + alt + shift + 4
+    scrot -u 

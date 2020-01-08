@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+PATTERN=$(echo ${1} | sd -s '.' '\.')
+REPLACEMENT="${1}__${2}"
+
+FILES=$(rg -l "\b${PATTERN}\b")
+FILE_COUNT=$(echo -n "${FILES}" | grep -c "^")
+
+echo "Replacing '${PATTERN}' with '${REPLACEMENT}'"
+
+if [ ! -z "$FILES" ];
+then
+  sd -f c -i "\b${PATTERN}\b" "${REPLACEMENT}" $FILES
+fi
+
+echo "Refactored ${FILE_COUNT} file(s)"
+
+git add -A
+git commit -m "refactor: ${1} --> ${2}"

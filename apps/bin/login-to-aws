@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+set -e
+
+# remove old totp creds and copy to new file
+sed -n '/\[totp\]/q;p' ~/.aws/credentials > ~/.aws/credentials.next
+
+# login to aws and get new creds
+aws \
+  --profile default \
+  sts get-session-token \
+  --serial-number arn:aws:iam::488075936769:mfa/george \
+  --duration=129600 \
+  --token-code $1 \
+  | jq -r '.Credentials | "[totp]\naws_access_key_id = " + .AccessKeyId + "\naws_secret_access_key = " + .SecretAccessKey + "\naws_session_token = " + .SessionToken' \
+  >> ~/.aws/credentials.next
+
+# overwrite old config
+mv -f ~/.aws/credentials.next ~/.aws/credentials

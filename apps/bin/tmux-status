@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+WATSON_DIR=~/shared/watson
+
+PROJECT="$(watson status --project)"
+PROJECT=$(echo "${PROJECT}" | sed 's/No project started.//g')
+
+TAGS=$(watson status --tags)
+TAGS=$(echo "${TAGS}" | sed 's/No project started.//g')
+TAGS=$(echo "${TAGS}" | sed 's/\[/ +/g' | sed 's/\]//g')
+
+ELAPSED=$(watson status --elapsed)
+ELAPSED=$(echo "${ELAPSED}" | sed 's/No project started.//g')
+
+BATTERY=$(acpi -b | tail -n 1 | rg -o '\w+, \d+%')
+BATTERY=$(echo "${BATTERY}" | sed 's/Discharging,\s*/#[fg=colour1]▼/')
+BATTERY=$(echo "${BATTERY}" | sed 's/Charging,\s*/#[fg=colour2]▲/')
+BATTERY=$(echo "${BATTERY}" | sed 's/Full,\s*/#[fg=colour3]/')
+
+DATE=$(date +"%d.%m %W")
+TIME=$(date +"%H:%M")
+
+SINK=$(pactl list short sinks | sed -e 's,^\([0-9][0-9]*\)[^0-9].*,\1,' | head -n 1)
+VOLUME=$(pactl list sinks | grep '^[[:space:]]Volume:' | head -n $(( $SINK + 1 )) | tail -n 1 | sed -e 's,.* \([0-9][0-9]*\)%.*,\1,')
+
+echo "#[fg=colour4]${PROJECT}#[fg=colour12]${TAGS} #[fg=colour3]${ELAPSED} #[fg=colour8]• ${BATTERY} #[fg=colour8]• #[fg=colour6]${DATE} #[fg=colour7]${TIME} #[fg=colour8]• #[fg=colour4]${VOLUME}%"

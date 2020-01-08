@@ -1,0 +1,4 @@
+#!/usr/bin/env python2
+
+import sys, urllib as ul
+[sys.stdout.write(ul.quote_plus(l)) for l in sys.stdin]

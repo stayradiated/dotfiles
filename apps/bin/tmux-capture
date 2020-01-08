@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+rm -f ~/tmux.txt
+tmux capture-pane -eJ
+tmux save-buffer ~/tmux.txt
+tmux delete-buffer
+cat ~/tmux.txt
