@@ -16,6 +16,12 @@ Window Manager
 - [sxhkd](./apps/sxhkd/sxhkdrc)
 - [.xinitrc](./apps/x11/xinitrc)
 
+Other Repos
+-----------
+
+- [ZSH + Prezto](https://github.com/stayradiated/prezto)
+- [Shell Docker Container](https://github.com/stayradiated/shell)
+
 ### Installation
 
 ```shell
