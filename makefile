@@ -94,7 +94,6 @@ tmux:
 	@echo "tmux..."
 	@ln -fs "$(apps)/tmux/tmux.conf" ~/.tmux.conf
 	@if test ! -d ~/.tmux/plugins/tpm; then\
-		export TMUX_PLUGIN_MANAGER_PATH '$HOME/.tmux/plugins/';\
 		mkdir -p ~/.tmux/plugins;\
 		git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm;\
 		~/.tmux/plugins/tpm/bin/install_plugins;\
@@ -123,13 +122,12 @@ vim:
 weechat:
 
 	@echo "weechat..."
-	@if test -f ~/.weechat/passphrase_file; then\
-		mv ~/.weechat/passphrase_file $(apps)/weechat/passphrase_file;\
-		rm -rf ~/.weechat;\
-	fi;
 	@if test ! -d ~/.weechat; then\
-		ln -fs $(apps)/weechat ~/.weechat;\
+		ln -fs "$(apps)/weechat" ~/.weechat;\
 	fi;
+
+	@ln -fs "$(apps)/weechat/passphrase_file.enc" ~/.weechat/passphrase_file
+
 	@if test ! -f ~/.weechat/python/autoload/wee_slack.py; then\
 		mkdir -p ~/.weechat/python/autoload;\
 		mkdir -p ~/.weechat/perl/autoload;\
