@@ -2,30 +2,76 @@ SHELL := /bin/bash
 
 apps := $(CURDIR)/apps
 
-apps: zsh tmux vim fasd urlview weechat git
+apps: bspwm git hub logview mitmproxy mycli ngrok npm ranger ssh sxhkd tmux urlview vim weechat x11 zsh
 
-.PHONY: apps git zsh tmux vim fasd urlview weechat
+bspwm:
+
+	@echo "bspwm..."
+	@ln -fs "$(apps)/bspwm/bspwmrc" ~/.config/bspwm/bspwmrc
 
 git:
 
 	@echo "git..."
 	@ln -fs "$(apps)/git/config" ~/.gitconfig
 
-zsh:
+hub:
 
-	@echo "zsh..."
-	@if test ! -d ~/.zprezto; then\
-		git clone --recursive https://github.com/stayradiated/prezto.git ~/.zprezto; \
-		pushd ~/.zprezto; \
-		git remote add upstream https://github.com/sorin-ionescu/prezto; \
-		popd; \
-	fi;
-	@ln -fs ~/.zprezto/runcoms/zlogin    ~/.zlogin
-	@ln -fs ~/.zprezto/runcoms/zlogout   ~/.zlogout
-	@ln -fs ~/.zprezto/runcoms/zpreztorc ~/.zpreztorc
-	@ln -fs ~/.zprezto/runcoms/zprofile  ~/.zprofile
-	@ln -fs ~/.zprezto/runcoms/zshenv    ~/.zshenv
-	@ln -fs ~/.zprezto/runcoms/zshrc     ~/.zshrc
+	@echo "hub..."
+	@ln -fs "$(apps)/hub/hub.enc" ~/.config/hub
+
+logview:
+
+	@echo "logview..."
+	@ln -fs "$(apps)/logview/config.json.enc" ~/.config/logview/config.json
+
+mitmproxy:
+
+	@echo "mitmproxy..."
+	@ln -fs "$(apps)/mitmproxy/mitmproxy-ca-cert.cer.enc" ~/.mitmproxy/mitmproxy-ca-cert.cer
+	@ln -fs "$(apps)/mitmproxy/mitmproxy-ca-cert.p12.enc" ~/.mitmproxy/mitmproxy-ca-cert.p12
+	@ln -fs "$(apps)/mitmproxy/mitmproxy-ca-cert.pem.enc" ~/.mitmproxy/mitmproxy-ca-cert.pem
+	@ln -fs "$(apps)/mitmproxy/mitmproxy-ca.pem.enc" ~/.mitmproxy/mitmproxy-ca.pem
+	@ln -fs "$(apps)/mitmproxy/mitmproxy-dhparam.pem.enc" ~/.mitmproxy/mitmproxy-dhparam.pem
+
+mycli:
+
+	@echo "mycli..."
+	@ln -fs "$(apps)/mycli/myclirc" ~/.myclirc
+
+ngrok:
+
+	@echo "ngrok..."
+	@ln -fs "$(apps)/ngrok/ngrok.yml.enc" ~/.ngrok2/ngrok.yml
+
+npm:
+
+	@echo "npm..."
+	@ln -fs "$(apps)/npm/npmrc.enc" ~/.npmrc
+
+ranger:
+
+	@echo "ranger..."
+	@ln -fs "$(apps)/ranger/rc.conf" ~/.config/ranger/rc.conf
+	@ln -fs "$(apps)/ranger/rifle.conf" ~/.config/ranger/rifle.conf
+
+ssh:
+
+	@echo "ssh..."
+	@ln -fs "$(apps)/ssh/config.enc" ~/.ssh/config
+	@ln -fs "$(apps)/ssh/george.enc" ~/.ssh/george
+	@ln -fs "$(apps)/ssh/george.pub" ~/.ssh/george.pub
+	@ln -fs "$(apps)/ssh/hetzner.enc" ~/.ssh/hetzner
+	@ln -fs "$(apps)/ssh/hetzner.pub" ~/.ssh/hetzner.pub
+	@ln -fs "$(apps)/ssh/id_rsa.enc" ~/.ssh/id_rsa
+	@ln -fs "$(apps)/ssh/id_rsa.pub" ~/.ssh/id_rsa.pub
+	@ln -fs "$(apps)/ssh/known_hosts" ~/.ssh/known_hosts
+	@ln -fs "$(apps)/ssh/sshkey.enc" ~/.ssh/sshkey
+	@ln -fs "$(apps)/ssh/sshkey.pub" ~/.ssh/sshkey.pub
+
+sxhkd:
+
+	@echo "sxhkd..."
+	@ln -fs "$(apps)/sxhkd/sxhkdrc" ~/.config/sxhkd/sxhkdrc
 
 tmux:
 
@@ -37,6 +83,11 @@ tmux:
 		git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm;\
 		~/.tmux/plugins/tpm/bin/install_plugins;\
 	fi;
+
+urlview:
+
+	@echo "urlview...."
+	@ln -fs $(apps)/urlview/urlview ~/.urlview
 
 vim:
 
@@ -52,16 +103,6 @@ vim:
 	@if test ! -d $(apps)/vim/dein/repos/github.com/Shougo/dein.vim; then\
 		git clone https://github.com/Shougo/dein.vim.git "$(apps)/vim/dein/repos/github.com/Shougo/dein.vim";\
 	fi;
-
-fasd:
-
-	@echo "fasd..."
-	@ln -fs $(apps)/fasd/fasdrc ~/.fasdrc
-
-urlview:
-
-	@echo "urlview...."
-	@ln -fs $(apps)/urlview/urlview ~/.urlview
 
 weechat:
 
@@ -82,3 +123,24 @@ weechat:
 		wget 'https://raw.githubusercontent.com/weechat/scripts/master/python/go.py' -O ~/.weechat/python/autoload/go.py;\
 		wget 'https://raw.githubusercontent.com/weechat/scripts/master/perl/colorize_lines.pl' -O ~/.weechat/perl/autoload/colorize_lines.pl;\
 	fi;
+
+x11:
+
+	@echo "x11..."
+	@ln -fs "$(apps)/x11/xinitrc" ~/.xinitrc
+
+zsh:
+
+	@echo "zsh..."
+	@if test ! -d ~/.zprezto; then\
+		git clone --recursive https://github.com/stayradiated/prezto.git ~/.zprezto; \
+		pushd ~/.zprezto; \
+		git remote add upstream https://github.com/sorin-ionescu/prezto; \
+		popd; \
+	fi;
+	@ln -fs ~/.zprezto/runcoms/zlogin    ~/.zlogin
+	@ln -fs ~/.zprezto/runcoms/zlogout   ~/.zlogout
+	@ln -fs ~/.zprezto/runcoms/zpreztorc ~/.zpreztorc
+	@ln -fs ~/.zprezto/runcoms/zprofile  ~/.zprofile
+	@ln -fs ~/.zprezto/runcoms/zshenv    ~/.zshenv
+	@ln -fs ~/.zprezto/runcoms/zshrc     ~/.zshrc
