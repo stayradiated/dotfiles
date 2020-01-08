@@ -7,6 +7,7 @@ apps: bspwm git hub logview mitmproxy mycli ngrok npm ranger ssh sxhkd tmux urlv
 bspwm:
 
 	@echo "bspwm..."
+	@mkdir -p ~/.config/bspwm
 	@ln -fs "$(apps)/bspwm/bspwmrc" ~/.config/bspwm/bspwmrc
 
 git:
@@ -17,16 +18,19 @@ git:
 hub:
 
 	@echo "hub..."
+	@mkdir -p ~/.config
 	@ln -fs "$(apps)/hub/hub.enc" ~/.config/hub
 
 logview:
 
 	@echo "logview..."
+	@mkdir -p ~/.config/logview
 	@ln -fs "$(apps)/logview/config.json.enc" ~/.config/logview/config.json
 
 mitmproxy:
 
 	@echo "mitmproxy..."
+	@mkdir -p ~/.mitmproxy
 	@ln -fs "$(apps)/mitmproxy/mitmproxy-ca-cert.cer.enc" ~/.mitmproxy/mitmproxy-ca-cert.cer
 	@ln -fs "$(apps)/mitmproxy/mitmproxy-ca-cert.p12.enc" ~/.mitmproxy/mitmproxy-ca-cert.p12
 	@ln -fs "$(apps)/mitmproxy/mitmproxy-ca-cert.pem.enc" ~/.mitmproxy/mitmproxy-ca-cert.pem
@@ -41,6 +45,7 @@ mycli:
 ngrok:
 
 	@echo "ngrok..."
+	@mkdir -p ~/.ngrok2
 	@ln -fs "$(apps)/ngrok/ngrok.yml.enc" ~/.ngrok2/ngrok.yml
 
 npm:
@@ -51,12 +56,14 @@ npm:
 ranger:
 
 	@echo "ranger..."
+	@mkdir -p ~/.config/ranger
 	@ln -fs "$(apps)/ranger/rc.conf" ~/.config/ranger/rc.conf
 	@ln -fs "$(apps)/ranger/rifle.conf" ~/.config/ranger/rifle.conf
 
 ssh:
 
 	@echo "ssh..."
+	@mkdir -p ~/.ssh
 	@ln -fs "$(apps)/ssh/config.enc" ~/.ssh/config
 	@ln -fs "$(apps)/ssh/george.enc" ~/.ssh/george
 	@ln -fs "$(apps)/ssh/george.pub" ~/.ssh/george.pub
@@ -71,6 +78,7 @@ ssh:
 sxhkd:
 
 	@echo "sxhkd..."
+	@mkdir -p ~/.config/sxhkd
 	@ln -fs "$(apps)/sxhkd/sxhkdrc" ~/.config/sxhkd/sxhkdrc
 
 tmux:
