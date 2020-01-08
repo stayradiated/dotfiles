@@ -65,15 +65,23 @@ ssh:
 	@echo "ssh..."
 	@mkdir -p ~/.ssh
 	@ln -fs "$(apps)/ssh/config.enc" ~/.ssh/config
+	@ln -fs "$(apps)/ssh/known_hosts" ~/.ssh/known_hosts
+
 	@ln -fs "$(apps)/ssh/george.enc" ~/.ssh/george
 	@ln -fs "$(apps)/ssh/george.pub" ~/.ssh/george.pub
+	@chmod 600 ~/.ssh/george
+
 	@ln -fs "$(apps)/ssh/hetzner.enc" ~/.ssh/hetzner
 	@ln -fs "$(apps)/ssh/hetzner.pub" ~/.ssh/hetzner.pub
+	@chmod 600 ~/.ssh/hetzner
+
 	@ln -fs "$(apps)/ssh/id_rsa.enc" ~/.ssh/id_rsa
 	@ln -fs "$(apps)/ssh/id_rsa.pub" ~/.ssh/id_rsa.pub
-	@ln -fs "$(apps)/ssh/known_hosts" ~/.ssh/known_hosts
+	@chmod 600 ~/.ssh/id_rsa
+
 	@ln -fs "$(apps)/ssh/sshkey.enc" ~/.ssh/sshkey
 	@ln -fs "$(apps)/ssh/sshkey.pub" ~/.ssh/sshkey.pub
+	@chmod 600 ~/.ssh/sshkey
 
 sxhkd:
 
