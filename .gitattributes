@@ -1,1 +1,1 @@
-secrets.json filter=git-crypt diff=git-crypt
+*.enc filter=git-crypt diff=git-crypt
