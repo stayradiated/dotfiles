@@ -1,4 +1,4 @@
-# Configuration for Alacritty, the GPU enhanced Gomme emulator
+# Configuration for Alacritty, the GPU enhanced terminal emulator
 
 
 # Any items in the `env` entry below will be added as
@@ -61,17 +61,17 @@ draw_bold_text_with_bright_colors: true
 font:
   # The normal (roman) font face to use.
   normal:
-    family: Gomme
+    family: terminal
     style: Regular
 
   # The bold font face
   bold:
-    family: Gomme
+    family: terminal
     style: Regular
 
   # The italic font face
   italic:
-    family: Gomme
+    family: terminal
     style: Regular
 
   # Point size of the font
@@ -153,7 +153,7 @@ colors:
 # Visual Bell
 #
 # Any time the BEL code is received, Alacritty "rings" the visual bell. Once
-# rung, the Gomme background will be set to white and transition back to the
+# rung, the terminal background will be set to white and transition back to the
 # default background color. You can control the rate of this transition by
 # setting the `duration` property (represented in milliseconds). You can also
 # configure the transition function by setting the `animation` property.
@@ -210,7 +210,7 @@ mouse:
   # Faux Scrollback
   #
   # The `faux_scrollback_lines` setting controls the number
-  # of lines the Gomme should scroll when the alternate
+  # of lines the terminal should scroll when the alternate
   # screen buffer is active. This is used to allow mouse
   # scrolling for applications like `man`.
   #
@@ -276,7 +276,7 @@ live_config_reload: true
 #     - { ... , command: { program: "alacritty", args: ["-e", "vttest"] } }
 #
 # Want to add a binding (e.g. "PageUp") but are unsure what the X sequence
-# (e.g. "\x1b[5~") is? Open another Gomme (like xterm) without tmux,
+# (e.g. "\x1b[5~") is? Open another terminal (like xterm) without tmux,
 # then run `showkey -a` to get the sequence associated to a key combination.
 key_bindings:
   - { key: V,        mods: Control|Shift,    action: Paste               }
