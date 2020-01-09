@@ -1,4 +1,4 @@
-# Configuration for Alacritty, the GPU enhanced terminal emulator
+# Configuration for Alacritty, the GPU enhanced Gomme emulator
 
 
 # Any items in the `env` entry below will be added as
@@ -61,17 +61,17 @@ draw_bold_text_with_bright_colors: true
 font:
   # The normal (roman) font face to use.
   normal:
-    family: terminal
+    family: Gomme
     style: Regular
 
   # The bold font face
   bold:
-    family: terminal
+    family: Gomme
     style: Regular
 
   # The italic font face
   italic:
-    family: terminal
+    family: Gomme
     style: Regular
 
   # Point size of the font
@@ -95,65 +95,59 @@ font:
   # false.
   use_thin_strokes: false
 
-colors:
-  # # Default colors
-  # primary:
-  #   background: '0xf3f3f3'
-  #   foreground: '0x707070'
-  #
-  # # Normal colors
-  # normal:
-  #   black:   '0xd3d3d3'
-  #   red:     '0xef6b7b'
-  #   green:   '0xa1d569'
-  #   yellow:  '0xf59335'
-  #   blue:    '0x4ec2e8'
-  #   magenta: '0xfec7cd'
-  #   cyan:    '0x95c1c0'
-  #   white:   '0x707070'
-  #
-  # # Bright colors
-  # bright:
-  #   black:   '0xb3b3b3'
-  #   red:     '0xed5466'
-  #   green:   '0xafdb80'
-  #   yellow:  '0xf59335'
-  #   blue:    '0x5dc7ea'
-  #   magenta: '0xd2a4b4'
-  #   cyan:    '0x75a1a0'
-  #   white:   '0x909090'
+color_schemes:
+  termorrow_light: &termorrow_light
+    primary:
+      background: '0xf3f3f3'
+      foreground: '0x707070'
+    normal:
+      black:   '0xd3d3d3'
+      red:     '0xef6b7b'
+      green:   '0xa1d569'
+      yellow:  '0xf59335'
+      blue:    '0x4ec2e8'
+      magenta: '0xfec7cd'
+      cyan:    '0x95c1c0'
+      white:   '0x707070'
+    bright:
+      black:   '0xb3b3b3'
+      red:     '0xed5466'
+      green:   '0xafdb80'
+      yellow:  '0xf59335'
+      blue:    '0x5dc7ea'
+      magenta: '0xd2a4b4'
+      cyan:    '0x75a1a0'
+      white:   '0x909090'
 
-  # Default colors
-  primary:
-    foreground: '0xffffff'
-    background: '0x001115'
+  termorrow_dark: &termorrow_dark
+    primary:
+      foreground: '0xffffff'
+      background: '0x001115'
+    normal:
+      black:   '0x001b22'
+      red:     '0xdd4050'
+      green:   '0x24ce7a'
+      yellow:  '0x86ea5c'
+      blue:    '0x38c2e8'
+      magenta: '0x697fb1'
+      cyan:    '0x619e94'
+      white:   '0xace2f1'
+    bright:
+      black:   '0x174954'
+      red:     '0xe9b3bf'
+      green:   '0xade1b6'
+      yellow:  '0xfbf1cf'
+      blue:    '0xb5dbe4'
+      magenta: '0xb6cbfa'
+      cyan:    '0xa3d0c8'
+      white:   '0xf7f8f8'
 
-  # Normal colors
-  normal:
-    black:   '0x001b22'
-    red:     '0xdd4050'
-    green:   '0x24ce7a'
-    yellow:  '0x86ea5c'
-    blue:    '0x38c2e8'
-    magenta: '0x697fb1'
-    cyan:    '0x619e94'
-    white:   '0xace2f1'
-
-  # Bright colors
-  bright:
-    black:   '0x174954'
-    red:     '0xe9b3bf'
-    green:   '0xade1b6'
-    yellow:  '0xfbf1cf'
-    blue:    '0xb5dbe4'
-    magenta: '0xb6cbfa'
-    cyan:    '0xa3d0c8'
-    white:   '0xf7f8f8'
+colors: *termorrow_light
 
 # Visual Bell
 #
 # Any time the BEL code is received, Alacritty "rings" the visual bell. Once
-# rung, the terminal background will be set to white and transition back to the
+# rung, the Gomme background will be set to white and transition back to the
 # default background color. You can control the rate of this transition by
 # setting the `duration` property (represented in milliseconds). You can also
 # configure the transition function by setting the `animation` property.
@@ -210,7 +204,7 @@ mouse:
   # Faux Scrollback
   #
   # The `faux_scrollback_lines` setting controls the number
-  # of lines the terminal should scroll when the alternate
+  # of lines the Gomme should scroll when the alternate
   # screen buffer is active. This is used to allow mouse
   # scrolling for applications like `man`.
   #
@@ -276,7 +270,7 @@ live_config_reload: true
 #     - { ... , command: { program: "alacritty", args: ["-e", "vttest"] } }
 #
 # Want to add a binding (e.g. "PageUp") but are unsure what the X sequence
-# (e.g. "\x1b[5~") is? Open another terminal (like xterm) without tmux,
+# (e.g. "\x1b[5~") is? Open another Gomme (like xterm) without tmux,
 # then run `showkey -a` to get the sequence associated to a key combination.
 key_bindings:
   - { key: V,        mods: Control|Shift,    action: Paste               }
