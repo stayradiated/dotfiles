@@ -61,17 +61,17 @@ draw_bold_text_with_bright_colors: true
 font:
   # The normal (roman) font face to use.
   normal:
-    family: Gomme
+    family: terminal
     style: Regular
 
   # The bold font face
   bold:
-    family: Gomme
+    family: terminal
     style: Regular
 
   # The italic font face
   italic:
-    family: Gomme
+    family: terminal
     style: Regular
 
   # Point size of the font
@@ -142,7 +142,7 @@ color_schemes:
       cyan:    '0xa3d0c8'
       white:   '0xf7f8f8'
 
-colors: *termorrow_light
+colors: *termorrow_dark
 
 # Visual Bell
 #
