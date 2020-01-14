@@ -179,6 +179,9 @@ nnoremap <leader>/ :<C-u>Denite -buffer-name=line line<CR>
 nnoremap <leader>A :<C-u>Denite -buffer-name=grep grep:.<CR>
 nnoremap <leader>a :<C-u>Denite -buffer-name=grep -start-filter grep:::!<CR>
 nnoremap <leader>k :<C-u>DeniteCursorWord grep<CR>
+nnoremap <leader>[ :<C-u>Denite -resume -buffer-name=grep -cursor-pos=-1 -immediately<CR>
+nnoremap <leader>] :<C-u>Denite -resume -buffer-name=grep -cursor-pos=+1 -immediately<CR>
+
 
 " Keep search pattern at the center of the screen
 nnoremap <silent> n nzz
