@@ -176,7 +176,8 @@ nnoremap <leader>t :<C-u>Denite -buffer-name=files file/rec<CR>
 " denite.vim
 nnoremap <leader>b :<C-u>Denite -buffer-name=buffer buffer<CR>
 nnoremap <leader>/ :<C-u>Denite -buffer-name=line line<CR>
-nnoremap <leader>a :<C-u>Denite -buffer-name=grep grep:.<CR>
+nnoremap <leader>A :<C-u>Denite -buffer-name=grep grep:.<CR>
+nnoremap <leader>a :<C-u>Denite -buffer-name=grep -start-filter grep:::!<CR>
 nnoremap <leader>k :<C-u>DeniteCursorWord grep<CR>
 
 " Keep search pattern at the center of the screen
@@ -206,10 +207,10 @@ let g:tmuxcomplete#trigger = ''
 let g:deoplete#enable_at_startup = 1
 
 " denite.nvim
-call denite#custom#var('file/rec', 'command', ['rg', '--files', '--glob', '!.git'])
+call denite#custom#var('file/rec', 'command', ['rg', '--sort=path', '--files', '--glob', '!.git'])
 call denite#custom#source('file/rec', 'sorters', ['sorter/sublime'])
 
-call denite#custom#var('grep', 'command', ['rg'])
+call denite#custom#var('grep', 'command', ['rg', '--sort=path'])
 call denite#custom#var('grep', 'default_opts', ['-i', '--glob', '!package-lock.json', '--vimgrep', '--no-heading'])
 call denite#custom#var('grep', 'recursive_opts', [])
 
