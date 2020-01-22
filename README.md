@@ -3,6 +3,8 @@ Dotfiles
 
 > My personal config files and shell scripts
 
+![](./scrot.png)
+
 Popular Apps
 ------------
 
