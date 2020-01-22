@@ -134,3 +134,11 @@ ip-addr () {
   grep --color=none --only-matching --perl-regexp '(?<=inet\s)\d+(\.\d+){3}' |\
   awk '{$1=$1};1' # trim whitespace
 }
+
+wifi-ssid () {
+  as-host netctl-auto list | grep '*'
+}
+
+wifi-switch () {
+  as-host sudo netctl-auto switch-to $1
+}
