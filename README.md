@@ -8,6 +8,7 @@ Popular Apps
 
 - [vim](./apps/vim/init.vim)
 - [tmux](./apps/tmux/tmux.conf)
+- [zsh](./apps/zsh/zshrc)
 
 Window Manager
 --------------
@@ -19,7 +20,6 @@ Window Manager
 Other Repos
 -----------
 
-- [ZSH + Prezto](https://github.com/stayradiated/prezto)
 - [Shell Docker Container](https://github.com/stayradiated/shell)
 
 ### Installation
