@@ -1,0 +1,6 @@
+source "${ZDOTDIR:-$HOME}/dotfiles/apps/zsh/config.sh"
+source "${ZDOTDIR:-$HOME}/dotfiles/apps/zsh/git.sh"
+source "${ZDOTDIR:-$HOME}/dotfiles/apps/zsh/docker.sh"
+source "${ZDOTDIR:-$HOME}/dotfiles/apps/zsh/stayradiated.sh"
+
+source "${ZDOTDIR:-$HOME}/.antibody.sh"

@@ -2,7 +2,7 @@ SHELL := /bin/bash
 
 apps := $(CURDIR)/apps
 
-apps: bspwm git hub logview mitmproxy mycli ngrok npm ranger ssh sxhkd tmux urlview vim weechat x11 zsh
+apps: bspwm git hub logview mitmproxy mycli ngrok npm ranger safe-rm ssh sxhkd tmux urlview vim weechat x11 zsh
 
 bspwm:
 
@@ -59,6 +59,11 @@ ranger:
 	@mkdir -p ~/.config/ranger
 	@ln -fs "$(apps)/ranger/rc.conf" ~/.config/ranger/rc.conf
 	@ln -fs "$(apps)/ranger/rifle.conf" ~/.config/ranger/rifle.conf
+
+safe-rm:
+
+	@echo "safe-rm..."
+	@ln -fs "$(apps)/safe-rm/config" ~/.config/safe-rm
 
 ssh:
 
@@ -146,15 +151,4 @@ x11:
 zsh:
 
 	@echo "zsh..."
-	@if test ! -d ~/.zprezto; then\
-		git clone --recursive https://github.com/stayradiated/prezto.git ~/.zprezto; \
-		pushd ~/.zprezto; \
-		git remote add upstream https://github.com/sorin-ionescu/prezto; \
-		popd; \
-	fi;
-	@ln -fs ~/.zprezto/runcoms/zlogin    ~/.zlogin
-	@ln -fs ~/.zprezto/runcoms/zlogout   ~/.zlogout
-	@ln -fs ~/.zprezto/runcoms/zpreztorc ~/.zpreztorc
-	@ln -fs ~/.zprezto/runcoms/zprofile  ~/.zprofile
-	@ln -fs ~/.zprezto/runcoms/zshenv    ~/.zshenv
-	@ln -fs ~/.zprezto/runcoms/zshrc     ~/.zshrc
+	@ln -fs "$(apps)/zsh/zshrc" ~/.zshrc

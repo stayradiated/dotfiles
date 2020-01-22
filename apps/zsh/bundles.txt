@@ -1,0 +1,11 @@
+# this block is in alphabetic order
+djui/alias-tips
+mafredri/zsh-async
+softmoth/zsh-vim-mode
+zsh-users/zsh-autosuggestions
+zsh-users/zsh-completions
+
+# these should be at last
+sindresorhus/pure
+zdharma/fast-syntax-highlighting
+zsh-users/zsh-history-substring-search
