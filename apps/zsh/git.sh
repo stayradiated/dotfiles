@@ -18,9 +18,6 @@ _git_status_ignore_submodules='none'
 # Aliases
 #
 
-# Git
-alias g='git'
-
 # Branch (b)
 alias gb='git branch'
 alias gba='git branch --all --verbose'
