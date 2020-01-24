@@ -337,8 +337,9 @@ function noremoteglob {
 # ==============================================================================
 #
 
-alias tmuxa="tmux $_tmux_iterm_integration new-session -A"
+alias tmuxa="tmux attach -d"
 alias tmuxl='tmux list-sessions'
+alias tmuxn="tmux new-session -A"
 
 #
 # ==============================================================================
