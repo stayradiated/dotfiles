@@ -46,7 +46,9 @@ fi
 
 # settings
 export TZ='Pacific/Auckland'
-export TMUX_TMPDIR="$HOME/.tmux"
+
+# gcloud
+export CLOUDSDK_CONFIG="${HOME}/shared/gcloud"
 
 # fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
