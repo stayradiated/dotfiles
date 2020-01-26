@@ -271,7 +271,7 @@ fi
 #
 
 # Makes a directory and changes to it.
-function mkdcd {
+function mcd {
   [[ -n "$1" ]] && mkdir -p "$1" && builtin cd "$1"
 }
 
