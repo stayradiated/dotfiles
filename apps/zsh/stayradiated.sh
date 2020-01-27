@@ -19,6 +19,7 @@ path=(
   /home/admin/.yarn/bin
   /usr/local/go/bin
   /usr/local/google-cloud-sdk/bin
+  /usr/local/share/anki/bin
   /home/admin/.fzf/bin
 )
 #
