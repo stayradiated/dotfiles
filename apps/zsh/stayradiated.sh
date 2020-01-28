@@ -51,9 +51,6 @@ export TZ='Pacific/Auckland'
 # gcloud
 export CLOUDSDK_CONFIG="${HOME}/shared/gcloud"
 
-# fzf
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
 # z.lua
 export _ZL_DATA='~/shared/zlua'
 eval "$(lua5.3 /usr/local/bin/z.lua --init zsh)"
@@ -115,12 +112,14 @@ use-monitor () {
   use-config-keyboard
   monitor-on
   set-alacritty-font terminal
+  source ~/dotfiles/apps/bspwm/bspwmrc
 }
 
 use-laptop () {
   bluetooth-off
   monitor-off
   set-alacritty-font Gomme
+  source ~/dotfiles/apps/bspwm/bspwmrc
 }
 
 rsync-photos () {
@@ -149,7 +148,7 @@ wifi-switch () {
 
 gcloud-stream-build () {
   gcloud builds log --stream $(\
-    gcloud builds list --limit 1 --filter 'status=WORKING' --format 'value(id)'
+    gcloud builds list --limit 1 --format 'value(id)'
   )
 }
 

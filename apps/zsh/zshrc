@@ -4,3 +4,4 @@ source "${ZDOTDIR:-$HOME}/dotfiles/apps/zsh/docker.sh"
 source "${ZDOTDIR:-$HOME}/dotfiles/apps/zsh/stayradiated.sh"
 
 source "${ZDOTDIR:-$HOME}/.antibody.sh"
+source "${ZDOTDIR:-$HOME}/.fzf.zsh"
