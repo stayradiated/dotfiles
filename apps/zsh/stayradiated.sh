@@ -2,8 +2,8 @@
 PURE_PROMPT_SYMBOL='>'
 PURE_PROMPT_VICMD_SYMBOL='<'
 
-GOPATH=/home/admin
-GOROOT=/usr/local/go
+export GOPATH=/home/admin
+export GOROOT=/usr/local/go
 
 path=(
   /home/admin/dotfiles/bin
