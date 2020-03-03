@@ -152,3 +152,10 @@ gcloud-stream-build () {
   )
 }
 
+set-ethernet () {
+  as-host sudo ip link set enp0s31f6 up
+}
+
+set-wifi () {
+  as-host sudo ip link set wlp2s0 up
+}
