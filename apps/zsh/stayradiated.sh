@@ -152,22 +152,18 @@ gcloud-stream-build () {
   )
 }
 
-set-ethernet () {
-  as-host sudo ip link set enp0s31f6 $1
-}
-
-set-wifi () {
-  as-host sudo ip link set wlp2s0 $1
-}
-
 use-ethernet () {
-  set-ethernet up
-  set-wifi down
-  as-host sudo dhcpcd
+  as-host '
+    sudo ip link set enp0s31f6 up &&
+    sudo ip link set wlp2s0 down &&
+    sudo dhcpcd
+  '
 }
 
 use-wifi () {
-  set-wifi up
-  set-ethernet down
-  as-host sudo dhcpcd
+  as-host '
+    sudo ip link set wlp2s0 up &&
+    sudo ip link set enp0s31f6 down &&
+    sudo dhcpcd
+  '
 }
