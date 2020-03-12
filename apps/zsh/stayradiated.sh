@@ -108,6 +108,7 @@ set-alacritty-colors () {
 }
 
 use-monitor () {
+  use-ethernet
   bluetooth-on
   use-config-keyboard
   monitor-on
@@ -116,6 +117,7 @@ use-monitor () {
 }
 
 use-laptop () {
+  use-wifi
   bluetooth-off
   monitor-off
   set-alacritty-font Gomme
