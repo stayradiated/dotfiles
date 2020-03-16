@@ -139,7 +139,7 @@ ip-addr () {
   awk '{$1=$1};1' # trim whitespace
 }
 
-wifi-ssid () {
+ssid () {
   as-host netctl-auto list | grep '*'
 }
 
