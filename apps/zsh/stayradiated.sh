@@ -78,11 +78,6 @@ alias ping='prettyping --nolegend'
 
 # git
 alias gup='git push -u origin HEAD'
-unalias gm
-
-# save tmux buffer
-# use `C-a: capture-pane -eJ` to screenshot the desired pane
-alias saveBuffer='tmux save-buffer tmux_output.bin && tmux delete-buffer'
 
 # root user
 as-host () {
@@ -169,3 +164,13 @@ use-wifi () {
     sudo dhcpcd
   '
 }
+
+#
+# ==============================================================================
+# TMUX
+# ------------------------------------------------------------------------------
+# Defines tmux aliases
+# ==============================================================================
+#
+
+alias tm='tmux list-sessions && tmux attach -d || tmux new-session'
