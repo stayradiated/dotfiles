@@ -129,8 +129,11 @@ rsync-photos () {
 }
 
 ip () {
-  as-host ip -4 addr show wlp2s0 | \
-  grep --color=none --only-matching --perl-regexp '(?<=inet\s)\d+(\.\d+){3}' |\
+  { 
+    as-host ip -4 addr show wlp2s0 &
+    as-host ip -4 addr show enp0s31f6 
+  } |
+  grep --color=none --only-matching --perl-regexp '(?<=inet\s)\d+(\.\d+){3}' |
   awk '{$1=$1};1' # trim whitespace
 }
 
