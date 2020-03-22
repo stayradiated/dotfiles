@@ -79,11 +79,6 @@ alias ping='prettyping --nolegend'
 # git
 alias gup='git push -u origin HEAD'
 
-# root user
-as-host () {
-  ssh george@localhost -q -t "$@"
-}
-
 alias bluetooth-on='as-host bluetoothctl power on'
 alias bluetooth-off='as-host bluetoothctl power off'
 
@@ -126,15 +121,6 @@ rsync-photos () {
     rsync -vua /mnt/usb/DCIM ~/src/camera && \
     sudo umount /mnt/usb && \
     echo "sync complete, please remove the SD card :)"'
-}
-
-ip () {
-  { 
-    as-host ip -4 addr show wlp2s0 &
-    as-host ip -4 addr show enp0s31f6 
-  } |
-  grep --color=none --only-matching --perl-regexp '(?<=inet\s)\d+(\.\d+){3}' |
-  awk '{$1=$1};1' # trim whitespace
 }
 
 ssid () {
