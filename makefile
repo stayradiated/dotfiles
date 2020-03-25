@@ -2,7 +2,7 @@ SHELL := /bin/bash
 
 apps := $(CURDIR)/apps
 
-apps: anki bspwm git hub logview mitmproxy mycli ngrok npm ranger safe-rm ssh sxhkd tmux urlview vim weechat x11 zsh
+apps: anki bspwm charles git hub logview mitmproxy mycli ngrok npm ranger safe-rm ssh sxhkd tmux urlview vim weechat x11 zsh
 
 anki:
 
@@ -15,6 +15,11 @@ bspwm:
 	@echo "bspwm..."
 	@mkdir -p ~/.config/bspwm
 	@ln -fs "$(apps)/bspwm/bspwmrc" ~/.config/bspwm/bspwmrc
+
+charles:
+
+	@echo "charles..."
+	@ln -fs "$(apps)/charles/config.enc" ~/.charles.config
 
 git:
 
