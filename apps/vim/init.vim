@@ -36,6 +36,10 @@ if dein#load_state('$HOME/.config/nvim/dein')
   call dein#add('junegunn/fzf')
   call dein#add('wellle/tmux-complete.vim')
 
+  call dein#add('iamcco/markdown-preview.nvim', {
+    \'on_ft': ['markdown', 'pandoc.markdown', 'rmd'],
+    \'build': 'sh -c "cd app & yarn install"' })
+
   " Languages
   call dein#add('leafgarland/typescript-vim')
   call dein#add('pangloss/vim-javascript')
