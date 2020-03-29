@@ -1,6 +1,6 @@
 # pure prompt
-PURE_PROMPT_SYMBOL='>'
-PURE_PROMPT_VICMD_SYMBOL='<'
+PURE_PROMPT_SYMBOL='»'
+PURE_PROMPT_VICMD_SYMBOL='«'
 
 export GOPATH=/home/admin
 export GOROOT=/usr/local/go
