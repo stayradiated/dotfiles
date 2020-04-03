@@ -1,6 +1,8 @@
+autoload -U promptinit; promptinit
 # pure prompt
 PURE_PROMPT_SYMBOL='»'
 PURE_PROMPT_VICMD_SYMBOL='«'
+prompt pure
 
 export GOPATH=/home/admin
 export GOROOT=/usr/local/go
