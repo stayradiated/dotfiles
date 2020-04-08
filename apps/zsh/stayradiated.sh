@@ -136,7 +136,7 @@ wifi-switch () {
 
 gcloud-stream-build () {
   gcloud builds log --stream $(\
-    gcloud builds list --limit 1 --format 'value(id)'
+    gcloud builds list --limit 1 --format 'value(id)' --ongoing
   )
 }
 
