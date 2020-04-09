@@ -1,3 +1,10 @@
 #!/usr/bin/env zsh
 
-ssh george@localhost -q -t "$@"
+user="$(whoami)"
+
+if [[ "${user}" == "george" ]]
+then
+  "${@}"
+else
+  ssh george@localhost -q -t "${@}"
+fi
