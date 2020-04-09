@@ -1,0 +1,14 @@
+#!/usr/bin/env zsh
+
+VAULTS=(carbon sauce)
+FILES=(profile.js band_0.js band_1.js band_2.js band_3.js band_4.js band_5.js band_6.js band_7.js band_8.js band_9.js band_A.js band_C.js band_D.js band_E.js band_F.js)
+
+for VAULT in $VAULTS[@]
+do
+  mkdir -p "~/vaults/${VAULT}/default"
+  for FILE in $FILES[@]
+  do
+    echo "${VAULT} -- ${FILE}"
+    dbxcli get "/Apps/1Password/${VAULT}.opvault/default/$FILE" "${HOME}/vaults/${VAULT}/default/$FILE"
+  done
+done

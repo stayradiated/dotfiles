@@ -2,7 +2,7 @@ SHELL := /bin/bash
 
 apps := $(CURDIR)/apps
 
-apps: anki bspwm charles git hub logview mitmproxy mycli ngrok npm ranger safe-rm ssh sxhkd tmux urlview vim weechat x11 zsh
+apps: anki bspwm charles dbxcli git hub logview mitmproxy mycli ngrok npm ranger safe-rm ssh sxhkd tmux urlview vim weechat x11 zsh
 
 anki:
 
@@ -20,6 +20,12 @@ charles:
 
 	@echo "charles..."
 	@ln -fs "$(apps)/charles/config.enc" ~/.charles.config
+
+dbxcli:
+
+	@echo "dbxcli..."
+	@mkdir -p ~/.config/dbxcli
+	@ln -fs "$(apps)/dbxcli/auth.json.enc" ~/.config/dbxcli/auth.json
 
 git:
 
