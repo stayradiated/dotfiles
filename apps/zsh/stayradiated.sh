@@ -51,7 +51,7 @@ fi
 export TZ='Pacific/Auckland'
 
 # z.lua
-export _ZL_DATA='~/shared/zlua'
+export _ZL_DATA='~/src/zlua'
 eval "$(lua5.3 /usr/local/bin/z.lua --init zsh)"
 alias j='z'
 
@@ -60,7 +60,7 @@ alias celar='clear'
 alias :q='exit'
 
 # watson
-export WATSON_DIR=~/shared/watson
+export WATSON_DIR=~/src/watson
 
 # when exiting ranger, cd to the same dir
 alias ranger='source ranger'
