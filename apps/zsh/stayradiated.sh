@@ -84,8 +84,8 @@ alias gup='git push -u origin HEAD'
 alias bluetooth-on='as-host bluetoothctl power on'
 alias bluetooth-off='as-host bluetoothctl power off'
 
-alias monitor-on='xrandr --output HDMI-1 --mode 1920x1080 --left-of eDP-1'
-alias monitor-off='xrandr --output eDP-1 --mode 1920x1080 --output HDMI-1 --off'
+alias monitor-on='xrandr --output HDMI1 --mode 1920x1080 --left-of eDP1'
+alias monitor-off='xrandr --output eDP1 --mode 1920x1080 --output HDMI1 --off'
 
 use-config-keyboard () {
   setxkbmap us -variant colemak -option ctrl:nocaps -option altwin:swap_alt_win
