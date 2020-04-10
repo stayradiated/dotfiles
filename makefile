@@ -2,7 +2,7 @@ SHELL := /bin/bash
 
 apps := $(CURDIR)/apps
 
-apps: anki bspwm charles dbxcli git hub logview mitmproxy mycli ngrok npm ranger safe-rm ssh sxhkd tmux urlview vim weechat x11 zsh
+apps: anki bspwm charles dbxcli gcloud git hub logview mitmproxy mycli ngrok npm ranger safe-rm ssh sxhkd tmux urlview vim weechat x11 zsh
 
 anki:
 
@@ -26,6 +26,15 @@ dbxcli:
 	@echo "dbxcli..."
 	@mkdir -p ~/.config/dbxcli
 	@ln -fs "$(apps)/dbxcli/auth.json.enc" ~/.config/dbxcli/auth.json
+
+gcloud:
+
+	@echo "gcloud..."
+	@mkdir -p ~/.config/gcloud/configurations
+	@ln -fs "$(apps)/gcloud/access_tokens.db.enc" ~/.config/gcloud/access_tokens.db
+	@ln -fs "$(apps)/gcloud/active_config.enc" ~/.config/gcloud/active_config
+	@ln -fs "$(apps)/gcloud/configurations/config_default.enc" ~/.config/gcloud/configurations/config_default
+	@ln -fs "$(apps)/gcloud/credentials.db.enc" ~/.config/gcloud/credentials.db
 
 git:
 

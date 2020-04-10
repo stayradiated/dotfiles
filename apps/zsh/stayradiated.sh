@@ -50,9 +50,6 @@ fi
 # settings
 export TZ='Pacific/Auckland'
 
-# gcloud
-export CLOUDSDK_CONFIG="${HOME}/shared/gcloud"
-
 # z.lua
 export _ZL_DATA='~/shared/zlua'
 eval "$(lua5.3 /usr/local/bin/z.lua --init zsh)"
