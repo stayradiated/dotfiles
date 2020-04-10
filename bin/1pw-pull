@@ -5,7 +5,7 @@ FILES=(profile.js band_0.js band_1.js band_2.js band_3.js band_4.js band_5.js ba
 
 for VAULT in $VAULTS[@]
 do
-  mkdir -p "~/vaults/${VAULT}/default"
+  mkdir -p "${HOME}/vaults/${VAULT}/default"
   for FILE in $FILES[@]
   do
     echo "${VAULT} -- ${FILE}"
