@@ -19,7 +19,21 @@ bspwm:
 charles:
 
 	@echo "charles..."
+	@mkdir -p ~/.charles
 	@ln -fs "$(apps)/charles/config.enc" ~/.charles.config
+	@ln -fs "$(apps)/charles/ca/charles-proxy-ssl-proxying-certificate.cer.enc" ~/.charles/ca/charles-proxy-ssl-proxying-certificate.cer
+	@ln -fs "$(apps)/charles/ca/charles-proxy-ssl-proxying-certificate.pem.enc" ~/.charles/ca/charles-proxy-ssl-proxying-certificate.pem
+	@ln -fs "$(apps)/charles/ca/keystore.enc" ~/.charles/ca/keystore
+	@ln -fs "$(apps)/charles/certs/4b411e9366c230b6b9cc8a1e8561f1a836c377fd-5726138436715021819600663311331114832-1586977469132-907e542cbcaa923b54802c0b5fb18637ddfc6027.keystore.enc" ~/.charles/certs/4b411e9366c230b6b9cc8a1e8561f1a836c377fd-5726138436715021819600663311331114832-1586977469132-907e542cbcaa923b54802c0b5fb18637ddfc6027.keystore
+	@ln -fs "$(apps)/charles/certs/c06a3d993539b85437ecf1e39c570e717221b92b-303982394985508397538159550000603141616-1586977469132-fd696aea360ab5fb06683b9494636180fc57da82.keystore.enc" ~/.charles/certs/c06a3d993539b85437ecf1e39c570e717221b92b-303982394985508397538159550000603141616-1586977469132-fd696aea360ab5fb06683b9494636180fc57da82.keystore
+	@ln -fs "$(apps)/charles/profiles/default.cfg.xml.enc" ~/.charles/profiles/default.cfg.xml
+	@ln -fs "$(apps)/charles/passwords.keystore.enc" ~/.charles/passwords.keystore
+
+charles-import:
+		
+	@echo "grabbing charles config..."
+	@cp ~/.charles.config "$(apps)/charles/config.enc"
+	@cp ~/.charles/profiles/default.cfg.xml "$(apps)/charles/profiles/default.cfg.xml.enc"
 
 dbxcli:
 
