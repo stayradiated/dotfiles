@@ -84,6 +84,10 @@ super + shift + {Left,Right,Up,Down}
 super + Return
     alacritty --config-file ~/dotfiles/apps/alacritty/alacritty.yml
 
+# take screenshot
+Print
+    fshot
+
 # Launch dmenu
 super + space
     rofi -show run -modi run,window,ssh -font 'Gomme 12' -terminal 'alacritty'

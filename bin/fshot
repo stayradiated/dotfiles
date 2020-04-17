@@ -1,0 +1,10 @@
+#!/usr/bin/env zsh
+
+if ! pgrep -x flameshot > /dev/null
+then
+  echo "Starting flameshot daemon..."
+  flameshot &
+  sleep 1
+fi
+
+flameshot gui

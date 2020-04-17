@@ -8,6 +8,6 @@ setxkbmap us -variant colemak -option ctrl:nocaps -option altwin:swap_alt_win
 xsetroot -solid '#001115'
 
 # wm keybindings
-sxhkd -m 1 &
+PATH=$HOME/dotfiles/bin:$PATH sxhkd -m 1 &
 
 exec bspwm
