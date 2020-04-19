@@ -2,7 +2,7 @@ SHELL := /bin/bash
 
 apps := $(CURDIR)/apps
 
-apps: anki bspwm charles dbxcli gcloud git hub logview mitmproxy mycli ngrok npm ranger safe-rm ssh sxhkd tmux urlview vim weechat x11 zsh
+apps: anki bspwm charles dbxcli firefox gcloud git hub logview mitmproxy mycli ngrok npm ranger safe-rm ssh sxhkd tmux urlview vim weechat x11 zsh
 
 anki:
 
@@ -47,6 +47,11 @@ dbxcli:
 	@echo "dbxcli..."
 	@mkdir -p ~/.config/dbxcli
 	@ln -fs "$(apps)/dbxcli/auth.json.enc" ~/.config/dbxcli/auth.json
+
+firefox:
+
+	@echo "firefox..."
+	@xdg-settings set default-web-browser firefox.desktop
 
 gcloud:
 
