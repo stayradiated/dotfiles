@@ -35,6 +35,7 @@ if dein#load_state('$HOME/.config/nvim/dein')
   call dein#add('danro/rename.vim')
   call dein#add('junegunn/fzf')
   call dein#add('wellle/tmux-complete.vim')
+  call dein#add('dkarter/bullets.vim')
 
   call dein#add('iamcco/markdown-preview.nvim', {
     \'on_ft': ['markdown', 'pandoc.markdown', 'rmd'],
