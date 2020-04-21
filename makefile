@@ -2,7 +2,7 @@ SHELL := /bin/bash
 
 apps := $(CURDIR)/apps
 
-apps: anki bspwm charles dbxcli firefox gcloud git hub logview mitmproxy mycli ngrok npm ranger safe-rm ssh sxhkd tmux urlview vim weechat x11 zsh
+apps: anki bspwm charles dbxcli firefox gcloud git hub logview mitmproxy mycli ngrok npm ranger safe-rm ssh sxhkd tmux urlview vim weechat x11 zoom zsh
 
 anki:
 
@@ -199,6 +199,12 @@ x11:
 
 	@echo "x11..."
 	@ln -fs "$(apps)/x11/xinitrc" ~/.xinitrc
+
+zoom:
+
+	@echo "zoom..."
+	@mkdir -p ~/.zoom/data
+	@ln -fs "$(apps)/zoom/zoomus.db.enc" ~/.zoom/data/zoomus.db
 
 zsh:
 
