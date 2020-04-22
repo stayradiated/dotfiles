@@ -54,6 +54,9 @@ ls \
   -I vaults  \
   -I docker.sock
 
-echo '\n# DOWNLOADS DIR'
-cd $HOME/downloads
-ls -Alh
+if [ -d "${HOME}/downloads" ]
+then
+  echo '\n# DOWNLOADS DIR'
+  cd $HOME/downloads
+  ls -Alh
+fi
