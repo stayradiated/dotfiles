@@ -1,0 +1,59 @@
+#!/usr/bin/env zsh
+
+echo '# DOTFILES'
+cd $HOME/dotfiles
+git status
+
+echo '\n# HOME DIR'
+cd $HOME
+ls \
+  -Alh \
+  -I .android \
+  -I .antibody.sh \
+  -I .bash_logout \
+  -I .bashrc \
+  -I .cache \
+  -I .cargo \
+  -I .charles \
+  -I .charles.config \
+  -I .config \
+  -I .fzf \
+  -I .fzf.zsh \
+  -I .gitconfig \
+  -I .local \
+  -I .mitmproxy \
+  -I .mozilla \
+  -I .myclirc \
+  -I .ngrok2 \
+  -I .node_repl_history \
+  -I .npm \
+  -I .npmrc \
+  -I .pki \
+  -I .profile \
+  -I .rustup \
+  -I .ssh \
+  -I .sudo_as_admin_successful \
+  -I .tig_history \
+  -I .tmux \
+  -I .tmux.conf \
+  -I .urlview \
+  -I .urlview.conf \
+  -I .weechat \
+  -I .wget-hsts \
+  -I .xinitrc \
+  -I .zcompcache \
+  -I .zcompdump \
+  -I .zoom \
+  -I .zshrc \
+  -I Desktop \
+  -I bus \
+  -I data \
+  -I dotfiles  \
+  -I downloads \
+  -I src \
+  -I vaults  \
+  -I docker.sock
+
+echo '\n# DOWNLOADS DIR'
+cd $HOME/downloads
+ls -Alh
