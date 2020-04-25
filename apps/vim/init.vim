@@ -51,6 +51,7 @@ if dein#load_state('$HOME/.config/nvim/dein')
   call dein#add('elzr/vim-json')
   call dein#add('GutenYe/json5.vim')
   call dein#add('cespare/vim-toml')
+  call dein#add('kchmck/vim-coffee-script')
 
  call dein#end()
  call dein#save_state()
