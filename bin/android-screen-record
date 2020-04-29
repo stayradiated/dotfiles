@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+TMP_FILE=$(mktemp -u /sdcard/Movies/screenrecord_XXXX.mp4)
+adb shell screenrecord --time-limit 10 --verbose "${TMP_FILE}"
+adb pull $TMP_FILE .
+adb shell rm "${TMP_FILE}"
