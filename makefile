@@ -2,7 +2,7 @@ SHELL := /bin/bash
 
 apps := $(CURDIR)/apps
 
-apps: anki beets bspwm charles dbxcli firefox gcloud git hub logview mitmproxy mycli ngrok npm ranger safe-rm ssh sxhkd tmux urlview vim weechat x11 zoom zsh
+apps: anki beets bspwm charles dbxcli firefox gcloud git hub logview mitmproxy mycli ngrok npm ranger ssh sxhkd tmux urlview vim weechat x11 zoom zsh
 
 anki:
 
@@ -117,11 +117,6 @@ ranger:
 	@mkdir -p ~/.config/ranger
 	@ln -fs "$(apps)/ranger/rc.conf" ~/.config/ranger/rc.conf
 	@ln -fs "$(apps)/ranger/rifle.conf" ~/.config/ranger/rifle.conf
-
-safe-rm:
-
-	@echo "safe-rm..."
-	@ln -fs "$(apps)/safe-rm/config" ~/.config/safe-rm
 
 ssh:
 

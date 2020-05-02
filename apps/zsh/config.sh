@@ -188,7 +188,6 @@ alias sa='alias | grep -i'
 alias type='type -a'
 alias rm='safe-rm'
 
-alias rm="${aliases[rm]:-rm} -i"
 alias mv="${aliases[mv]:-mv} -i"
 alias cp="${aliases[cp]:-cp} -i"
 alias ln="${aliases[ln]:-ln} -i"
