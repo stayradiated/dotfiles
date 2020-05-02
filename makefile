@@ -2,13 +2,19 @@ SHELL := /bin/bash
 
 apps := $(CURDIR)/apps
 
-apps: anki bspwm charles dbxcli firefox gcloud git hub logview mitmproxy mycli ngrok npm ranger safe-rm ssh sxhkd tmux urlview vim weechat x11 zoom zsh
+apps: anki beets bspwm charles dbxcli firefox gcloud git hub logview mitmproxy mycli ngrok npm ranger safe-rm ssh sxhkd tmux urlview vim weechat x11 zoom zsh
 
 anki:
 
 	@echo "anki..."
 	@mkdir -p ~/.local/share/Anki2
 	@ln -fs "$(apps)/anki/prefs21.db.enc" ~/.local/share/Anki2/prefs21.db
+
+beets:
+
+	@echo "beets..."
+	@mkdir -p ~/.config/beets
+	@ln -fs "$(apps)/beets/config.yaml" ~/.config/beets/config.yaml
 
 bspwm:
 
