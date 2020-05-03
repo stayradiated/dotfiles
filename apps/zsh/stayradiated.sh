@@ -4,6 +4,8 @@ PURE_PROMPT_SYMBOL='»'
 PURE_PROMPT_VICMD_SYMBOL='«'
 prompt pure
 
+export TERM='xterm-256color'
+
 export GOPATH=/home/admin
 export GOROOT=/usr/local/go
 
