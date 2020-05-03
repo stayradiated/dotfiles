@@ -116,12 +116,13 @@ use-laptop () {
 }
 
 rsync-photos () {
-  as-host -t bash -c 'true && \
-    mkdir -p /mnt/usb && \
-    sudo mount /dev/sda1 /mnt/usb && \
+  DEVICE="${1:-/dev/sda1}"
+  as-host -t bash -c "true && \
+    sudo mkdir -p /mnt/usb && \
+    sudo mount '${DEVICE}' /mnt/usb && \
     rsync -vua /mnt/usb/DCIM ~/src/camera && \
     sudo umount /mnt/usb && \
-    echo "sync complete, please remove the SD card :)"'
+    echo 'sync complete, please remove the SD card :)'"
 }
 
 ssid () {
