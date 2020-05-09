@@ -9,23 +9,6 @@ export TERM='xterm-256color'
 export GOPATH=/home/admin
 export GOROOT=/usr/local/go
 
-path=(
-  /home/admin/dotfiles/bin
-  /home/admin/.local/bin
-  /usr/local/sbin
-  /usr/local/bin
-  /usr/sbin
-  /usr/bin
-  /sbin
-  /bin
-  /home/admin/.cargo/bin
-  /usr/local/lib/node/bin
-  /home/admin/.yarn/bin
-  /usr/local/go/bin
-  /usr/local/google-cloud-sdk/bin
-  /usr/local/share/anki/bin
-  /home/admin/.fzf/bin
-)
 #
 # Editors
 #
