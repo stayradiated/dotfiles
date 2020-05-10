@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+FROM=`echo "${1}" | awk '{gsub(/ /,"\\ ");print}'`
+TO=`echo "${2}" | awk '{gsub(/ /,"\\ ");print}'`
+exec scp "${FROM}" "${TO}"
