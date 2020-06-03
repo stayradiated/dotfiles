@@ -263,6 +263,11 @@ function! CodeModImport()
   %s/\v(const|let|var)\s+([A-z0-9{},: ]+)\s*\=\s*require\(['"]([^']+)['"]\)/import \2 from '\3'
 endfunction
 
+" `function (...args) {` --> `(...args) => {`
+function! CodeModArrowFn()
+  %s/\vfunction\s*\(([A-z,:\n ]*)\)\s*\{/(\1) => {
+endfunction
+
 " Autocommands
 " ------------------------------------------------------------------------------
 
