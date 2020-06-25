@@ -39,6 +39,7 @@ alias gbv='git branch --verbose'
 alias gbV='git branch --verbose --verbose'
 alias gbx='git branch --delete'
 alias gbX='git branch --delete --force'
+alias gbxx='git branch --merged | rg -v "master" | xargs git branch -d'
 
 # Commit (c)
 alias gc='git commit --verbose'
@@ -85,6 +86,7 @@ alias gdi='git status --porcelain --short --ignored | sed -n "s/^!! //p"'
 # Fetch (f)
 alias gf='git fetch'
 alias gfa='git fetch --all'
+alias gfp='git fetch --prune'
 alias gfc='git clone'
 alias gfcr='git clone --recurse-submodules'
 alias gfm='git pull'
