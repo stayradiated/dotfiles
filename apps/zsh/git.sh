@@ -39,7 +39,6 @@ alias gbv='git branch --verbose'
 alias gbV='git branch --verbose --verbose'
 alias gbx='git branch --delete'
 alias gbX='git branch --delete --force'
-alias gbxx='git branch --merged | rg -v "master" | xargs git branch -d'
 
 # Commit (c)
 alias gc='git commit --verbose'
