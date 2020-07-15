@@ -52,6 +52,7 @@ if dein#load_state('$HOME/.config/nvim/dein')
   call dein#add('mxw/vim-jsx')
   call dein#add('mxw/vim-prolog')
   call dein#add('pangloss/vim-javascript')
+  call dein#add('vim-crystal/vim-crystal')
 
  call dein#end()
  call dein#save_state()
@@ -235,6 +236,9 @@ endfunction
 
 " JSX
 let g:jsx_ext_required = 0
+
+" bullets
+let g:bullets_enable_in_empty_buffers = 0
 
 " Functions
 " ------------------------------------------------------------------------------
