@@ -69,6 +69,9 @@ alias bluetooth-off='as-host bluetoothctl power off'
 alias monitor-on='xrandr --output HDMI1 --mode 1920x1080 --left-of eDP1'
 alias monitor-off='xrandr --output eDP1 --mode 1920x1080 --output HDMI1 --off'
 
+alias laptop-monitor-on='xrandr --output eDP1 --mode 1920x1080'
+alias laptop-monitor-off='xrandr --output eDP1 --off'
+
 use-config-keyboard () {
   setxkbmap us -variant colemak -option ctrl:nocaps -option altwin:swap_alt_win
 }
