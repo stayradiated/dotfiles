@@ -18,8 +18,14 @@ if dein#load_state('$HOME/.config/nvim/dein')
   call dein#add('reedes/vim-colors-pencil')
 
   " Extensions
-  call dein#add('Shougo/deoplete.nvim')
   call dein#add('Shougo/denite.nvim')
+
+  call dein#add('Shougo/deoplete.nvim')
+  let g:deoplete#enable_at_startup = 1
+
+  call dein#add('Shougo/neosnippet.vim')
+  " call dein#add('Shougo/deoppet.nvim')
+  
   call dein#add('neoclide/denite-git')
   call dein#add('jeetsukumaran/vim-filebeagle')
   call dein#add('christoomey/vim-tmux-navigator')
@@ -215,7 +221,6 @@ let g:dein#notification_time = 0
 " https://github.com/wellle/tmux-complete.vim
 let g:tmuxcomplete#trigger = ''
 
-let g:deoplete#enable_at_startup = 1
 
 " denite.nvim
 call denite#custom#var('file/rec', 'command', ['rg', '--sort=path', '--files', '--glob', '!.git'])
@@ -239,6 +244,23 @@ let g:jsx_ext_required = 0
 
 " bullets
 let g:bullets_enable_in_empty_buffers = 0
+
+
+" Snippets
+" ------------------------------------------------------------------------------
+
+let g:neosnippet#snippets_directory	= '~/.config/nvim/my-snippets'
+let g:neosnippet#scope_aliases = {}
+let g:neosnippet#scope_aliases['typescript'] = 'typescript,javascript'
+let g:neosnippet#disable_runtime_snippets = { '_' : 1 }
+
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+if has('conceal')
+  set conceallevel=2 concealcursor=niv
+endif
 
 " Functions
 " ------------------------------------------------------------------------------
