@@ -32,7 +32,8 @@ if dein#load_state('$HOME/.config/nvim/dein')
 
   " Editing
   call dein#add('tpope/vim-repeat')
-  call dein#add('tpope/vim-abolish')
+  " call dein#add('tpope/vim-abolish')
+  call dein#add('arthurxavierx/vim-caser')
   call dein#add('tpope/vim-fugitive')
   call dein#add('tpope/vim-surround')
   call dein#add('tpope/vim-unimpaired')

@@ -7,14 +7,22 @@ options word
   }
 
   const ${1}: React.FC<Props> = (props) => {
-    const { ${3} } = props
+    const { ${2} } = props
 
     return (
       ${0}
     )
   }
 
-  export default ${2}
+  export default $1
 
 snippet matcore
   import { ${1} } from '@material-ui/core'
+
+snippet func
+  interface $1Options {
+  }
+
+  const ${1}: (options: $1Options) => {
+    const { ${0} } = options
+  }
