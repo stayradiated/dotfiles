@@ -255,9 +255,9 @@ let g:neosnippet#scope_aliases = {}
 let g:neosnippet#scope_aliases['typescript'] = 'typescript,javascript'
 let g:neosnippet#disable_runtime_snippets = { '_' : 1 }
 
-imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-xmap <C-k>     <Plug>(neosnippet_expand_target)
+imap <C-CR>    <Plug>(neosnippet_expand_or_jump)
+smap <C-CR>    <Plug>(neosnippet_expand_or_jump)
+xmap <C-CR>    <Plug>(neosnippet_expand_target)
 
 if has('conceal')
   set conceallevel=2 concealcursor=niv
