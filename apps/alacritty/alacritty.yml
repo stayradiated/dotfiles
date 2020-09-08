@@ -91,22 +91,22 @@
 font:
   # Normal (roman) font face
   normal:
-    family: Gomme
+    family: terminal
     style: Regular
 
   # Bold font face
   bold:
-    family: Gomme
+    family: terminal
     style: Bold
 
   # Bold italic font face
   #bold_italic:
-    family: Gomme
+    family: terminal
     style: Regular
 
   # The italic font face
   italic:
-    family: Gomme
+    family: terminal
     style: Regular
 
   # Point size
@@ -522,7 +522,7 @@ colors: *termorrow_dark
 # If the same trigger is assigned to multiple actions, all of them are executed
 # at once.
 key_bindings:
-  - { key: Return,   mods: Shift,   chars: "\x1b[13;2u" }
+  # - { key: Return,   mods: Shift,   chars: "\x1b[13;2u" }
   - { key: Return,   mods: Control, chars: "\x1b[13;5u" }
 
   # (Windows, Linux, and BSD only)
