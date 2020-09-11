@@ -1,0 +1,10 @@
+#!/usr/bin/env zsh
+
+DEVICE_NAME='Synaptics TM3289-021'
+DEVICE_ID=$(xinput list | rg "${DEVICE_NAME}" | rg -o 'id=(\d+)' -r '$1')
+
+PROP_NAME='libinput Disable While Typing Enabled \('
+PROP_ID=$(xinput list-props "${DEVICE_ID}" | rg "${PROP_NAME}" | rg -o '\((\d+)\)' -r '$1')
+
+xinput set-prop "${DEVICE_ID}" "${PROP_ID}" 0
+
