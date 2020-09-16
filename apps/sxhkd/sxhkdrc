@@ -90,7 +90,7 @@ Print
 
 # Launch dmenu
 super + space
-    XDG_RUNTIME_DIR=/tmp rofi -show run -modi run,window,ssh -font 'Gomme 12' -terminal 'alacritty'
+    rofi -show run -modi run,window,ssh -font 'Gomme 12' -terminal 'alacritty'
 
 # Quit BSPWM
 super + alt + Escape

@@ -5,6 +5,6 @@ setxkbmap us -variant colemak -option ctrl:nocaps -option altwin:swap_alt_win
 xsetroot -solid '#001115'
 
 # wm keybindings
-SXHKD_SHELL=/bin/bash PATH=$HOME/dotfiles/bin:$PATH sxhkd &
+XDG_RUNTIME_DIR=/tmp SXHKD_SHELL=/bin/bash PATH=$HOME/dotfiles/bin:$PATH sxhkd &
 
 exec bspwm -c /home/admin/.config/bspwm/bspwmrc
