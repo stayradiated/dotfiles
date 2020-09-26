@@ -45,7 +45,7 @@ alias celar='clear'
 alias :q='exit'
 
 # watson
-export WATSON_DIR=~/src/watson
+export WATSON_DIR="${HOME}/dotfiles/apps/watson"
 
 # when exiting ranger, cd to the same dir
 alias ranger='source ranger'

@@ -10,3 +10,6 @@
 /apps/weechat/perl
 /apps/weechat/python
 /apps/weechat/*.log
+
+# backup files
+*.bak
