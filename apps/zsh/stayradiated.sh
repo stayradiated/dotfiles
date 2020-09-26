@@ -36,7 +36,7 @@ fi
 export TZ='Pacific/Auckland'
 
 # z.lua
-export _ZL_DATA='~/src/zlua'
+export _ZL_DATA="${HOME}/dotfiles/apps/zsh/state/zlua.enc"
 eval "$(lua5.3 /usr/local/bin/z.lua --init zsh)"
 alias j='z'
 
