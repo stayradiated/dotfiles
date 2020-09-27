@@ -86,7 +86,7 @@ set-alacritty-colors () {
 
 use-monitor () {
   use-ethernet
-  bluetooth-on
+  # bluetooth-on
   use-config-keyboard
   monitor-on
   set-alacritty-font terminal
@@ -95,7 +95,7 @@ use-monitor () {
 
 use-laptop () {
   use-wifi
-  bluetooth-off
+  # bluetooth-off
   monitor-off
   set-alacritty-font Gomme
   source ~/dotfiles/apps/bspwm/bspwmrc
@@ -128,17 +128,19 @@ gcloud-stream-build () {
 
 use-ethernet () {
   as-host '
+    sudo systemctl stop dhcpcd &&
     sudo ip link set enp0s31f6 up &&
     sudo ip link set wlp2s0 down &&
-    sudo dhcpcd
+    sudo systemctl start dhcpcd
   '
 }
 
 use-wifi () {
   as-host '
+    sudo systemctl stop dhcpcd &&
     sudo ip link set wlp2s0 up &&
     sudo ip link set enp0s31f6 down &&
-    sudo dhcpcd
+    sudo systemctl start dhcpcd
   '
 }
 
