@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-WATSON_DIR="${HOME}/src/watson"
+WATSON_DIR="${HOME}/dotfiles/apps/watson"
 
 PROJECT="$(watson status --project)"
 PROJECT=$(echo "${PROJECT}" | sed 's/No project started.//g')
