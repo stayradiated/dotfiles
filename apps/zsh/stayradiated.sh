@@ -61,6 +61,8 @@ alias cat='bat'
 alias ping='prettyping --nolegend'
 
 # git
+alias gunshallow='git stash save && git fetch --unshallow && git reset --hard origin/master'
+
 alias gup='git push -u origin HEAD'
 
 alias bluetooth-on='as-host bluetoothctl power on'
