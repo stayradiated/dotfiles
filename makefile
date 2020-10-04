@@ -205,7 +205,7 @@ zoom:
 
 	@echo "zoom..."
 	@mkdir -p ~/.zoom/data
-	@ln -fs "$(apps)/zoom/zoomus.db.enc" ~/.zoom/data/zoomus.db
+	@ln -fs "$(apps)/zoom/zoomus.db.enc" ~/.zoom/data/zoomus.enc.db
 
 zsh:
 
