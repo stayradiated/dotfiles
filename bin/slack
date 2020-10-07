@@ -1,0 +1,13 @@
+#!/usr/bin/env zsh
+
+source "${HOME}/dotfiles/apps/slack/token.enc"
+
+STATUS_TEXT=$1
+STATUS_EMOJI=$2
+
+http \
+  --print="" \
+  POST \
+  'https://slack.com/api/users.profile.set' \
+  "profile=={\"status_text\":\"${STATUS_TEXT}\",\"status_emoji\":\"${STATUS_EMOJI}\"}" \
+  "token==${SLACK_TOKEN}"
