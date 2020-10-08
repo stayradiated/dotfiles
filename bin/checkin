@@ -1,0 +1,6 @@
+#!/usr/bin/env zsh
+
+cd $HOME/dotfiles
+git add -A
+git commit -m 'checkin: update state'
+git push
