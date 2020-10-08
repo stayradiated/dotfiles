@@ -61,7 +61,7 @@ alias cat='bat'
 alias ping='prettyping --nolegend'
 
 # git
-alias gunshallow='git stash save && git fetch --unshallow && git reset --hard origin/master'
+alias gunshallow='git stash save && git fetch && git reset --hard origin/master'
 
 alias gup='git push -u origin HEAD'
 
