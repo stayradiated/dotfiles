@@ -26,3 +26,5 @@
 	whitespace = red reverse
 [merge]
 	conflictstyle = diff3
+[rerere]
+	enabled = 1
