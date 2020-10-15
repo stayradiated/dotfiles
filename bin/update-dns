@@ -1,0 +1,3 @@
+#!/usr/bin/env zsh
+
+as-host cat /etc/resolv.conf | sudo tee /etc/resolv.conf
