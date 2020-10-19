@@ -2,12 +2,30 @@
 
 source "${HOME}/dotfiles/apps/slack/token.enc"
 
-STATUS_TEXT=$1
-STATUS_EMOJI=$2
+function setSlackStatus () {
+  statusText=$1
+  statusEmoji=$2
 
-http \
-  --print="" \
-  POST \
-  'https://slack.com/api/users.profile.set' \
-  "profile=={\"status_text\":\"${STATUS_TEXT}\",\"status_emoji\":\"${STATUS_EMOJI}\"}" \
-  "token==${SLACK_TOKEN}"
+  http \
+    --print="" \
+    POST \
+    'https://slack.com/api/users.profile.set' \
+    "profile=={\"status_text\":\"${statusText}\",\"status_emoji\":\"${statusEmoji}\"}" \
+    "token==${SLACK_TOKEN}"
+}
+
+function getSlackStatus () {
+  http \
+    --print="b" \
+    POST \
+    'https://slack.com/api/users.profile.get' \
+    "token==${SLACK_TOKEN}" \
+  | jq -r '.profile.status_text'
+}
+
+if [[ -v 1 ]]
+then
+  setSlackStatus $1 $2
+else
+  getSlackStatus
+fi
