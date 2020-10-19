@@ -1,0 +1,8 @@
+#!/usr/bin/env zsh
+
+export XSECURELOCK_DISCARD_FIRST_KEYPRESS=0
+export XSECURELOCK_FONT=gomme
+export XSECURELOCK_PASSWORD_PROMPT=time_hex
+export XSECURELOCK_SAVER=saver_xscreensaver
+
+xsecurelock
