@@ -1,0 +1,19 @@
+#!/usr/bin/env zsh
+
+set -e
+
+battery=$(acpi -b | tail -n 1 | rg -o --pcre2 '\d+(?=%)')
+
+color='#001115'
+
+if [ "${battery}" -lt "10" ]; then
+  color='#FC440F'
+elif [ "${battery}" -lt "20" ]; then
+  color='#F9DB6D'
+elif [ "${battery}" -lt "30" ]; then
+  color='#0AD2FF'
+fi
+
+xsetroot -solid $color
+
+date > ~/.last_updated

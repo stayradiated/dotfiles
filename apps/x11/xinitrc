@@ -1,8 +1,13 @@
 # use colemak
 setxkbmap us -variant colemak -option ctrl:nocaps -option altwin:swap_alt_win
 
-# set background colour
-xsetroot -solid '#001115'
+# set background colour based on battery level
+(
+  while true; do
+    xsetroot-battery
+    sleep 10
+  done
+) &
 
 # wm keybindings
 XDG_RUNTIME_DIR=/tmp SXHKD_SHELL=/bin/bash PATH=$HOME/dotfiles/bin:$PATH sxhkd &
