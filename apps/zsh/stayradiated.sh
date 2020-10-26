@@ -88,7 +88,7 @@ set-alacritty-colors () {
 
 use-monitor () {
   use-ethernet
-  bluetooth-on
+  # bluetooth-on
   use-config-keyboard
   monitor-on
   set-alacritty-font terminal
@@ -97,7 +97,7 @@ use-monitor () {
 
 use-laptop () {
   use-wifi
-  bluetooth-off
+  # bluetooth-off
   monitor-off
   set-alacritty-font Gomme
   source ~/dotfiles/apps/bspwm/bspwmrc
