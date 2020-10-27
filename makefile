@@ -2,7 +2,7 @@ SHELL := /bin/bash
 
 apps := $(CURDIR)/apps
 
-apps: anki beets bspwm charles dbxcli firefox gcloud git hub logview mitmproxy mycli ngrok npm ranger ssh sxhkd tmux urlview vim weechat x11 zoom zsh
+apps: anki beets bspwm charles dbxcli firefox gcloud git hub khal logview mitmproxy mycli ngrok npm ranger ssh sxhkd tmux urlview vim weechat x11 zoom zsh
 
 anki:
 
@@ -78,6 +78,11 @@ hub:
 	@echo "hub..."
 	@mkdir -p ~/.config
 	@ln -fs "$(apps)/hub/hub.enc" ~/.config/hub
+
+khal:
+	@echo "khal..."
+	@mkdir -p ~/.config/khal
+	@ln -fs "$(apps)/khal/config" ~/.config/khal/config
 
 logview:
 
