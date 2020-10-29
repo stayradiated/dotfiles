@@ -1,0 +1,3 @@
+#!/usr/bin/env zsh
+
+slack $1 ':hamster_dance:'
