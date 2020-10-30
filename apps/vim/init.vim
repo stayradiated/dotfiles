@@ -184,6 +184,9 @@ vnoremap <leader>T :Tabularize /:\zs/l0l1<CR>
 " Edit current file path
 map <Leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
 
+" mkdir current file path
+map <Leader>m :!mkdir <C-R>=expand("%:p:h") . "/" <CR>
+
 " FZF
 " nnoremap <leader>t :FZF<CR>
 nnoremap <leader>t :<C-u>Denite -buffer-name=files file/rec<CR>
