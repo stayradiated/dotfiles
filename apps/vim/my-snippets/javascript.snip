@@ -16,9 +16,6 @@ options word
 
   export default $1
 
-snippet matcore
-  import { ${1} } from '@material-ui/core'
-
 snippet func
   interface $1Options {
   }
@@ -26,3 +23,6 @@ snippet func
   const ${1} = (options: $1Options) => {
     const { ${0} } = options
   }
+
+snippet styles
+  import styles from './`expand('%:p:t:r')`.module.css'
