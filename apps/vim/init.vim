@@ -43,6 +43,7 @@ if dein#load_state('$HOME/.config/nvim/dein')
   call dein#add('junegunn/fzf')
   call dein#add('wellle/tmux-complete.vim')
   call dein#add('dkarter/bullets.vim')
+  call dein#add('Yggdroot/indentLine')
 
   call dein#add('iamcco/markdown-preview.nvim', {
     \'on_ft': ['markdown', 'pandoc.markdown', 'rmd'],
@@ -222,6 +223,8 @@ let g:dein#install_message_type = "none"
 let g:dein#types#git#clone_depth = 1
 let g:dein#notification_time = 0
 
+let g:indentLine_char_list = ['|', '¦', '┆', '┊']
+
 " https://github.com/wellle/tmux-complete.vim
 let g:tmuxcomplete#trigger = ''
 
@@ -316,3 +319,6 @@ autocmd FileType go setlocal ts=2 sw=2 sts=2
 
 " CSS
 autocmd BufNewFile,BufRead *.css set filetype=sass
+
+" YAML
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
