@@ -2,7 +2,7 @@ SHELL := /bin/bash
 
 apps := $(CURDIR)/apps
 
-apps: anki beets bspwm charles dbxcli exeditor firefox gcloud git hub khal logview mitmproxy mycli ngrok npm ranger ssh sxhkd tmux urlview vim weechat x11 zoom zsh
+apps: anki beets bspwm charles dbxcli docker exeditor firefox gcloud git hub khal logview mitmproxy mycli ngrok npm ranger ssh sxhkd tmux urlview vim weechat x11 zoom zsh
 
 anki:
 
@@ -53,6 +53,13 @@ dbxcli:
 	@echo "dbxcli..."
 	@mkdir -p ~/.config/dbxcli
 	@ln -fs "$(apps)/dbxcli/auth.json.enc" ~/.config/dbxcli/auth.json
+
+docker:
+
+	@echo "docker..."
+	@mkdir -p ~/.docker
+	@ln -fs "$(apps)/docker/config.json.enc" ~/.docker/config.json
+
 
 exeditor:
 
