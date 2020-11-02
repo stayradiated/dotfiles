@@ -4,10 +4,11 @@ snippet ir
 snippet rfc
 options word
   interface Props {
+    ${2}
   }
 
-  const ${1}: React.FC<Props> = (props) => {
-    const { ${2} } = props
+  const ${1} = (props: Props) => {
+    const { ${3} } = props
 
     return (
       ${0}
