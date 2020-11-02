@@ -35,6 +35,9 @@ fi
 # settings
 export TZ='Pacific/Auckland'
 
+# don't lag when switching between insert/normal mode
+KEYTIMEOUT=1
+
 # z.lua
 export _ZL_DATA="${HOME}/dotfiles/apps/zsh/state/zlua.enc"
 eval "$(lua5.3 /usr/local/bin/z.lua --init zsh)"
