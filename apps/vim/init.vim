@@ -223,6 +223,7 @@ let g:dein#install_message_type = "none"
 let g:dein#types#git#clone_depth = 1
 let g:dein#notification_time = 0
 
+let g:indentLine_enabled = 0
 let g:indentLine_char_list = ['|', '¦', '┆', '┊']
 
 " https://github.com/wellle/tmux-complete.vim
