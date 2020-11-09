@@ -2,7 +2,7 @@ SHELL := /bin/bash
 
 apps := $(CURDIR)/apps
 
-apps: anki beets bspwm charles dbxcli docker exeditor firefox gcloud git hub khal logview mitmproxy mycli ngrok npm ranger ssh sxhkd tmux urlview vim weechat x11 zoom zsh
+apps: anki beets bspwm charles dbxcli docker exeditor firefox gcloud git hub khal logview mitmproxy mycli ngrok npm ranger ssh sxhkd tmux urlview vim weechat x11 xscreensaver zoom zsh
 
 anki:
 
@@ -221,6 +221,11 @@ x11:
 	@echo "x11..."
 	@ln -fs "$(apps)/x11/xinitrc" ~/.xinitrc
 
+xscreensaver:
+
+	@echo "x11..."
+	@ln -fs "$(apps)/xscreensaver/config" ~/.xscreensaver
+	
 zoom:
 
 	@echo "zoom..."
