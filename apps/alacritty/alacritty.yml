@@ -91,22 +91,22 @@
 font:
   # Normal (roman) font face
   normal:
-    family: Gomme
+    family: ubuntu mono
     style: Regular
 
   # Bold font face
   bold:
-    family: Gomme
+    family: ubuntu mono
     style: Bold
 
   # Bold italic font face
   #bold_italic:
-    family: Gomme
+    family: ubuntu mono
     style: Regular
 
   # The italic font face
   italic:
-    family: Gomme
+    family: ubuntu mono
     style: Regular
 
   # Point size
