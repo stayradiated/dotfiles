@@ -45,7 +45,6 @@ alias j='z'
 
 # typos
 alias celar='clear'
-alias :q='exit'
 
 # watson
 export WATSON_DIR="${HOME}/dotfiles/apps/watson"
@@ -56,6 +55,8 @@ alias ranger='source ranger'
 # vim
 alias vi='nvim'
 alias vim='nvim'
+alias :e='nvim'
+alias :q='exit'
 
 # bat
 alias cat='bat'
