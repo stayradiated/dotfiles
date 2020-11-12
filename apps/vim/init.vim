@@ -24,7 +24,6 @@ if dein#load_state('$HOME/.config/nvim/dein')
   let g:deoplete#enable_at_startup = 1
 
   call dein#add('Shougo/neosnippet.vim')
-  " call dein#add('Shougo/deoppet.nvim')
   
   call dein#add('neoclide/denite-git')
   call dein#add('jeetsukumaran/vim-filebeagle')
@@ -32,7 +31,6 @@ if dein#load_state('$HOME/.config/nvim/dein')
 
   " Editing
   call dein#add('tpope/vim-repeat')
-  " call dein#add('tpope/vim-abolish')
   call dein#add('arthurxavierx/vim-caser')
   call dein#add('tpope/vim-fugitive')
   call dein#add('tpope/vim-surround')
@@ -50,17 +48,18 @@ if dein#load_state('$HOME/.config/nvim/dein')
     \'build': 'sh -c "cd app & yarn install"' })
 
   " Languages
-  call dein#add('cespare/vim-toml')
-  call dein#add('elzr/vim-json')
-  call dein#add('fatih/vim-go')
-  call dein#add('GutenYe/json5.vim')
-  call dein#add('jxnblk/vim-mdx-js')
-  call dein#add('kchmck/vim-coffee-script')
-  call dein#add('leafgarland/typescript-vim')
-  call dein#add('mxw/vim-jsx')
-  call dein#add('mxw/vim-prolog')
-  call dein#add('pangloss/vim-javascript')
-  call dein#add('vim-crystal/vim-crystal')
+  call dein#add('sheerun/vim-polyglot')
+  " call dein#add('GutenYe/json5.vim')
+  " call dein#add('pangloss/vim-javascript')
+  " call dein#add('neoclide/vim-jsx-improve')
+  " call dein#add('cespare/vim-toml')
+  " call dein#add('elzr/vim-json')
+  " call dein#add('fatih/vim-go')
+  " call dein#add('jxnblk/vim-mdx-js')
+  " call dein#add('kchmck/vim-coffee-script')
+  " call dein#add('leafgarland/typescript-vim')
+  " call dein#add('mxw/vim-prolog')
+  " call dein#add('vim-crystal/vim-crystal')
 
  call dein#end()
  call dein#save_state()
@@ -141,6 +140,9 @@ map <BS> %
 if has('nvim')
   tnoremap <leader>e <c-\><c-n>
 endif
+
+" Comment JSX
+noremap j :TCommentAs jsx<CR>
 
 " Toggle fold
 nnoremap <leader><space> za
@@ -229,7 +231,6 @@ let g:indentLine_char_list = ['|', '¦', '┆', '┊']
 " https://github.com/wellle/tmux-complete.vim
 let g:tmuxcomplete#trigger = ''
 
-
 " denite.nvim
 call denite#custom#var('file/rec', 'command', ['rg', '--sort=path', '--files', '--glob', '!.git'])
 call denite#custom#source('file/rec', 'sorters', ['sorter/sublime'])
@@ -246,9 +247,6 @@ function! s:denite_my_settings() abort
   nnoremap <silent><buffer><expr> q    denite#do_map('quit')
   nnoremap <silent><buffer><expr> i    denite#do_map('open_filter_buffer')
 endfunction
-
-" JSX
-let g:jsx_ext_required = 0
 
 " bullets
 let g:bullets_enable_in_empty_buffers = 0
