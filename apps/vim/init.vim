@@ -13,6 +13,9 @@ if dein#load_state('$HOME/.config/nvim/dein')
  call dein#begin('$HOME/.config/nvim/dein')
  call dein#add('$HOME/.config/nvim/dein')
 
+  " Dein UI
+  call dein#add('wsdjeg/dein-ui.vim')
+
   " Themes
   call dein#add('stayradiated/vim-termorrow')
   call dein#add('reedes/vim-colors-pencil')
@@ -48,6 +51,7 @@ if dein#load_state('$HOME/.config/nvim/dein')
     \'build': 'sh -c "cd app & yarn install"' })
 
   " Languages
+  call dein#add('stayradiated/vim-journal')
   call dein#add('sheerun/vim-polyglot')
   " call dein#add('GutenYe/json5.vim')
   " call dein#add('pangloss/vim-javascript')
@@ -321,3 +325,6 @@ autocmd BufNewFile,BufRead *.css set filetype=sass
 
 " YAML
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+
+" Journal
+autocmd BufRead,BufNewFile */journal/* set syntax=journal
