@@ -1,0 +1,12 @@
+#!/usr/bin/env zsh
+
+journal_dir="/home/admin/src/github.com/stayradiated/private-journal"
+note_path="${journal_dir}/$(date '+%Y/%m/%d')"
+
+if [ ! -f "${note_path}" ]; then 
+  title=$(date '+%A %e %b %Y') 
+  underline=$(echo "${title}" | sed 's/./=/g')
+  echo "${title}\n${underline}" > "${note_path}"
+fi
+
+nvim "${note_path}"

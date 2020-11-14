@@ -255,6 +255,10 @@ endfunction
 " bullets
 let g:bullets_enable_in_empty_buffers = 0
 
+" markdown conceal
+" https://github.com/plasticboy/vim-markdown#syntax-concealing
+let g:vim_markdown_conceal = 0
+let g:vim_markdown_conceal_code_blocks = 0
 
 " Snippets
 " ------------------------------------------------------------------------------

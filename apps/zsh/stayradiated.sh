@@ -32,7 +32,10 @@ if (( $#commands[(i)lesspipe(|.sh)] )); then
   export LESSOPEN="| /usr/bin/env $commands[(i)lesspipe(|.sh)] %s 2>&-"
 fi
 
-# settings
+#
+# Settings
+#
+
 export TZ='Pacific/Auckland'
 
 # don't lag when switching between insert/normal mode
@@ -48,6 +51,10 @@ alias celar='clear'
 
 # watson
 export WATSON_DIR="${HOME}/dotfiles/apps/watson"
+
+#
+# Alias
+#
 
 # when exiting ranger, cd to the same dir
 alias ranger='source ranger'
