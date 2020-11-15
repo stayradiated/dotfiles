@@ -1,0 +1,1 @@
+/home/admin/src/github.com/stayradiated/vim-journal/syntax/journal.vim
