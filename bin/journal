@@ -1,10 +1,22 @@
 #!/usr/bin/env zsh
 
 journal_dir="/home/admin/src/github.com/stayradiated/journal/public"
-note_path="${journal_dir}/$(date '+%Y/%m/%d').txt"
+
+weekly_note_path="${journal_dir}/$(date '+%Y')/week/$(expr $(date '+%U') + 1).txt"
+weekly_title="Week $(expr $(date '+%U') + 1)"
+
+daily_note_path="${journal_dir}/$(date '+%Y/%m/%d').txt"
+daily_title=$(date '+%A %e %b %Y') 
+
+if [ "$1" = "-w" ]; then
+  note_path="${weekly_note_path}"
+  title="${weekly_title}"
+else
+  note_path="${daily_note_path}"
+  title="${daily_title}"
+fi
 
 if [ ! -f "${note_path}" ]; then 
-  title=$(date '+%A %e %b %Y') 
   underline=$(echo "${title}" | sed 's/./=/g')
   echo "${title}\n${underline}" > "${note_path}"
 fi
