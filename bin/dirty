@@ -17,6 +17,7 @@ ls \
   -I .charles \
   -I .charles.config \
   -I .config \
+  -I .docker \
   -I .fzf \
   -I .fzf.zsh \
   -I .gitconfig \
@@ -38,9 +39,11 @@ ls \
   -I .tmux.conf \
   -I .urlview \
   -I .urlview.conf \
+  -I .vdirsyncer \
   -I .weechat \
   -I .wget-hsts \
   -I .xinitrc \
+  -I .xscreensaver \
   -I .zcompcache \
   -I .zcompdump \
   -I .zoom \
@@ -48,11 +51,12 @@ ls \
   -I Desktop \
   -I bus \
   -I data \
+  -I docker.sock \
   -I dotfiles  \
   -I downloads \
+  -I exports \
   -I src \
-  -I vaults  \
-  -I docker.sock
+  -I vaults
 
 if [ -d "${HOME}/downloads" ]
 then

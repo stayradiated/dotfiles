@@ -15,5 +15,3 @@ elif [ "${battery}" -lt "30" ]; then
 fi
 
 xsetroot -solid $color
-
-date > ~/.last_updated
