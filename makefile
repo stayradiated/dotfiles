@@ -148,6 +148,10 @@ ssh:
 	@ln -fs "$(apps)/ssh/config.enc" ~/.ssh/config
 	@ln -fs "$(apps)/ssh/known_hosts" ~/.ssh/known_hosts
 
+	@ln -fs "$(apps)/ssh/datacrunch.enc" ~/.ssh/datacrunch
+	@ln -fs "$(apps)/ssh/datacrunch.pub" ~/.ssh/datacrunch.pub
+	@chmod 600 ~/.ssh/datacrunch
+
 	@ln -fs "$(apps)/ssh/george.enc" ~/.ssh/george
 	@ln -fs "$(apps)/ssh/george.pub" ~/.ssh/george.pub
 	@chmod 600 ~/.ssh/george
