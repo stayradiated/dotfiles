@@ -94,11 +94,12 @@ hub:
 	@ln -fs "$(apps)/hub/hub.enc" ~/.config/hub
 
 khal:
+
 	@echo "khal..."
 	@mkdir -p ~/.config/khal
 	@ln -fs "$(apps)/khal/config" ~/.config/khal/config
 	@if test ! -d ~/.local/share/khal; then\
-		@ln -fs "$(apps)/khal/state" ~/.local/share/khal;\
+		ln -fs "$(apps)/khal/state" ~/.local/share/khal;\
 	fi
 
 logview:
@@ -187,8 +188,9 @@ urlview:
 vdirsyncer:
 
 	@echo "vdirsyncer..."
-	@mkdir -p ~/.vdirsyncer
-	@ln -fs "$(apps)/vdirsyncer/config.enc" ~/.vdirsyncer/config
+	@if test ! -d ~/.vdirsyncer; then\
+		ln -fs "$(apps)/vdirsyncer" ~/.vdirsyncer;\
+	fi
 
 vim:
 

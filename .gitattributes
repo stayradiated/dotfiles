@@ -1,3 +1,4 @@
 *.enc filter=git-crypt diff=git-crypt
 apps/watson/** filter=git-crypt diff=git-crypt
+apps/vdirsyncer/** filter=git-crypt diff=git-crypt
 apps/khal/state/** filter=git-crypt diff=git-crypt
