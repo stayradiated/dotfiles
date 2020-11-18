@@ -97,7 +97,9 @@ khal:
 	@echo "khal..."
 	@mkdir -p ~/.config/khal
 	@ln -fs "$(apps)/khal/config" ~/.config/khal/config
-	@ln -fs "$(apps)/khal/state" ~/.local/share/khal
+	@if test ! -d ~/.local/share/khal; then\
+		@ln -fs "$(apps)/khal/state" ~/.local/share/khal;\
+	fi
 
 logview:
 

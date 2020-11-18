@@ -1,8 +1,9 @@
 [calendars]
 
-[[private]]
-path = /home/admin/.local/share/khal/calendars/private
-type = calendar
+[[calendars]]
+path = ~/.calendars/*
+type = discover
+color = dark green
 
 [locale]
 timeformat = %H:%M
