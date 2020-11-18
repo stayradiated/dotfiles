@@ -2,7 +2,7 @@ SHELL := /bin/bash
 
 apps := $(CURDIR)/apps
 
-apps: anki beets bspwm charles dbxcli docker exeditor firefox gcloud git hub khal logview mitmproxy mycli ngrok npm ranger ssh sxhkd tmux urlview vim weechat x11 xscreensaver zoom zsh
+apps: anki beets bspwm charles dbxcli docker exeditor firefox gcloud git hub khal logview mitmproxy mycli ngrok npm ranger ssh sxhkd tmux urlview vdirsyncer vim weechat x11 xscreensaver zoom zsh
 
 anki:
 
@@ -181,6 +181,12 @@ urlview:
 
 	@echo "urlview...."
 	@ln -fs $(apps)/urlview/urlview ~/.urlview
+
+vdirsyncer:
+
+	@echo "vdirsyncer..."
+	@mkdir -p ~/.vdirsyncer
+	@ln -fs "$(apps)/vdirsyncer/config.enc" ~/.vdirsyncer/config
 
 vim:
 
