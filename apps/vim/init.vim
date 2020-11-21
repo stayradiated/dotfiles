@@ -43,7 +43,6 @@ if dein#load_state('$HOME/.config/nvim/dein')
   call dein#add('danro/rename.vim')
   call dein#add('junegunn/fzf')
   call dein#add('junegunn/goyo.vim')
-  call dein#add('junegunn/limelight.vim')
   call dein#add('wellle/tmux-complete.vim')
   call dein#add('dkarter/bullets.vim')
   call dein#add('Yggdroot/indentLine')
@@ -187,7 +186,7 @@ nnoremap <leader>p :call ClipboardPaste()<CR>p
 nnoremap <leader>w :w<CR>
 
 " Goyo
-nnoremap <leader>g :Goyo<CR>:set linebreak<CR>
+nnoremap <leader>g :Goyo<CR>
 
 " Shortcut for Tabularize
 vnoremap <leader>t :Tabularize /
@@ -338,6 +337,6 @@ autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 " Journal
 autocmd BufRead,BufNewFile *.txt set syntax=journal
 
-" Goyo + Limelight
-autocmd! User GoyoEnter Limelight
-autocmd! User GoyoLeave Limelight!
+" Goyo
+autocmd! User GoyoEnter set linebreak
+autocmd! User GoyoLeave set linebreak!
