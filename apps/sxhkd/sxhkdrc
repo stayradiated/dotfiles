@@ -98,7 +98,7 @@ super + alt + Escape
 
 # Audio 
 {F2,F3}
-    pactl -- set-sink-volume 0 {-,+}3%
+    amixer sset Master 1{-,+} --quiet
 
 # backlight
 super + shift + {comma,period}
