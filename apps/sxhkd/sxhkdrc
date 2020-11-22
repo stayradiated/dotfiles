@@ -97,7 +97,7 @@ super + alt + Escape
     bspc quit
 
 # Audio 
-{F2,F3}
+{XF86AudioLowerVolume,XF86AudioRaiseVolume}
     amixer sset Master 1{-,+} --quiet
 
 # backlight
