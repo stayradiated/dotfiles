@@ -92,10 +92,6 @@ Print
 super + space
     rofi -show run -modi run,window,ssh -font 'Gomme 12' -terminal 'alacritty'
 
-# Quit BSPWM
-super + alt + Escape
-    bspc quit
-
 # Audio 
 {XF86AudioLowerVolume,XF86AudioRaiseVolume}
     amixer sset Master 1{-,+} --quiet
@@ -108,6 +104,6 @@ super + shift + {comma,period}
 super + shift + slash
     redshift {-O 4000,-O 3000,-O 2000,-O 1000,-x}
 
-# scrot
-ctrl + alt + shift + 4
-    scrot -u 
+# lock the screen
+F12
+  /home/admin/dotfiles/bin/lock
