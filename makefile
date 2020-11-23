@@ -211,6 +211,12 @@ vim:
 		git clone https://github.com/Shougo/dein.vim.git "$(apps)/vim/dein/repos/github.com/Shougo/dein.vim";\
 	fi;
 
+wacom:
+
+	@echo "wacom..."
+	xsetwacom --set "Wacom Intuos S Pen stylus" Button 2 "pan"
+	xsetwacom --set "Wacom Intuos S Pen stylus" "PanScrollThreshold" 200
+
 weechat:
 
 	@echo "weechat..."
