@@ -1,9 +1,15 @@
 [calendars]
 
-[[calendars]]
-path = ~/.calendars/*
-type = discover
-color = dark green
+  [[runn]]
+    path = ~/dotfiles/apps/vdirsyncer/calendars/runn/*
+    type = discover
+    color = light blue
+    readonly = True
+
+  [[personal]]
+    path = ~/dotfiles/apps/vdirsyncer/calendars/personal/*
+    type = discover
+    color = dark green
 
 [locale]
 timeformat = %H:%M
