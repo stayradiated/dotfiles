@@ -1,0 +1,53 @@
+#!/usr/bin/env python3
+# vim: set ft=python
+
+# alias jj='cd $(journal-utils --root)'
+# alias jd='nvim $(journal-utils --day)'
+# alias jw='nvim $(journal-utils --week)'
+
+import datetime
+import argparse
+import os.path
+
+parser = argparse.ArgumentParser()
+
+parser.add_argument("--root", help="Print root path", action='store_true')
+parser.add_argument("--week", help="Create week notes", action='store_true')
+parser.add_argument("--day", help="Create day notes", action='store_true')
+
+args = parser.parse_args()
+
+today = datetime.date.today()
+
+root_dir = "/home/admin/src/github.com/stayradiated/journal"
+
+year = today.year
+week = int(today.strftime('%U')) + 1
+month = today.month
+day = today.day
+
+def format_title (text):
+    underline = "=" * len(text)
+    return f"{text}\n{underline}"
+
+if args.root:
+    print(root_dir)
+    exit(0)
+
+if args.week:
+    note = {
+        "path": f"{root_dir}/public/{year}/week/{week}.txt",
+        "title": format_title(f"Week {week}"),
+    }
+else:
+    note = {
+        "path": f"{root_dir}/public/{year}/{month}/{day}.txt",
+        "title": format_title(today.strftime("%A %e %b %Y")),
+    }
+
+if not os.path.exists(note["path"]):
+    print('Creating file', note["path"])
+    with open(note["path"], "w+") as file:
+        file.write(note["title"])
+
+print(note["path"])
