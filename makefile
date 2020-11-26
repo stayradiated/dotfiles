@@ -2,7 +2,7 @@ SHELL := /bin/bash
 
 apps := $(CURDIR)/apps
 
-apps: anki beets bspwm charles dbxcli docker exeditor firefox gcloud git gh khal logview mitmproxy mycli ngrok npm ranger ssh sxhkd tmux urlview vdirsyncer vim weechat x11 xscreensaver zoom zsh
+apps: anki beets bspwm charles dbxcli docker exeditor firefox gcloud git gh khal logview mitmproxy mycli ngrok npm ranger ssh sxhkd tmux urlview vdirsyncer vim weechat xinput x11 xscreensaver zoom zsh
 
 anki:
 
@@ -237,6 +237,14 @@ weechat:
 		wget 'https://raw.githubusercontent.com/weechat/scripts/master/python/go.py' -O ~/.weechat/python/autoload/go.py;\
 		wget 'https://raw.githubusercontent.com/weechat/scripts/master/perl/colorize_lines.pl' -O ~/.weechat/perl/autoload/colorize_lines.pl;\
 	fi;
+
+xinput:
+
+	@echo "xinput..."
+	@xinput enable 'Synaptics TM3289-021'
+	@xinput set-prop 'Synaptics TM3289-021' 'libinput Disable While Typing Enabled' 0
+	@xinput disable 'Synaptics TM3289-021'
+	@xinput set-prop 'TPPS/2 Elan TrackPoint' 'libinput Accel Speed' 0.7
 
 x11:
 
