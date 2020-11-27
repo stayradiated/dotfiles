@@ -2,7 +2,7 @@ SHELL := /bin/bash
 
 apps := $(CURDIR)/apps
 
-apps: anki beets bspwm charles dbxcli docker exeditor firefox gcloud git gh khal logview mitmproxy mycli ngrok npm ranger ssh sxhkd tmux urlview vdirsyncer vim weechat xinput x11 xscreensaver zoom zsh
+apps: anki beets bspwm charles dbxcli docker exeditor firefox gcloud git gh khal logview mitmproxy mycli ngrok npm ranger ssh sxhkd tmux urlview vdirsyncer vim weechat xinput x11 xournalpp xscreensaver zoom zsh
 
 anki:
 
@@ -250,6 +250,16 @@ x11:
 
 	@echo "x11..."
 	@ln -fs "$(apps)/x11/xinitrc" ~/.xinitrc
+
+xournalpp:
+
+	@echo "xournalpp..."
+	@if test ! -d ~/.xournalpp; then\
+		mkdir -p ~/.xournalpp;\
+	fi
+	@ln -fs "$(apps)/xournalpp/colornames.ini" ~/.xournalpp/colornames.ini
+	@ln -fs "$(apps)/xournalpp/settings.xml" ~/.xournalpp/settings.xml
+	@ln -fs "$(apps)/xournalpp/toolbar.ini" ~/.xournalpp/toolbar.ini
 
 xscreensaver:
 
