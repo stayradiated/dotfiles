@@ -10,7 +10,7 @@
   <property name="zoomStep" value="10.00000000"/>
   <property name="zoomStepScroll" value="2.00000000"/>
   <property name="displayDpi" value="72"/>
-  <property name="mainWndWidth" value="1896"/>
+  <property name="mainWndWidth" value="940"/>
   <property name="mainWndHeight" value="1056"/>
   <property name="maximized" value="false"/>
   <property name="showSidebar" value="false"/>
@@ -34,7 +34,7 @@
   <property name="showBigCursor" value="false"/>
   <property name="highlightPosition" value="false"/>
   <property name="darkTheme" value="false"/>
-  <property name="disableScrollbarFadeout" value="false"/>
+  <property name="disableScrollbarFadeout" value="true"/>
   <property name="scrollbarHideType" value="none"/>
   <!--Hides scroolbars in the main window, allowed values: "none", "horizontal", "vertical", "both"-->
   <property name="autoloadPdfXoj" value="true"/>
@@ -49,7 +49,7 @@
   <property name="drawDirModsRadius" value="50"/>
   <property name="snapRotation" value="true"/>
   <property name="snapRotationTolerance" value="0.20000000"/>
-  <property name="snapGrid" value="true"/>
+  <property name="snapGrid" value="false"/>
   <property name="snapGridTolerance" value="0.25000000"/>
   <property name="touchWorkaround" value="false"/>
   <property name="selectionBorderColor" value="-65536"/>
@@ -160,9 +160,9 @@
       <attribute name="drawingType" type="string" value="default"/>
     </data>
     <data name="pen">
-      <attribute name="color" type="hex" value="204a87"/>
+      <attribute name="color" type="hex" value="ffff00"/>
       <attribute name="drawingType" type="string" value="default"/>
-      <attribute name="fill" type="int" value="1"/>
+      <attribute name="fill" type="int" value="0"/>
       <attribute name="fillAlpha" type="int" value="128"/>
       <attribute name="size" type="string" value="BIG"/>
       <attribute name="style" type="string" value="plain"/>
