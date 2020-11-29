@@ -46,7 +46,6 @@ else:
     }
 
 if not os.path.exists(note["path"]):
-    print('Creating file', note["path"])
     with open(note["path"], "w+") as file:
         file.write(note["title"])
 

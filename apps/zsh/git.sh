@@ -22,7 +22,7 @@ alias gd='git diff'
 alias gdc='git diff --cached'
 
 # status
-alias gs='git status'
+alias gs='git status --short'
 
 # add
 alias g.='git add .'
