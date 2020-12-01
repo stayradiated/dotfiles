@@ -42,10 +42,11 @@ if args.week:
 else:
     note = {
         "path": f"{root_dir}/public/{year}/{month}/{day}.txt",
-        "title": format_title(today.strftime("%A %e %b %Y")),
+        "title": format_title(today.strftime("%A %d %b %Y")),
     }
 
 if not os.path.exists(note["path"]):
+    os.makedirs(os.path.dirname(note["path"]), exist_ok=True)
     with open(note["path"], "w+") as file:
         file.write(note["title"])
 
