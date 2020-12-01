@@ -23,8 +23,8 @@ root_dir = "/home/admin/src/github.com/stayradiated/journal"
 
 year = today.year
 week = int(today.strftime('%U')) + 1
-month = today.month
-day = today.day
+month = today.strftime('%m')
+day = today.strftime('%d')
 
 def format_title (text):
     underline = "=" * len(text)
