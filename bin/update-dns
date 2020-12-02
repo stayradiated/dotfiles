@@ -1,3 +1,18 @@
 #!/usr/bin/env zsh
 
-as-host cat /etc/resolv.conf | sudo tee /etc/resolv.conf
+# DNS management script for docker systems
+
+# update-dns
+#   by default the script copies the host DNS settings
+#
+# update-dns 1.1.1.1
+#   if you pass an IP address it will use that instead
+
+if [[ -v 1 ]]
+then
+  echo "domain home\nnameserver ${1}" | sudo tee /etc/resolv.conf
+else
+  as-host cat /etc/resolv.conf | sudo tee /etc/resolv.conf
+fi
+
+
