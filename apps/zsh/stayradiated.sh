@@ -118,11 +118,15 @@ use-laptop () {
 
 rsync-photos () {
   DEVICE="${1:-/dev/sda1}"
-  as-host -t bash -c "true && \
-    sudo mkdir -p /mnt/usb && \
-    sudo mount '${DEVICE}' /mnt/usb && \
-    rsync -vua /mnt/usb/DCIM ~/src/camera && \
-    sudo umount /mnt/usb && \
+  as-host -t bash -c \
+    "sudo mkdir -p /mnt/usb; \
+    if mount | grep -q '${DEVICE}'; then \
+      echo 'Already mounted'; \
+    else \
+      sudo mount '${DEVICE}' /mnt/usb; \
+    fi; \
+    rsync -vua /mnt/usb/DCIM ~/src/camera; \
+    sudo umount /mnt/usb; \
     echo 'sync complete, please remove the SD card :)'"
 }
 
