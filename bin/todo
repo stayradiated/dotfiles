@@ -1,0 +1,3 @@
+#!/usr/bin/env zsh
+
+rg --ignore-case --only-matching --colors=match:none 'todo\(.+\):.*'
