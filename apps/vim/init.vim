@@ -33,6 +33,7 @@ if dein#load_state('$HOME/.config/nvim/dein')
   call dein#add('christoomey/vim-tmux-navigator')
 
   " Editing
+  " call
   call dein#add('tpope/vim-repeat')
   call dein#add('arthurxavierx/vim-caser')
   call dein#add('tpope/vim-fugitive')
@@ -54,6 +55,7 @@ if dein#load_state('$HOME/.config/nvim/dein')
   " Languages
   call dein#add('stayradiated/vim-journal')
   call dein#add('sheerun/vim-polyglot')
+  call dein#add('fcpg/vim-waikiki')
   " call dein#add('GutenYe/json5.vim')
   " call dein#add('pangloss/vim-javascript')
   " call dein#add('neoclide/vim-jsx-improve')
@@ -232,6 +234,11 @@ nnoremap <leader>D :r!date --iso-8601=seconds<CR>
 let g:dein#install_message_type = "none"
 let g:dein#types#git#clone_depth = 1
 let g:dein#notification_time = 0
+
+" wiki
+let maplocalleader = "\\"
+let g:waikiki_roots = ["~/src/github.com/stayradiated/journal/public/wiki/"]
+let g:waikiki_default_maps = 1
 
 let g:indentLine_enabled = 0
 let g:indentLine_char_list = ['|', '¦', '┆', '┊']
