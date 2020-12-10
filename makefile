@@ -2,7 +2,15 @@ SHELL := /bin/bash
 
 apps := $(CURDIR)/apps
 
-apps: anki beets bspwm charles dbxcli docker exeditor firefox gcloud git gh khal logview mitmproxy mycli ngrok npm ranger ssh sxhkd tmux urlview vdirsyncer vim weechat xinput x11 xournalpp xscreensaver zoom zsh
+apps: aerc anki beets bspwm charles dbxcli docker exeditor firefox gcloud git gh khal logview mitmproxy mycli ngrok npm ranger ssh sxhkd tmux urlview vdirsyncer vim weechat xinput x11 xournalpp xscreensaver zoom zsh
+
+aerc:
+
+	@echo "aerc..."
+	@mkdir -p ~/.config/aerc
+	@ln -fs "$(apps)/aerc/accounts.conf.enc" ~/.config/aerc/accounts.conf
+	@ln -fs "$(apps)/aerc/aerc.conf" ~/.config/aerc/aerc.conf
+	@ln -fs "$(apps)/aerc/binds.conf" ~/.config/aerc/binds.conf
 
 anki:
 
