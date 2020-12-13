@@ -11,6 +11,7 @@ aerc:
 	@ln -fs "$(apps)/aerc/accounts.conf.enc" ~/.config/aerc/accounts.conf
 	@ln -fs "$(apps)/aerc/aerc.conf" ~/.config/aerc/aerc.conf
 	@ln -fs "$(apps)/aerc/binds.conf" ~/.config/aerc/binds.conf
+	@chmod 600 ~/.config/aerc/accounts.conf
 
 anki:
 
