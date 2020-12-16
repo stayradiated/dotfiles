@@ -17,6 +17,8 @@ alias gpF='git push --force-with-lease'
 # print local git branches
 alias gbl='git for-each-ref --color=always --sort=committerdate refs/heads/ --format=''%(HEAD) %(color:yellow)%(refname:short)|%(color:red)%(objectname:short)|%(color:reset)%(contents:subject)|%(color:blue)%(authorname)|%(color:green)%(committerdate:relative)%(color:reset)'' | column -t -s \|'
 
+alias git-delete-squashed='git checkout -q main && git for-each-ref refs/heads/ "--format=%(refname:short)" | while read branch; do mergeBase=$(git merge-base main $branch) && [[ $(git cherry main $(git commit-tree $(git rev-parse $branch\^{tree}) -p $mergeBase -m _)) == "-"* ]] && git branch -D $branch; done'
+
 # diff
 alias gd='git diff'
 alias gdc='git diff --cached'
