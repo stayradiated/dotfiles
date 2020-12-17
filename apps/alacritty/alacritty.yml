@@ -91,22 +91,22 @@
 font:
   # Normal (roman) font face
   normal:
-    family: terminal
+    family: Ubuntu Mono
     style: Regular
 
   # Bold font face
   bold:
-    family: terminal
+    family: Ubuntu Mono
     style: Bold
 
   # Bold italic font face
   #bold_italic:
-    family: terminal
+    family: Ubuntu Mono
     style: Regular
 
   # The italic font face
   italic:
-    family: terminal
+    family: Ubuntu Mono
     style: Regular
 
   # Point size
