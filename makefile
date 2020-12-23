@@ -235,6 +235,7 @@ weechat:
 		mkdir -p ~/.weechat/python/autoload;\
 		mkdir -p ~/.weechat/perl/autoload;\
 		wget 'https://raw.githubusercontent.com/wee-slack/wee-slack/master/wee_slack.py' -O ~/.weechat/python/autoload/wee_slack.py;\
+		wget 'https://raw.githubusercontent.com/wee-slack/wee-slack/master/weemoji.json' -O ~/.weechat/weemoji.json;\
 		wget 'https://raw.githubusercontent.com/de-vri-es/weechat-autosort/master/autosort.py' -O ~/.weechat/python/autoload/autosort.py;\
 		wget 'https://raw.githubusercontent.com/keith/edit-weechat/master/edit.py' -O ~/.weechat/python/autoload/edit.py;\
 		wget 'https://raw.githubusercontent.com/weechat/scripts/master/python/go.py' -O ~/.weechat/python/autoload/go.py;\
