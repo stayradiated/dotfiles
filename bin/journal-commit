@@ -1,0 +1,6 @@
+#!/usr/bin/env zsh
+
+cd $(journal-utils --root)
+git add -A
+git commit -m "$(date '+%Y/%m/%d')"
+git push
