@@ -2,8 +2,11 @@
 # Defines Git aliases.
 #
 
-# checkout -> switch
-alias gco='git switch'
+# switch branchs
+alias gsw='git switch'
+
+# checkout has better autocompletion
+alias gco='git checkout'
 
 # prune remote branches
 alias gfp='git fetch --prune'
