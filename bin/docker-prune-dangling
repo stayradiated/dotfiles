@@ -1,0 +1,12 @@
+#!/usr/bin/env zsh
+
+# delete all old dangling images that weren't referenced in a docker build
+# $ docker build . | tee output.log
+# $ docker-prune-dangling < output.log
+
+EXP=$(cat /dev/stdin \
+	| rg -o '^ ---> \w{12}' \
+	| rg -o '\w{12}' \
+	| awk '/START/{ if (x) print x; x=""; next }{ x=(!x) ? $0 : x"|"$0; }END{ print "("x")"; }')
+
+docker images --filter dangling=true -q | rg -v "${EXP}" | xargs docker rmi
