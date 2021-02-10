@@ -145,6 +145,29 @@ font:
 #draw_bold_text_with_bright_colors: false
 
 color_schemes:
+  high_contrast: &high_contrast
+    primary:
+      background: '#ffffff'
+      foreground: '#000000'
+    normal:
+      black:   '#d3d3d3'
+      red:     '#ef6b7b'
+      green:   '#a1d569'
+      yellow:  '#f59335'
+      blue:    '#4ec2e8'
+      magenta: '#fec7cd'
+      cyan:    '#95c1c0'
+      white:   '#707070'
+    bright:
+      black:   '#808080'
+      red:     '#000000'
+      green:   '#000000'
+      yellow:  '#000000'
+      blue:    '#000000'
+      magenta: '#000000'
+      cyan:    '#000000'
+      white:   '#000000'
+
   termorrow_light: &termorrow_light
     primary:
       background: '#f3f3f3'
@@ -192,7 +215,7 @@ color_schemes:
       white:   '#f7f8f8'
 
 # Colors (Tomorrow Night Bright)
-colors: *termorrow_dark
+colors: *high_contrast
   # Default colors
   #primary:
   #  background: '#000000'
