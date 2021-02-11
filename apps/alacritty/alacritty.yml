@@ -215,7 +215,7 @@ color_schemes:
       white:   '#f7f8f8'
 
 # Colors (Tomorrow Night Bright)
-colors: *high_contrast
+colors: *termorrow_dark
   # Default colors
   #primary:
   #  background: '#000000'
