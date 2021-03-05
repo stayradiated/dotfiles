@@ -48,6 +48,7 @@ if dein#load_state('$HOME/.config/nvim/dein')
   call dein#add('wellle/tmux-complete.vim')
   call dein#add('dkarter/bullets.vim')
   call dein#add('Yggdroot/indentLine')
+  call dein#add('christianrondeau/vim-base64')
 
   call dein#add('iamcco/markdown-preview.nvim', {
     \'on_ft': ['markdown', 'pandoc.markdown', 'rmd'],
