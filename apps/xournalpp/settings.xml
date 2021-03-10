@@ -4,7 +4,7 @@
   <property name="pressureSensitivity" value="true"/>
   <property name="zoomGesturesEnabled" value="false"/>
   <property name="selectedToolbar" value="Floating Toolbox (experimental) Copy"/>
-  <property name="lastSavePath" value="file:///home/admin/src/github.com/stayradiated/journal/private/scratchpad"/>
+  <property name="lastSavePath" value="/home/admin/src/github.com/stayradiated/journal/private/scratchpad"/>
   <property name="lastOpenPath" value="/home/admin/src/github.com/stayradiated/journal/private/scratchpad"/>
   <property name="lastImagePath" value=""/>
   <property name="zoomStep" value="10.00000000"/>
