@@ -1,0 +1,4 @@
+#!/usr/bin/env zsh
+
+echo "Connecting to database for PR #${1}…"
+exec pgcli $(heroku config:get DATABASE_URL --app runn-pr-${1}-app)
