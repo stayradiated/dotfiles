@@ -159,6 +159,9 @@ ssh:
 	@ln -fs "$(apps)/ssh/config.enc" ~/.ssh/config
 	@ln -fs "$(apps)/ssh/known_hosts" ~/.ssh/known_hosts
 
+	@ln -fs "$(apps)/ssh/bastion.enc" ~/.ssh/bastion
+	@chmod 600 ~/.ssh/bastion
+
 	@ln -fs "$(apps)/ssh/datacrunch.enc" ~/.ssh/datacrunch
 	@ln -fs "$(apps)/ssh/datacrunch.pub" ~/.ssh/datacrunch.pub
 	@chmod 600 ~/.ssh/datacrunch
