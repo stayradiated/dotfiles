@@ -4,7 +4,7 @@
   <property name="pressureSensitivity" value="true"/>
   <property name="zoomGesturesEnabled" value="false"/>
   <property name="selectedToolbar" value="Floating Toolbox (experimental) Copy"/>
-  <property name="lastSavePath" value="/home/admin/src/github.com/stayradiated/journal/private/scratchpad"/>
+  <property name="lastSavePath" value="file:///home/admin/src/github.com/stayradiated/journal/private/scratchpad"/>
   <property name="lastOpenPath" value="/home/admin/src/github.com/stayradiated/journal/private/scratchpad"/>
   <property name="lastImagePath" value=""/>
   <property name="zoomStep" value="10.00000000"/>
@@ -107,6 +107,10 @@
   </data>
   <data name="deviceClasses">
     <data name="Apple Inc. Magic Trackpad 2">
+      <attribute name="deviceClass" type="int" value="0"/>
+      <attribute name="deviceSource" type="int" value="6"/>
+    </data>
+    <data name="Synaptics TM3289-021">
       <attribute name="deviceClass" type="int" value="0"/>
       <attribute name="deviceSource" type="int" value="6"/>
     </data>
