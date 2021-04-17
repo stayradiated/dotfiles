@@ -4,7 +4,7 @@
   <property name="pressureSensitivity" value="true"/>
   <property name="zoomGesturesEnabled" value="false"/>
   <property name="selectedToolbar" value="Floating Toolbox (experimental) Copy"/>
-  <property name="lastSavePath" value="file:///home/admin/src/github.com/stayradiated/journal/private/scratchpad"/>
+  <property name="lastSavePath" value="/home/admin/src/github.com/stayradiated/journal/private/scratchpad"/>
   <property name="lastOpenPath" value="/home/admin/src/github.com/stayradiated/journal/private/scratchpad"/>
   <property name="lastImagePath" value=""/>
   <property name="zoomStep" value="10.00000000"/>
@@ -158,11 +158,11 @@
       <attribute name="drawingType" type="string" value="default"/>
     </data>
     <data name="hilighter">
-      <attribute name="color" type="hex" value="00ff00"/>
+      <attribute name="color" type="hex" value="ff00ff"/>
       <attribute name="drawingType" type="string" value="default"/>
       <attribute name="fill" type="int" value="0"/>
       <attribute name="fillAlpha" type="int" value="84"/>
-      <attribute name="size" type="string" value="MEDIUM"/>
+      <attribute name="size" type="string" value="THIN"/>
     </data>
     <data name="image">
       <attribute name="drawingType" type="string" value="default"/>
@@ -173,7 +173,7 @@
       <attribute name="fill" type="int" value="0"/>
       <attribute name="fillAlpha" type="int" value="160"/>
       <attribute name="size" type="string" value="MEDIUM"/>
-      <attribute name="style" type="string" value="plain"/>
+      <attribute name="style" type="string" value="dot"/>
     </data>
     <data name="playObject">
       <attribute name="drawingType" type="string" value="default"/>
