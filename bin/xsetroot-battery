@@ -14,4 +14,5 @@ elif [ "${battery}" -lt "30" ]; then
   color='#0AD2FF'
 fi
 
-xsetroot -solid $color
+# xsetroot -solid $color
+feh --no-fehbg --bg-fill '/home/admin/Downloads/annie.jpeg' 

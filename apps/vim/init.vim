@@ -137,6 +137,10 @@ let g:hybrid_use_Xresources=1
 colorscheme termorrow
 set background=dark
 
+" Digraphs
+digraphs lh 9829 " ♥ love heart
+digraphs cr 8627 " ↳ carriage return
+
 " Mapping
 " ------------------------------------------------------------------------------
 
