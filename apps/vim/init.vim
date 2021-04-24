@@ -50,6 +50,7 @@ if dein#load_state('$HOME/.config/nvim/dein')
   call dein#add('Yggdroot/indentLine')
   call dein#add('christianrondeau/vim-base64')
   call dein#add('vim-utils/vim-troll-stopper')
+  call dein#add('junegunn/vim-emoji')
 
   call dein#add('iamcco/markdown-preview.nvim', {
     \'on_ft': ['markdown', 'pandoc.markdown', 'rmd'],
@@ -235,6 +236,9 @@ vnoremap <leader>s :%s/\%V<c-r><c-w>/
 " Insert current date
 nnoremap <leader>D :r!date --iso-8601=seconds<CR>
 
+" Emojis
+nnoremap <leader>E %s/:\([^:]\+\):/\=emoji#for(submatch(1), submatch(0))/g
+
 " Plugin Settings
 " ------------------------------------------------------------------------------
 
@@ -277,6 +281,14 @@ let g:bullets_enable_in_empty_buffers = 0
 " https://github.com/plasticboy/vim-markdown#syntax-concealing
 let g:vim_markdown_conceal = 0
 let g:vim_markdown_conceal_code_blocks = 0
+
+" deoplete + tmux (https://github.com/wellle/tmux-complete.vim/issues/88)
+call deoplete#custom#var('tmux-complete', 'splitmode', 'words')
+call deoplete#custom#var('tmux-complete', 'filter-prefix', v:true)
+call deoplete#custom#var('tmux-complete', 'show_incomplete', v:true)
+call deoplete#custom#var('tmux-complete', 'sort_candidates', v:false)
+call deoplete#custom#var('tmux-complete', 'scrollback', 0)
+call deoplete#custom#var('tmux-complete', 'truncate', 0)
 
 " Snippets
 " ------------------------------------------------------------------------------
