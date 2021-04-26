@@ -1,0 +1,5 @@
+#!/usr/bin/env zsh
+
+town=$1
+
+http "https://www.metservice.com/publicData/localForecast${town}" | jq -r '.days[0].forecast'
