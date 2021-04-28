@@ -2,5 +2,5 @@
 
 cd $HOME/dotfiles
 git add -A
-git commit -m 'checkin: update state'
+git commit -m "snapshot: $(date +'%D %T')"
 git push
