@@ -1,0 +1,5 @@
+#!/usr/bin/env zsh
+
+msg="Working from ${1} ($(date +'%D %T'))"
+slack $msg ':hamster_dance:'
+echo $msg

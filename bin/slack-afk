@@ -1,0 +1,5 @@
+#!/usr/bin/env zsh
+
+msg="Away from keyboard ($(date +'%D %T'))"
+slack $msg ':walking:'
+echo $msg
