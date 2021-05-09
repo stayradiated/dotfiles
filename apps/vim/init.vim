@@ -283,12 +283,14 @@ let g:vim_markdown_conceal = 0
 let g:vim_markdown_conceal_code_blocks = 0
 
 " deoplete + tmux (https://github.com/wellle/tmux-complete.vim/issues/88)
-call deoplete#custom#var('tmux-complete', 'splitmode', 'words')
-call deoplete#custom#var('tmux-complete', 'filter-prefix', v:true)
-call deoplete#custom#var('tmux-complete', 'show_incomplete', v:true)
-call deoplete#custom#var('tmux-complete', 'sort_candidates', v:false)
-call deoplete#custom#var('tmux-complete', 'scrollback', 0)
-call deoplete#custom#var('tmux-complete', 'truncate', 0)
+if exists("*deoplete#custom#var")
+  call deoplete#custom#var('tmux-complete', 'splitmode', 'words')
+  call deoplete#custom#var('tmux-complete', 'filter-prefix', v:true)
+  call deoplete#custom#var('tmux-complete', 'show_incomplete', v:true)
+  call deoplete#custom#var('tmux-complete', 'sort_candidates', v:false)
+  call deoplete#custom#var('tmux-complete', 'scrollback', 0)
+  call deoplete#custom#var('tmux-complete', 'truncate', 0)
+endif
 
 " Snippets
 " ------------------------------------------------------------------------------
