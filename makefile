@@ -170,6 +170,10 @@ ssh:
 	@ln -fs "$(apps)/ssh/george.pub" ~/.ssh/george.pub
 	@chmod 600 ~/.ssh/george
 
+	@ln -fs "$(apps)/ssh/github.enc" ~/.ssh/github
+	@ln -fs "$(apps)/ssh/github.pub" ~/.ssh/github.pub
+	@chmod 600 ~/.ssh/github
+
 	@ln -fs "$(apps)/ssh/hetzner.enc" ~/.ssh/hetzner
 	@ln -fs "$(apps)/ssh/hetzner.pub" ~/.ssh/hetzner.pub
 	@chmod 600 ~/.ssh/hetzner
