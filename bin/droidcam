@@ -1,0 +1,3 @@
+#!/usr/bin/env zsh
+
+as-host ~/src/droidcam/droidcam-cli ios 4747
