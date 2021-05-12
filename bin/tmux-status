@@ -5,12 +5,9 @@ WATSON_DIR="${HOME}/dotfiles/apps/watson"
 PROJECT="$(watson status --project)"
 PROJECT=$(echo "${PROJECT}" | sed 's/No project started.//g')
 
-TAGS=$(watson status --tags)
-TAGS=$(echo "${TAGS}" | sed 's/No project started.//g')
-TAGS=$(echo "${TAGS}" | sed 's/\[/ +/g' | sed 's/\]//g')
+ELAPSED=$(watson status --elapsed | sed 's/No project started.//g')
 
-ELAPSED=$(watson status --elapsed)
-ELAPSED=$(echo "${ELAPSED}" | sed 's/No project started.//g')
+TOTAL=$(watson log --day --current | head -n 1 | rg -o '\(.+\)' | sed 's/[()]//g')
 
 BATTERY=$(acpi -b | tail -n 1 | rg -o '\w+, \d+%')
 BATTERY=$(echo "${BATTERY}" | sed 's/Discharging,\s*/#[fg=colour1]▼/')
@@ -22,4 +19,4 @@ TIME=$(date +"%H:%M")
 
 VOLUME=$(awk -F"[][]" '/Mono:/ { print $2 }' <(amixer sget Master))
 
-echo "#[fg=colour4]${PROJECT}#[fg=colour12]${TAGS} #[fg=colour3]${ELAPSED} #[fg=colour8]• ${BATTERY} #[fg=colour8]• #[fg=colour6]${DATE} #[fg=colour7]${TIME} #[fg=colour8]• #[fg=colour4]${VOLUME}"
+echo "#[fg=colour10]${TOTAL} #[fg=colour4]${PROJECT}#[fg=colour12] #[fg=colour3]${ELAPSED} #[fg=colour8]• ${BATTERY} #[fg=colour8]• #[fg=colour6]${DATE} #[fg=colour7]${TIME} #[fg=colour8]• #[fg=colour4]${VOLUME}"
