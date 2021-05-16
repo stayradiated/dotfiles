@@ -2,4 +2,5 @@
 
 town=$1
 
-http "https://www.metservice.com/publicData/localForecast${town}" | jq -r '.days[0].forecast'
+http "https://www.metservice.com/publicData/localForecast${town}" | \
+  jq -r '.days[0] | (.forecast + "\nHigh: " + .max + "°c Low: " + .min + "°c\n" + .riseSet.firstLight + "/" + .riseSet.sunRise + " → " + .riseSet.sunSet + "/" + .riseSet.lastLight)'
