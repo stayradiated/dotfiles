@@ -9,75 +9,72 @@ endif
 " Add the dein installation directory into runtimepath
 set runtimepath+=$HOME/.config/nvim/dein/repos/github.com/Shougo/dein.vim
 
-if dein#load_state('$HOME/.config/nvim/dein')
- call dein#begin('$HOME/.config/nvim/dein')
- call dein#add('$HOME/.config/nvim/dein')
+call dein#begin('$HOME/.config/nvim/dein')
+call dein#add('$HOME/.config/nvim/dein')
 
-  " Dein UI
-  call dein#add('wsdjeg/dein-ui.vim')
+" Themes
+call dein#add('stayradiated/vim-termorrow')
+call dein#add('reedes/vim-colors-pencil')
 
-  " Themes
-  call dein#add('stayradiated/vim-termorrow')
-  call dein#add('reedes/vim-colors-pencil')
+" Extensions
+call dein#add('Shougo/denite.nvim')
 
-  " Extensions
-  call dein#add('Shougo/denite.nvim')
+call dein#add('Shougo/deoplete.nvim')
+let g:deoplete#enable_at_startup = 1
 
-  call dein#add('Shougo/deoplete.nvim')
-  let g:deoplete#enable_at_startup = 1
+call dein#add('Shougo/neosnippet.vim')
 
-  call dein#add('Shougo/neosnippet.vim')
-  
-  call dein#add('neoclide/denite-git')
-  call dein#add('jeetsukumaran/vim-filebeagle')
-  call dein#add('christoomey/vim-tmux-navigator')
+call dein#add('neoclide/denite-git')
+call dein#add('jeetsukumaran/vim-filebeagle')
+call dein#add('christoomey/vim-tmux-navigator')
 
-  " Editing
-  " call
-  call dein#add('arthurxavierx/vim-caser')
-  call dein#add('tpope/vim-abolish')
-  call dein#add('tpope/vim-fugitive')
-  call dein#add('tpope/vim-repeat')
-  call dein#add('tpope/vim-surround')
-  call dein#add('tpope/vim-unimpaired')
-  call dein#add('tomtom/tcomment_vim')
-  call dein#add('godlygeek/tabular')
-  call dein#add('danro/rename.vim')
-  call dein#add('junegunn/fzf')
-  call dein#add('junegunn/goyo.vim')
-  call dein#add('wellle/tmux-complete.vim')
-  call dein#add('dkarter/bullets.vim')
-  call dein#add('Yggdroot/indentLine')
-  call dein#add('christianrondeau/vim-base64')
-  call dein#add('vim-utils/vim-troll-stopper')
-  call dein#add('junegunn/vim-emoji')
+" Editing
+" call
+call dein#add('arthurxavierx/vim-caser')
+call dein#add('tpope/vim-abolish')
+call dein#add('tpope/vim-fugitive')
+call dein#add('tpope/vim-repeat')
+call dein#add('tpope/vim-surround')
+call dein#add('tpope/vim-unimpaired')
+call dein#add('tomtom/tcomment_vim')
+call dein#add('godlygeek/tabular')
+call dein#add('danro/rename.vim')
+call dein#add('junegunn/fzf')
+call dein#add('junegunn/goyo.vim')
+call dein#add('wellle/tmux-complete.vim')
+call dein#add('dkarter/bullets.vim')
+call dein#add('Yggdroot/indentLine')
+call dein#add('christianrondeau/vim-base64')
+call dein#add('vim-utils/vim-troll-stopper')
 
-  call dein#add('iamcco/markdown-preview.nvim', {
-    \'on_ft': ['markdown', 'pandoc.markdown', 'rmd'],
-    \'build': 'sh -c "cd app & yarn install"' })
+call dein#add('iamcco/markdown-preview.nvim', {
+  \'on_ft': ['markdown', 'pandoc.markdown', 'rmd'],
+  \'build': 'sh -c "cd app & yarn install"' })
 
-  " Languages
-  call dein#add('stayradiated/vim-journal')
-  call dein#add('sheerun/vim-polyglot')
-  call dein#add('fcpg/vim-waikiki')
-  " call dein#add('GutenYe/json5.vim')
-  " call dein#add('pangloss/vim-javascript')
-  " call dein#add('neoclide/vim-jsx-improve')
-  " call dein#add('cespare/vim-toml')
-  " call dein#add('elzr/vim-json')
-  " call dein#add('fatih/vim-go')
-  " call dein#add('jxnblk/vim-mdx-js')
-  " call dein#add('kchmck/vim-coffee-script')
-  " call dein#add('leafgarland/typescript-vim')
-  " call dein#add('mxw/vim-prolog')
-  " call dein#add('vim-crystal/vim-crystal')
+" Languages
+call dein#add('stayradiated/vim-journal')
+call dein#add('sheerun/vim-polyglot')
+call dein#add('fcpg/vim-waikiki')
+" call dein#add('GutenYe/json5.vim')
+" call dein#add('pangloss/vim-javascript')
+" call dein#add('neoclide/vim-jsx-improve')
+" call dein#add('cespare/vim-toml')
+" call dein#add('elzr/vim-json')
+" call dein#add('fatih/vim-go')
+" call dein#add('jxnblk/vim-mdx-js')
+" call dein#add('kchmck/vim-coffee-script')
+" call dein#add('leafgarland/typescript-vim')
+" call dein#add('mxw/vim-prolog')
+" call dein#add('vim-crystal/vim-crystal')
 
- call dein#end()
- call dein#save_state()
-endif
+call dein#end()
 
 filetype plugin indent on
 syntax enable
+
+if dein#check_install()
+  call dein#install()
+endif
 
 " Settings
 " ------------------------------------------------------------------------------
@@ -346,9 +343,6 @@ endfunction
 " Markdown
 autocmd BufNewFile,BufRead *.md set filetype=markdown
 autocmd FileType markdown setlocal tw=79
-
-" Typescript
-autocmd BufNewFile,BufRead *.tsx set filetype=typescript
 
 " Markdown JSX
 autocmd BufNewFile,BufRead *.mdx set filetype=javascript
