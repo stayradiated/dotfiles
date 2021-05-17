@@ -4,15 +4,17 @@ set -e
 
 battery=$(acpi -b | tail -n 1 | rg -o --pcre2 '\d+(?=%)')
 
-color='#001115'
-
 if [ "${battery}" -lt "10" ]; then
   color='#FC440F'
+  xsetroot -solid $color
 elif [ "${battery}" -lt "20" ]; then
   color='#F9DB6D'
+  xsetroot -solid $color
 elif [ "${battery}" -lt "30" ]; then
   color='#0AD2FF'
+  xsetroot -solid $color
+else
+  # color='#001115'
+  # xsetroot -solid $color
+  feh --no-fehbg --bg-fill '/home/admin/src/annie.jpeg' 
 fi
-
-# xsetroot -solid $color
-feh --no-fehbg --bg-fill '/home/admin/src/annie.jpeg' 
