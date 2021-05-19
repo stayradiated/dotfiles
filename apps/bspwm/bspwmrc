@@ -7,8 +7,13 @@ bspc config gapless_monocle     true
 bspc config click_to_focus      button1
 
 # Create monitors
-bspc monitor eDP1 -d 1 2 3 4 5
-bspc monitor HDMI1 -d 6 7 8 9 10
+if xrandr --listmonitors | grep HDMI1
+then
+  bspc monitor eDP1 -d 1 2 3 4 5
+  bspc monitor HDMI1 -d 6 7 8 9 10
+else
+  bspc monitor eDP1 -d 1 2 3 4 5 6 7 8 9 10
+fi
 
 # Set windows styles
 for desktop in $(bspc query -D); do
