@@ -1,6 +1,9 @@
 #!/usr/bin/env zsh
 
 cd $HOME/dotfiles
+
 git add -A
 git commit -m "snapshot: $(date +'%D %T')"
-git push
+
+tag=$(autotag --scheme=conventional)
+git push --atomic master $tag
