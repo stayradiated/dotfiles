@@ -82,7 +82,7 @@ super + shift + {Left,Right,Up,Down}
 
 # Open terminal
 super + Return
-    alacritty --config-file ~/dotfiles/apps/alacritty/alacritty.yml
+    alacritty --config-file /home/admin/dotfiles/apps/alacritty/alacritty.yml
 
 # take screenshot
 Print
