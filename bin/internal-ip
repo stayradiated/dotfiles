@@ -5,5 +5,6 @@
   as-host ip -4 addr show enp0s31f6 &
   as-host ip -4 addr show enp0s20f0u1c4i2
 } |
-grep --color=none --only-matching --perl-regexp '(?<=inet\s)\d+(\.\d+){3}' |
-awk '{$1=$1};1' # trim whitespace
+grep --color=none --only-matching --perl-regexp '(?<=inet\s)\d+(\.\d+){3}' \
+| awk '{$1=$1};1' \
+| head -n 1
