@@ -83,9 +83,15 @@ alias monitor-off='xrandr --output eDP1 --mode 1920x1080 --output HDMI1 --off'
 alias laptop-monitor-on='xrandr --output eDP1 --mode 1920x1080'
 alias laptop-monitor-off='xrandr --output eDP1 --off'
 
+# journal shortcuts
 alias jj='cd $(journal-utils --root)'
 alias jd='nvim $(journal-utils --day)'
 alias jw='nvim $(journal-utils --week)'
+alias jlbo='nvim $(journal-utils --list books)'
+alias jlmo='nvim $(journal-utils --list movies)'
+alias jlmu='nvim $(journal-utils --list music)'
+alias jlwi='nvim $(journal-utils --list wishlist)'
+alias jlyt='nvim $(journal-utils --list youtube)'
 
 use-config-keyboard () {
   setxkbmap us -variant colemak -option ctrl:nocaps -option altwin:swap_alt_win
