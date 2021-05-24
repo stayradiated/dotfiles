@@ -138,6 +138,7 @@ set background=dark
 " Digraphs
 digraphs lh 9829 " ♥ love heart
 digraphs cr 8627 " ↳ carriage return
+digraphs d4 10294 " ⠶ braille pattern dots 2356
 
 " Mapping
 " ------------------------------------------------------------------------------
