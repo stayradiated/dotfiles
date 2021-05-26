@@ -10,6 +10,10 @@ setxkbmap us -variant colemak -option ctrl:nocaps -option altwin:swap_alt_win
 ) &
 
 # wm keybindings
-XDG_RUNTIME_DIR=/home/admin SXHKD_SHELL=/bin/bash PATH=$HOME/dotfiles/bin:$PATH sxhkd -c /home/admin/.config/sxhkd/sxhkdrc &
+export XDG_CONFIG_HOME=/home/admin
+export XDG_RUNTIME_DIR=/home/admin
+export SXHKD_SHELL=/bin/bash
+export PATH=$HOME/dotfiles/bin:$PATH
+sxhkd -c /home/admin/.config/sxhkd/sxhkdrc &
 
 exec bspwm -c /home/admin/.config/bspwm/bspwmrc
