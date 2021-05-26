@@ -1,5 +1,5 @@
 # XScreenSaver Preferences File
-# Written by xscreensaver-demo 5.36 for admin on Tue Nov 10 11:22:33 2020.
+# Written by xscreensaver-demo 5.36 for admin on Thu May 27 11:36:14 2021.
 # https://www.jwz.org/xscreensaver/
 
 timeout:	0:10:00
@@ -32,7 +32,7 @@ dpmsOff:	4:00:00
 grabDesktopImages:  False
 grabVideoFrames:    False
 chooseRandomImages: True
-imageDirectory:	/home/admin/src/desktops/
+imageDirectory:	/home/admin/src/desktops
 
 mode:		random
 selected:	-1
@@ -60,15 +60,17 @@ programs:								      \
 				decayscreen -root			    \n\
 				flame -root				    \n\
 				halo -root				    \n\
-				slidescreen -root			    \n\
+				slidescreen -root -delay2 407080	      \
+				  -duration 198 -increment 20 -grid-size      \
+				  25					    \n\
 				pedal -root				    \n\
 				bouboule -root				    \n\
 -				braid -root				    \n\
 				coral -root				    \n\
-				deco -root				    \n\
+-				deco -root				    \n\
 				drift -root				    \n\
 -				fadeplot -root				    \n\
-				galaxy -root				    \n\
+-				galaxy -root				    \n\
 				goop -root				    \n\
 				grav -root				    \n\
 				ifs -root				    \n\
@@ -81,7 +83,7 @@ programs:								      \
 - GL: 				morph3d -root				    \n\
 				mountain -root				    \n\
 				munch -root				    \n\
-				penrose -root				    \n\
+-				penrose -root				    \n\
 - GL: 				pipes -root				    \n\
 				rd-bomb -root				    \n\
 - GL: 				rubik -root				    \n\
@@ -90,10 +92,10 @@ programs:								      \
 - GL: 				sproingies -root			    \n\
 				starfish -root				    \n\
 				strange -root				    \n\
-				swirl -root				    \n\
+-				swirl -root				    \n\
 				triangle -root				    \n\
 				xjack -root				    \n\
-				xlyap -root				    \n\
+-				xlyap -root				    \n\
 - GL: 				atlantis -root				    \n\
 				bsod -root				    \n\
 - GL: 				bubble3d -root				    \n\
@@ -101,7 +103,8 @@ programs:								      \
 -				crystal -root				    \n\
 				cynosure -root				    \n\
 				discrete -root				    \n\
-				distort -root				    \n\
+				distort -root -number 3 -effect bounce	      \
+				  -vortex				    \n\
 				epicycle -root				    \n\
 				flow -root				    \n\
 - GL: 				glplanet -root				    \n\
@@ -126,7 +129,7 @@ programs:								      \
 				phosphor -root				    \n\
 - GL: 				pulsar -root				    \n\
 				ripples -root				    \n\
-				shadebobs -root				    \n\
+-				shadebobs -root				    \n\
 - GL: 				sierpinski3d -root			    \n\
 				spotlight -root				    \n\
 				squiral -root				    \n\
@@ -190,19 +193,19 @@ programs:								      \
 - GL: 				glslideshow -root			    \n\
 - GL: 				hypertorus -root			    \n\
 - GL: 				jigglypuff -root			    \n\
-				metaballs -root				    \n\
+-				metaballs -root				    \n\
 - GL: 				mirrorblob -root			    \n\
 				piecewise -root				    \n\
 - GL: 				polytopes -root				    \n\
 				pong -root				    \n\
-				popsquares -root			    \n\
+-				popsquares -root			    \n\
 - GL: 				surfaces -root				    \n\
 				xanalogtv -root				    \n\
-				abstractile -root			    \n\
+-				abstractile -root			    \n\
 				anemotaxis -root			    \n\
 - GL: 				antinspect -root			    \n\
 				fireworkx -root				    \n\
-				fuzzyflakes -root			    \n\
+-				fuzzyflakes -root			    \n\
 				interaggregate -root			    \n\
 				intermomentary -root			    \n\
 				memscroller -root			    \n\
@@ -220,7 +223,7 @@ programs:								      \
 				celtic -root				    \n\
 - GL: 				crackberg -root				    \n\
 - GL: 				cube21 -root				    \n\
-				fiberlamp -root				    \n\
+-				fiberlamp -root				    \n\
 - GL: 				fliptext -root				    \n\
 - GL: 				glhanoi -root				    \n\
 - GL: 				tangram -root				    \n\
@@ -228,11 +231,11 @@ programs:								      \
 - GL: 				glschool -root				    \n\
 - GL: 				topblock -root				    \n\
 - GL: 				cubicgrid -root				    \n\
-				cwaves -root				    \n\
+-				cwaves -root				    \n\
 - GL: 				gears -root				    \n\
 - GL: 				glcells -root				    \n\
 - GL: 				lockward -root				    \n\
-				m6502 -root				    \n\
+-				m6502 -root				    \n\
 - GL: 				moebiusgears -root			    \n\
 - GL: 				voronoi -root				    \n\
 - GL: 				hypnowheel -root			    \n\
@@ -245,16 +248,18 @@ programs:								      \
 - GL: 				hilbert -root				    \n\
 - GL: 				tronbit -root				    \n\
 - GL: 				geodesic -root				    \n\
-				hexadrop -root				    \n\
+-				hexadrop -root				    \n\
 - GL: 				kaleidocycle -root			    \n\
 - GL: 				quasicrystal -root			    \n\
 - GL: 				unknownpleasures -root			    \n\
-				binaryring -root			    \n\
+-				binaryring -root			    \n\
 - GL: 				cityflow -root				    \n\
 - GL: 				geodesicgears -root			    \n\
 - GL: 				projectiveplane -root			    \n\
 - GL: 				romanboy -root				    \n\
-				tessellimage -root			    \n\
+				tessellimage -root -delay 34513		      \
+				  -duration2 0.4451 -duration 161	      \
+				  -max-depth 66708			    \n\
 - GL: 				winduprobot -root			    \n\
 - GL: 				splitflap -root				    \n\
 - GL: 				cubestack -root				    \n\
@@ -278,3 +283,4 @@ procInterrupts:	True
 xinputExtensionDev: False
 overlayStderr:	True
 authWarningSlack:   20
+
