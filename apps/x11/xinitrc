@@ -10,8 +10,11 @@ setxkbmap us -variant colemak -option ctrl:nocaps -option altwin:swap_alt_win
 ) &
 
 # wm keybindings
-export XDG_CONFIG_HOME=/home/admin
+export XDG_CACHE_HOME=/home/admin/.cache
+export XDG_CONFIG_HOME=/home/admin/.config
+export XDG_DATA_HOME=/home/admin/.local/share
 export XDG_RUNTIME_DIR=/home/admin
+export XDG_STATE_HOME=/home/admin/.local/state
 export SXHKD_SHELL=/bin/bash
 export PATH=$HOME/dotfiles/bin:$PATH
 sxhkd -c /home/admin/.config/sxhkd/sxhkdrc &
