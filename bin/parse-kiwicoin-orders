@@ -1,0 +1,54 @@
+#!/usr/bin/env zsh
+
+f_data=$(mktemp)
+f_stats=$(mktemp)
+f_table=$(mktemp)
+
+tail -n +2 \
+| xsv select 'Date/Time,Order size,Average price,Bought,Fee,Spent' \
+| xsv sort \
+> $f_data
+
+< $f_data | xsv stats > $f_stats
+
+get_stat() {
+  local field=$1
+  local stat=$2
+  < $f_stats | xsv search -s field "${field}" | xsv select "${stat}" | tail -n 1
+}
+
+round() {
+  local dp=$1
+  local value=$2
+  node -e "console.log((Math.round($value * Math.pow(10, $dp)) / Math.pow(10, $dp)).toFixed($dp))"
+}
+
+order_size=$(round 4 $(get_stat 'Order size' 'sum'))
+price=$(round 2 $(get_stat 'Average price' 'mean'))
+bought=$(round 6 $(get_stat 'Bought' 'sum'))
+fee=$(round 6 $(get_stat 'Fee' 'sum'))
+spent=$(round 2 $(get_stat 'Spent' 'sum'))
+
+echo "Total,${order_size},${price},${bought},${fee},${spent}" >> $f_data
+< $f_data | xsv table > $f_table
+
+header=$(< $f_table | head -n 1)
+body=$(< $f_table | head -n -2 | tail -n +2)
+footer=$(< $f_table | tail -n 1)
+
+line=$(echo $footer | sed s/./-/g)
+
+roi=$(round 2 $(node -e "console.log($spent / $bought)"))
+
+echo "$header
+$line
+$body
+$line
+$footer
+
+> gains @ \$$spent / $bought = \$$roi
+> i.e. 1 Bitcoin must be worth over \$$roi before any ROI"
+
+rm $f_data
+rm $f_stats
+rm $f_table
