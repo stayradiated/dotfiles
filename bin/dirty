@@ -43,6 +43,8 @@ ls \
   -I .weechat \
   -I .wget-hsts \
   -I .xinitrc \
+  -I .xournalpp \
+  -I .expo \
   -I .xscreensaver \
   -I .zcompcache \
   -I .zcompdump \
