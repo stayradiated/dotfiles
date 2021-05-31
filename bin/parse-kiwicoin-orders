@@ -1,54 +1,41 @@
 #!/usr/bin/env zsh
 
 f_data=$(mktemp)
-f_stats=$(mktemp)
-f_table=$(mktemp)
+f_totals=$(mktemp)
+f_full=$(mktemp)
 
 tail -n +2 \
-| xsv select 'Date/Time,Order size,Average price,Bought,Fee,Spent' \
-| xsv sort \
+  | mlr --csv \
+  then rename 'Order size,order' \
+  then rename 'Average price,price' \
+  then rename 'Bought,bought' \
+  then rename 'Fee,fee' \
+  then rename 'Spent,spent' \
+  then rename 'Date/Time,date' \
+  then cut -o -f date,price,spent,order,fee,bought \
+  then sort -f date \
 > $f_data
 
-< $f_data | xsv stats > $f_stats
+< $f_data | mlr --csv \
+  then stats1 -a sum,mean -f spent,price,bought \
+  then cut -o -f spent_sum,price_mean,bought_sum \
+  then put '$date=""' \
+  then put '$order=""' \
+  then put '$fee=""' \
+  then put '$price_roi = $spent_sum / $bought_sum' \
+  then rename 'spent_sum,spent' \
+  then rename 'bought_sum,bought' \
+  then rename 'price_roi,price' \
+  then cut -o -f date,price,spent,order,fee,bought \
+> $f_totals
 
-get_stat() {
-  local field=$1
-  local stat=$2
-  < $f_stats | xsv search -s field "${field}" | xsv select "${stat}" | tail -n 1
-}
+mlr --csv cat $f_data $f_totals > $f_full
 
-round() {
-  local dp=$1
-  local value=$2
-  node -e "console.log((Math.round($value * Math.pow(10, $dp)) / Math.pow(10, $dp)).toFixed($dp))"
-}
-
-order_size=$(round 4 $(get_stat 'Order size' 'sum'))
-price=$(round 2 $(get_stat 'Average price' 'mean'))
-bought=$(round 6 $(get_stat 'Bought' 'sum'))
-fee=$(round 6 $(get_stat 'Fee' 'sum'))
-spent=$(round 2 $(get_stat 'Spent' 'sum'))
-
-echo "Total,${order_size},${price},${bought},${fee},${spent}" >> $f_data
-< $f_data | xsv table > $f_table
-
-header=$(< $f_table | head -n 1)
-body=$(< $f_table | head -n -2 | tail -n +2)
-footer=$(< $f_table | tail -n 1)
-
-line=$(echo $footer | sed s/./-/g)
-
-roi=$(round 2 $(node -e "console.log($spent / $bought)"))
-
-echo "$header
-$line
-$body
-$line
-$footer
-
-> gains @ \$$spent / $bought = \$$roi
-> i.e. 1 Bitcoin must be worth over \$$roi before any ROI"
+< $f_full mlr --icsv --opprint \
+  then put '$fee = fmtnum($fee / $order * 100, "%.1lf%%")' \
+  then put '$spent = fmtnum($spent, "%.2lf")' \
+  then put '$price = fmtnum($price, "%.2lf")'
 
 rm $f_data
-rm $f_stats
-rm $f_table
+rm $f_totals
+rm $f_full
