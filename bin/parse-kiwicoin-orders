@@ -29,12 +29,15 @@ tail -n +2 \
   then cut -o -f date,price,spent,order,fee,bought \
 > $f_totals
 
+bought_sum=$(mlr --csv cut -f bought $f_totals | tail -n 1)
+
 mlr --csv cat $f_data $f_totals > $f_full
 
 < $f_full mlr --icsv --opprint \
   then put '$fee = fmtnum($fee / $order * 100, "%.1lf%%")' \
   then put '$spent = fmtnum($spent, "%.2lf")' \
-  then put '$price = fmtnum($price, "%.2lf")'
+  then put '$price = fmtnum($price, "%.2lf")' \
+  then put "\$share = fmtnum(\$bought / ${bought_sum} * 100, \"%.2lf%%\")"
 
 rm $f_data
 rm $f_totals
