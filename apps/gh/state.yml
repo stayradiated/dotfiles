@@ -1,4 +1,4 @@
-checked_for_update_at: 2021-06-02T14:11:48.251837711+12:00
+checked_for_update_at: 2021-06-04T09:51:37.45311124+12:00
 latest_release:
-    version: v1.10.3
-    url: https://github.com/cli/cli/releases/tag/v1.10.3
+    version: v1.11.0
+    url: https://github.com/cli/cli/releases/tag/v1.11.0
