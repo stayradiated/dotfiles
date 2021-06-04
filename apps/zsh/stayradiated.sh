@@ -136,10 +136,6 @@ rsync-photos () {
     echo 'sync complete, please remove the SD card :)'"
 }
 
-ssid () {
-  as-host netctl-auto list | grep '*'
-}
-
 wifi-switch () {
   as-host sudo netctl-auto switch-to $1
 }
