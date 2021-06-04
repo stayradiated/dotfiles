@@ -140,7 +140,6 @@ wifi-switch () {
   as-host sudo netctl-auto switch-to $1
 }
 
-
 gcloud-stream-build () {
   gcloud builds log --stream $(\
     gcloud builds list --limit 1 --format 'value(id)' --ongoing
