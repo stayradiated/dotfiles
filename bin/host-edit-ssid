@@ -1,0 +1,4 @@
+#!/usr/bin/env zsh
+
+ssid=${1:-$(host-ssid)}
+as-host sudo vi /etc/netctl/${ssid}

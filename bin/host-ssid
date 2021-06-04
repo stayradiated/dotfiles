@@ -1,0 +1,3 @@
+#!/usr/bin/env zsh
+
+as-host netctl-auto list | grep '*' | sed 's/^\*\s\+//' | sed 's/\s\+$//'
