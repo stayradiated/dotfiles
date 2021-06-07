@@ -275,6 +275,7 @@ endfunction
 " bullets
 let g:bullets_enable_in_empty_buffers = 0
 let g:bullets_renumber_on_change = 0
+let g:bullets_checkbox_markers = ' .ox'
 
 " markdown conceal
 " https://github.com/plasticboy/vim-markdown#syntax-concealing
