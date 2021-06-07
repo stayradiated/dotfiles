@@ -86,7 +86,10 @@ expo:
 firefox:
 
 	@echo "firefox..."
-	@xdg-settings set default-web-browser firefox.desktop
+	@if command -v xdg-settings; then \
+		xdg-settings set default-web-browser firefox.desktop; \
+	fi
+
 
 gcloud:
 
@@ -258,10 +261,12 @@ weechat:
 xinput:
 
 	@echo "xinput..."
-	@xinput enable 'Synaptics TM3289-021'
-	@xinput set-prop 'Synaptics TM3289-021' 'libinput Disable While Typing Enabled' 0
-	@xinput disable 'Synaptics TM3289-021'
-	@xinput set-prop 'TPPS/2 Elan TrackPoint' 'libinput Accel Speed' 0.7
+	@if command -v xinput; then \
+		xinput enable 'Synaptics TM3289-021'; \
+		xinput set-prop 'Synaptics TM3289-021' 'libinput Disable While Typing Enabled' 0; \
+		xinput disable 'Synaptics TM3289-021'; \
+		xinput set-prop 'TPPS/2 Elan TrackPoint' 'libinput Accel Speed' 0.7; \
+	fi
 
 x11:
 
