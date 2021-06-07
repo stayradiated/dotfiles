@@ -90,7 +90,7 @@ Print
 
 # Launch dmenu
 super + space
-    rofi -show run -modi run,window,ssh -font 'Gomme 12' -terminal 'alacritty'
+    rofi -show run -modi run,window,ssh -font 'SFMono 12' -terminal 'alacritty'
 
 # Audio 
 {XF86AudioLowerVolume,XF86AudioRaiseVolume}
