@@ -262,9 +262,9 @@ xinput:
 
 	@echo "xinput..."
 	@if command -v xinput; then \
-		xinput enable 'Synaptics TM3289-021'; \
-		xinput set-prop 'Synaptics TM3289-021' 'libinput Disable While Typing Enabled' 0; \
-		xinput disable 'Synaptics TM3289-021'; \
+		xinput enable 'ELAN0672:00 04F3:3187 Touchpad'; \
+		xinput set-prop 'ELAN0672:00 04F3:3187 Touchpad' 'libinput Disable While Typing Enabled' 0; \
+		# xinput disable 'ELAN0672:00 04F3:3187 Touchpad'; \
 		xinput set-prop 'TPPS/2 Elan TrackPoint' 'libinput Accel Speed' 0.7; \
 	fi
 
