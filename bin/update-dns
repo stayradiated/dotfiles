@@ -8,11 +8,14 @@
 # update-dns 1.1.1.1
 #   if you pass an IP address it will use that instead
 
+resolv_conf=$(mktemp)
+
 if [[ -v 1 ]]
 then
-  echo "domain home\nnameserver ${1}" | sudo tee /etc/resolv.conf
+  echo "domain home\nnameserver ${1}" > $resolv_conf
 else
-  as-host cat /etc/resolv.conf | sudo tee /etc/resolv.conf
+  as-host cat /etc/resolv.conf | tr '' ' ' > $resolv_conf
 fi
 
-
+< $resolv_conf | sudo tee /etc/resolv.conf
+rm $resolv_conf
