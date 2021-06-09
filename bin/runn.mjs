@@ -10,6 +10,8 @@
 
 const [command, ...args] = process.argv.slice(3)
 
+cd('/home/admin/src/github.com/Runn-Fast/runn')
+
 switch (command) {
   case 'rs':
   case 'restart': {
@@ -23,5 +25,15 @@ switch (command) {
   case 'rebuild-db':
     await $`docker-compose exec -T app rake db:drop db:create db:migrate`
     await $`docker-compose exec -T app rake db:seed`
+    break
+
+  case 'l':
+  case 'logs':
+    const app = args[0]
+    await $`docker-compose logs --tail 500 --follow ${app}`
+    break
+
+  case 'status':
+    await $`docker-compose ps --all`
     break
 }
