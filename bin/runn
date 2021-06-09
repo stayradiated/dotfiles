@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+zx ~/dotfiles/bin/runn.mjs $@
