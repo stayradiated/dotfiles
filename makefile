@@ -2,7 +2,7 @@ SHELL := /bin/bash
 
 apps := $(CURDIR)/apps
 
-apps: aerc anki beets bspwm charles dbxcli docker exeditor expo firefox gcloud git gh khal logview mitmproxy mycli ngrok npm ranger ssh sxhkd tmux urlview vdirsyncer vim weechat xinput x11 xournalpp xscreensaver zoom zsh
+apps: aerc anki beets bspwm charles dbxcli docker exeditor electrum expo firefox gcloud git gh khal logview mitmproxy mycli ngrok npm ranger ssh sxhkd tmux urlview vdirsyncer vim weechat xinput x11 xournalpp xscreensaver zoom zsh
 
 aerc:
 
@@ -76,6 +76,12 @@ exeditor:
 	@mkdir -p ~/.config/withexeditorhost/config/firefox
 	@ln -fs "$(apps)/exeditor/firefox/editorconfig.json" ~/.config/withexeditorhost/config/firefox/editorconfig.json
 	@ln -fs "$(apps)/exeditor/firefox/withexeditorhost.sh" ~/.config/withexeditorhost/config/firefox/withexeditorhost.sh
+
+electrum:
+
+	@echo "electrum..."
+	@mkdir -p ~/.electrum
+	@ln -fs "$(apps)/electrum/config.enc" ~/.electrum/config
 
 expo:
 
