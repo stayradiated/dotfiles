@@ -22,18 +22,27 @@ switch (command) {
     break
   }
 
-  case 'rebuild-db':
+  case 'migrate-db': {
+    await $`docker-compose exec -T app rake db:migrate`
+    break
+  }
+
+  case 'rebuild-db': {
     await $`docker-compose exec -T app rake db:drop db:create db:migrate`
     await $`docker-compose exec -T app rake db:seed`
     break
+  }
 
   case 'l':
-  case 'logs':
+  case 'logs': {
     const app = args[0]
     await $`docker-compose logs --tail 500 --follow ${app}`
     break
+  }
 
-  case 'status':
+  case 'ps':
+  case 'status': {
     await $`docker-compose ps --all`
     break
+  }
 }
