@@ -1,0 +1,7 @@
+#!/usr/bin/env zsh
+
+set -e
+
+git stash save
+git fetch
+git reset --hard origin/master

@@ -1,0 +1,3 @@
+#!/usr/bin/env zsh
+
+sd -f m "^(\s*family:).*$" "\$1 ${1}" ~/dotfiles/apps/alacritty/alacritty.yml

@@ -1,0 +1,6 @@
+#!/usr/bin/env zsh
+
+setxkbmap us \
+  -variant colemak \
+  -option ctrl:nocaps \
+  -option altwin:swap_alt_win
