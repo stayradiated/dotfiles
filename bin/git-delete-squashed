@@ -1,0 +1,17 @@
+#!/usr/bin/env zsh
+
+set -e
+
+base_branch=${1:-main}
+
+git checkout -q "${base_branch}"
+
+git for-each-ref refs/heads/ "--format=%(refname:short)" | while read branch
+do
+  merge_base=$(git merge-base "${base_branch}" "${branch}")
+  tree=$(git rev-parse "${branch}^{tree}")
+  commit=$(git commit-tree "${tree}" -p "${merge_base}" -m _)
+  cherry=$(git cherry "${base_branch}" "${commit}")
+
+  [[ "${cherry}" == "-"* ]] && git branch -D "${branch}"
+done
