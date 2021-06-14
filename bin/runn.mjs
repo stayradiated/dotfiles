@@ -13,9 +13,15 @@ const [command, ...args] = process.argv.slice(3)
 cd('/home/admin/src/github.com/Runn-Fast/runn')
 
 switch (command) {
+  case 'stop': {
+    const app = args[0] ?? ''
+    await $`docker-compose stop --time 0 ${app}`
+    break
+  }
+
   case 'rs':
   case 'restart': {
-    const app = args[0]
+    const app = args[0] ?? ''
     await $`docker-compose stop --time 0 ${app}`
     await $`docker-compose up --detach ${app}`
     await $`docker-compose logs --tail 500 --follow ${app}`

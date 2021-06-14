@@ -1,17 +1,24 @@
 #!/usr/bin/env zsh
 
+# based on https://github.com/not-an-aardvark/git-delete-squashed
+# > To determine if a branch is squash-merged, git-delete-squashed creates a
+# > temporary dangling squashed commit with git commit-tree. Then it uses git
+# > cherry to check if the squashed commit has already been applied to master.
+# > If so, it deletes the branch.
+
 set -e
 
 base_branch=${1:-main}
-
 git checkout -q "${base_branch}"
 
 git for-each-ref refs/heads/ "--format=%(refname:short)" | while read branch
 do
   merge_base=$(git merge-base "${base_branch}" "${branch}")
   tree=$(git rev-parse "${branch}^{tree}")
-  commit=$(git commit-tree "${tree}" -p "${merge_base}" -m _)
-  cherry=$(git cherry "${base_branch}" "${commit}")
-
-  [[ "${cherry}" == "-"* ]] && git branch -D "${branch}"
+  tmp_commit=$(git commit-tree "${tree}" -p "${merge_base}" -m _)
+  cherry=$(git cherry "${base_branch}" "${tmp_commit}")
+  if [[ "${cherry}" == "-"* ]] 
+  then 
+    git branch -D "${branch}"
+  fi
 done

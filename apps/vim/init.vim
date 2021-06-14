@@ -46,6 +46,7 @@ call dein#add('dkarter/bullets.vim')
 call dein#add('Yggdroot/indentLine')
 call dein#add('christianrondeau/vim-base64')
 call dein#add('vim-utils/vim-troll-stopper')
+call dein#add('dhruvasagar/vim-table-mode')
 
 call dein#add('iamcco/markdown-preview.nvim', {
   \'on_ft': ['markdown', 'pandoc.markdown', 'rmd'],
