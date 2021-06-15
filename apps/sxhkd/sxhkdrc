@@ -34,10 +34,6 @@ super + y
 super + {_,shift + }{h,j,k,l}
     bspc node -{f,s} {west,south,north,east}
 
-# Loop through the window frames
-super + {_,shift + }c
-    bspc node -f {next,prev}
-
 # Switch each window with the frame next to it
 super + {comma,period}
     bspc desktop -C {backward,forward}
@@ -91,6 +87,9 @@ Print
 # Launch dmenu
 super + space
     rofi -show run -modi run,window,ssh -font 'SFMono 12' -terminal 'alacritty'
+
+super + c
+    rofi -show clipboard -modi "clipboard:greenclip print" -run-command '{cmd}' -font 'SFMono 12'
 
 # Audio 
 {XF86AudioLowerVolume,XF86AudioRaiseVolume}
