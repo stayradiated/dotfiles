@@ -9,6 +9,9 @@ setxkbmap us -variant colemak -option ctrl:nocaps -option altwin:swap_alt_win
   done
 ) &
 
+# greenclip
+greenclip daemon &
+
 # wm keybindings
 export XDG_CACHE_HOME=/home/admin/.cache
 export XDG_CONFIG_HOME=/home/admin/.config

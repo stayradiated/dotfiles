@@ -2,7 +2,7 @@ SHELL := /bin/bash
 
 apps := $(CURDIR)/apps
 
-apps: aerc anki beets bspwm charles dbxcli docker exeditor electrum expo firefox gcloud git gh khal logview mitmproxy mycli ngrok npm ranger ssh sxhkd tmux urlview vdirsyncer vim weechat xinput x11 xournalpp xscreensaver zoom zsh
+apps: aerc anki beets bspwm charles dbxcli docker exeditor electrum expo firefox gcloud git gh greenclip khal logview mitmproxy mycli ngrok npm ranger ssh sxhkd tmux urlview vdirsyncer vim weechat xinput x11 xournalpp xscreensaver zoom zsh
 
 aerc:
 
@@ -118,6 +118,12 @@ gh:
 	@ln -fs "$(apps)/gh/config.yml" ~/.config/gh/config.yml
 	@ln -fs "$(apps)/gh/hosts.yml.enc" ~/.config/gh/hosts.yml
 	@ln -fs "$(apps)/gh/state.yml" ~/.config/gh/state.yml
+
+greenclip:
+
+	@echo "grenclip..."
+	@mkdir -p ~/.config
+	@ln -fs "$(apps)/greenclip/greenclip.toml" ~/.config/greenclip.toml
 
 khal:
 
