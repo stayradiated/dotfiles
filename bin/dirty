@@ -60,9 +60,9 @@ ls \
   -I src \
   -I vaults
 
-if [ -d "${HOME}/downloads" ]
+if [ -d "${HOME}/Downloads" ]
 then
   echo '\n# DOWNLOADS DIR'
-  cd $HOME/downloads
+  cd $HOME/Downloads
   ls -Alh
 fi
