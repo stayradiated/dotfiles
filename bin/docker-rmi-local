@@ -1,0 +1,5 @@
+#!/usr/bin/env zsh
+
+set -euxo pipefail
+
+docker images --filter 'reference=local/*' -q  | xargs --no-run-if-empty docker rmi

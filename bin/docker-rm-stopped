@@ -1,0 +1,5 @@
+#!/usr/bin/env zsh
+
+set -euxo pipefail
+
+docker ps --filter "status=created" --filter "status=exited" -q | xargs --no-run-if-empty docker rm
