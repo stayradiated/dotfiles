@@ -35,7 +35,7 @@ switch (command) {
   }
 
   case 'db': {
-    const subcommand = args[1] ?? ''
+    const subcommand = args[0] ?? ''
     switch (subcommand) {
       case 'migrate': {
         await $`docker-compose exec -T app rake db:migrate`

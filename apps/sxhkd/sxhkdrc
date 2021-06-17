@@ -105,4 +105,4 @@ super + shift + slash
 
 # lock the screen
 F12
-    slack-afk && (watson stop || true) && /home/admin/dotfiles/bin/lock
+    /home/admin/dotfiles/bin/lock

@@ -14,7 +14,7 @@ BATTERY=$(echo "${BATTERY}" | sed 's/Discharging,\s*/#[fg=colour1]▼/')
 BATTERY=$(echo "${BATTERY}" | sed 's/Charging,\s*/#[fg=colour2]▲/')
 BATTERY=$(echo "${BATTERY}" | sed 's/Full,\s*/#[fg=colour3]/')
 
-DATE=$(date +"%d.%m %W")
+DATE=$(date +"%Y.%m.%d")
 TIME=$(date +"%H:%M")
 
 VOLUME=$(awk -F"[][]" '/Mono:/ { print $2 }' <(amixer sget Master))
