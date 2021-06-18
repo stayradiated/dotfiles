@@ -97,11 +97,17 @@ super + c
 
 # backlight
 super + shift + {comma,period}
-    light -{U,A} 5
+    light -{U,A} 1
 
 # redshift
+super + shift + i
+    tempcolor -inc 3
+
+super + shift + e
+    tempcolor -dec 3
+
 super + shift + slash
-    redshift {-O 4000,-O 3000,-O 2000,-O 1000,-x}
+    tempcolor {1000,2000,3000,4000,5000,-x}
 
 # lock the screen
 F12

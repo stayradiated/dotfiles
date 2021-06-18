@@ -1,0 +1,121 @@
+#!/usr/bin/env zsh
+#
+# tempcolor
+# Based on https://github.com/entrywayaudibly/tempcolor
+#
+# Wrapper around `redshift` that makes it easy to increment/decrement the color
+# temperature
+#
+# incrementally change color temperature
+#   tempcolor -inc <percent_value>
+#   tempcolor -dec <percent_value>
+#
+# reset color temperature
+#   tempcolor -x
+#
+# set value using one shot mode
+#   tempcolor <value>
+#
+
+CONFIG_PATH="${HOME}"/.config/tempcolorrc
+
+function store_temperature() {
+  local temperature
+  temperature=$1
+
+  touch $CONFIG_PATH
+
+  cat << EOF > "${CONFIG_PATH}"
+previous_temperature=$temperature
+EOF
+}
+
+function increase_color_temperature() {
+  
+  local input
+  input=$1
+
+  local step_size
+  step_size=$(( $previous_temperature*$input/100 ))
+
+  local temperature
+  temperature=$(( $previous_temperature+$step_size ))
+
+  validate_temperature $temperature
+
+  redshift -P -O $temperature
+
+  echo "increased redshift color from ${previous_temperature}K to ${temperature}K..."
+
+  store_temperature $temperature
+}
+
+function decrease_color_temperature() {
+  local input
+  input=$1
+
+  local step_size
+  step_size=$(( $previous_temperature*$input/100 ))
+
+  local temperature
+  temperature=$(( $previous_temperature-$step_size ))
+
+  validate_temperature $temperature
+
+  redshift -P -O $temperature
+
+  echo "decreased redshift color from ${previous_temperature}K to ${temperature}K..."
+
+  store_temperature $temperature
+}
+
+function set_color_temperature() {
+  local temperature
+  temperature=$1
+
+  validate_temperature $temperature
+
+  redshift -P -O $temperature
+
+  echo "redshift color set to ${temperature}K..."
+
+  store_temperature $temperature
+}
+
+function validate_temperature() {
+
+  local temperature
+  temperature=$1
+
+  if [[ ! ($temperature -ge 1000 && $temperature -le 25000) ]]; then
+    echo "Temperature must be between 1000K and 25000K!"
+    exit
+  fi
+}
+
+argument=$1
+value=$2
+
+if [[ ! -e $CONFIG_PATH ]]; then store_temperature 3000; fi
+source $CONFIG_PATH
+
+case $argument in
+
+  -inc)
+    increase_color_temperature $value
+    ;;
+
+  -dec)
+    decrease_color_temperature $value
+    ;;
+
+  -x)
+    redshift -x
+    echo "redshift color reset..."
+    ;;
+
+  *)
+    set_color_temperature $argument
+    ;;
+esac
+
