@@ -203,6 +203,10 @@ ssh:
 	@ln -fs "$(apps)/ssh/id_rsa.pub" ~/.ssh/id_rsa.pub
 	@chmod 600 ~/.ssh/id_rsa
 
+	@ln -fs "$(apps)/ssh/merrytired.enc" ~/.ssh/merrytired
+	@ln -fs "$(apps)/ssh/merrytired.pub" ~/.ssh/merrytired.pub
+	@chmod 600 ~/.ssh/merrytired
+
 	@ln -fs "$(apps)/ssh/sshkey.enc" ~/.ssh/sshkey
 	@ln -fs "$(apps)/ssh/sshkey.pub" ~/.ssh/sshkey.pub
 	@chmod 600 ~/.ssh/sshkey

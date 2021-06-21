@@ -338,7 +338,8 @@ endfunction
 
 " `function (...args) {` --> `(...args) => {`
 function! CodeModArrowFn()
-  %s/\vfunction\s*\(([A-z,:\n ]*)\)\s*\{/(\1) => {
+  %s/\vfunction\s+(\w+)/const \1 = function/
+  %s/\vfunction\s*\(([A-z,:\n{}= ]*)\)\s*\{/(\1) => {/
 endfunction
 
 " Autocommands
