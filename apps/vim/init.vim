@@ -367,3 +367,16 @@ autocmd BufRead,BufNewFile *.txt set syntax=journal
 " Goyo
 autocmd! User GoyoEnter set linebreak
 autocmd! User GoyoLeave set linebreak!
+
+" Mappings to make Vim more friendly towards presenting slides.
+autocmd BufNewFile,BufRead *.vpm call SetVimPresentationMode()
+function SetVimPresentationMode()
+  set filetype=markdown
+
+  nnoremap <buffer> <Right> :n<CR>
+  nnoremap <buffer> <Left> :N<CR>
+
+  if !exists('#goyo')
+    Goyo
+  endif
+endfunction
