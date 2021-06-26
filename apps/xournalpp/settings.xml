@@ -110,6 +110,10 @@
       <attribute name="deviceClass" type="int" value="0"/>
       <attribute name="deviceSource" type="int" value="6"/>
     </data>
+    <data name="ELAN0672:00 04F3:3187 Touchpad">
+      <attribute name="deviceClass" type="int" value="0"/>
+      <attribute name="deviceSource" type="int" value="6"/>
+    </data>
     <data name="Synaptics TM3289-021">
       <attribute name="deviceClass" type="int" value="0"/>
       <attribute name="deviceSource" type="int" value="6"/>
@@ -121,6 +125,10 @@
     <data name="Wacom Intuos S Pad pad">
       <attribute name="deviceClass" type="int" value="0"/>
       <attribute name="deviceSource" type="int" value="8"/>
+    </data>
+    <data name="Wacom Intuos S Pen Pen (0x580822b)">
+      <attribute name="deviceClass" type="int" value="1"/>
+      <attribute name="deviceSource" type="int" value="1"/>
     </data>
     <data name="Wacom Intuos S Pen cursor">
       <attribute name="deviceClass" type="int" value="0"/>
