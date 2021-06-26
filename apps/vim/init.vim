@@ -241,6 +241,9 @@ nnoremap <leader>E %s/:\([^:]\+\):/\=emoji#for(submatch(1), submatch(0))/g
 " Plugin Settings
 " ------------------------------------------------------------------------------
 
+" vim-table-mode
+let g:table_mode_map_prefix = '<leader>2'
+
 let g:dein#install_message_type = "none"
 let g:dein#types#git#clone_depth = 1
 let g:dein#notification_time = 0

@@ -107,7 +107,7 @@ super + shift + e
     tempcolor -dec 3
 
 super + shift + slash
-    tempcolor {1000,2000,3000,4000,5000,-x}
+    tempcolor {5000,4000,3000,2000,1000,-x}
 
 # lock the screen
 F12

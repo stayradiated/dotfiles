@@ -54,6 +54,9 @@ alias ranger='source ranger'
 # typos
 alias celar='clear'
 
+# node
+alias node='node --experimental-repl-await'
+
 # vim
 alias vi='nvim'
 alias vim='nvim'
