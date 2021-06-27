@@ -15,6 +15,12 @@ const log = (message) => {
 }
 
 switch (command) {
+  case 'reset': {
+    const app = args[0] ?? ''
+    log(`docker-compose up --detach --remove-orphans --renew-anon-volumes ${app}`)
+    break
+  }
+
   case 'start': {
     const app = args[0] ?? ''
     log(`docker-compose up --detach --remove-orphans ${app}`)
