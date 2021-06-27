@@ -73,13 +73,6 @@ switch (command) {
 
   case 'help':
   case '--help': {
-    log(`
-runn start [app]
-runn stop [app]
-runn db migrate
-runn db rebuild
-runn logs [app]
-runn status [app]
-    `)
+    log(`echo "runn [start | stop | restart | db | logs | status]"`)
   }
 }
