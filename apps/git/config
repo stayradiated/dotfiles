@@ -1,6 +1,7 @@
 [user]
 	email = 1140167+stayradiated@users.noreply.github.com
 	name = George Czabania
+	signingkey = george@czabania.com
 [push]
 	default = simple
 	followTags = true
@@ -31,3 +32,5 @@
 	enabled = 1
 [init]
 	defaultBranch = main
+[gpg]
+	program = gpg
