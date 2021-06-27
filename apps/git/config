@@ -1,7 +1,7 @@
 [user]
 	email = 1140167+stayradiated@users.noreply.github.com
 	name = George Czabania
-	signingkey = george@czabania.com
+	signingkey = 130FA94F279AE060AC6345B21CC302FD07E9879B
 [push]
 	default = simple
 	followTags = true
