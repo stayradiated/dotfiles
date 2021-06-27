@@ -8,6 +8,8 @@ prompt pure
 export GOPATH=/home/admin
 export GOROOT=/usr/local/go
 
+export GPG_TTY=$(tty)
+
 #
 # Editors
 #
