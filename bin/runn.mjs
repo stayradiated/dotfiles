@@ -15,6 +15,16 @@ const log = (message) => {
 }
 
 switch (command) {
+  case 'tidy': {
+    log(`docker-compose exec -T app npx prettier --write ${args.join(' ')}`)
+    break
+  }
+
+  case 'build': {
+    log(`docker-compose exec -T app yarn run tsc --pretty ${args.join(' ')}`)
+    break
+  }
+
   case 'reset': {
     const app = args[0] ?? ''
     log(`docker-compose up --detach --remove-orphans --renew-anon-volumes ${app}`)
@@ -51,13 +61,54 @@ switch (command) {
         log(`docker-compose exec -T app rake db:migrate`)
         break
       }
+      case 'seed': {
+        log(`docker-compose exec -T app rake db:seed`)
+        break
+      }
       case 'rebuild': {
         log(`docker-compose exec -T app rake db:drop db:create db:migrate && docker-compose exec -T app rake db:seed`)
         break
       }
-
       case 'pgcli': {
         log(`pgcli postgres://postgres:H3JjmJ5W@172.17.0.1:23001/runn_development`)
+        break
+      }
+    }
+    break
+  }
+
+  case 'graphql': {
+    const subcommand = args[0] ?? ''
+    switch (subcommand) {
+      case '': {
+        log(`docker-compose exec -T app yarn run graphql`)
+        break
+      }
+      case 'hasura': {
+        log(`docker-compose exec -T app yarn run graphql:hasura`)
+        break
+      }
+      case 'ruby': {
+        log(`docker-compose exec -T app yarn run graphql:ruby`)
+        break
+      }
+    }
+    break
+  }
+
+  case 'relay': {
+    const subcommand = args[0] ?? ''
+    switch (subcommand) {
+      case '': {
+        log(`docker-compose exec -T app yarn run relay`)
+        break
+      }
+      case 'hasura': {
+        log(`docker-compose exec -T app yarn run relay:hasura`)
+        break
+      }
+      case 'ruby': {
+        log(`docker-compose exec -T app yarn run relay:ruby`)
         break
       }
     }
