@@ -34,3 +34,5 @@
 	defaultBranch = main
 [gpg]
 	program = gpg
+[feature]
+	manyFiles = true
