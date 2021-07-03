@@ -170,7 +170,9 @@ pgp:
 
 	@echo "pgp..."
 	@mkdir -p ~/.gnupg
+	@chmod 0700 ~/.gnupg
 	@ln -fs "$(apps)/pgp/pubring.kbx" ~/.gnupg/pubring.kbx
+	@chmod 0600 ~/.gnupg/pubring.kbx
 
 ranger:
 
