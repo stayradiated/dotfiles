@@ -65,6 +65,9 @@ alias vim='nvim'
 alias :e='nvim'
 alias :q='exit'
 
+# sc
+alias sc='sc-im'
+
 # bat
 alias cat='bat'
 

@@ -1,0 +1,3 @@
+#!/usr/bin/zsh
+
+exec sc-im --quit_afterload --nocurses --export_mkd $@

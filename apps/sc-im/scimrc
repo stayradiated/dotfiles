@@ -1,0 +1,38 @@
+# show content that exceeds column width
+set truncate
+
+DEFINE_COLOR "fg" 255 255 255
+DEFINE_COLOR "bg" 0 0 0
+DEFINE_COLOR "axis_even_bg" 30 30 30
+DEFINE_COLOR "axis_odd_bg" 50 50 50
+DEFINE_COLOR "axis_selected_bg" 80 80 80
+DEFINE_COLOR "cell_selected_bg" 80 80 80
+
+color "type=DEFAULT fg=fg bg=bg"
+
+# axis
+color "type=HEADINGS       fg=fg bg=axis_even_bg"
+color "type=HEADINGS_ODD   fg=fg bg=axis_odd_bg"
+color "type=CELL_SELECTION fg=bg bg=axis_selected_bg"
+
+# cell
+color "type=CELL_SELECTION_SC fg=fg      bg=cell_selected_bg"
+color "type=NUMB              fg=CYAN    bg=DEFAULT_COLOR"
+color "type=STRG              fg=fg      bg=DEFAULT_COLOR"
+color "type=DATEF             fg=YELLOW  bg=DEFAULT_COLOR"
+color "type=EXPRESSION        fg=RED     bg=DEFAULT_COLOR"
+
+#color "type=GRID_EVEN fg=WHITE bg=DEFAULT_COLOR"
+#color "type=GRID_ODD fg=WHITE bg=DEFAULT_COLOR"
+#color "type=WELCOME fg=YELLOW bg=DEFAULT_COLOR"
+
+#color "type=INFO_MSG fg=CYAN bg=DEFAULT_COLOR"
+#color "type=ERROR_MSG fg=WHITE bg=RED"
+#color "type=MODE fg=WHITE bg=DEFAULT_COLOR"
+#color "type=CELL_ID fg=WHITE bg=DEFAULT_COLOR"
+#color "type=CELL_FORMAT fg=RED bg=DEFAULT_COLOR"
+#color "type=CELL_CONTENT fg=BLACK bg=DEFAULT_COLOR"
+#color "type=INPUT fg=WHITE bg=DEFAULT_COLOR"
+#color "type=NORMAL fg=BLACK bg=DEFAULT_COLOR"
+#color "type=CELL_ERROR fg=RED bg=DEFAULT_COLOR"
+#color "type=CELL_NEGATIVE fg=GREEN bg=DEFAULT_COLOR"

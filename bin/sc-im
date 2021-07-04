@@ -1,0 +1,4 @@
+#!/usr/bin/env zsh
+
+export TERM=xterm-256color
+exec /usr/local/bin/sc-im $@

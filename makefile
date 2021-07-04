@@ -2,7 +2,7 @@ SHELL := /bin/bash
 
 apps := $(CURDIR)/apps
 
-apps: aerc anki beets bspwm charles dbxcli docker exeditor electrum expo firefox gcloud git gh greenclip khal logview mitmproxy mycli ngrok npm pgp ranger ssh sxhkd tmux urlview vdirsyncer vim weechat xinput x11 xournalpp xscreensaver zoom zsh
+apps: aerc anki beets bspwm charles dbxcli docker exeditor electrum expo firefox gcloud git gh greenclip khal logview mitmproxy mycli ngrok npm pgp ranger sc-im ssh sxhkd tmux urlview vdirsyncer vim weechat xinput x11 xournalpp xscreensaver zoom zsh
 
 aerc:
 
@@ -180,6 +180,12 @@ ranger:
 	@mkdir -p ~/.config/ranger
 	@ln -fs "$(apps)/ranger/rc.conf" ~/.config/ranger/rc.conf
 	@ln -fs "$(apps)/ranger/rifle.conf" ~/.config/ranger/rifle.conf
+
+sc-im:
+
+	@echo "sc-im..."
+	@mkdir -p ~/.config/sc-im
+	@ln -fs "$(apps)/sc-im/scimrc" ~/.config/sc-im/scimrc
 
 ssh:
 
