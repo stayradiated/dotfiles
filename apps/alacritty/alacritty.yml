@@ -203,7 +203,7 @@ color_schemes:
       blue:    '#38c2e8'
       magenta: '#697fb1'
       cyan:    '#619e94'
-      white:   '#ace2f1'
+      white:   '#eeeeee'
     bright:
       black:   '#174954'
       red:     '#e9b3bf'
@@ -212,7 +212,7 @@ color_schemes:
       blue:    '#b5dbe4'
       magenta: '#b6cbfa'
       cyan:    '#a3d0c8'
-      white:   '#f7f8f8'
+      white:   '#ffffff'
 
 # Colors (Tomorrow Night Bright)
 colors: *termorrow_dark

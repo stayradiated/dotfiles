@@ -15,6 +15,11 @@ const log = (message) => {
 }
 
 switch (command) {
+  case 'test': {
+    log(`docker-compose exec -T app yarn run test`)
+    break
+  }
+
   case 'tidy': {
     log(`docker-compose exec -T app npx prettier --write ${args.join(' ')}`)
     break

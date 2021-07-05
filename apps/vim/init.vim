@@ -128,6 +128,9 @@ set hlsearch             " highlight search results
 set ignorecase           " case insensitive searching
 set smartcase            " override ignorecase if upper case typed
 
+" netrw-gx
+let g:netrw_browsex_viewer="xdg-open"
+
 " Colourscheme
 let g:pencil_terminal_italics=1
 let g:pencil_spell_undercurl=1
