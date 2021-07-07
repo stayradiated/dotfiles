@@ -10,11 +10,11 @@
   <property name="zoomStep" value="10.00000000"/>
   <property name="zoomStepScroll" value="2.00000000"/>
   <property name="displayDpi" value="155"/>
-  <property name="mainWndWidth" value="940"/>
+  <property name="mainWndWidth" value="1896"/>
   <property name="mainWndHeight" value="1176"/>
   <property name="maximized" value="false"/>
   <property name="showSidebar" value="false"/>
-  <property name="sidebarWidth" value="50"/>
+  <property name="sidebarWidth" value="179"/>
   <property name="sidebarOnRight" value="false"/>
   <property name="scrollbarOnLeft" value="false"/>
   <property name="menubarVisible" value="true"/>
@@ -41,9 +41,9 @@
   <property name="defaultSaveName" value="%F"/>
   <property name="autosaveEnabled" value="true"/>
   <property name="autosaveTimeout" value="3"/>
-  <property name="addHorizontalSpace" value="true"/>
+  <property name="addHorizontalSpace" value="false"/>
   <property name="addHorizontalSpaceAmount" value="150"/>
-  <property name="addVerticalSpace" value="true"/>
+  <property name="addVerticalSpace" value="false"/>
   <property name="addVerticalSpaceAmount" value="150"/>
   <property name="drawDirModsEnabled" value="false"/>
   <property name="drawDirModsRadius" value="50"/>
@@ -58,7 +58,7 @@
   <!--The count of rendered PDF pages which will be cached.-->
   <!--Config for new pages-->
   <property name="pdfPageCacheSize" value="10"/>
-  <property name="pageTemplate" value="xoj/template&#10;copyLastPageSettings=true&#10;size=595.275591x841.889764&#10;backgroundType=lined&#10;backgroundColor=#ffffff&#10;"/>
+  <property name="pageTemplate" value="xoj/template&#10;copyLastPageSize=false&#10;copyLastPageSettings=true&#10;size=510.236220x907.086614&#10;backgroundType=plain&#10;backgroundColor=#ffffffff&#10;"/>
   <property name="sizeUnit" value="cm"/>
   <property name="audioFolder" value=""/>
   <property name="audioInputDevice" value="-1"/>
@@ -110,6 +110,10 @@
       <attribute name="deviceClass" type="int" value="0"/>
       <attribute name="deviceSource" type="int" value="6"/>
     </data>
+    <data name="ELAN0672:00 04F3:3187 Mouse">
+      <attribute name="deviceClass" type="int" value="1"/>
+      <attribute name="deviceSource" type="int" value="0"/>
+    </data>
     <data name="ELAN0672:00 04F3:3187 Touchpad">
       <attribute name="deviceClass" type="int" value="0"/>
       <attribute name="deviceSource" type="int" value="6"/>
@@ -121,6 +125,10 @@
     <data name="TPPS/2 Elan TrackPoint">
       <attribute name="deviceClass" type="int" value="0"/>
       <attribute name="deviceSource" type="int" value="7"/>
+    </data>
+    <data name="Wacom Intuos S Pad">
+      <attribute name="deviceClass" type="int" value="-1"/>
+      <attribute name="deviceSource" type="int" value="8"/>
     </data>
     <data name="Wacom Intuos S Pad pad">
       <attribute name="deviceClass" type="int" value="0"/>
@@ -176,11 +184,11 @@
       <attribute name="drawingType" type="string" value="default"/>
     </data>
     <data name="pen">
-      <attribute name="color" type="hex" value="008000"/>
+      <attribute name="color" type="hex" value="00ff00"/>
       <attribute name="drawingType" type="string" value="default"/>
       <attribute name="fill" type="int" value="0"/>
       <attribute name="fillAlpha" type="int" value="160"/>
-      <attribute name="size" type="string" value="VERY_BIG"/>
+      <attribute name="size" type="string" value="MEDIUM"/>
       <attribute name="style" type="string" value="plain"/>
     </data>
     <data name="playObject">

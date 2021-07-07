@@ -68,6 +68,9 @@ alias :q='exit'
 # sc
 alias sc='sc-im'
 
+# custom scripts
+alias udns='update-dns'
+
 # bat
 alias cat='bat'
 
