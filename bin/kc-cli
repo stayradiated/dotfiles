@@ -1,0 +1,3 @@
+#!/usr/bin/env zsh
+
+node /home/admin/src/github.com/stayradiated/kc/kc-cli/dist/index.js --config /home/admin/dotfiles/apps/kiwi-coin/config.json.enc $@
