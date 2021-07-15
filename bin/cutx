@@ -1,0 +1,4 @@
+#!/usr/bin/env zsh
+
+width=$(tmux display-message -pt "$pane" -F '#{pane_width}')
+exec cut "-c1-${width}"

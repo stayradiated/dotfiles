@@ -1,5 +1,5 @@
 #!/usr/bin/env zsh
 #
-msg="Offline ($(date +'%D %T'))"
+msg="Not available ($(date +'%D %T'))"
 slack $msg ':x:'
 echo $msg

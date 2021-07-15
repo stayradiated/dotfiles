@@ -1,0 +1,3 @@
+#!/usr/bin/env zsh
+
+exec node /home/admin/src/github.com/Runn-Fast/hlog/dist/index.js $@
