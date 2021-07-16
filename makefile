@@ -2,7 +2,7 @@ SHELL := /bin/bash
 
 apps := $(CURDIR)/apps
 
-apps: aerc anki beets bspwm charles dbxcli docker exeditor electrum expo firefox gcloud git gh greenclip khal logview mitmproxy mycli ngrok npm pgp ranger sc-im ssh sxhkd tmux urlview vdirsyncer vim weechat xinput x11 xournalpp xscreensaver zoom zsh
+apps: aerc anki beets bspwm charles dbxcli docker exeditor electrum expo firefox gcloud git gh greenclip khal logview mitmproxy mycli ngrok npm pgcli pgp ranger sc-im ssh sxhkd tmux urlview vdirsyncer vim weechat xinput x11 xournalpp xscreensaver zoom zsh
 
 aerc:
 
@@ -165,6 +165,12 @@ npm:
 
 	@echo "npm..."
 	@ln -fs "$(apps)/npm/npmrc.enc" ~/.npmrc
+
+pgcli:
+
+	@echo "pgcli..."
+	@mkdir -p ~/.config/pgcli
+	@ln -fs "$(apps)/pgcli/config.enc" ~/.config/pgcli/config
 
 pgp:
 
