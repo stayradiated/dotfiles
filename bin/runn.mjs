@@ -83,47 +83,19 @@ switch (command) {
   }
 
   case 'graphql': {
-    const subcommand = args[0] ?? ''
-    switch (subcommand) {
-      case '': {
-        log(`docker-compose exec -T app yarn run graphql`)
-        break
-      }
-      case 'hasura': {
-        log(`docker-compose exec -T app yarn run graphql:hasura`)
-        break
-      }
-      case 'ruby': {
-        log(`docker-compose exec -T app yarn run graphql:ruby`)
-        break
-      }
-    }
+    log(`docker-compose exec -T app yarn run graphql`)
     break
   }
 
   case 'relay': {
-    const subcommand = args[0] ?? ''
-    switch (subcommand) {
-      case '': {
-        log(`docker-compose exec -T app yarn run relay`)
-        break
-      }
-      case 'hasura': {
-        log(`docker-compose exec -T app yarn run relay:hasura`)
-        break
-      }
-      case 'ruby': {
-        log(`docker-compose exec -T app yarn run relay:ruby`)
-        break
-      }
-    }
+    log(`docker-compose exec -T app yarn run relay`)
     break
   }
 
   case 'l':
   case 'logs': {
     const app = args[0] ?? ''
-    log(`docker-compose logs --tail 500 --follow ${app}`)
+    log(`docker-compose logs --no-log-prefix --tail 500 --follow ${app}`)
     break
   }
 
