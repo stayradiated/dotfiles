@@ -56,17 +56,6 @@ call dein#add('iamcco/markdown-preview.nvim', {
 call dein#add('stayradiated/vim-journal')
 call dein#add('sheerun/vim-polyglot')
 call dein#add('fcpg/vim-waikiki')
-" call dein#add('GutenYe/json5.vim')
-" call dein#add('pangloss/vim-javascript')
-" call dein#add('neoclide/vim-jsx-improve')
-" call dein#add('cespare/vim-toml')
-" call dein#add('elzr/vim-json')
-" call dein#add('fatih/vim-go')
-" call dein#add('jxnblk/vim-mdx-js')
-" call dein#add('kchmck/vim-coffee-script')
-" call dein#add('leafgarland/typescript-vim')
-" call dein#add('mxw/vim-prolog')
-" call dein#add('vim-crystal/vim-crystal')
 
 call dein#end()
 
@@ -363,6 +352,9 @@ autocmd FileType go setlocal ts=2 sw=2 sts=2
 
 " CSS
 autocmd BufNewFile,BufRead *.css set filetype=sass
+
+" Typescript
+autocmd BufNewFile,BufRead *.ts set includeexpr=substitute(v:fname,'\\.js$','.ts','g')
 
 " YAML
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
