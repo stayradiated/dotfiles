@@ -20,7 +20,7 @@ call dein#add('reedes/vim-colors-pencil')
 call dein#add('Shougo/denite.nvim')
 
 call dein#add('Shougo/deoplete.nvim')
-let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_at_startup = 0
 
 call dein#add('Shougo/neosnippet.vim')
 
@@ -51,6 +51,9 @@ call dein#add('dhruvasagar/vim-table-mode')
 call dein#add('iamcco/markdown-preview.nvim', {
   \'on_ft': ['markdown', 'pandoc.markdown', 'rmd'],
   \'build': 'sh -c "cd app & yarn install"' })
+
+" call dein#add('Quramy/tsuquyomi')
+call dein#add('neoclide/coc.nvim', {'rev': 'release'})
 
 " Languages
 call dein#add('stayradiated/vim-journal')

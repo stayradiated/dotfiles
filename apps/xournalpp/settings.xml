@@ -3,7 +3,7 @@
 <settings>
   <property name="pressureSensitivity" value="true"/>
   <property name="zoomGesturesEnabled" value="false"/>
-  <property name="selectedToolbar" value="Floating Toolbox (experimental) Copy"/>
+  <property name="selectedToolbar" value="Xournal++"/>
   <property name="lastSavePath" value="file:///home/admin/src/github.com/stayradiated/journal/private/scratchpad"/>
   <property name="lastOpenPath" value="/home/admin/src/github.com/stayradiated/journal/private/scratchpad"/>
   <property name="lastImagePath" value=""/>
@@ -14,7 +14,7 @@
   <property name="mainWndHeight" value="1176"/>
   <property name="maximized" value="false"/>
   <property name="showSidebar" value="false"/>
-  <property name="sidebarWidth" value="179"/>
+  <property name="sidebarWidth" value="50"/>
   <property name="sidebarOnRight" value="false"/>
   <property name="scrollbarOnLeft" value="false"/>
   <property name="menubarVisible" value="true"/>
@@ -76,7 +76,7 @@
   <property name="experimentalInputSystemEnabled" value="true"/>
   <property name="inputSystemTPCButton" value="false"/>
   <property name="inputSystemDrawOutsideWindow" value="true"/>
-  <property name="font" font="SF Pro Display" size="12.00000000"/>
+  <property name="font" font="SF Pro Display" size="4.00000000"/>
   <data name="buttonConfig">
     <data name="default">
       <attribute name="color" type="hex" value="ff000000"/>
@@ -152,7 +152,7 @@
     </data>
   </data>
   <data name="tools">
-    <attribute name="current" type="string" value="pen"/>
+    <attribute name="current" type="string" value="selectRegion"/>
     <data name="drawArrow">
       <attribute name="drawingType" type="string" value="default"/>
     </data>
@@ -174,9 +174,9 @@
       <attribute name="drawingType" type="string" value="default"/>
     </data>
     <data name="hilighter">
-      <attribute name="color" type="hex" value="00ff00"/>
-      <attribute name="drawingType" type="string" value="default"/>
-      <attribute name="fill" type="int" value="0"/>
+      <attribute name="color" type="hex" value="3333cc"/>
+      <attribute name="drawingType" type="string" value="rectangle"/>
+      <attribute name="fill" type="int" value="1"/>
       <attribute name="fillAlpha" type="int" value="84"/>
       <attribute name="size" type="string" value="MEDIUM"/>
     </data>
@@ -184,11 +184,11 @@
       <attribute name="drawingType" type="string" value="default"/>
     </data>
     <data name="pen">
-      <attribute name="color" type="hex" value="00ff00"/>
-      <attribute name="drawingType" type="string" value="default"/>
-      <attribute name="fill" type="int" value="0"/>
-      <attribute name="fillAlpha" type="int" value="160"/>
-      <attribute name="size" type="string" value="MEDIUM"/>
+      <attribute name="color" type="hex" value="ff00ff"/>
+      <attribute name="drawingType" type="string" value="rectangle"/>
+      <attribute name="fill" type="int" value="1"/>
+      <attribute name="fillAlpha" type="int" value="255"/>
+      <attribute name="size" type="string" value="BIG"/>
       <attribute name="style" type="string" value="plain"/>
     </data>
     <data name="playObject">
@@ -207,7 +207,7 @@
       <attribute name="drawingType" type="string" value="default"/>
     </data>
     <data name="text">
-      <attribute name="color" type="hex" value="000000"/>
+      <attribute name="color" type="hex" value="ffffff"/>
       <attribute name="drawingType" type="string" value="default"/>
     </data>
     <data name="verticalSpace">
