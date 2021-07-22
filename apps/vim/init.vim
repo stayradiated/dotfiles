@@ -150,9 +150,6 @@ if has('nvim')
   tnoremap <leader>e <c-\><c-n>
 endif
 
-" Comment JSX
-noremap j :TCommentAs jsx<CR>
-
 " Toggle fold
 nnoremap <leader><space> za
 
@@ -353,11 +350,9 @@ autocmd BufNewFile,BufRead *.mdx set filetype=javascript
 " Go
 autocmd FileType go setlocal ts=2 sw=2 sts=2
 
-" CSS
-autocmd BufNewFile,BufRead *.css set filetype=sass
-
 " Typescript
 autocmd BufNewFile,BufRead *.ts set includeexpr=substitute(v:fname,'\\.js$','.ts','g')
+autocmd BufNewFile,BufRead *.tsx let g:tcomment#filetype#guess_typescriptreact = 1
 
 " YAML
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
