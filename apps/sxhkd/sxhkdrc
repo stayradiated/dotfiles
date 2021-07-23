@@ -28,7 +28,7 @@ super + apostrophe
 
 # Move the focused window into the 'given' window
 super + y
-    bspc node -w last.manual
+    bspc node -n last.!automatic
 
 # Select a window or move a window
 super + {_,shift + }{h,j,k,l}
@@ -88,8 +88,11 @@ Print
 super + space
     rofi -show run -modi run,window,ssh -font 'SFMono 12' -terminal 'alacritty'
 
-super + c
+super + shift + y
     rofi -show clipboard -modi "clipboard:greenclip print" -run-command '{cmd}' -font 'SFMono 12'
+
+super + shift + slash
+    rofi -show calc -modi calc -no-show-match -no-sort
 
 # Audio 
 {XF86AudioLowerVolume,XF86AudioRaiseVolume}
@@ -100,13 +103,13 @@ super + shift + {comma,period}
     light -{U,A} 1
 
 # redshift
-super + shift + i
-    tempcolor -inc 3
-
-super + shift + e
+super + shift + braceleft
     tempcolor -dec 3
 
-super + shift + slash
+super + shift + braceright
+    tempcolor -inc 3
+
+super + shift + backslash
     tempcolor {5000,4000,3000,2000,1000,-x}
 
 # lock the screen
