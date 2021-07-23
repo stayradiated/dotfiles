@@ -9,5 +9,5 @@ TMP_DIR=$(mktemp -d 2>/dev/null || mktemp -d -t 'mytmpdir')
 
 cd $TMP_DIR
 ffmpeg -i "${INPUT}" -vf "fps=15" "frame%04d.png"
-gifski --fps 15 --quality 50 -o "${INPUT}.gif" frame*.png
+gifski --fps 20 --quality 80 -o "${INPUT}.gif" frame*.png
 rm -r $TMP_DIR

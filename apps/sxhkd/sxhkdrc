@@ -103,10 +103,10 @@ super + shift + {comma,period}
     light -{U,A} 1
 
 # redshift
-super + shift + braceleft
+super + shift + bracketleft
     tempcolor -dec 3
 
-super + shift + braceright
+super + shift + bracketright
     tempcolor -inc 3
 
 super + shift + backslash
