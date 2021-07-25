@@ -1,0 +1,9 @@
+#!/usr/bin/env zsh
+
+# sometimes after installing with apt
+# the font config gets reset
+
+cd /etc/fonts/conf.d/
+sudo rm 10* 70-no-bitmaps.conf
+sudo dpkg-reconfigure font-config
+fc-cache -fv
