@@ -15,6 +15,9 @@ super + {t,shift + t,s,f}
     bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
 
 # set the node flags
+# locked?
+# stick: always keep this window visible, even when switching desktops
+# private?
 super + ctrl + {x,y,z}
     bspc node -g {locked,sticky,private}
 
@@ -43,20 +46,20 @@ super + bracket{left,right}
     bspc desktop -f {prev,next}
 
 # Preselect a window half
-super + ctrl + {h,j,k,l}
+super + alt + {h,j,k,l}
     bspc node -p {west,south,north,east}
 
 # Cancel preselection
-super + ctrl + space
+super + alt + space
     bspc node -p cancel
 
 # Push window
 super + ctrl + {h,j,k,l}
-    bspc node -e {left -50,down +50,up -50,right +50}
+	bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
 
 # Pull window
 super + ctrl + shift + {h,j,k,l}
-    bspc node -e {right -50,up +50,down -50,left +50}
+	bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
 
 super + ctrl + {1-9}
     bspc node -r 0.{1-9}

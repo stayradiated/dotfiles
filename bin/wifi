@@ -1,10 +1,16 @@
 #!/usr/bin/env zsh
 
+# TODO: based on
+# https://gist.github.com/trygveaa/b52a9f365e1b36b0e31fa17b2bf0f1d3
+
 action=$1
 ssid=$2
 psk=$3
 
-if test "${action}" = "join"
+if test "${action}" = "status"
+then
+  as-host wpa_cli status
+elif test "${action}" = "join"
 then
   id=$(as-host wpa_cli add_network | tail -n 1)
   echo $id
