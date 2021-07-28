@@ -2,7 +2,14 @@ SHELL := /bin/bash
 
 apps := $(CURDIR)/apps
 
-apps: aerc anki beets bspwm charles dbxcli docker exeditor electrum expo firefox gcloud git gh greenclip khal logview mitmproxy mycli ngrok npm pgcli pgp ranger sc-im ssh sxhkd tmux urlview vdirsyncer vim weechat xinput x11 xournalpp xscreensaver zoom zsh
+apps: 1password aerc anki beets bspwm charles dbxcli docker exeditor electrum expo firefox gcloud git gh greenclip khal logview mitmproxy mycli ngrok npm pgcli pgp ranger sc-im ssh sxhkd tmux urlview vdirsyncer vim weechat xinput x11 xournalpp xscreensaver zoom zsh
+
+1password:
+
+	@echo "1password..."
+	@mkdir -p ~/.config/1Password/settings
+	@ln -fs "$(apps)/1password/settings.json.enc" ~/.config/1Password/settings/settings.json
+	@ln -fs "$(apps)/1password/1password.sqlite.enc" ~/.config/1Password/1password.sqlite
 
 aerc:
 

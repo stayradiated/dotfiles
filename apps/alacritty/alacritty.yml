@@ -91,22 +91,22 @@
 font:
   # Normal (roman) font face
   normal:
-    family: gomme
+    family: monospace
     style: Regular
 
   # Bold font face
   bold:
-    family: gomme
+    family: monospace
     style: Bold
 
   # Bold italic font face
   #bold_italic:
-    family: gomme
+    family: monospace
     style: Regular
 
   # The italic font face
   italic:
-    family: gomme
+    family: monospace
     style: Regular
 
   # Point size
