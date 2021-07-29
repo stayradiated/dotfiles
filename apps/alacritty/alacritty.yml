@@ -91,22 +91,22 @@
 font:
   # Normal (roman) font face
   normal:
-    family: monospace
+    family: mono
     style: Regular
 
   # Bold font face
   bold:
-    family: monospace
+    family: mono
     style: Bold
 
   # Bold italic font face
   #bold_italic:
-    family: monospace
+    family: mono
     style: Regular
 
   # The italic font face
   italic:
-    family: monospace
+    family: mono
     style: Regular
 
   # Point size
