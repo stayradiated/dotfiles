@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+# Wrapper for `nvr` Python script that checks to see if the session/window nvim
+# server is running, and switches to that instance of nvim if it is.
+
+if [[ -n "$TMUX" ]] && command -v nvr > /dev/null; then
+    # Use environment variable, otherwise fall back to nvr default
+    nvimsock="${NVIM_LISTEN_ADDRESS:-/tmp/nvimsocket}"
+    # Check for running nvim servers using nvr
+    # Prefer using `nvr` over [[ -S "$nvimsock" ]] to guarantee that anything
+    # found at $nvimsock is in fact an nvim socket, rather than something else
+    for sock in $(command nvr --serverlist); do
+        # Check that we've found the right nvim server
+        if [[ "$sock" = "$nvimsock" ]]; then
+            # Use nvr to get the tmux pane_id
+            pane_id="$(command nvr --remote-expr 'get(environ(), "TMUX_PANE")')"
+            if [[ -n "$pane_id" ]]; then
+                # Activate the pane containing our nvim server
+                command tmux select-pane -t"$pane_id"
+                # Find the window containing $pane_id
+                window_id="$(command tmux list-panes -s -F '#{window_id}' -f "#{m:$pane_id,#{pane_id}}")"
+                # Activate the window
+                [[ -n "$window_id" ]] && command tmux select-window -t"$window_id"
+            fi
+            break
+        fi
+    done
+fi
+
+# Run nvr
+command nvr "$@"
