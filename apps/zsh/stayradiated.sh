@@ -10,12 +10,6 @@ export GOROOT=/usr/local/go
 
 export GPG_TTY=$(tty)
 
-if [ -n "$TMUX" ]; then
-    eval "$(tmux show-environment -s NVIM_LISTEN_ADDRESS)"
-else
-    export NVIM_LISTEN_ADDRESS=/tmp/nvimsocket
-fi
-
 #
 # Editors
 #
@@ -66,9 +60,9 @@ alias celar='clear'
 alias node='node --experimental-repl-await'
 
 # vim
-alias vi='nvim'
-alias vim='nvim'
-alias :e='nvim'
+alias vi='nvr'
+alias vim='nvr'
+alias :e='nvr'
 alias :q='exit'
 
 # sc
@@ -88,15 +82,15 @@ alias gup='git push -u origin HEAD'
 
 # journal shortcuts
 alias jj='cd $(journal-utils --root)'
-alias jd='nvim $(journal-utils --day)'
-alias jw='nvim $(journal-utils --week)'
-alias jlbo='nvim $(journal-utils --list books)'
-alias jlmo='nvim $(journal-utils --list movies)'
-alias jlmu='nvim $(journal-utils --list music)'
-alias jlwi='nvim $(journal-utils --list wishlist)'
-alias jlyt='nvim $(journal-utils --list youtube)'
+alias jd='nvr $(journal-utils --day)'
+alias jw='nvr $(journal-utils --week)'
+alias jlbo='nvr $(journal-utils --list books)'
+alias jlmo='nvr $(journal-utils --list movies)'
+alias jlmu='nvr $(journal-utils --list music)'
+alias jlwi='nvr $(journal-utils --list wishlist)'
+alias jlyt='nvr $(journal-utils --list youtube)'
 
-alias jwifi='nvim $(journal-utils --root)/private/wifi.txt'
+alias jwifi='nvr $(journal-utils --root)/private/wifi.txt'
 
 # tmux
 alias tm='tmux list-sessions && tmux attach -d || tmux new-session'
