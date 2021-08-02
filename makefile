@@ -248,11 +248,8 @@ tmux:
 
 	@echo "tmux..."
 	@ln -fs "$(apps)/tmux/tmux.conf" ~/.tmux.conf
-	@if test ! -d ~/.tmux/plugins/tmux-nvr; then\
-		mkdir -p ~/.tmux/plugins;\
-		git clone https://github.com/carlocab/tmux-nvr ~/.tmux/plugins/tmux-nvr;\
-	fi;
 	@if test ! -d ~/.tmux/plugins/tpm; then\
+		mkdir -p ~/.tmux/plugins;\
 		git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm;\
 		~/.tmux/plugins/tpm/bin/install_plugins;\
 	fi;
