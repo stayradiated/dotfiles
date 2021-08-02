@@ -53,6 +53,12 @@ call dein#add('iamcco/markdown-preview.nvim', {
   \'on_ft': ['markdown', 'pandoc.markdown', 'rmd'],
   \'build': 'sh -c "cd app & yarn install"' })
 
+let g:coc_global_extensions = [
+\ 'coc-json',
+\ 'coc-tsserver',
+\ 'coc-git',
+\ ]
+
 " call dein#add('Quramy/tsuquyomi')
 call dein#add('neoclide/coc.nvim', {'rev': 'release'})
 

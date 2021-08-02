@@ -65,8 +65,9 @@ alias node='node --experimental-repl-await'
 
 # vim
 alias vi='nvr --nostart'
-alias vim='nvr --nostart'
-alias :e='nvr --nostart'
+alias vim='vi'
+alias nvi='nvim'
+alias :e='vi'
 alias :q='exit'
 
 # sc
@@ -86,13 +87,13 @@ alias gup='git push -u origin HEAD'
 
 # journal shortcuts
 alias jj='cd $(journal-utils --root)'
-alias jd='vi $(journal-utils --day)'
-alias jw='vi $(journal-utils --week)'
-alias jlbo='vi $(journal-utils --list books)'
-alias jlmo='vi $(journal-utils --list movies)'
-alias jlmu='vi $(journal-utils --list music)'
-alias jlwi='vi $(journal-utils --list wishlist)'
-alias jlyt='vi $(journal-utils --list youtube)'
+alias jd='nvi $(journal-utils --day)'
+alias jw='nvi $(journal-utils --week)'
+alias jlbo='nvi $(journal-utils --list books)'
+alias jlmo='nvi $(journal-utils --list movies)'
+alias jlmu='nvi $(journal-utils --list music)'
+alias jlwi='nvi $(journal-utils --list wishlist)'
+alias jlyt='nvi $(journal-utils --list youtube)'
 
 alias jwifi='vi $(journal-utils --root)/private/wifi.txt'
 
