@@ -10,6 +10,10 @@ export GOROOT=/usr/local/go
 
 export GPG_TTY=$(tty)
 
+# coc.nvim config
+export NODE_CLIENT_LOG_FILE=/tmp/coc-nod-client.log
+export NVIM_COC_LOG_FILE=/tmp/coc-nvim.log
+
 #
 # Editors
 #
@@ -60,9 +64,9 @@ alias celar='clear'
 alias node='node --experimental-repl-await'
 
 # vim
-alias vi='nvr'
-alias vim='nvr'
-alias :e='nvr'
+alias vi='nvr --nostart'
+alias vim='nvr --nostart'
+alias :e='nvr --nostart'
 alias :q='exit'
 
 # sc
@@ -82,15 +86,15 @@ alias gup='git push -u origin HEAD'
 
 # journal shortcuts
 alias jj='cd $(journal-utils --root)'
-alias jd='nvr $(journal-utils --day)'
-alias jw='nvr $(journal-utils --week)'
-alias jlbo='nvr $(journal-utils --list books)'
-alias jlmo='nvr $(journal-utils --list movies)'
-alias jlmu='nvr $(journal-utils --list music)'
-alias jlwi='nvr $(journal-utils --list wishlist)'
-alias jlyt='nvr $(journal-utils --list youtube)'
+alias jd='vi $(journal-utils --day)'
+alias jw='vi $(journal-utils --week)'
+alias jlbo='vi $(journal-utils --list books)'
+alias jlmo='vi $(journal-utils --list movies)'
+alias jlmu='vi $(journal-utils --list music)'
+alias jlwi='vi $(journal-utils --list wishlist)'
+alias jlyt='vi $(journal-utils --list youtube)'
 
-alias jwifi='nvr $(journal-utils --root)/private/wifi.txt'
+alias jwifi='vi $(journal-utils --root)/private/wifi.txt'
 
 # tmux
 alias tm='tmux list-sessions && tmux attach -d || tmux new-session'
