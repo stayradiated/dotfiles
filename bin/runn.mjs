@@ -82,6 +82,17 @@ switch (command) {
     break
   }
 
+  case 'export': {
+    const subcommand = args[0] ?? ''
+    switch (subcommand) {
+      case 'hasura': {
+        log('yarn run hasura:export')
+        break
+      }
+    }
+    break
+  }
+
   case 'graphql': {
     log(`docker-compose exec -T app yarn run graphql`)
     break
