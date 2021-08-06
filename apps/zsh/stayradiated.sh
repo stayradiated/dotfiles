@@ -95,7 +95,7 @@ alias jlmu='nvi $(journal-utils --list music)'
 alias jlwi='nvi $(journal-utils --list wishlist)'
 alias jlyt='nvi $(journal-utils --list youtube)'
 
-alias jwifi='vi $(journal-utils --root)/private/wifi.txt'
+alias jwifi='nvi $(journal-utils --root)/private/wifi.txt'
 
 # tmux
 alias tm='tmux list-sessions && tmux attach -d || tmux new-session'
