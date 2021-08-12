@@ -1,0 +1,7 @@
+#!/usr/bin/env zsh
+
+exec /home/admin/src/github.com/stayradiated/shark/api/api \
+  -client /home/admin/src/github.com/stayradiated/shark/web/build \
+  -db /home/admin/src/github.com/stayradiated/shark/api/shark.db \
+  -tracks /home/admin/shark
+  
