@@ -99,7 +99,7 @@ super + shift + slash
 
 # Audio 
 {XF86AudioLowerVolume,XF86AudioRaiseVolume}
-    amixer sset PCM 1{-,+} --quiet
+    amixer sset Master 1{-,+} --quiet
 
 # backlight
 super + shift + {comma,period}
