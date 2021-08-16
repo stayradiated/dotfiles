@@ -89,13 +89,13 @@ Print
 
 # Launch dmenu
 super + space
-    rofi -show run -modi run,window,ssh -font 'SFMono 12' -terminal 'alacritty'
+    rofi -show run -modi run,window,ssh -font 'SFMono 12' -terminal 'alacritty' -location 6
 
 super + shift + y
-    rofi -show clipboard -modi "clipboard:greenclip print" -run-command '{cmd}' -font 'SFMono 12'
+    rofi -show clipboard -modi "clipboard:greenclip print" -run-command '{cmd}' -font 'SFMono 12' -location 6
 
 super + shift + slash
-    rofi -show calc -modi calc -no-show-match -no-sort
+    rofi -show calc -modi calc -no-show-match -no-sort -font 'SFMono 12' -location 6
 
 # Audio 
 {XF86AudioLowerVolume,XF86AudioRaiseVolume}
