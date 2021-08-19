@@ -1,5 +1,7 @@
 #!/usr/bin/env zsh
 
+as-host sudo sv restart udevmon
+
 setxkbmap us \
   -variant colemak \
   -option ctrl:nocaps \
