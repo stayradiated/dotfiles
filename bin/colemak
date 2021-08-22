@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-as-host sudo sv restart udevmon
+as-host sudo /root/sudoscripts/sv-restart-udevmon.sh
 
 setxkbmap us \
   -variant colemak \
