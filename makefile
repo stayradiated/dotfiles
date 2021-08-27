@@ -207,36 +207,18 @@ ssh:
 	@ln -fs "$(apps)/ssh/config.enc" ~/.ssh/config
 	@ln -fs "$(apps)/ssh/known_hosts" ~/.ssh/known_hosts
 
-	@ln -fs "$(apps)/ssh/bastion.enc" ~/.ssh/bastion
-	@chmod 600 ~/.ssh/bastion
+	@for file in $(apps)/ssh/*.enc; do\
+		name=$$(basename --suffix=.enc $$file);\
+		ln -fs $$file ~/.ssh/$$name;\
+		chmod 600 ~/.ssh/$$name;\
+		echo "🔑 $$name";\
+	done
 
-	@ln -fs "$(apps)/ssh/datacrunch.enc" ~/.ssh/datacrunch
-	@ln -fs "$(apps)/ssh/datacrunch.pub" ~/.ssh/datacrunch.pub
-	@chmod 600 ~/.ssh/datacrunch
-
-	@ln -fs "$(apps)/ssh/george.enc" ~/.ssh/george
-	@ln -fs "$(apps)/ssh/george.pub" ~/.ssh/george.pub
-	@chmod 600 ~/.ssh/george
-
-	@ln -fs "$(apps)/ssh/github.enc" ~/.ssh/github
-	@ln -fs "$(apps)/ssh/github.pub" ~/.ssh/github.pub
-	@chmod 600 ~/.ssh/github
-
-	@ln -fs "$(apps)/ssh/hetzner.enc" ~/.ssh/hetzner
-	@ln -fs "$(apps)/ssh/hetzner.pub" ~/.ssh/hetzner.pub
-	@chmod 600 ~/.ssh/hetzner
-
-	@ln -fs "$(apps)/ssh/id_rsa.enc" ~/.ssh/id_rsa
-	@ln -fs "$(apps)/ssh/id_rsa.pub" ~/.ssh/id_rsa.pub
-	@chmod 600 ~/.ssh/id_rsa
-
-	@ln -fs "$(apps)/ssh/merrytired.enc" ~/.ssh/merrytired
-	@ln -fs "$(apps)/ssh/merrytired.pub" ~/.ssh/merrytired.pub
-	@chmod 600 ~/.ssh/merrytired
-
-	@ln -fs "$(apps)/ssh/sshkey.enc" ~/.ssh/sshkey
-	@ln -fs "$(apps)/ssh/sshkey.pub" ~/.ssh/sshkey.pub
-	@chmod 600 ~/.ssh/sshkey
+	@for file in $(apps)/ssh/*.pub; do\
+		name=$$(basename $$file);\
+		ln -fs $$file ~/.ssh/$$name;\
+		echo "🔒 $$name";\
+	done
 
 sxhkd:
 
