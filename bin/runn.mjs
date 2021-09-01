@@ -20,8 +20,17 @@ switch (command) {
     break
   }
 
-  case 'tidy': {
-    log(`docker-compose exec -T app npx prettier --write ${args.join(' ')}`)
+  case 'fmt': {
+    if (args.length > 0) {
+      log(`docker-compose exec -T app npx prettier --write ${args.join(' ')}`)
+    } else {
+      log(`docker-compose exec -T app yarn run fmt`)
+    }
+    break
+  }
+
+  case 'lint': {
+    log(`docker-compose exec -T app yarn run lint`)
     break
   }
 

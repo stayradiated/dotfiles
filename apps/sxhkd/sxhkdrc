@@ -14,12 +14,16 @@ super + m
 super + {t,shift + t,s,f}
     bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
 
-# set the node flags
-# locked?
-# stick: always keep this window visible, even when switching desktops
-# private?
-super + ctrl + {x,y,z}
-    bspc node -g {locked,sticky,private}
+# locked: prevent window from being closed (can still be killed)
+super + ctrl + x
+    bspc node -g locked
+
+# always keep this window visible, even when switching desktops
+super + ctrl + y
+    bspc node -g sticky
+
+super + ctrl + z
+    bspc node -g private
 
 # Tab between the last used window or workspace
 super + {Tab,grave}

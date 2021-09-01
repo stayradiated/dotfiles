@@ -49,7 +49,14 @@ KEYTIMEOUT=1
 # z.lua
 export _ZL_DATA="${HOME}/dotfiles/apps/zsh/state/zlua.enc"
 eval "$(lua5.3 /usr/local/bin/z.lua --init zsh)"
-alias j='z'
+alias zz='z -i'
+alias zc='z -c'
+alias zf='z -I'
+alias zb='z -b'
+alias zbi='z -b -i'
+alias zbf='z -b -I'
+alias zh='z -I -t .'
+alias zzc='zz -c'
 
 # watson
 export WATSON_DIR="${HOME}/dotfiles/apps/watson"
