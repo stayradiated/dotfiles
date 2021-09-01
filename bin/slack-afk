@@ -1,5 +1,7 @@
 #!/usr/bin/env zsh
 
+set -euo pipefail
+
 msg="Away from my laptop, will be back online later today ($(date +'%D %T'))"
 slack $msg ':walking:'
 echo $msg

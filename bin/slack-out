@@ -1,0 +1,7 @@
+#!/usr/bin/env zsh
+
+set -euo pipefail
+
+msg="Taking a break to exercise, will be back soon ($(date +'%D %T'))"
+slack $msg ':man-running:'
+echo $msg

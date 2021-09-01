@@ -1,5 +1,7 @@
 #!/usr/bin/env zsh
 
+set -euo pipefail
+
 source "${HOME}/dotfiles/apps/slack/token.enc"
 
 function setSlackStatus () {

@@ -1,5 +1,7 @@
 #!/usr/bin/env zsh
 
+set -euo pipefail
+
 msg="Available, working from ${1} ($(date +'%D %T'))"
 slack $msg ':smile:'
 echo $msg
