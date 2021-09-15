@@ -310,6 +310,9 @@ endif
 " Functions
 " ------------------------------------------------------------------------------
 
+" https://vi.stackexchange.com/a/2107
+command! -bar -range=% Reverse <line1>,<line2>global/^/m<line1>-1
+
 function! ClipboardYank()
   if has('mac')
     call system('pbcopy', @@)

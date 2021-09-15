@@ -34,6 +34,7 @@ switch (command) {
     break
   }
 
+  case 'tsc':
   case 'build': {
     log(`docker-compose exec -T app yarn run tsc --pretty ${args.join(' ')}`)
     break
@@ -45,12 +46,14 @@ switch (command) {
     break
   }
 
+  case 'up':
   case 'start': {
     const app = args[0] ?? ''
     log(`docker-compose up --detach --remove-orphans ${app}`)
     break
   }
 
+  case 'down':
   case 'stop': {
     const app = args[0] ?? ''
     log(`docker-compose stop --time 0 ${app}`)
@@ -68,6 +71,10 @@ switch (command) {
     break
   }
 
+  case 'rake': {
+    log(`docker-compose exec -T app rake ${args.join(' ')}`)
+  }
+
   case 'db': {
     const subcommand = args[0] ?? ''
     switch (subcommand) {
@@ -80,6 +87,7 @@ switch (command) {
         break
       }
       case 'rebuild': {
+        log(`docker-compose exec -T app rails db:environment:set RAILS_ENV=development;`)
         log(`docker-compose exec -T app rake db:drop db:create db:migrate && docker-compose exec -T app rake db:seed`)
         break
       }

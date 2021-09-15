@@ -41,7 +41,7 @@ fi
 # Settings
 #
 
-export TZ='Pacific/Auckland'
+export TZ='Europe/London'
 
 # don't lag when switching between insert/normal mode
 KEYTIMEOUT=1
