@@ -82,13 +82,24 @@ switch (command) {
         log(`docker-compose exec -T app rake db:migrate`)
         break
       }
-      case 'seed': {
+      case 'seed:small': {
         log(`docker-compose exec -T app rake db:seed`)
         break
       }
+      case 'seed:large': {
+        log(`
+          docker-compose exec -T app rake db:drop db:create &&
+          docker-compose exec -T postgres pg_restore -U postgres -d runn_development /app/runn_large_db.dump &&
+          docker-compose exec -T app rake db:migrate
+        `)
+        break
+      }
       case 'rebuild': {
-        log(`docker-compose exec -T app rails db:environment:set RAILS_ENV=development;`)
-        log(`docker-compose exec -T app rake db:drop db:create db:migrate && docker-compose exec -T app rake db:seed`)
+        log(`
+          docker-compose exec -T app rails db:environment:set RAILS_ENV=development &&
+          docker-compose exec -T app rake db:drop db:create db:migrate &&
+          docker-compose exec -T app rake db:seed
+        `)
         break
       }
       case 'pgcli': {
