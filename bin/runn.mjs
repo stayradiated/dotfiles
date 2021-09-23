@@ -14,9 +14,27 @@ const log = (message) => {
   console.log(message.replace(/\n/g, ' '))
 }
 
+const fail = (message) => {
+  console.log(message)
+  process.exit(1)
+}
+
 switch (command) {
   case 'test': {
     log(`docker-compose exec -T app yarn run test`)
+    break
+  }
+
+  case 'test:rspec': {
+    log(`docker-compose exec -T app yarn run rspec ${args.join(' ')}`)
+    break
+  }
+
+  case 'test:rails': {
+    log(`
+      docker-compose exec -T app rake db:migrate RAILS_ENV=test &&
+      docker-compose exec -T app yarn run rake-test TESTOPTS="-v"
+    `)
     break
   }
 
@@ -49,7 +67,10 @@ switch (command) {
   case 'up':
   case 'start': {
     const app = args[0] ?? ''
-    log(`docker-compose up --detach --remove-orphans ${app}`)
+    log(`
+      docker-compose up --detach --remove-orphans ${app} &&
+      docker-compose logs --tail 500 --follow ${app}
+    `)
     break
   }
 
@@ -86,10 +107,32 @@ switch (command) {
         log(`docker-compose exec -T app rake db:seed`)
         break
       }
-      case 'seed:large': {
+      case 'seed:enterprise': {
+        log(`docker-compose exec -T app rake db:seed_enterprise_team`)
+        break
+      }
+      case 'dump': {
+        const filename = args[1]
+        if (!filename) {
+          fail('You must specify a filename')
+        }
+        log(`
+          docker-compose exec -T postgres pg_dump
+            --username postgres
+            --dbname runn_development
+            --format custom
+            --file /app/${filename}
+        `)
+        break
+      }
+      case 'restore': {
+        const filename = args[1]
+        if (!filename) {
+          fail('You must specify a filename')
+        }
         log(`
           docker-compose exec -T app rake db:drop db:create &&
-          docker-compose exec -T postgres pg_restore -U postgres -d runn_development /app/runn_large_db.dump &&
+          docker-compose exec -T postgres pg_restore -U postgres -d runn_development /app/${filename} &&
           docker-compose exec -T app rake db:migrate
         `)
         break

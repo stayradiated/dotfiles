@@ -48,15 +48,26 @@ KEYTIMEOUT=1
 
 # z.lua
 export _ZL_DATA="${HOME}/dotfiles/apps/zsh/state/zlua.enc"
+
+# z foo       # cd to most frecent dir matching foo
+# z foo bar   # cd to most frecent dir matching foo and bar
 eval "$(lua5.3 /usr/local/bin/z.lua --init zsh)"
-alias zz='z -i'
-alias zc='z -c'
-alias zf='z -I'
+
+# z -r foo    # cd to highest ranked dir matching foo
+# z -t foo    # cd to most recently accessed dir matching foo
+# z -l foo    # list matches instead of cd
+# z -c foo    # restrict matches to subdirs of $PWD
+# z -e foo    # echo the best match, don't cd
+# z -x path   # remove path from history
+# z -i foo    # cd with interactive selection
+# z -I foo    # cd with interactive selection using fzf
+# z -b foo    # cd to the parent directory starting with foo
+
+alias zz='z -I -t'
 alias zb='z -b'
-alias zbi='z -b -i'
-alias zbf='z -b -I'
-alias zh='z -I -t .'
-alias zzc='zz -c'
+alias zc='z -c'
+
+alias zj='cd $(journal-utils --root)'
 
 # watson
 export WATSON_DIR="${HOME}/dotfiles/apps/watson"
@@ -92,8 +103,8 @@ alias ping='prettyping --nolegend'
 # git
 alias gup='git push -u origin HEAD'
 
+
 # journal shortcuts
-alias jj='cd $(journal-utils --root)'
 alias jd='nvi $(journal-utils --day)'
 alias jw='nvi $(journal-utils --week)'
 alias jlbo='nvi $(journal-utils --list books)'
@@ -101,7 +112,6 @@ alias jlmo='nvi $(journal-utils --list movies)'
 alias jlmu='nvi $(journal-utils --list music)'
 alias jlwi='nvi $(journal-utils --list wishlist)'
 alias jlyt='nvi $(journal-utils --list youtube)'
-
 alias jwifi='nvi $(journal-utils --root)/private/wifi.txt'
 
 # tmux

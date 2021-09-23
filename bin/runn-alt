@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -euxo pipefail
+
 cd /home/admin/src/github.com/Runn-Fast/runn-alt
 command=$(zx ~/dotfiles/bin/runn.mjs $@)
 echo $command
