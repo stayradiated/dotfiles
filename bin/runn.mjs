@@ -48,7 +48,20 @@ switch (command) {
   }
 
   case 'lint': {
-    log(`docker-compose exec -T app yarn run lint`)
+    const subcommand = args[0] ?? ''
+    switch (subcommand) {
+      case 'js': {
+        log(`docker-compose exec -T app yarn run lint`)
+        break
+      }
+      case 'ruby': {
+        log(`
+          docker-compose exec -T app yarn run erb-lint-correct
+          && docker-compose exec -T app yarn run rubocop
+        `)
+        break
+      }
+    }
     break
   }
 
