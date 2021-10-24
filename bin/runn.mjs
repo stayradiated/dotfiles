@@ -50,8 +50,16 @@ switch (command) {
   case 'lint': {
     const subcommand = args[0] ?? ''
     switch (subcommand) {
-      case 'js': {
-        log(`docker-compose exec -T app yarn run lint`)
+      case 'app': {
+        log(`docker-compose exec -T app yarn run lint:app --fix`)
+        break
+      }
+      case 'cypress': {
+        log(`docker-compose exec -T app yarn run lint:cypress --fix`)
+        break
+      }
+      case 'file': {
+        log(`docker-compose exec -T app yarn run eslint --fix ${args.slice(1).join(' ')}`)
         break
       }
       case 'ruby': {
