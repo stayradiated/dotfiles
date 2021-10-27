@@ -186,12 +186,12 @@ switch (command) {
   }
 
   case 'graphql': {
-    log(`docker-compose exec -T app yarn run graphql`)
+    log(`docker-compose exec -T app yarn run hasura:graphql`)
     break
   }
 
   case 'relay': {
-    log(`docker-compose exec -T app yarn run relay`)
+    log(`docker-compose exec -T app yarn run hasura:relay`)
     break
   }
 

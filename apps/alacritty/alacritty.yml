@@ -91,22 +91,22 @@
 font:
   # Normal (roman) font face
   normal:
-    family: gomme
+    family: SF Mono
     style: Regular
 
   # Bold font face
   bold:
-    family: gomme
+    family: SF Mono
     style: Bold
 
   # Bold italic font face
   #bold_italic:
-    family: gomme
+    family: SF Mono
     style: Regular
 
   # The italic font face
   italic:
-    family: gomme
+    family: SF Mono
     style: Regular
 
   # Point size
@@ -215,7 +215,7 @@ color_schemes:
       white:   '#ffffff'
 
 # Colors (Tomorrow Night Bright)
-colors: *termorrow_dark
+colors: *high_contrast
   # Default colors
   #primary:
   #  background: '#000000'
