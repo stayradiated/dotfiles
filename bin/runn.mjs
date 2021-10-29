@@ -120,6 +120,10 @@ switch (command) {
   case 'db': {
     const subcommand = args[0] ?? ''
     switch (subcommand) {
+      case 'create-migration': {
+        log(`docker-compose exec -T app rails generate migration ${args[1]}`)
+        break
+      }
       case 'migrate': {
         log(`docker-compose exec -T app rake db:migrate`)
         break
