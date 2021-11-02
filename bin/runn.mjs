@@ -38,6 +38,11 @@ switch (command) {
     break
   }
 
+  case 'build:prod': {
+    log(`docker-compose exec -T app yarn run bundle-webpack`)
+    break
+  }
+
   case 'fmt': {
     if (args.length > 0) {
       log(`docker-compose exec -T app npx prettier --write ${args.join(' ')}`)
