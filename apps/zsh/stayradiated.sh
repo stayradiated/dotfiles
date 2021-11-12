@@ -88,6 +88,9 @@ alias nvi='nvim'
 alias :e='vi'
 alias :q='exit'
 
+# rg
+alias rgf='rg -F'
+
 # sc
 alias sc='sc-im'
 
