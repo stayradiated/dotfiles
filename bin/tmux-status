@@ -7,7 +7,7 @@ PROJECT=$(echo "${PROJECT}" | sed 's/No project started.//g')
 
 ELAPSED=$(watson status --elapsed | sed 's/No project started.//g')
 
-TOTAL=$(watson log --day --current | head -n 1 | rg -o '\(.+\)' | sed 's/[()]//g')
+TOTAL=$(watson log --day --current --project "${PROJECT}" | head -n 1 | rg -o '\(.+\)' | sed 's/[()]//g')
 
 BATTERY=$(acpi -b | tail -n 1 | rg -o '\w+, \d+%')
 BATTERY=$(echo "${BATTERY}" | sed 's/Discharging,\s*/#[fg=colour1]▼/')
