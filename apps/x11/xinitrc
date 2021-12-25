@@ -1,5 +1,9 @@
 # use colemak
-setxkbmap us -variant colemak -option ctrl:nocaps -option altwin:swap_alt_win
+setxkbmap us \
+  -variant colemak \
+  -option ctrl:nocaps \
+  -option altwin:swap_alt_win \
+  -option compose:ralt
 
 # set background colour based on battery level
 (
