@@ -26,7 +26,10 @@ switch (command) {
   }
 
   case 'test:rspec': {
-    log(`docker-compose exec -T app yarn run rspec ${args.join(' ')}`)
+    log(`
+      docker-compose exec -T app rake db:migrate RAILS_ENV=test &&
+      docker-compose exec -T app yarn run rspec ${args.join(' ')}
+    `)
     break
   }
 
@@ -135,6 +138,10 @@ switch (command) {
       }
       case 'seed:small': {
         log(`docker-compose exec -T app rake db:seed`)
+        break
+      }
+      case 'reset': {
+        log(`docker-compose exec -T app rake db:drop db:create`)
         break
       }
       case 'seed:enterprise': {
