@@ -20,6 +20,11 @@ const fail = (message) => {
 }
 
 switch (command) {
+  case 'shell': {
+    log(`docker-compose exec app sh`)
+    break
+  }
+
   case 'test': {
     log(`docker-compose exec -T app yarn run test`)
     break
@@ -136,6 +141,10 @@ switch (command) {
         log(`docker-compose exec -T app rake db:migrate`)
         break
       }
+      case 'seed:minimal': {
+        log(`docker-compose exec -T app rake db:seed_minimal_team`)
+        break
+      }
       case 'seed:small': {
         log(`docker-compose exec -T app rake db:seed`)
         break
@@ -158,6 +167,19 @@ switch (command) {
             --username postgres
             --dbname runn_development
             --format custom
+            --file /app/${filename}
+        `)
+        break
+      }
+      case 'dump:sql': {
+        const filename = args[1]
+        if (!filename) {
+          fail('You must specify a filename')
+        }
+        log(`
+          docker-compose exec -T postgres pg_dump
+            --username postgres
+            --dbname runn_development
             --file /app/${filename}
         `)
         break
