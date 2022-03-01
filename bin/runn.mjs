@@ -141,20 +141,16 @@ switch (command) {
         log(`docker-compose exec -T app rake db:migrate`)
         break
       }
-      case 'seed:minimal': {
-        log(`docker-compose exec -T app rake db:seed_minimal_team`)
+      case 'reset': {
+        log(`docker-compose exec -T app rake db:drop db:create db:migrate`)
         break
       }
-      case 'seed:small': {
+      case 'seed': {
         log(`docker-compose exec -T app rake db:seed`)
         break
       }
-      case 'reset': {
-        log(`docker-compose exec -T app rake db:drop db:create`)
-        break
-      }
-      case 'seed:enterprise': {
-        log(`docker-compose exec -T app rake db:seed_enterprise_team`)
+      case 'seed:massive': {
+        log(`docker-compose exec -T app rake db:seed_massive`)
         break
       }
       case 'dump': {
