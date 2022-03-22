@@ -49,10 +49,6 @@ call dein#add('vim-utils/vim-troll-stopper')
 call dein#add('dhruvasagar/vim-table-mode')
 call dein#add('airblade/vim-rooter')
 
-call dein#add('iamcco/markdown-preview.nvim', {
-  \'on_ft': ['markdown', 'pandoc.markdown', 'rmd'],
-  \'build': 'sh -c "cd app & yarn install"' })
-
 let g:coc_global_extensions = [ 'coc-json', 'coc-tsserver']
 
 " call dein#add('Quramy/tsuquyomi')
@@ -62,6 +58,7 @@ call dein#add('neoclide/coc.nvim', {'rev': 'release'})
 call dein#add('stayradiated/vim-journal')
 call dein#add('sheerun/vim-polyglot')
 call dein#add('fcpg/vim-waikiki')
+call dein#add('pantharshit00/vim-prisma')
 
 call dein#end()
 

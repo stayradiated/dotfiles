@@ -111,7 +111,7 @@ switch (command) {
   case 'down':
   case 'stop': {
     const app = args[0] ?? ''
-    log(`docker-compose stop --time 0 ${app}`)
+    log(`docker-compose stop --timeout 0 ${app}`)
     break
   }
 
@@ -119,7 +119,7 @@ switch (command) {
   case 'restart': {
     const app = args[0] ?? ''
     log(`
-      docker-compose stop --time 0 ${app} &&
+      docker-compose stop --timeout 0 ${app} &&
       docker-compose up --detach ${app} &&
       docker-compose logs --tail 500 --follow ${app}
     `)

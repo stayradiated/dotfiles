@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-set -euxo pipefail
+set -euo pipefail
 
-cd /home/admin/src/github.com/Runn-Fast/runn
-command=$(zx ~/dotfiles/bin/runn.mjs $@)
-echo $command
-exec sh -c "${command}"
+exec node /home/admin/src/github.com/Runn-Fast/runn-cli/dist/index.js $@
