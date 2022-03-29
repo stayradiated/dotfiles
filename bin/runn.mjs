@@ -142,7 +142,7 @@ switch (command) {
         break
       }
       case 'reset': {
-        log(`docker-compose exec -T app rake db:drop db:create db:migrate`)
+        log(`docker-compose exec -T app rake db:drop:primary db:create db:migrate`)
         break
       }
       case 'seed': {
@@ -186,7 +186,7 @@ switch (command) {
           fail('You must specify a filename')
         }
         log(`
-          docker-compose exec -T app rake db:drop db:create &&
+          docker-compose exec -T app rake db:drop:primary db:create &&
           docker-compose exec -T postgres pg_restore -U postgres -d runn_development /app/${filename} &&
           docker-compose exec -T app rake db:migrate
         `)
@@ -195,7 +195,7 @@ switch (command) {
       case 'rebuild': {
         log(`
           docker-compose exec -T app rails db:environment:set RAILS_ENV=development &&
-          docker-compose exec -T app rake db:drop db:create db:migrate &&
+          docker-compose exec -T app rake db:drop:primary db:create db:migrate &&
           docker-compose exec -T app rake db:seed
         `)
         break

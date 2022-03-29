@@ -1,5 +1,0 @@
-#!/usr/bin/env bash
-
-set -euo pipefail
-
-exec node /home/admin/src/github.com/Runn-Fast/runn-cli/dist/index.js $@

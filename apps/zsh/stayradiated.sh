@@ -14,6 +14,9 @@ export GPG_TTY=$(tty)
 export NODE_CLIENT_LOG_FILE=/tmp/coc-nod-client.log
 export NVIM_COC_LOG_FILE=/tmp/coc-nvim.log
 
+# runn-cli
+export RUNN_DIR=/home/admin/src/github.com/Runn-Fast/runn
+
 #
 # Editors
 #

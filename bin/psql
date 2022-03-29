@@ -1,0 +1,4 @@
+#!/usr/bin/env zsh
+
+cd ~/src/github.com/Runn-Fast/runn
+exec docker-compose exec -- postgres psql $@
