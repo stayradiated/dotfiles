@@ -1,0 +1,69 @@
+#!/usr/bin/env node
+
+const { exec } = require('child_process')
+
+const mirrors = [
+   "https://alpha.de.repo.voidlinux.org/",            // EU: Finland
+   "https://repo-fi.voidlinux.org/",                  // EU: Finland
+   "https://mirrors.servercentral.com/voidlinux/",    // USA: Chicago
+   "https://repo-us.voidlinux.org/",                  // USA: Kansas City
+   "https://mirror.ps.kz/voidlinux/",                 // Asia: Almaty, KZ
+   "https://mirrors.bfsu.edu.cn/voidlinux/",          // Asia: China
+   "https://mirrors.cnnic.cn/voidlinux/",             // Asia: China
+   "https://mirrors.tuna.tsinghua.edu.cn/voidlinux/", // Asia: China
+   "https://mirror.sjtu.edu.cn/voidlinux/",           // Asia: China
+   "https://void.webconverger.org/",                  // Asia: Singapore
+   "https://mirror.aarnet.edu.au/pub/voidlinux/",     // AU: Canberra
+   "https://ftp.swin.edu.au/voidlinux/",              // AU: Melbourne
+   "https://void.cijber.net/",                        // EU: Amsterdam, NL
+   "http://ftp.dk.xemacs.org/voidlinux/",             // EU: Denmark
+   "https://mirrors.dotsrc.org/voidlinux/",           // EU: Denmark
+   "https://quantum-mirror.hu/mirrors/pub/voidlinux/",// EU: Hungary
+   "https://voidlinux.mirror.garr.it/",               // EU: Italy
+   "https://mirror.fit.cvut.cz/voidlinux/",           // EU: Prague, CZ
+   "http://ftp.debian.ru/mirrors/voidlinux/",         // EU: Russia
+   "https://mirror.yandex.ru/mirrors/voidlinux/",     // EU: Russia
+   "https://cdimage.debian.org/mirror/voidlinux/",    // EU: Sweden
+   "https://ftp.acc.umu.se/mirror/voidlinux/",        // EU: Sweden
+   "https://ftp.lysator.liu.se/pub/voidlinux/",       // EU: Sweden
+   "https://ftp.sunet.se/mirror/voidlinux/",          // EU: Sweden
+   "https://void.sakamoto.pl/",                       // EU: Warsaw, PL
+   "https://mirror.clarkson.edu/voidlinux/",          // USA: New York
+]
+
+const getAvgPing = async (url) => {
+   return new Promise((resolve, reject) => {
+      exec(`ping -c 4 ${url}`, (err, stdout) => {
+         if (err) {
+            reject(err)
+         } else {
+            const lastLine = stdout.split('\n').slice(-2)[0]
+
+            // format: "rtt min/avg/max/mdev = 56.076/57.421/57.929/0.778 ms"
+            const avg = lastLine.match(/[\d.]+/g)?.[1]
+            if (!avg) {
+               reject(new Error(`Could not parse ping results for "${url}"`))
+            }
+            resolve(Number.parseFloat(avg))
+         }
+      })
+   })
+}
+
+void (async () => {
+   let fastestPing = Infinity
+   let fastestMirror = ''
+
+   for (const mirror of mirrors) {
+      const {hostname} = new URL(mirror)
+      const ping = await getAvgPing(hostname)
+      console.log(mirror, `${ping}ms`)
+      if (ping < fastestPing) {
+         fastestPing = ping
+         fastestMirror = mirror
+      }
+   }
+
+   console.log(`\nFastest mirror is "${fastestMirror}" @ ${fastestPing}ms`)
+   console.log(`\necho "repository=${fastestMirror}current" | sudo tee /etc/xbps.d/00-repository-main.conf`)
+})()
