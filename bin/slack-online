@@ -3,5 +3,5 @@
 set -euo pipefail
 
 msg="Available, working from ${1} ($(date +'%D %T'))"
-slack $msg ':flag-hr:'
+slack $msg ':innocent:'
 echo $msg
