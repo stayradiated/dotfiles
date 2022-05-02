@@ -1,7 +1,0 @@
-#!/usr/bin/env zsh
-
-set -euo pipefail
-
-msg="Not available ($(date +'%D %T'))"
-slack $msg ':x:'
-echo $msg

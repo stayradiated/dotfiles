@@ -1,0 +1,74 @@
+#!/usr/bin/env zsh
+
+set -euo pipefail
+
+source "${HOME}/dotfiles/apps/slack/token.enc"
+
+function setStatus () {
+  statusText=$1
+  statusEmoji=$2
+  statusExpiration=$3
+
+  http \
+    POST \
+    'https://slack.com/api/users.profile.set' \
+    "profile=={\"status_text\":\"${statusText}\",\"status_emoji\":\"${statusEmoji}\",\"status_expiration\":\"${statusExpiration}\"}" \
+    "token==${SLACK_TOKEN}" \
+  | jq -r '.profile.status_text'
+}
+
+function getStatus () {
+  http \
+    --print="b" \
+    POST \
+    'https://slack.com/api/users.profile.get' \
+    "token==${SLACK_TOKEN}" \
+  | jq -r '.profile.status_text'
+}
+
+
+function setStatusOnline () {
+  emoji=":innocent:"
+  if [[ -n "$1" ]]
+  then
+    text="Available, working from ${1} ($(date +'%D %T'))"
+  else
+    text="Available ($(date +'%D %T'))"
+  fi
+  expiration="$(( $(date +'%s') + (4 * 60 * 60) ))"
+  setStatus $text $emoji $expiration
+}
+
+function setStatusAway () {
+  emoji=":hear_no_evil:"
+  text="Away from my laptop, will be back online later today ($(date +'%D %T'))"
+  expiration="$(( $(date +'%s') + (4 * 60 * 60) ))"
+  setStatus $text $emoji $expiration
+}
+
+function setStatusOffline () {
+  emoji=":x:"
+  text="Not available ($(date +'%D %T'))"
+  expiration="0"
+  setStatus $text $emoji $expiration
+}
+
+if [[ -v 1 ]]
+then
+  case $1 in 
+    online)
+      setStatusOnline ${2:-""}
+      ;;
+    away)
+      setStatusAway
+      ;;
+    offline)
+      setStatusOffline
+      ;;
+    *)
+      getStatus
+      ;;
+  esac
+else 
+  getStatus
+fi
