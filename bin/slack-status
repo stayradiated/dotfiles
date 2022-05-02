@@ -1,5 +1,38 @@
 #!/usr/bin/env zsh
 
+#
+# SLACK STATUS
+# ============
+#
+# setup:
+# create a Slack App with this config:
+#
+#     display_information:
+#       name: Slack Status CLI
+#     oauth_config:
+#       scopes:
+#         user:
+#           - users.profile:write
+#           - users.profile:read
+#     settings:
+#       org_deploy_enabled: false
+#       socket_mode_enabled: false
+#       token_rotation_enabled: false
+#
+# Get your OAuth Token
+# "OAuth & Permissions" → "OAuth Tokens for Your Workspace" → "User OAuth Token"
+#
+# Save this in a file that you can import
+#
+#   export SLACK_TOKEN="xoxp-************-*************-*************-********************************"
+#
+# usage:
+#
+#   slack-status online
+#   slack-status online 'Auckland, NZ'
+#   slack-status away
+#   slack-status offline
+
 set -euo pipefail
 
 source "${HOME}/dotfiles/apps/slack/token.enc"
