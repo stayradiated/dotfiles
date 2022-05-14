@@ -74,6 +74,10 @@ alias zc='z -c'
 
 alias zj='cd $(journal-utils --root)'
 
+alias online='slack-status online'
+alias afk='slack-status away'
+alias offline='slack-status offline'
+
 # watson
 export WATSON_DIR="${HOME}/dotfiles/apps/watson"
 
