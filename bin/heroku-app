@@ -1,7 +1,0 @@
-#!/usr/bin/env zsh
-
-set -euo pipefail
-
-app_name=$1
-heroku apps --team runn --json | jq -r '.[].name' | rg "${app_name}"
-
