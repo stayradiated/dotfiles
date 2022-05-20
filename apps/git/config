@@ -27,7 +27,13 @@
 	new = green bold
 	whitespace = red reverse
 [merge]
+	tool = nvim
 	conflictstyle = diff3
+[mergetool "nvim"]
+	cmd = nvim -f -c \"Gvdiffsplit!\" \"$MERGED\"
+[mergetool]
+	prompt = false
+	keepBackup = false
 [rerere]
 	enabled = 1
 [init]
