@@ -114,7 +114,7 @@ alias ping='prettyping --nolegend'
 
 # git
 alias gup='git push -u origin HEAD'
-
+alias gmt='git mergetool'
 
 # journal shortcuts
 alias jd='nvi $(journal-utils --day)'
