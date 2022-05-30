@@ -14,7 +14,13 @@ if [[ -v 1 ]]
 then
   echo "domain home\nnameserver ${1}" > $resolv_conf
 else
-  as-host cat /etc/resolv.conf | tr '' ' ' > $resolv_conf
+  as-host '\
+    print_dns () { cat /etc/resolv.conf | grep -v "^#"; };\
+    print_dns;\
+    while [ $? -ne 0 ];\
+      do sleep 1;\
+        print_dns;\
+    done' | tr '' ' ' > $resolv_conf
 fi
 
 < $resolv_conf | sudo tee /etc/resolv.conf
