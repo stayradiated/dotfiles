@@ -14,14 +14,19 @@ if [[ -v 1 ]]
 then
   echo "domain home\nnameserver ${1}" > $resolv_conf
 else
+  # poll the hosts resolv.conf file until the nameserver appears
+  echo "Reading from hosts /etc/resolv.conf"
   as-host '\
     print_dns () { cat /etc/resolv.conf | grep -v "^#"; };\
     print_dns;\
     while [ $? -ne 0 ];\
       do sleep 1;\
+        echo -n ".";\
         print_dns;\
     done' | tr '' ' ' > $resolv_conf
 fi
 
-< $resolv_conf | sudo tee /etc/resolv.conf
+cat $resolv_conf
+
+< $resolv_conf | sudo tee /etc/resolv.conf > /dev/null
 rm $resolv_conf
