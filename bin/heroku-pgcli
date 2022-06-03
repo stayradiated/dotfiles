@@ -18,7 +18,7 @@ case "${database}" in
     tmux select-pane -P bg=DarkRed
     app_name=$(heroku-find-app "runn-prod-eu-app-(?!fork).*")
     echo "Connecting to database for ${app_name}…"
-    database_url=$(heroku config:get --app "${app_name}" DATABASE_URL)
+    database_url=$(heroku pg:credentials:url --app "${app_name}" --name readonly | grep -oP 'postgres://\S+')
     pgcli "${database_url}" --prompt "${app_name} » " --less-chatty
     tmux select-pane -P bg=
     ;;
