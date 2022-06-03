@@ -129,7 +129,3 @@ alias jem='nvi $(journal-utils --root)/public/emoji.txt'
 
 # tmux
 alias tm='tmux list-sessions && tmux attach -d || tmux new-session'
-
-# runn
-alias pgcli-runn-staging='pgcli $(heroku config:get --app $(heroku-find-app "runn-staging-us-app-.*") DATABASE_URL) --prompt "runn-staging-us-app> "'
-alias pgcli-runn-production='pgcli $(heroku config:get --app $(heroku-find-app "runn-prod-eu-app-.*") DATABASE_URL) --prompt "runn-prod-eu-app> "'
