@@ -200,8 +200,8 @@ map <Leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
 map <Leader>m :!mkdir <C-R>=expand("%:p:h") . "/" <CR>
 
 " FZF
-" nnoremap <leader>t :FZF<CR>
-nnoremap <leader>t :<C-u>Denite -buffer-name=files file/rec<CR>
+nnoremap <leader>t :FZF<CR>
+" nnoremap <leader>t :<C-u>Denite -buffer-name=files file/rec<CR>
 
 " denite.vim
 nnoremap <leader>b :<C-u>Denite -buffer-name=buffer buffer<CR>

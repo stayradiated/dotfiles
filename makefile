@@ -289,7 +289,7 @@ xinput:
 	@if command -v xinput; then \
 		xinput set-prop 'ELAN0672:00 04F3:3187 Touchpad' 'libinput Disable While Typing Enabled' 0; \
 		xinput disable 'ELAN0672:00 04F3:3187 Touchpad'; \
-		xinput set-prop 'TPPS/2 Elan TrackPoint' 'libinput Accel Speed' -0.2; \
+		# xinput set-prop 'TPPS/2 Elan TrackPoint' 'libinput Accel Speed' -0.2; \
 	fi
 
 x11:
