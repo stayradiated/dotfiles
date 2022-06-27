@@ -48,6 +48,7 @@ call dein#add('christianrondeau/vim-base64')
 call dein#add('vim-utils/vim-troll-stopper')
 call dein#add('dhruvasagar/vim-table-mode')
 call dein#add('airblade/vim-rooter')
+call dein#add('othree/eregex.vim')
 
 let g:coc_global_extensions = [ 'coc-json', 'coc-tsserver']
 
@@ -252,6 +253,9 @@ nnoremap <leader>E %s/:\([^:]\+\):/\=emoji#for(submatch(1), submatch(0))/g
 
 " vim-table-mode
 let g:table_mode_map_prefix = '<leader>2'
+
+" eregex.vim
+let g:eregex_default_enable = 0
 
 let g:dein#install_message_type = "none"
 let g:dein#types#git#clone_depth = 1
