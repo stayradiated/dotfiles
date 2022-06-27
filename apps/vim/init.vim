@@ -119,6 +119,23 @@ set tabstop=2            " spaces for <Tab>
 set hlsearch             " highlight search results
 set ignorecase           " case insensitive searching
 set smartcase            " override ignorecase if upper case typed
+set nomagic              " disable magic
+
+"|-----------+-------+---------+-------------+---------------------------------|
+"| verymagic | magic | nomagic | verynomagic |                                 |
+"|----------:+------:+--------:+------------:+---------------------------------|
+"|        \v |    \m |      \M |          \V | regex fla                       |
+"|         $ |     $ |       $ |          \$ | matches end-of-line             |
+"|         . |     . |      \. |          \. | matches any character           |
+"|         * |     * |      \* |          \* | any number of the previous atom |
+"|        () |  \(\) |    \(\) |        \(\) | grouping into an atom           |
+"|         | |    \| |      \| |          \| | separating alternatives         |
+"|        \a |    \a |      \a |          \a | alphabetic character            |
+"|        \\ |    \\ |      \\ |          \\ | literal backslash               |
+"|        \. |    \. |       . |           . | literal dot                     |
+"|        \{ |     { |       { |           { | literal '{'                     |
+"|         a |     a |       a |           a | literal 'a'                     |
+"|-----------+-------+---------+-------------+---------------------------------|
 
 " netrw-gx
 let g:netrw_browsex_viewer="xdg-open"
