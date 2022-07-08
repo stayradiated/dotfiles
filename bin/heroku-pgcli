@@ -22,6 +22,14 @@ case "${database}" in
     pgcli "${database_url}" --prompt "${app_name} » " --less-chatty
     tmux select-pane -P bg=
     ;;
+  euronext)
+    tmux select-pane -P bg=DarkRed
+    app_name=$(heroku-find-app "runn-prod-euronext-app-(?!fork).*")
+    echo "Connecting to database for ${app_name}…"
+    database_url=$(heroku pg:credentials:url --app "${app_name}" --name default | grep -oP 'postgres://\S+')
+    pgcli "${database_url}" --prompt "${app_name} » " --less-chatty
+    tmux select-pane -P bg=
+    ;;
   review-app)
     pr_id=$2
     app_name="runn-pr-${pr_id}-app"
