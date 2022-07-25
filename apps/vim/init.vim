@@ -10,7 +10,8 @@ endif
 set runtimepath+=$HOME/.config/nvim/dein/repos/github.com/Shougo/dein.vim
 
 call dein#begin('$HOME/.config/nvim/dein')
-call dein#add('$HOME/.config/nvim/dein')
+
+call dein#add('$HOME/.config/nvim/dein/repos/github.com/Shougo/dein.vim')
 
 " Themes
 call dein#add('stayradiated/vim-termorrow')
@@ -18,18 +19,18 @@ call dein#add('reedes/vim-colors-pencil')
 
 " Extensions
 call dein#add('Shougo/denite.nvim')
-
+ 
 call dein#add('Shougo/deoplete.nvim')
 let g:deoplete#enable_at_startup = 0
-
+ 
 call dein#add('Shougo/neosnippet.vim')
 
 call dein#add('neoclide/denite-git')
-call dein#add('jeetsukumaran/vim-filebeagle')
+" call dein#add('jeetsukumaran/vim-filebeagle')
+call dein#add('tpope/vim-vinegar')
 call dein#add('christoomey/vim-tmux-navigator')
 
 " Editing
-" call
 call dein#add('arthurxavierx/vim-caser')
 call dein#add('tpope/vim-abolish')
 call dein#add('tpope/vim-fugitive')
@@ -52,15 +53,14 @@ call dein#add('othree/eregex.vim')
 
 let g:coc_global_extensions = [ 'coc-json', 'coc-tsserver']
 
-" call dein#add('Quramy/tsuquyomi')
 call dein#add('neoclide/coc.nvim', {'rev': 'release'})
 
 " Languages
 call dein#add('stayradiated/vim-journal')
-call dein#add('sheerun/vim-polyglot')
+" call dein#add('sheerun/vim-polyglot')
 call dein#add('fcpg/vim-waikiki')
 call dein#add('pantharshit00/vim-prisma')
-
+ 
 call dein#end()
 
 filetype plugin indent on

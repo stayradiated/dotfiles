@@ -54,7 +54,7 @@ IMAGE="${1}"
 shift
 
 # See https://stackoverflow.com/a/26226261/2742221
-docker save "${IMAGE}" | pv | ssh -C "${@}" "${SUDO} docker load"
+docker save "${IMAGE}" | ssh -C "${@}" "${SUDO} docker load"
 
 # MIT License
 #
