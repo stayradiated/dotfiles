@@ -150,9 +150,15 @@ colorscheme termorrow
 set background=dark
 
 " Digraphs
-digraphs lh 9829 " ♥ love heart
-digraphs cr 8627 " ↳ carriage return
+digraphs lh 9829  " ♥ love heart
+digraphs cr 8627  " ↳ carriage return
 digraphs d4 10294 " ⠶ braille pattern dots 2356
+
+" coc.nvim
+set cmdheight=2    " Give more space for displaying messages.
+set updatetime=300 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
+                   " delays and poor user experience.
+set shortmess+=c   " Don't pass messages to |ins-completion-menu|.
 
 " Mapping
 " ------------------------------------------------------------------------------
@@ -248,6 +254,12 @@ nnoremap <leader>D :r!date --iso-8601=seconds<CR>
 " Emojis
 nnoremap <leader>E %s/:\([^:]\+\):/\=emoji#for(submatch(1), submatch(0))/g
 
+" coc.nvim
+" ↳ Use K to show documentation in preview window.
+nnoremap <silent> K :call ShowDocumentation()<CR>
+" ↳ Symbol renaming.
+nmap <leader>rn <Plug>(coc-rename)
+
 " Plugin Settings
 " ------------------------------------------------------------------------------
 
@@ -308,6 +320,14 @@ if exists("*deoplete#custom#var")
   call deoplete#custom#var('tmux-complete', 'scrollback', 0)
   call deoplete#custom#var('tmux-complete', 'truncate', 0)
 endif
+
+function! ShowDocumentation()
+  if CocAction('hasProvider', 'hover')
+    call CocActionAsync('doHover')
+  else
+    call feedkeys('K', 'in')
+  endif
+endfunction
 
 " Snippets
 " ------------------------------------------------------------------------------
