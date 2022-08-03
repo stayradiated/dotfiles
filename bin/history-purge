@@ -1,0 +1,10 @@
+#!/usr/bin/env zsh
+
+cd /home/admin/dotfiles/apps/zsh/state/
+
+# show lines which are being removed
+rg 'ssh_\w+_[A-z0-9!@#$%^&*-=_+]{45,50}' ./history.enc
+
+# remove lines
+rg -v 'ssh_\w+_[A-z0-9!@#$%^&*-=_+]{45,50}' ./history.enc > ./history.bak.enc
+mv ./history.bak.enc ./history.enc

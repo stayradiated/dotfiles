@@ -1,5 +1,7 @@
 #!/usr/bin/env zsh
 
+history-purge
+
 cd $HOME/dotfiles
 
 git add -A
