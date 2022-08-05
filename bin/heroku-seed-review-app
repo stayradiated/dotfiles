@@ -1,9 +1,0 @@
-#!/usr/bin/env zsh
-
-set -euo pipefail
-
-pr_id=$1
-app_name="runn-pr-${pr_id}-app"
-
-echo "Executing db:seed for ${app_name}…"
-heroku run --app "${app_name}" --type=worker rake db:seed
