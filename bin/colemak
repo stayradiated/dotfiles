@@ -1,8 +1,12 @@
 #!/usr/bin/env zsh
 
+set -euxo pipefail
+
 as-host sudo /root/sudoscripts/sv-restart-udevmon.sh
 
 setxkbmap us \
   -variant colemak \
   -option ctrl:nocaps \
-  -option altwin:swap_alt_win
+  -option altwin:swap_alt_win \
+  -option compose:ralt
+
