@@ -5,10 +5,10 @@
 [push]
 	default = simple
   followTags = true
-[url "git@github.com:"]
-	insteadOf = https://github.com/
-[url "git@bitbucket.org:"]
-	insteadOf = https://bitbucket.org/
+# [url "git@github.com:"]
+# 	insteadOf = https://github.com/
+# [url "git@bitbucket.org:"]
+# 	insteadOf = https://bitbucket.org/
 [core]
 	pager = diff-so-fancy | less --tabs=4 -RFX
 	excludesFile = ~/.gitignore

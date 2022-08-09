@@ -203,7 +203,7 @@ sc-im:
 ssh:
 
 	@echo "ssh..."
-	@mkdir -p ~/.ssh
+	@mkdir -p ~/.ssh/sockets
 	@ln -fs "$(apps)/ssh/config.enc" ~/.ssh/config
 	@ln -fs "$(apps)/ssh/known_hosts" ~/.ssh/known_hosts
 
