@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-set -euo pipefail
+set -euxo pipefail
 
 action=${1:-}
 
@@ -10,9 +10,9 @@ elif test "${action}" = "list"; then
   as-host wpa_cli list_networks
 elif test "${action}" = "join"; then
   ssid=${2}
-  psk=${3}
-  id=$(as-host wpa_cli add_network | tail -n 1)
-  as-host wpa_cli set_network "${id}" ssid "${ssid}"
+  psk=${3:-}
+  id=$(as-host wpa_cli add_network | tail -n 1 | cut -d'' -f1)
+  as-host wpa_cli set_network ${id} ssid "${ssid}"
   if test "${psk}" = ""; then
     as-host wpa_cli set_network "${id}" key_mgmt NONE
   else

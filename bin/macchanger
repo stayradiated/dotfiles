@@ -1,0 +1,7 @@
+#!/usr/bin/env zsh
+
+set -euxo pipefail
+
+as-host sudo ip link set wlp0s20f3 down
+as-host sudo macchanger --another --permanent --bia wlp0s20f3
+as-host sudo ip link set wlp0s20f3 up

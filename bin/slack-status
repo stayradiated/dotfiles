@@ -61,7 +61,7 @@ function getStatus () {
 
 
 function setStatusOnline () {
-  emoji=":innocent:"
+  emoji=${2:-":innocent:"}
   if [[ -n "$1" ]]
   then
     text="Available, working from ${1} ($(date +'%D %T'))"
@@ -90,7 +90,7 @@ if [[ -v 1 ]]
 then
   case $1 in 
     online)
-      setStatusOnline ${2:-""}
+      setStatusOnline ${2:-} ${3:-}
       ;;
     away)
       setStatusAway
