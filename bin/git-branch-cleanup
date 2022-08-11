@@ -1,9 +1,3 @@
 #!/usr/bin/env zsh
 
-MERGED=$(git branch --merged)
-STALE=$(echo "${MERGED}" | rg -v '^\*\s' | xargs echo)
-
-if [ ! -z "${STALE}" ]
-then
-  echo "${STALE}" | xargs git branch -d
-fi
+git branch --list | rg -v '(main|george/)' | xargs -r git branch -D
