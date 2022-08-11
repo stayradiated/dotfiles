@@ -1,0 +1,30 @@
+#!/usr/bin/env zsh
+
+#
+# Quickly edit the source for a shell script.
+#
+# usage:
+#
+#   vbin <script>
+#
+# example:
+#
+#   vbin archive
+#
+# edit source of vbin:
+#
+#   vbin vbin
+#
+
+set -euo pipefail
+
+vbin () {
+  local binary="${1}"
+  local binary_path="$(which ${binary})"
+
+  echo "Editing ${binary_path}"
+
+  $EDITOR "${binary_path}"
+}
+
+vbin "$@"

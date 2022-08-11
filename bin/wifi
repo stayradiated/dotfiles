@@ -1,28 +1,40 @@
 #!/usr/bin/env zsh
 
-set -euxo pipefail
+set -euo pipefail
 
-action=${1:-}
+func wifi () {
+  local action=${1:-}
 
-if test "${action}" = "status"; then
-  as-host wpa_cli status
-elif test "${action}" = "list"; then
-  as-host wpa_cli list_networks
-elif test "${action}" = "join"; then
-  ssid=${2}
-  psk=${3:-}
-  id=$(as-host wpa_cli add_network | tail -n 1 | cut -d'' -f1)
-  as-host wpa_cli set_network ${id} ssid "${ssid}"
-  if test "${psk}" = ""; then
-    as-host wpa_cli set_network "${id}" key_mgmt NONE
+  if test "${action}" = "status"; then
+    as-host wpa_cli status
+  elif test "${action}" = "edit"; then
+    as-host vi /etc/wpa_supplicant/wpa_supplicant.conf
+  elif test "${action}" = "restart"; then
+    as-host sudo sv restart wpa_supplicant
+  elif test "${action}" = "list"; then
+    as-host wpa_cli list_networks
+  elif test "${action}" = "remove"; then
+    local id=${2}
+    as-host wpa_cli remove_network ${id}
+  elif test "${action}" = "join"; then
+    local ssid="${2}"
+    local psk=${3:-}
+    local id=$(as-host wpa_cli add_network | tail -n 1 | cut -d'' -f1)
+    as-host wpa_cli set_network ${id} ssid \\\"${ssid}\\\"
+    if test "${psk}" = ""; then
+      as-host wpa_cli set_network "${id}" key_mgmt NONE
+    else
+      as-host wpa_cli set_network "${id}" psk \\\"${psk}\\\"
+    fi
+    as-host wpa_cli enable_network "${id}"
+    as-host wpa_cli save
+  elif test "${action}" = "scan"; then
+    as-host "sh -c 'wpa_cli scan > /dev/null && wpa_cli scan_results'" | tail -n +3 | sd '\t' ',' | xsv table
+  elif test "${action}" = ""; then
+    as-host wpa_cli
   else
-    as-host wpa_cli set_network "${id}" psk "${psk}"
+    echo "status, list, join, scan"
   fi
-  as-host wpa_cli enable_network "${id}"
-elif test "${action}" = "scan"; then
-  as-host "sh -c 'wpa_cli scan > /dev/null && wpa_cli scan_results'" | tail -n +3 | sd '\t' ',' | xsv table
-elif test "${action}" = ""; then
-  as-host wpa_cli
-else
-  echo "status, list, join, scan"
-fi
+}
+
+wifi "$@"

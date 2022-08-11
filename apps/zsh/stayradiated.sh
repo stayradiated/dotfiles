@@ -25,9 +25,9 @@ export FZF_DEFAULT_COMMAND='fd --type f'
 # Editors
 #
 
-export EDITOR='nvim'
-export VISUAL='nvim'
-export PAGER='less'
+export EDITOR=$(which nvim)
+export VISUAL=$(which nvim)
+export PAGER=$(which less)
 
 #
 # Less
