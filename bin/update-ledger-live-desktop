@@ -3,6 +3,7 @@
 set -euo pipefail
 
 # https://github.com/LedgerHQ/ledger-live-desktop/blob/master/src/main/updater/ledger-pubkey.js
+# https://github.com/LedgerHQ/ledger-live/blob/develop/apps/ledger-live-desktop/src/main/updater/ledger-pubkey.js
 public_key='-----BEGIN PUBLIC KEY-----
 MFYwEAYHKoZIzj0CAQYFK4EEAAoDQgAEN7qcsG6bogi1nkD3jnMWS813wWguYEcI
 CRcijSvFskSFjHB5la4xUt+Omb2t6iUwop+JRy+EUhy0UQ9p/cPsQA==
@@ -16,52 +17,52 @@ f_sha512sum=./ledger-live.sha512sum
 f_sha512sum_sig=./ledger-live.sha512sum.sig
 f_public_key=./ledgerlive.pem
 
-echo "Fetching releases from https://github.com/LedgerHQ/ledger-live-desktop/releases"
+echo "» Fetching releases from https://github.com/LedgerHQ/ledger-live/releases"
 
-http https://api.github.com/repos/LedgerHQ/ledger-live-desktop/releases > $f_release
+http https://api.github.com/repos/LedgerHQ/ledger-live/releases > $f_release
 
-tag_name=$(< $f_release | jq -r '.[].tag_name'  | sort | tail -n 1)
+tag_name=$(< $f_release | jq -r '.[].tag_name' | grep '^@ledgerhq/live-desktop' | sort | tail -n 1)
 version=$(echo "${tag_name}" | rg -o '[\d.]+')
-download_url=$(< $f_release | jq -r ".[] | select(.tag_name == \"${tag_name}\") | .assets[] | select(.name | contains(\".AppImage\")) | .browser_download_url")
+download_url="https://download.live.ledger.com/ledger-live-desktop-${version}-linux-x86_64.AppImage"
 
-echo "Latest version is ${tag_name}"
+echo "» Latest version is v${version}"
 
-f_dest="$HOME/src/ledger-live-desktop-${tag_name}"
+f_dest="$HOME/src/ledger-live-desktop-${version}"
 if [ -d "${f_dest}" ]; then
-  echo "Ledger Live Desktop is up to date (${tag_name})"
+  echo "» Ledger Live Desktop is up to date (${version})"
   exit 0
 fi
 
-echo "Fetching signatures"
+echo "» Fetching signatures"
 
 http "https://resources.live.ledger.app/public_resources/signatures/ledger-live-desktop-${version}.sha512sum" > $f_sha512sum
 http "https://resources.live.ledger.app/public_resources/signatures/ledger-live-desktop-${version}.sha512sum.sig" > $f_sha512sum_sig
 
 echo $public_key > $f_public_key
 
-echo "Verifying signatures match public key"
+echo "» Verifying signatures match public key"
 
 openssl dgst -sha256 -verify $f_public_key -signature $f_sha512sum_sig $f_sha512sum
 
-echo "Downloading ledger-live-desktop binary"
+echo "» Downloading ledger-live-desktop binary"
 wget "${download_url}"
 f_binary=$(ls ./*.AppImage)
 
-echo "Verifying binary matches signature"
+echo "» Verifying binary matches signature"
 sha512sum --check --ignore-missing $f_sha512sum
 
-echo "Extracting files from AppImage"
+echo "» Extracting files from AppImage"
 chmod +x $f_binary
 $f_binary --appimage-extract
 
-echo "Moving to ${f_dest}"
+echo "» Moving to ${f_dest}"
 mv squashfs-root $f_dest
 
-echo "Updating ledger-live-desktop link"
+echo "» Updating ledger-live-desktop link"
 ln -sf "${f_dest}/ledger-live-desktop" "${HOME}/dotfiles/bin/ledger-live-desktop"
 
-echo "Removing tempoary files"
+echo "» Removing tempoary files"
 popd
 rm -rf $f_tmp
 
-echo "Successfully installed ledger-live-desktop ${tag_name}"
+echo "» Successfully installed ledger-live-desktop ${version}"
