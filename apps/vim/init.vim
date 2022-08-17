@@ -341,9 +341,7 @@ imap <C-CR>    <Plug>(neosnippet_expand_or_jump)
 smap <C-CR>    <Plug>(neosnippet_expand_or_jump)
 xmap <C-CR>    <Plug>(neosnippet_expand_target)
 
-if has('conceal')
-  set conceallevel=2 concealcursor=niv
-endif
+set conceallevel=2
 
 " Functions
 " ------------------------------------------------------------------------------
