@@ -8,7 +8,9 @@ func wifi () {
   if test "${action}" = "status"; then
     as-host wpa_cli status
   elif test "${action}" = "edit"; then
-    as-host vi /etc/wpa_supplicant/wpa_supplicant.conf
+    as-host sudo vi /etc/wpa_supplicant/wpa_supplicant.conf
+    echo 'Restarting WPA Supplicant…'
+    as-host sudo sv restart wpa_supplicant
   elif test "${action}" = "restart"; then
     as-host sudo sv restart wpa_supplicant
   elif test "${action}" = "list"; then
@@ -29,7 +31,7 @@ func wifi () {
     as-host wpa_cli enable_network "${id}"
     as-host wpa_cli save
   elif test "${action}" = "scan"; then
-    as-host "sh -c 'wpa_cli scan > /dev/null && wpa_cli scan_results'" | tail -n +3 | sd '\t' ',' | xsv table
+    as-host "sh -c 'wpa_cli scan > /dev/null && wpa_cli scan_results'" | tail -n +3 | awk '{ $1=$2=$3=""; print $0 }' | sd '^\s*\[ESS\]\s' '🔓' | sd '^\s*\[.*\]\s' '🔑' | sd ' ' '\u001B[46m \u001B[49m'
   elif test "${action}" = ""; then
     as-host wpa_cli
   else
