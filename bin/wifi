@@ -15,6 +15,12 @@ func wifi () {
     as-host sudo sv restart wpa_supplicant
   elif test "${action}" = "list"; then
     as-host wpa_cli list_networks
+  elif test "${action}" = "disable"; then
+    local id=${2}
+    as-host wpa_cli disable ${id}
+  elif test "${action}" = "enable"; then
+    local id=${2}
+    as-host wpa_cli enable ${id}
   elif test "${action}" = "remove"; then
     local id=${2}
     as-host wpa_cli remove_network ${id}
