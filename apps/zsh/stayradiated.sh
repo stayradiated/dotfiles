@@ -5,8 +5,13 @@ PURE_PROMPT_SYMBOL='»'
 PURE_PROMPT_VICMD_SYMBOL='«'
 prompt pure
 
+# golang
 export GOPATH=/home/admin
 export GOROOT=/usr/local/go
+
+# ruby gems
+export GEM_HOME=/home/admin/src/ruby/gems
+export GEM_PATH=/home/admin/src/ruby/gems
 
 export GPG_TTY=$(tty)
 
