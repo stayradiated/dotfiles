@@ -33,7 +33,7 @@ if [ -d "${f_dest}" ]; then
   exit 0
 fi
 
-echo "» Fetching signatures"
+echo "» Fetching signatures from https://www.ledger.com/ledger-live/lld-signatures"
 
 http "https://resources.live.ledger.app/public_resources/signatures/ledger-live-desktop-${version}.sha512sum" > $f_sha512sum
 http "https://resources.live.ledger.app/public_resources/signatures/ledger-live-desktop-${version}.sha512sum.sig" > $f_sha512sum_sig
