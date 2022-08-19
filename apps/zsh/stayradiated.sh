@@ -12,6 +12,7 @@ export GOROOT=/usr/local/go
 # ruby gems
 export GEM_HOME=/home/admin/src/ruby/gems
 export GEM_PATH=/home/admin/src/ruby/gems
+export PATH="${PATH}:${GEM_PATH}/bin"
 
 export GPG_TTY=$(tty)
 
