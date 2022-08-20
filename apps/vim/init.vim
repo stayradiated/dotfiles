@@ -51,7 +51,7 @@ call dein#add('dhruvasagar/vim-table-mode')
 call dein#add('airblade/vim-rooter')
 call dein#add('othree/eregex.vim')
 
-let g:coc_global_extensions = [ 'coc-json', 'coc-tsserver']
+let g:coc_global_extensions = [ 'coc-json', 'coc-tsserver', 'coc-go' ]
 
 call dein#add('neoclide/coc.nvim', {'rev': 'release'})
 
