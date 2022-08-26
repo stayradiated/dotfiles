@@ -2,6 +2,9 @@
 
 set -euxo pipefail
 
-as-host sudo ip link set wlp0s20f3 down
-as-host sudo macchanger --another --permanent --bia wlp0s20f3
-as-host sudo ip link set wlp0s20f3 up
+device_id='wlp0s20f3'
+
+as-host "\
+  sudo ip link set wlp0s20f3 down;\
+  sudo macchanger --another --permanent --random --bia '${device_id}';\
+  sudo ip link set wlp0s20f3 up;"

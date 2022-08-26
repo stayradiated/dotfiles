@@ -21,8 +21,7 @@ else
     print_dns;\
     while [ $? -ne 0 ];\
       do sleep 1;\
-        echo -n ".";\
-        print_dns;\
+      print_dns;\
     done' | tr '' ' ' > $resolv_conf
 fi
 
