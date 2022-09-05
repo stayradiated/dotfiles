@@ -329,6 +329,10 @@ function! ShowDocumentation()
   endif
 endfunction
 
+" force Subvert to S
+command -nargs=1 -bang -bar -range=0 -complete=custom,s:SubComplete S
+        \ :exec s:subvert_dispatcher(<bang>0,<line1>,<line2>,<count>,<q-args>)
+
 " Snippets
 " ------------------------------------------------------------------------------
 

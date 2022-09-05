@@ -43,3 +43,8 @@ Apps
 app
 admin
 Hasura
+BigInt
+ORM
+Prisma
+stringify
+JSON
