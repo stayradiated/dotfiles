@@ -1,0 +1,15 @@
+#!/usr/bin/env zsh
+
+set -euxo pipefail
+
+enable=$1
+
+if [[ "${enable}" == "true" ]]
+then
+  as-host sudo tailscale up --exit-node=100.125.248.114 --exit-node-allow-lan-access=true
+elif [[ "${enable}" == "false" ]]
+then
+  as-host sudo tailscale up --exit-node= --exit-node-allow-lan-access=false
+else
+  echo "tailscale-set-exit-node true|false"
+fi
