@@ -185,6 +185,7 @@ pgp:
 	@mkdir -p ~/.gnupg
 	@chmod 0700 ~/.gnupg
 	@ln -fs "$(apps)/pgp/pubring.kbx" ~/.gnupg/pubring.kbx
+	@ln -fs "$(apps)/pgp/gpg.conf" ~/.gnupg/gpg.conf
 	@chmod 0600 ~/.gnupg/pubring.kbx
 
 ranger:
