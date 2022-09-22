@@ -5,6 +5,8 @@
 # Originally written by Fabrizio Lungo.
 # https://gist.github.com/flungo/6b5f607db87c3c034609c8dbc5b40966
 
+set -euxo pipefail
+
 usage() {
   cat <<EOF
 Usage: $0 [-s] image [ssh_opts] [user@]hostname
