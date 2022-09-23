@@ -8,6 +8,9 @@
 # update-dns 1.1.1.1
 #   if you pass an IP address it will use that instead
 
+# get sudo permission upfront, so user can leave this program to run in the background  
+sudo --validate
+
 resolv_conf=$(mktemp)
 
 if [[ -v 1 ]]
