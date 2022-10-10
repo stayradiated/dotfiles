@@ -56,7 +56,7 @@ fi
 
 # export TZ='Pacific/Auckland'
 # export TZ='Europe/London'
-export TZ='Europe/Berlin'
+# export TZ='Europe/Berlin'
 
 # don't lag when switching between insert/normal mode
 KEYTIMEOUT=1
