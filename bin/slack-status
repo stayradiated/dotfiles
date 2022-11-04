@@ -73,7 +73,7 @@ function setStatusOnline () {
 }
 
 function setStatusAway () {
-  emoji=":hear_no_evil:"
+  emoji=":no_bell:"
   text="Away from my laptop, will be back online later today ($(date +'%D %T'))"
   expiration="$(( $(date +'%s') + (4 * 60 * 60) ))"
   setStatus $text $emoji $expiration

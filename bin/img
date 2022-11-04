@@ -1,0 +1,3 @@
+#!/usr/bin/env zsh
+
+feh --scale-down --auto-zoom --image-bg black -.
