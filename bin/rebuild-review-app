@@ -1,0 +1,11 @@
+#!/usr/bin/env zsh
+
+set -euo pipefail
+
+echo "Checking if there are uncommited changes... "
+trap 'echo -e "\033[0;31mCHANGED\033[0m"' ERR
+git diff-index --quiet HEAD --
+trap - ERR
+echo -e "\033[0;32mCreating empty commit with message '[heroku-rebuild-review-app]'\033[0m"
+
+git commit --allow-empty -m "[heroku-rebuild-review-app]"
