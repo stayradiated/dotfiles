@@ -5,4 +5,13 @@ export XSECURELOCK_FONT=gomme
 export XSECURELOCK_PASSWORD_PROMPT=time_hex
 export XSECURELOCK_SAVER=saver_xscreensaver
 
+# lock 1password
+1password --lock
+
+# kill all ssh sessions
+rm -f ~/.ssh/sockets/*
+
+# reset clipboard
+greenclip-reset
+
 xsecurelock
