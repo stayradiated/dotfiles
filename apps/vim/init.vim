@@ -58,8 +58,10 @@ call dein#add('neoclide/coc.nvim', {'rev': 'release'})
 " Languages
 call dein#add('stayradiated/vim-journal')
 " call dein#add('sheerun/vim-polyglot')
-call dein#add('fcpg/vim-waikiki')
+" call dein#add('fcpg/vim-waikiki')
 call dein#add('pantharshit00/vim-prisma')
+call dein#add('jidn/vim-dbml')
+call dein#add('mracos/mermaid.vim')
  
 call dein#end()
 

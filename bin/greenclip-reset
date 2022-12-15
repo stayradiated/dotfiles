@@ -1,0 +1,11 @@
+#!/usr/bin/env zsh
+
+set -euxo pipefail
+
+pkill greenclip
+
+greenclip clear
+
+cd /tmp
+nohup greenclip daemon &
+
