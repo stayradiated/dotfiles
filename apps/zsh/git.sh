@@ -8,6 +8,9 @@ alias gsw='git switch'
 # checkout has better autocompletion
 alias gco='git checkout'
 
+# copy a commit
+alias gcp='git cherry-pick'
+
 # prune remote branches
 alias gfp='git fetch --prune'
 

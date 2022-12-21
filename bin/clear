@@ -1,0 +1,4 @@
+#/usr/bin/env zsh
+
+/usr/bin/clear
+tmux clear-history
