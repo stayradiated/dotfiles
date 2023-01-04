@@ -1,5 +1,7 @@
 #!/usr/bin/env zsh
 
+set -euxo pipefail
+
 rsync -chavzP --stats --remove-source-files \
   /home/admin/src/sftpgo/data/2022/exports \
   tridentspace:~/src/photos-rsync
