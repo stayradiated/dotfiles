@@ -3,7 +3,7 @@
 set -euxo pipefail
 
 rsync -chavzP --stats --remove-source-files \
-  /home/admin/src/sftpgo/data/2022/exports \
+  /home/admin/src/sftpgo/data/exports \
   tridentspace:~/src/photos-rsync
 
 ssh tridentspace ./phockup
