@@ -19,6 +19,7 @@ then
 else
   # poll the hosts resolv.conf file until the nameserver appears
   echo "Reading from hosts /etc/resolv.conf"
+  echo "--------------------------------------------------------------------------------"
   as-host '\
     print_dns () { cat /etc/resolv.conf | grep -v "^#"; };\
     print_dns;\
@@ -29,6 +30,14 @@ else
 fi
 
 cat $resolv_conf
+echo "--------------------------------------------------------------------------------"
 
 < $resolv_conf | sudo tee /etc/resolv.conf > /dev/null
 rm $resolv_conf
+
+
+if command -v internal-ip &> /dev/null
+then
+  echo -n "Internal IP is "
+  internal-ip
+fi
