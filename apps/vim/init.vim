@@ -62,7 +62,8 @@ call dein#add('stayradiated/vim-journal')
 call dein#add('pantharshit00/vim-prisma')
 call dein#add('jidn/vim-dbml')
 call dein#add('mracos/mermaid.vim')
- 
+call dein#add('elel-dev/vim-astro-syntax')
+
 call dein#end()
 
 filetype plugin indent on
@@ -88,6 +89,9 @@ set showtabline=0        " hide tab line
 set number
 " set relativenumber
 set inccommand=split     " live substitution
+
+set list
+set listchars=tab:»\ ,trail:•,eol:⠶
 
 " Backup swap files
 set backup
