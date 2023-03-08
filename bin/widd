@@ -1,0 +1,10 @@
+#!/usr/bin/env zsh
+
+set -euxo pipefail
+
+name=$1
+
+scp "tridentspace:~/${name}.opus" ~/src/
+ffmpeg -i "/home/admin/src/${name}.opus" "/home/admin/src/${name}.mp3"
+as-host sudo tailscale file cp "~/src/${name}.mp3" widdicombe:
+rm ~/src/${name}.{opus,mp3}

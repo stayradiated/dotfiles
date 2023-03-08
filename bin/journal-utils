@@ -8,6 +8,7 @@
 import datetime
 import argparse
 import os.path
+import re
 
 parser = argparse.ArgumentParser()
 
@@ -24,12 +25,29 @@ root_dir = "/home/admin/src/github.com/stayradiated/journal"
 
 year = today.year
 week = int(today.strftime('%U')) + 1
-month = today.strftime('%m')
-day = today.strftime('%d')
+month = today.month
+day = today.day
 
 def format_title (text):
     underline = "=" * len(text)
     return f"{text}\n{underline}"
+
+def get_previous_day (year, month, day):
+    a = datetime.date(year, month, day)
+    b = a - datetime.timedelta(days=1)
+    return [b.year, b.month, b.day]
+
+def path_for_journal_entry_for_date (year, month, day):
+    padded_month = str(month).rjust(2, '0')
+    padded_day = str(day).rjust(2, '0')
+    return f"{root_dir}/public/{year}/{padded_month}/{padded_day}.txt"
+
+def extract_todo_list (content):
+    match = re.search(r"TODO\n----\s+((?:- \[[\sx.]\] .+\n)+)", content, re.MULTILINE)
+    if not match:
+        return ""
+    todo_items = match.group(1)
+    return todo_items
 
 if args.root:
     print(root_dir)
@@ -42,17 +60,24 @@ if args.list:
 if args.week:
     note = {
         "path": f"{root_dir}/public/{year}/week/{week}.txt",
-        "title": format_title(f"Week {week}"),
+        "content": format_title(f"Week {week}"),
     }
 else:
+    previous_entry_path = path_for_journal_entry_for_date(*get_previous_day(year, month, day))
+    previous_todo_items = ""
+    if os.path.exists(previous_entry_path):
+        with open(previous_entry_path) as file:
+            content = file.read()
+            previous_todo_items = extract_todo_list(content)
+
     note = {
-        "path": f"{root_dir}/public/{year}/{month}/{day}.txt",
-        "title": format_title(today.strftime("%A %d %b %Y")),
+        "path": path_for_journal_entry_for_date(year, month, day),
+        "content": format_title(today.strftime("%A %d %b %Y")) + f'\n\nTODO\n----\n\n{previous_todo_items}',
     }
 
 if not os.path.exists(note["path"]):
     os.makedirs(os.path.dirname(note["path"]), exist_ok=True)
     with open(note["path"], "w+") as file:
-        file.write(note["title"])
+        file.write(note["content"])
 
 print(note["path"])
