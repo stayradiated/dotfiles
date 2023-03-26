@@ -50,6 +50,7 @@ call dein#add('vim-utils/vim-troll-stopper')
 call dein#add('dhruvasagar/vim-table-mode')
 call dein#add('airblade/vim-rooter')
 call dein#add('othree/eregex.vim')
+call dein#add('github/copilot.vim')
 
 let g:coc_global_extensions = [ 'coc-json', 'coc-tsserver', 'coc-go' ]
 
