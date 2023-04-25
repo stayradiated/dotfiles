@@ -1,0 +1,26 @@
+#!/usr/bin/env zsh
+
+count=100
+precision=6
+
+# Parse command line arguments
+for arg in "$@"; do
+  case $arg in
+    --count=*)
+      count="${arg#*=}"
+      shift
+      ;;
+    --precision=*)
+      precision="${arg#*=}"
+      shift
+      ;;
+    *)
+      echo "Unknown argument: $arg"
+      exit 1
+      ;;
+  esac
+done
+
+gpx reduce-points --count="$count" \
+  | gpx reduce-precision --precision="$precision" \
+  | gpx json-coords
