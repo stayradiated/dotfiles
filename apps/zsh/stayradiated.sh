@@ -14,6 +14,10 @@ export GEM_HOME=/home/admin/src/ruby/gems
 export GEM_PATH=/home/admin/src/ruby/gems
 export PATH="${PATH}:${GEM_PATH}/bin"
 
+# pnpm
+export PNPM_HOME="/home/admin/.local/share/pnpm"
+export PATH="${PNPM_HOME}:${PATH}"
+
 export GPG_TTY=$(tty)
 
 # coc.nvim config
@@ -139,3 +143,4 @@ alias jem='nvi $(journal-utils --root)/public/emoji.txt'
 
 # tmux
 alias tm='tmux list-sessions && tmux attach -d || tmux new-session'
+
