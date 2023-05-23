@@ -2,7 +2,7 @@ SHELL := /bin/bash
 
 apps := $(CURDIR)/apps
 
-apps: 1password aerc anki beets bspwm charles darktable dbxcli docker exeditor electrum expo firefox gcloud git gh greenclip khal logview mitmproxy mycli ngrok npm obsidian pgcli pgp ranger sc-im ssh sxhkd tmux urlview vdirsyncer vim weechat xinput x11 xournalpp xscreensaver zoom zsh
+apps: 1password aerc anki beets bspwm charles darktable dbxcli docker exeditor electrum expo firefox gcloud gh git githubcopilot greenclip khal logview mitmproxy mycli ngrok npm obsidian pgcli pgp ranger sc-im ssh sxhkd tmux urlview vdirsyncer vim weechat xinput x11 xournalpp xscreensaver zoom zsh
 
 1password:
 
@@ -122,11 +122,6 @@ gcloud:
 	@ln -fs "$(apps)/gcloud/configurations/config_default.enc" ~/.config/gcloud/configurations/config_default
 	@ln -fs "$(apps)/gcloud/credentials.db.enc" ~/.config/gcloud/credentials.db
 
-git:
-
-	@echo "git..."
-	@ln -fs "$(apps)/git/config" ~/.gitconfig
-
 gh:
 
 	@echo "gh..."
@@ -134,6 +129,17 @@ gh:
 	@ln -fs "$(apps)/gh/config.yml" ~/.config/gh/config.yml
 	@ln -fs "$(apps)/gh/hosts.yml.enc" ~/.config/gh/hosts.yml
 	@ln -fs "$(apps)/gh/state.yml" ~/.config/gh/state.yml
+
+git:
+
+	@echo "git..."
+	@ln -fs "$(apps)/git/config" ~/.gitconfig
+
+githubcopilot:
+
+	@echo "github-copilot..."
+	@mkdir -p ~/.config/github-copilot
+	@ln -fs "$(apps)/github-copilot/hosts.json.enc" ~/.config/github-copilot/hosts.json
 
 greenclip:
 
