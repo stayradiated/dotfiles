@@ -2,7 +2,7 @@ SHELL := /bin/bash
 
 apps := $(CURDIR)/apps
 
-apps: 1password aerc anki beets bspwm charles darktable dbxcli docker exeditor electrum expo firefox gcloud git gh greenclip khal logview mitmproxy mycli ngrok npm pgcli pgp ranger sc-im ssh sxhkd tmux urlview vdirsyncer vim weechat xinput x11 xournalpp xscreensaver zoom zsh
+apps: 1password aerc anki beets bspwm charles darktable dbxcli docker exeditor electrum expo firefox gcloud git gh greenclip khal logview mitmproxy mycli ngrok npm obsidian pgcli pgp ranger sc-im ssh sxhkd tmux urlview vdirsyncer vim weechat xinput x11 xournalpp xscreensaver zoom zsh
 
 1password:
 
@@ -181,6 +181,12 @@ npm:
 
 	@echo "npm..."
 	@ln -fs "$(apps)/npm/npmrc.enc" ~/.npmrc
+
+obsidian:
+
+	@echo "obsidian..."
+	@mkdir -p ~/.config/obsidian
+	@ln -fs "$(apps)/obsidian/obsidian.json.enc" ~/.config/obsidian/obsidian.json
 
 pgcli:
 
