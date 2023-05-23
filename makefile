@@ -128,7 +128,6 @@ gh:
 	@mkdir -p ~/.config/gh
 	@ln -fs "$(apps)/gh/config.yml" ~/.config/gh/config.yml
 	@ln -fs "$(apps)/gh/hosts.yml.enc" ~/.config/gh/hosts.yml
-	@ln -fs "$(apps)/gh/state.yml" ~/.config/gh/state.yml
 
 git:
 
