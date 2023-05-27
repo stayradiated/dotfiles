@@ -3,6 +3,7 @@ autoload -U promptinit; promptinit
 # pure prompt
 PURE_PROMPT_SYMBOL='»'
 PURE_PROMPT_VICMD_SYMBOL='«'
+PURE_GIT_PULL=0
 prompt pure
 
 # golang
