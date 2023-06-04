@@ -96,6 +96,9 @@ alias offline='slack-status offline'
 # watson
 export WATSON_DIR="${HOME}/dotfiles/apps/watson"
 
+# pomo
+export POMO_DATABASE_URL="${HOME}/dotfiles/apps/pomo/pomo.db.enc"
+
 # when exiting ranger, cd to the same dir
 alias ranger='source ranger'
 
