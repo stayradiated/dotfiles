@@ -101,6 +101,12 @@ super + shift + y
 super + shift + slash
     rofi -show calc -modi calc -no-show-match -no-sort -font 'SFMono 12' -location 6
 
+super + shift + Tab
+    rofi -show window -modi window -font 'SFMono 12' -location 6
+
+super + shift + e
+    rofi -modi emoji -show emoji
+
 # Audio 
 {XF86AudioLowerVolume,XF86AudioRaiseVolume}
     amixer sset Master 1{-,+} --quiet
