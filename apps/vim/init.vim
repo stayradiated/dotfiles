@@ -92,7 +92,7 @@ set number
 set inccommand=split     " live substitution
 
 set list
-set listchars=tab:»\ ,trail:•,eol:⠶
+set listchars=tab:»\ ,trail:•,eol:\ 
 
 " Backup swap files
 set backup

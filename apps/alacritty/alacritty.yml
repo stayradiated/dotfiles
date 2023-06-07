@@ -91,22 +91,22 @@
 font:
   # Normal (roman) font face
   normal:
-    family: LiberationMono
+    family: sf mono
     style: Regular
 
   # Bold font face
   bold:
-    family: LiberationMono
+    family: sf mono
     style: Bold
 
   # Bold italic font face
   #bold_italic:
-    family: LiberationMono
+    family: sf mono
     style: Regular
 
   # The italic font face
   italic:
-    family: LiberationMono
+    family: sf mono
     style: Regular
 
   # Point size
