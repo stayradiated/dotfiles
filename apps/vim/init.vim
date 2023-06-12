@@ -52,7 +52,7 @@ call dein#add('airblade/vim-rooter')
 call dein#add('othree/eregex.vim')
 call dein#add('github/copilot.vim')
 
-let g:coc_global_extensions = [ 'coc-json', 'coc-tsserver', 'coc-go' ]
+let g:coc_global_extensions = [ 'coc-json', 'coc-tsserver', 'coc-go', 'coc-svelte' ]
 
 call dein#add('neoclide/coc.nvim', {'rev': 'release'})
 
@@ -64,6 +64,7 @@ call dein#add('pantharshit00/vim-prisma')
 call dein#add('jidn/vim-dbml')
 call dein#add('mracos/mermaid.vim')
 call dein#add('elel-dev/vim-astro-syntax')
+call dein#add('evanleck/vim-svelte')
 
 call dein#end()
 

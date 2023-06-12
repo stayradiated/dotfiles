@@ -1,4 +1,6 @@
 {
   "typescript.autoClosingTags": false,
-  "suggest.noselect": true
+  "typescript.preferences.useAliasesForRenames": false,
+  "suggest.noselect": true,
+  "svelte.enable-ts-plugin": true
 }
