@@ -186,6 +186,7 @@ alias pu='pushd'
 alias sa='alias | grep -i'
 alias type='type -a'
 alias rm='safe-rm'
+alias realrm='/usr/bin/rm'
 
 alias mv="${aliases[mv]:-mv} -i"
 alias cp="${aliases[cp]:-cp} -i"

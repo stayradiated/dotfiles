@@ -48,6 +48,7 @@ call dein#add('Yggdroot/indentLine')
 call dein#add('christianrondeau/vim-base64')
 call dein#add('vim-utils/vim-troll-stopper')
 call dein#add('dhruvasagar/vim-table-mode')
+" Changes Vim working directory to project root
 call dein#add('airblade/vim-rooter')
 call dein#add('othree/eregex.vim')
 call dein#add('github/copilot.vim')
@@ -291,6 +292,9 @@ let g:indentLine_char_list = ['|', '¦', '┆', '┊']
 
 " https://github.com/wellle/tmux-complete.vim
 let g:tmuxcomplete#trigger = ''
+
+" https://github.com/airblade/vim-rooter#how-to-identify-a-root-directory
+let g:rooter_patterns = ['.git']
 
 " denite.nvim
 call denite#custom#var('file/rec', 'command', ['rg', '--sort=path', '--files', '--glob', '!.git'])
