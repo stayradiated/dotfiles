@@ -7,6 +7,7 @@ alias gsw='git switch'
 
 # checkout has better autocompletion
 alias gco='git checkout'
+alias ghco='gh pr checkout'
 
 # copy a commit
 alias gcp='git cherry-pick'
@@ -36,3 +37,7 @@ alias g.='git add .'
 # commit
 alias gc='git commit'
 alias gcwip='git commit -m "wip @ $(date +''%D %T'')" --no-verify'
+
+# restore
+alias gr='git restore'
+alias grs='git restore --staged'
