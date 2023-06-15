@@ -32,7 +32,8 @@ alias gdc='git diff --cached'
 alias gs='git status'
 
 # add
-alias g.='git add .'
+alias ga='git add'
+alias ga.='git add .'
 
 # commit
 alias gc='git commit'

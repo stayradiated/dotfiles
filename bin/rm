@@ -1,0 +1,4 @@
+#!/usr/bin/env zsh
+
+echo 'FAIL: rm is disabled - please use `rip`'
+exit 1
