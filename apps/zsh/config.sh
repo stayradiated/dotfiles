@@ -186,6 +186,9 @@ alias mkdir="${aliases[mkdir]:-mkdir} -p"
 # alias sa='alias | grep -i'
 alias type='type -a'
 
+alias rm='rip-rm'
+alias realrm='/usr/bin/rm'
+
 alias mv="${aliases[mv]:-mv} -i"
 alias cp="${aliases[cp]:-cp} -i"
 alias ln="${aliases[ln]:-ln} -i"
