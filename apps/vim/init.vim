@@ -66,6 +66,8 @@ call dein#add('jidn/vim-dbml')
 call dein#add('mracos/mermaid.vim')
 call dein#add('elel-dev/vim-astro-syntax')
 call dein#add('evanleck/vim-svelte')
+" call dein#add('nvim-treesitter/nvim-treesitter')
+" call dein#add('nvim-treesitter/nvim-treesitter-context')
 
 call dein#end()
 
@@ -88,9 +90,9 @@ set gdefault             " replace everything by default
 set visualbell           " stop the beep
 set colorcolumn=81       " for cleaner code
 set showtabline=0        " hide tab line
-" set synmaxcol=120      " Limit syntax highlighting
+" set synmaxcol=120        " Limit syntax highlighting
 set number
-" set relativenumber
+set relativenumber
 set inccommand=split     " live substitution
 
 set list
@@ -287,7 +289,7 @@ let maplocalleader = "\\"
 let g:waikiki_roots = ["~/src/github.com/stayradiated/journal/public/wiki/"]
 let g:waikiki_default_maps = 1
 
-let g:indentLine_enabled = 0
+let g:indentLine_enabled = 1
 let g:indentLine_char_list = ['|', '¦', '┆', '┊']
 
 " https://github.com/wellle/tmux-complete.vim
