@@ -66,28 +66,11 @@ fi
 # don't lag when switching between insert/normal mode
 KEYTIMEOUT=1
 
-# z.lua
-export _ZL_DATA="${HOME}/dotfiles/apps/zsh/state/zlua.enc"
-
-# z foo       # cd to most frecent dir matching foo
-# z foo bar   # cd to most frecent dir matching foo and bar
-eval "$(lua5.3 /usr/local/bin/z.lua --init zsh)"
-
-# z -r foo    # cd to highest ranked dir matching foo
-# z -t foo    # cd to most recently accessed dir matching foo
-# z -l foo    # list matches instead of cd
-# z -c foo    # restrict matches to subdirs of $PWD
-# z -e foo    # echo the best match, don't cd
-# z -x path   # remove path from history
-# z -i foo    # cd with interactive selection
-# z -I foo    # cd with interactive selection using fzf
-# z -b foo    # cd to the parent directory starting with foo
-
-alias zz='z -I -t'
-alias zb='z -b'
-alias zc='z -c'
-
-alias zj='cd $(journal-utils --root)'
+# zoxide
+export _ZO_DATA_DIR="${HOME}/dotfiles/apps/zoxide"
+eval "$(zoxide init zsh --no-cmd)"
+alias z="__zoxide_z"
+alias zi="__zoxide_zi"
 
 alias online='slack-status online'
 alias afk='slack-status away'
@@ -98,9 +81,6 @@ export WATSON_DIR="${HOME}/dotfiles/apps/watson"
 
 # pomo
 export POMO_DATABASE_URL="${HOME}/dotfiles/apps/pomo/pomo.db.enc"
-
-# when exiting ranger, cd to the same dir
-alias ranger='source ranger'
 
 # typos
 alias celar='clear'
@@ -148,3 +128,17 @@ alias jem='nvi "$(journal-utils --root)/public/emoji.txt"'
 # tmux
 alias tm='tmux list-sessions && tmux attach -d || tmux new-session'
 
+# ranger
+ranger_cd() {
+  temp_file="$(mktemp -t "ranger_cd.XXXXXXXXXX")"
+  ranger --choosedir="$temp_file" -- "${@:-$PWD}"
+  if 
+    chosen_dir="$(cat -- "$temp_file")" &&
+    [ -n "$chosen_dir" ] &&
+    [ "$chosen_dir" != "$PWD" ]
+  then
+    cd -- "$chosen_dir"
+  fi
+  /bin/rm -f -- "$temp_file"
+}
+bindkey -s "^O" "ranger_cd^M"

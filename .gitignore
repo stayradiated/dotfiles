@@ -14,3 +14,6 @@
 
 # backup files
 *.bak
+
+# ranger plugins
+__pycache__

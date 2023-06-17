@@ -1,0 +1,6 @@
+#!/usr/bin/env zsh
+
+exec /usr/local/bin/ranger \
+  --confdir="${HOME}/dotfiles/apps/ranger" \
+  --datadir="${HOME}/dotfiles/apps/ranger/data" \
+  $@
