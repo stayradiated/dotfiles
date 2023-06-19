@@ -30,6 +30,8 @@ call dein#add('jeetsukumaran/vim-filebeagle')
 " call dein#add('tpope/vim-vinegar')
 call dein#add('christoomey/vim-tmux-navigator')
 
+call dein#add('neoclide/npm.nvim', {'build' : 'npm install'})
+
 " Editing
 call dein#add('arthurxavierx/vim-caser')
 call dein#add('tpope/vim-abolish')

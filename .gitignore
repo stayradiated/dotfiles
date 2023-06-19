@@ -17,3 +17,6 @@
 
 # ranger plugins
 __pycache__
+
+# sqlite journal files
+*.db.enc-journal
