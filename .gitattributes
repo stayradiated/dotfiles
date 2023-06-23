@@ -5,3 +5,4 @@ apps/ranger/data/**  filter=git-crypt diff=git-crypt
 apps/vdirsyncer/**   filter=git-crypt diff=git-crypt
 apps/watson/**       filter=git-crypt diff=git-crypt
 apps/zoxide/**       filter=git-crypt diff=git-crypt
+apps/pomo/**         filter=git-crypt diff=git-crypt

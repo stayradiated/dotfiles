@@ -42,3 +42,6 @@
 	program = gpg
 [feature]
 	manyFiles = true
+[blame]
+	ignoreRevsFile = .git-blame-ignore-revs
+	markUnblamableLines = true
