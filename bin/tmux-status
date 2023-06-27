@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
 POMO_STATUS=$(pomo status --stream project)
-PROJECT=$(echo "${POMO_STATUS}" | jq -r .value)
+PROJECT=$(echo "${POMO_STATUS}" | jq -r .labels[0])
 ELAPSED=$(echo "${POMO_STATUS}" | jq -r .elapsed)
-TOTAL=$(pomo summary --stream project --value "${PROJECT}" | jq -r .duration)
+TOTAL=$(pomo summary --stream project --label "${PROJECT}" | jq -r .duration)
 
 BATTERY=$(acpi -b | tail -n 1 | rg -o '\w+, \d+%')
 BATTERY=$(echo "${BATTERY}" | sed 's/Discharging,\s*/#[fg=colour1]▼/')

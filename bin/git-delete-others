@@ -1,0 +1,3 @@
+#!/usr/bin/env zsh
+
+git branch --list | rg -v '(main|george/)' | xargs -r git branch -D
