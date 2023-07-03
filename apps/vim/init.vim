@@ -26,8 +26,10 @@ let g:deoplete#enable_at_startup = 0
 call dein#add('Shougo/neosnippet.vim')
 
 call dein#add('neoclide/denite-git')
-call dein#add('jeetsukumaran/vim-filebeagle')
-" call dein#add('tpope/vim-vinegar')
+" call dein#add('jeetsukumaran/vim-filebeagle')
+call dein#add('tpope/vim-vinegar')
+call dein#add('nvim-lua/plenary.nvim')
+call dein#add('nvim-telescope/telescope.nvim', { 'rev': '0.1.2' })
 call dein#add('christoomey/vim-tmux-navigator')
 
 call dein#add('neoclide/npm.nvim', {'build' : 'npm install'})
