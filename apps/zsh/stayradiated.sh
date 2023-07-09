@@ -76,6 +76,9 @@ alias online='slack-status online'
 alias afk='slack-status away'
 alias offline='slack-status offline'
 
+# ncu
+alias ncu='ncu --cache'
+
 # watson
 export WATSON_DIR="${HOME}/dotfiles/apps/watson"
 
