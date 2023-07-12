@@ -8,6 +8,7 @@ echo '\n# HOME DIR'
 cd $HOME
 ls \
   -Alh \
+  -I .1password \
   -I .android \
   -I .antibody.sh \
   -I .bash_logout \
@@ -18,9 +19,12 @@ ls \
   -I .charles.config \
   -I .config \
   -I .docker \
+  -I .electrum \
+  -I .expo \
   -I .fzf \
   -I .fzf.zsh \
   -I .gitconfig \
+  -I .gnupg \
   -I .local \
   -I .mitmproxy \
   -I .mozilla \
@@ -44,7 +48,6 @@ ls \
   -I .wget-hsts \
   -I .xinitrc \
   -I .xournalpp \
-  -I .expo \
   -I .xscreensaver \
   -I .zcompcache \
   -I .zcompdump \
@@ -53,10 +56,13 @@ ls \
   -I Desktop \
   -I bus \
   -I data \
+  -I dconf \
   -I docker.sock \
   -I dotfiles  \
   -I downloads \
   -I exports \
+  -I nvim.*.0 \
+  -I rofi.pid \
   -I src \
   -I vaults
 
