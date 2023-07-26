@@ -4,3 +4,7 @@ source "${HOME}/dotfiles/apps/zsh/docker.sh"
 source "${HOME}/.antibody.sh"
 source "${HOME}/.config/fzf/fzf.zsh"
 source "${HOME}/dotfiles/apps/zsh/stayradiated.sh"
+
+# zCLI
+export ZCLI_INSTALL="/home/admin/.zcli"
+export PATH="$ZCLI_INSTALL/bin:$PATH"

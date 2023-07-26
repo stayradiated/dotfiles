@@ -57,7 +57,7 @@ call dein#add('airblade/vim-rooter')
 call dein#add('othree/eregex.vim')
 call dein#add('github/copilot.vim')
 
-let g:coc_global_extensions = [ 'coc-json', 'coc-tsserver', 'coc-go', 'coc-svelte' ]
+let g:coc_global_extensions = [ 'coc-json', 'coc-tsserver', 'coc-go', 'coc-svelte', 'coc-deno' ]
 
 call dein#add('neoclide/coc.nvim', {'rev': 'release'})
 
@@ -364,6 +364,7 @@ smap <C-CR>    <Plug>(neosnippet_expand_or_jump)
 xmap <C-CR>    <Plug>(neosnippet_expand_target)
 
 set conceallevel=2
+set concealcursor=
 
 " Functions
 " ------------------------------------------------------------------------------
