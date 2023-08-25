@@ -125,6 +125,9 @@ super + shift + bracketright
 super + shift + backslash
     tempcolor {5000,4000,3000,2000,1000,-x}
 
+super + shift + semicolon                                                             │
+    xcolor --scale=10 --preview-size=200 | xclip -selection clipboard -in
+
 # lock the screen
 F12
     /home/admin/dotfiles/bin/lock
