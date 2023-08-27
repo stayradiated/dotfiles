@@ -43,7 +43,7 @@ def path_for_journal_entry_for_date (year, month, day):
     # convert integer month to name
     # i.e. 05 -> May
     month_name = datetime.date(1900, month, 1).strftime('%B')
-    return f"{root_dir}/public/{year}/{padded_month}/{padded_day} {month_name} {year}.md"
+    return f"{root_dir}/{year}/{padded_month}/{padded_day} {month_name} {year}.md"
 
 def extract_todo_list (content):
     match = re.search(r"TODO\n----\s+((?:- \[[\sx.]\] .+\n)+)", content, re.MULTILINE)
@@ -57,12 +57,12 @@ if args.root:
     exit(0)
 
 if args.list:
-    print(f"{root_dir}/public/lists/{args.list}.txt")
+    print(f"{root_dir}/lists/{args.list}.txt")
     exit(0)
 
 if args.week:
     note = {
-        "path": f"{root_dir}/public/{year}/week/{week}.txt",
+        "path": f"{root_dir}/{year}/week/{week}.txt",
         "content": format_title(f"Week {week}"),
     }
 else:
