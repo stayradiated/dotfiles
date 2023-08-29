@@ -1,0 +1,2 @@
+[1;38;5;196mERROR[0m [1;38;5;196m2023-08-28T17:45:44.273[0m ThreadId(10) [1P:op-ipc/src/ipc/unix.rs:110] [1;38;5;196mXDG_RUNTIME_DIR file permissions too open, refusing to use[0m
+INFO  2023-08-28T17:45:44.274 ThreadId(10) [client:typescript] 1Password is already running, closing.
