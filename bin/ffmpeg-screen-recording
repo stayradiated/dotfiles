@@ -1,0 +1,14 @@
+#!/usr/bin/env zsh
+
+set -euo pipefail
+
+INPUT="${1}"
+
+PRESET="fast"
+TUNE="animation"
+BITRATE="500k"
+
+ffmpeg -y -i "${INPUT}" -preset "${PRESET}" -tune "${TUNE}" -c:v libx264 -b:v "${BITRATE}" -pass 1 -an -f null /dev/null
+
+ffmpeg -y -i "${INPUT}" -preset "${PRESET}" -tune "${TUNE}" -c:v libx264 -b:v "${BITRATE}" -pass 2 -c:a aac -b:a 128k "${INPUT}.mp4"
+
