@@ -61,7 +61,7 @@ ls \
   -I dotfiles  \
   -I downloads \
   -I exports \
-  -I nvim.*.0 \
+  -I nvim.* \
   -I rofi.pid \
   -I src \
   -I vaults
