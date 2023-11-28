@@ -40,9 +40,9 @@ def get_previous_day (year, month, day):
 def path_for_journal_entry_for_date (year, month, day):
     padded_month = str(month).rjust(2, '0')
     padded_day = str(day).rjust(2, '0')
-    # convert integer month to name
-    # i.e. 05 -> May
-    month_name = datetime.date(1900, month, 1).strftime('%B')
+    # convert integer month to 3 letter name
+    # i.e. 05 -> May, 12 -> Dec
+    month_name = datetime.date(1900, month, 1).strftime('%b')
     return f"{root_dir}/{year}/{padded_month}/{padded_day} {month_name} {year}.md"
 
 def extract_todo_list (content):
