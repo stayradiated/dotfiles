@@ -2,34 +2,20 @@
 
 const { exec } = require('child_process')
 
-const mirrors = [
-   "https://alpha.de.repo.voidlinux.org/",            // EU: Finland
-   "https://repo-fi.voidlinux.org/",                  // EU: Finland
-   "https://mirrors.servercentral.com/voidlinux/",    // USA: Chicago
-   "https://repo-us.voidlinux.org/",                  // USA: Kansas City
-   "https://mirror.ps.kz/voidlinux/",                 // Asia: Almaty, KZ
-   "https://mirrors.bfsu.edu.cn/voidlinux/",          // Asia: China
-   "https://mirrors.cnnic.cn/voidlinux/",             // Asia: China
-   "https://mirrors.tuna.tsinghua.edu.cn/voidlinux/", // Asia: China
-   "https://mirror.sjtu.edu.cn/voidlinux/",           // Asia: China
-   "https://void.webconverger.org/",                  // Asia: Singapore
-   "https://mirror.aarnet.edu.au/pub/voidlinux/",     // AU: Canberra
-   "https://ftp.swin.edu.au/voidlinux/",              // AU: Melbourne
-   "https://void.cijber.net/",                        // EU: Amsterdam, NL
-   "http://ftp.dk.xemacs.org/voidlinux/",             // EU: Denmark
-   "https://mirrors.dotsrc.org/voidlinux/",           // EU: Denmark
-   "https://quantum-mirror.hu/mirrors/pub/voidlinux/",// EU: Hungary
-   "https://voidlinux.mirror.garr.it/",               // EU: Italy
-   "https://mirror.fit.cvut.cz/voidlinux/",           // EU: Prague, CZ
-   "http://ftp.debian.ru/mirrors/voidlinux/",         // EU: Russia
-   "https://mirror.yandex.ru/mirrors/voidlinux/",     // EU: Russia
-   "https://cdimage.debian.org/mirror/voidlinux/",    // EU: Sweden
-   "https://ftp.acc.umu.se/mirror/voidlinux/",        // EU: Sweden
-   "https://ftp.lysator.liu.se/pub/voidlinux/",       // EU: Sweden
-   "https://ftp.sunet.se/mirror/voidlinux/",          // EU: Sweden
-   "https://void.sakamoto.pl/",                       // EU: Warsaw, PL
-   "https://mirror.clarkson.edu/voidlinux/",          // USA: New York
-]
+const getMirrorList = async () => {
+  const response = await fetch("https://raw.githubusercontent.com/void-linux/xmirror/master/mirrors.yaml")
+  const yaml = await response.text()
+
+  const lines = yaml.trim().split('\n')
+  const urls = lines.filter((line) => {
+    return line.includes('base_url')
+  }).map((line) => {
+    const index = line.indexOf('http')
+    return line.slice(index)
+  })
+
+  return urls
+}
 
 const getAvgPing = async (url) => {
    return new Promise((resolve, reject) => {
@@ -51,17 +37,23 @@ const getAvgPing = async (url) => {
 }
 
 void (async () => {
+  const mirrorList = await getMirrorList()
+
    let fastestPing = Infinity
    let fastestMirror = ''
 
-   for (const mirror of mirrors) {
+   for (const mirror of mirrorList) {
       const {hostname} = new URL(mirror)
-      const ping = await getAvgPing(hostname)
-      console.log(mirror, `${ping}ms`)
-      if (ping < fastestPing) {
-         fastestPing = ping
-         fastestMirror = mirror
-      }
+       try {
+        const ping = await getAvgPing(hostname)
+        console.log(mirror, `${ping}ms`)
+        if (ping < fastestPing) {
+           fastestPing = ping
+           fastestMirror = mirror
+        }
+       } catch (error) {
+         console.log(mirror, `ERROR`, error)
+       }
    }
 
    console.log(`\nFastest mirror is "${fastestMirror}" @ ${fastestPing}ms`)
