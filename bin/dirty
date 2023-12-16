@@ -25,10 +25,12 @@ ls \
   -I .fzf.zsh \
   -I .gitconfig \
   -I .gnupg \
+  -I .lesshst \
   -I .local \
   -I .mitmproxy \
   -I .mozilla \
   -I .myclirc \
+  -I .netrc \
   -I .ngrok2 \
   -I .node_repl_history \
   -I .npm \
@@ -54,6 +56,7 @@ ls \
   -I .zoom \
   -I .zshrc \
   -I Desktop \
+  -I Downloads \
   -I bus \
   -I data \
   -I dconf \
@@ -61,7 +64,6 @@ ls \
   -I dotfiles  \
   -I downloads \
   -I exports \
-  -I nvim.* \
   -I rofi.pid \
   -I src \
   -I vaults
