@@ -1,10 +1,18 @@
 #!/usr/bin/env zsh
 
+local regex_ssh='ssh_\w+_[A-z0-9!@#$%^&*-=_+]{45,50}'
+local regex_exports=';export \w+='
+
 cd /home/admin/dotfiles/apps/zsh/state/
 
 # show lines which are being removed
-rg 'ssh_\w+_[A-z0-9!@#$%^&*-=_+]{45,50}' ./history.enc
+rg "${regex_ssh}" ./history.enc
+rg "${regex_exports}" ./history.enc
 
 # remove lines
-rg -v 'ssh_\w+_[A-z0-9!@#$%^&*-=_+]{45,50}' ./history.enc > ./history.bak.enc
+< ./history.enc \
+| rg -v "${regex_exports}" \
+| rg -v "${regex_ssh}" \
+> ./history.bak.enc
+
 mv ./history.bak.enc ./history.enc
