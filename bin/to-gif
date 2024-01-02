@@ -3,11 +3,13 @@
 set -e
 
 INPUT=$(readlink -f "${1}")
+FPS=15
+WIDTH=640
 
 # https://unix.stackexchange.com/a/84980
 TMP_DIR=$(mktemp -d 2>/dev/null || mktemp -d -t 'mytmpdir')
 
 cd $TMP_DIR
-ffmpeg -i "${INPUT}" -vf "fps=15" "frame%04d.png"
-gifski --fps 20 --quality 80 -o "${INPUT}.gif" frame*.png
+ffmpeg -i "${INPUT}" -vf "fps=${FPS}" "frame%04d.png"
+gifski --width "${WIDTH}" --fps "${FPS}" --quality 80 -o "${INPUT}.gif" frame*.png
 rm -r $TMP_DIR
