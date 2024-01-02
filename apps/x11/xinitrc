@@ -1,3 +1,7 @@
+#!/usr/bin/env zsh
+
+export SHELL=/bin/zsh
+
 # use colemak
 setxkbmap us \
   -variant colemak \

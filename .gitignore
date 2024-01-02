@@ -20,3 +20,5 @@ __pycache__
 
 # sqlite journal files
 *.db.enc-journal
+
+/apps/1password/*.enc-*
