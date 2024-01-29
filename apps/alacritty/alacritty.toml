@@ -26,17 +26,17 @@ foreground = "#ffffff"
 size = 8.0
 
 [font.bold]
-family = "sf mono"
+family = "gomme"
 style = "Bold"
 
 [font.bold_italic]
-family = "sf mono"
+family = "gomme"
 style = "Regular"
 
 [font.italic]
-family = "sf mono"
+family = "gomme"
 style = "Regular"
 
 [font.normal]
-family = "sf mono"
+family = "gomme"
 style = "Regular"
