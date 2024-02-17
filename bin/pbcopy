@@ -1,0 +1,7 @@
+#!/usr/bin/env zsh
+
+if (( $+commands[xclip] )); then
+  exec xclip -selection clipboard -in
+elif (( $+commands[xsel] )); then
+  exec xsel --clipboard --input
+fi

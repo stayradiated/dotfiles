@@ -218,14 +218,6 @@ fi
 # macOS Everywhere
 alias o='xdg-open'
 
-if (( $+commands[xclip] )); then
-  alias pbcopy='xclip -selection clipboard -in'
-  alias pbpaste='xclip -selection clipboard -out'
-elif (( $+commands[xsel] )); then
-  alias pbcopy='xsel --clipboard --input'
-  alias pbpaste='xsel --clipboard --output'
-fi
-
 alias pbc='pbcopy'
 alias pbp='pbpaste'
 
