@@ -1,26 +1,8 @@
-[colors.bright]
-black = "#174954"
-blue = "#b5dbe4"
-cyan = "#a3d0c8"
-green = "#ade1b6"
-magenta = "#b6cbfa"
-red = "#e9b3bf"
-white = "#ffffff"
-yellow = "#fbf1cf"
-
-[colors.normal]
-black = "#001b22"
-blue = "#38c2e8"
-cyan = "#619e94"
-green = "#24ce7a"
-magenta = "#697fb1"
-red = "#dd4050"
-white = "#eeeeee"
-yellow = "#86ea5c"
-
-[colors.primary]
-background = "#001115"
-foreground = "#ffffff"
+import = [
+  "~/dotfiles/apps/alacritty/termorrow_dark.toml",
+  "~/dotfiles/apps/alacritty/termorrow_light.toml",
+  "~/dotfiles/apps/alacritty/high_contrast.toml",
+]
 
 [font]
 size = 8.0
