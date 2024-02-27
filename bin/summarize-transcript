@@ -1,0 +1,10 @@
+#!/usr/bin/env zsh
+
+# Usage: summarize-transcript <path-to-srt> <meeting-title>
+
+path_to_srt=$1
+meeting_title=$2
+
+extract-text-to-srt $path_to_srt \
+  | llm -m gpt-4-turbo-preview \
+    "Please provide detailed summarized notes for the '${meeting_title}' from this meeting transcript, with a focus on the main points and direct quotes." \
