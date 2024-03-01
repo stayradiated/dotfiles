@@ -1,8 +1,4 @@
-import = [
-  "~/dotfiles/apps/alacritty/termorrow_dark.toml",
-  "~/dotfiles/apps/alacritty/termorrow_light.toml",
-  "~/dotfiles/apps/alacritty/high_contrast.toml",
-]
+import = ["~/dotfiles/apps/alacritty/colors/high_contrast.toml"]
 
 [font]
 size = 8.0

@@ -1,3 +1,19 @@
 #!/usr/bin/env zsh
 
-sd -f m "^(\s*colors:).*$" "\$1 *${1}" ~/dotfiles/apps/alacritty/alacritty.yml
+colorscheme="${1}"
+
+path_to_colorscheme="${HOME}/dotfiles/apps/alacritty/colors/${colorscheme}.toml"
+
+if [[ ! -f "${path_to_colorscheme}" ]]; then
+  echo "⚠️ Colorscheme not found: ${colorscheme}"
+
+  echo "\nAvailable colorschemes:"
+  ls -1 ~/dotfiles/apps/alacritty/colors | sd '^(\w+)\.toml$' '• $1'
+
+  exit 1
+fi
+
+sd \
+  '/dotfiles/apps/alacritty/colors/\w+.toml' \
+  "/dotfiles/apps/alacritty/colors/${colorscheme}.toml" \
+  ~/dotfiles/apps/alacritty/alacritty.toml
