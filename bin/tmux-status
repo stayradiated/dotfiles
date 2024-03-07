@@ -15,4 +15,6 @@ TIME=$(date +"%H:%M")
 
 VOLUME=$(awk -F"[][]" '/Mono:/ { print $2 }' <(amixer sget Master))
 
-echo "#[fg=colour10]${TOTAL} #[fg=colour4]${PROJECT}#[fg=colour12] #[fg=colour3]${ELAPSED} #[fg=colour8]• ${BATTERY} #[fg=colour8]• #[fg=colour6]${DATE} #[fg=colour7]${TIME} #[fg=colour8]• #[fg=colour4]${VOLUME}"
+PROFILE=$(cat /sys/firmware/acpi/platform_profile | head --bytes 1 | tr '[:lower:]' '[:upper:]')
+
+echo "#[fg=colour2]${PROFILE} #[fg=colour10]${TOTAL} #[fg=colour4]${PROJECT}#[fg=colour12] #[fg=colour3]${ELAPSED} #[fg=colour8]• ${BATTERY} #[fg=colour8]• #[fg=colour6]${DATE} #[fg=colour7]${TIME} #[fg=colour8]• #[fg=colour4]${VOLUME}"
