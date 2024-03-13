@@ -56,6 +56,7 @@ call dein#add('dhruvasagar/vim-table-mode')
 call dein#add('airblade/vim-rooter')
 call dein#add('othree/eregex.vim')
 call dein#add('github/copilot.vim')
+call dein#add('ggandor/leap.nvim')
 
 let g:coc_global_extensions = [ 'coc-json', 'coc-tsserver', 'coc-go', 'coc-svelte', 'coc-deno' ]
 
@@ -232,8 +233,10 @@ nnoremap <leader>g :Goyo<CR>
 vnoremap <leader>t :Tabularize /
 vnoremap <leader>T :Tabularize /:\zs/l0l1<CR>
 
-" Edit current file path
-map <Leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
+" Edit current file path (escaping square brackets)
+map <Leader>e :e <C-R>=substitute(expand("%:p:h"), '\[', '\\[', '') . "/" <CR>
+
+:e /home/admin/src/github.com/bowlineai/bowline/src/routes/api/replicache/[workspacePublicId]/pull/diff/
 
 " mkdir current file path
 map <Leader>m :!mkdir <C-R>=expand("%:p:h") . "/" <CR>
@@ -277,6 +280,9 @@ nmap <leader>rn <Plug>(coc-rename)
 
 " Plugin Settings
 " ------------------------------------------------------------------------------
+
+" leap.nvim
+lua require('leap').create_default_mappings()
 
 " vim-table-mode
 let g:table_mode_map_prefix = '<leader>2'
