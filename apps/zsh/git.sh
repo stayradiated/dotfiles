@@ -37,7 +37,7 @@ alias ga.='git add .'
 
 # commit
 alias gc='git commit'
-alias gcwip='git commit -m "wip @ $(date +''%D %T'')" --no-verify'
+alias gcwip='git commit -m "work-in-progress @ $(date +''%Y.%m.%d %T'')" --no-verify'
 
 # restore
 alias gr='git restore'
