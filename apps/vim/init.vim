@@ -236,8 +236,6 @@ vnoremap <leader>T :Tabularize /:\zs/l0l1<CR>
 " Edit current file path (escaping square brackets)
 map <Leader>e :e <C-R>=substitute(expand("%:p:h"), '\[', '\\[', 'g') . "/" <CR>
 
-:e /home/admin/src/github.com/bowlineai/bowline/src/routes/api/replicache/[workspacePublicId]/pull/diff/
-
 " mkdir current file path
 map <Leader>m :!mkdir <C-R>=expand("%:p:h") . "/" <CR>
 
