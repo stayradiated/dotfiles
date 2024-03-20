@@ -1,0 +1,34 @@
+#!/usr/bin/env bun
+
+import * as srtparsejs from 'srtparsejs';
+import * as fs from 'fs/promises';
+import * as process from 'process';
+
+const filepath = Bun.argv[2]
+
+const srt = await fs.readFile(filepath, 'utf8');
+
+const parsed = srtparsejs.parse(srt);
+
+const result = parsed.reduce((state, entry) => {
+  let text = entry.text
+  let speaker = undefined
+
+  const match = text.match(/^(.*?):\s+(.*)$/)
+  if (match) {
+    speaker = match[1]
+    text = match[2]
+  }
+  if (speaker && speaker !== state.previousSpeaker) {
+    state.text.push(`\n${speaker}:`)
+    state.previousSpeaker = speaker
+  }
+
+  state.text.push(text)
+  return state
+}, {
+  text: [],
+  previousSpeaker: ''
+});
+
+console.log(result.text.join(' '));

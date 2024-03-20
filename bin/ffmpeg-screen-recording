@@ -2,13 +2,63 @@
 
 set -euo pipefail
 
-INPUT="${1}"
-BITRATE="${2:-500k}"
+# Check if required commands are available
+for cmd in ffmpeg ffprobe; do
+    if ! command -v $cmd &> /dev/null; then
+        echo "Error: $cmd could not be found"
+        exit 1
+    fi
+done
 
+if [ "$#" -ne 2 ]; then
+    echo "Warning: Input arguments not set correctly."
+    echo "Usage: $0 <input_file> <target_file_size_in_MiB>"
+    exit 1
+fi
+
+INPUT="${1}"
+TARGET_SIZE_MB="${2}"
+
+# ultrafast
+# superfast
+# veryfast
+# faster
+# fast
+# medium
+# slow
+# slower
+# veryslow 
 PRESET="fast"
+
+# film – use for high quality movie content; lowers deblocking
+# animation – good for cartoons; uses higher deblocking and more reference frames
+# grain – preserves the grain structure in old, grainy film material
+# stillimage – good for slideshow-like content
+# fastdecode – allows faster decoding by disabling certain filters
+# zerolatency – good for fast encoding and low-latency streaming 
 TUNE="animation"
 
-# ffmpeg -y -i "${INPUT}" -preset "${PRESET}" -tune "${TUNE}" -c:v libx264 -b:v "${BITRATE}" -pass 1 -an -f null /dev/null
-# ffmpeg -y -i "${INPUT}" -preset "${PRESET}" -tune "${TUNE}" -c:v libx264 -b:v "${BITRATE}" -pass 2 -c:a aac -b:a 128k "${INPUT}.mp4"
+AUDIO_BITRATE_KBITS=$((128)) # 128k audio bitrate in kbits
 
-ffmpeg -y -i "${INPUT}" -preset "${PRESET}" -tune "${TUNE}" -c:v libx264 -b:v "${BITRATE}" -profile:v main -c:a aac -b:a 128k "${INPUT}.mp4"
+# Get duration in seconds
+DURATION=$(ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 "${INPUT}")
+
+# Calculate target total bitrate
+TARGET_TOTAL_BITRATE_KBITS=$(( (${TARGET_SIZE_MB} * 8388.608) / DURATION ))
+
+# Calculate video bitrate by subtracting audio bitrate
+VIDEO_BITRATE_KBITS=$((${TARGET_TOTAL_BITRATE_KBITS} - ${AUDIO_BITRATE_KBITS}))
+
+# Convert bitrates to bit/s for ffmpeg
+VIDEO_BITRATE="${VIDEO_BITRATE_KBITS}k"
+AUDIO_BITRATE="${AUDIO_BITRATE_KBITS}k"
+
+echo "Target Video Bitrate: ${VIDEO_BITRATE}"
+
+# Perform two-pass encoding
+# ffmpeg -y -i "${INPUT}" -preset "${PRESET}" -tune "${TUNE}" -c:v libx264 -b:v "${VIDEO_BITRATE}" -pass 1 -an -f null /dev/null
+# ffmpeg -y -i "${INPUT}" -preset "${PRESET}" -tune "${TUNE}" -c:v libx264 -b:v "${VIDEO_BITRATE}" -pass 2 -c:a aac -b:a "${AUDIO_BITRATE}" "${INPUT%.*}_converted.mp4"
+
+ffmpeg -y -i "${INPUT}" -preset "${PRESET}" -tune "${TUNE}" -c:v libx264 -b:v "${VIDEO_BITRATE}" -c:a aac -b:a "${AUDIO_BITRATE}" "${INPUT%.*}_converted.mp4"
+
+echo "Conversion completed: ${INPUT%.*}_converted.mp4"
