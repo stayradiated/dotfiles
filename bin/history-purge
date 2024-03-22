@@ -17,7 +17,7 @@ rg "${regex_header_bearer}" ./history.enc
 < ./history.enc \
 | rg -v "${regex_exports}" \
 | rg -v "${regex_ssh}" \
-| sd "${regex_header_bearer}" '"$1Bearer $AUTH_TOKEN"' \
+| sd "${regex_header_bearer}" '"${1}Bearer $AUTH_TOKEN"' \
 > ./history.bak.enc
 
 mv ./history.bak.enc ./history.enc
