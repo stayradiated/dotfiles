@@ -1,23 +1,23 @@
 #!/usr/bin/env zsh
 
+set -euo pipefail
+
 regex_ssh='ssh_\w+_[A-z0-9!@#$%^&*-=_+]{45,50}'
 regex_exports=';export \w+='
-
-# -e HASURA_ACTIONS_AUTHORIZATION_HEADER='Bearer unlockedinfinity' \\
-regex_header_bearer="['\"]([aA]uthorization:\\s*)[bB]earer\\s+[^$][^'\"]+['\"]"
+regex_header_bearer="['\"]([aA]uthorization:\\s*)?[bB]earer\\s+[^$][^'\"]+['\"]"
 
 cd /home/admin/dotfiles/apps/zsh/state/
 
 # show lines which are being removed
-rg "${regex_ssh}" ./history.enc
-rg "${regex_exports}" ./history.enc
+# rg "${regex_ssh}" ./history.enc
+# rg "${regex_exports}" ./history.enc
 rg "${regex_header_bearer}" ./history.enc
 
 # remove lines
 < ./history.enc \
 | rg -v "${regex_exports}" \
 | rg -v "${regex_ssh}" \
-| sd "${regex_header_bearer}" '"${1}Bearer $AUTH_TOKEN"' \
+| sd "${regex_header_bearer}" '"${1}Bearer $$AUTH_TOKEN"' \
 > ./history.bak.enc
 
 mv ./history.bak.enc ./history.enc
