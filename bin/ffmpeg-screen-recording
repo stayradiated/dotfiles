@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-set -euo pipefail
+set -euxo pipefail
 
 # Check if required commands are available
 for cmd in ffmpeg ffprobe; do
@@ -19,6 +19,16 @@ fi
 INPUT="${1}"
 TARGET_SIZE_MB="${2}"
 
+if [ ! -f "${INPUT}" ]; then
+    echo "Error: Input file does not exist."
+    exit 1
+fi
+
+if ! [[ "${TARGET_SIZE_MB}" =~ ^[0-9]+$ ]]; then
+    echo "Error: Target file size must be a positive integer."
+    exit 1
+fi
+
 # ultrafast
 # superfast
 # veryfast
@@ -28,26 +38,24 @@ TARGET_SIZE_MB="${2}"
 # slow
 # slower
 # veryslow 
-PRESET="fast"
-
-# film – use for high quality movie content; lowers deblocking
-# animation – good for cartoons; uses higher deblocking and more reference frames
-# grain – preserves the grain structure in old, grainy film material
-# stillimage – good for slideshow-like content
-# fastdecode – allows faster decoding by disabling certain filters
-# zerolatency – good for fast encoding and low-latency streaming 
-TUNE="animation"
+PRESET="medium"
 
 AUDIO_BITRATE_KBITS=$((128)) # 128k audio bitrate in kbits
 
 # Get duration in seconds
 DURATION=$(ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 "${INPUT}")
 
-# Calculate target total bitrate
-TARGET_TOTAL_BITRATE_KBITS=$(( (${TARGET_SIZE_MB} * 8388.608) / DURATION ))
+# Constants for bitrate calculations
+BITRATE_CONVERSION_FACTOR=8388.608 # Convert MiB to kbits
+
+# Calculate target total bitrate in kbits
+TARGET_TOTAL_BITRATE_KBITS=$(( (${TARGET_SIZE_MB} * ${BITRATE_CONVERSION_FACTOR}) / DURATION ))
 
 # Calculate video bitrate by subtracting audio bitrate
 VIDEO_BITRATE_KBITS=$((${TARGET_TOTAL_BITRATE_KBITS} - ${AUDIO_BITRATE_KBITS}))
+
+# Round video bitrate to nearest whole number
+VIDEO_BITRATE_KBITS=$(printf "%.0f" ${VIDEO_BITRATE_KBITS})
 
 # Convert bitrates to bit/s for ffmpeg
 VIDEO_BITRATE="${VIDEO_BITRATE_KBITS}k"
@@ -55,10 +63,22 @@ AUDIO_BITRATE="${AUDIO_BITRATE_KBITS}k"
 
 echo "Target Video Bitrate: ${VIDEO_BITRATE}"
 
-# Perform two-pass encoding
-# ffmpeg -y -i "${INPUT}" -preset "${PRESET}" -tune "${TUNE}" -c:v libx264 -b:v "${VIDEO_BITRATE}" -pass 1 -an -f null /dev/null
-# ffmpeg -y -i "${INPUT}" -preset "${PRESET}" -tune "${TUNE}" -c:v libx264 -b:v "${VIDEO_BITRATE}" -pass 2 -c:a aac -b:a "${AUDIO_BITRATE}" "${INPUT%.*}_converted.mp4"
-
-ffmpeg -y -i "${INPUT}" -preset "${PRESET}" -tune "${TUNE}" -c:v libx264 -b:v "${VIDEO_BITRATE}" -c:a aac -b:a "${AUDIO_BITRATE}" "${INPUT%.*}_converted.mp4"
+ffmpeg -y \
+  -i "${INPUT}" \
+  -preset "${PRESET}" \
+  -vf "scale=1280:-2,fps=30"
+  -c:v libx264 \
+  -crf 35 \
+  -b:v "${VIDEO_BITRATE}" \
+  -c:a aac \
+  -b:a "${AUDIO_BITRATE}" \
+  -maxrate 2500k \
+  -bufsize 5000k \
+  -movflags +faststart \
+  "${INPUT%.*}_converted.mp4"
 
 echo "Conversion completed: ${INPUT%.*}_converted.mp4"
+
+# Perform two-pass encoding
+# ffmpeg -y -i "${INPUT}" -preset "${PRESET}" -c:v libx264 -b:v "${VIDEO_BITRATE}" -pass 1 -an -f null /dev/null
+# ffmpeg -y -i "${INPUT}" -preset "${PRESET}" -c:v libx264 -b:v "${VIDEO_BITRATE}" -pass 2 -c:a aac -b:a "${AUDIO_BITRATE}" "${INPUT%.*}_converted.mp4"
