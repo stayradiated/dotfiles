@@ -2,7 +2,7 @@ SHELL := /bin/bash
 
 apps := $(CURDIR)/apps
 
-apps: 1password aerc anki beets bspwm charles darktable dbxcli docker exeditor electrum expo firefox gcloud gh git githubcopilot greenclip khal logview mitmproxy mycli ngrok npm obsidian pgcli pgp ranger sc-im ssh sxhkd tmux urlview vdirsyncer vim weechat xinput x11 xournalpp xscreensaver zoom zsh
+apps: 1password aerc anki beets bspwm charles darktable dbxcli docker exeditor electrum expo firefox gcloud gh git githubcopilot greenclip khal logview llm mitmproxy mycli ngrok npm obsidian pgcli pgp ranger sc-im ssh sxhkd tmux urlview vdirsyncer vim weechat xinput x11 xournalpp xscreensaver zoom zsh
 
 1password:
 
@@ -160,6 +160,12 @@ logview:
 	@echo "logview..."
 	@mkdir -p ~/.config/logview
 	@ln -fs "$(apps)/logview/config.json.enc" ~/.config/logview/config.json
+
+llm:
+
+	@echo "llm..."
+	@mkdir -p ~/.config/io.datasette.llm
+	@ln -fs "$(apps)/llm/keys.json.enc" ~/.config/io.datasette.llm/keys.json
 
 mitmproxy:
 
