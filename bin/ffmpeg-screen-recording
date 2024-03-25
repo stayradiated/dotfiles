@@ -66,9 +66,9 @@ echo "Target Video Bitrate: ${VIDEO_BITRATE}"
 ffmpeg -y \
   -i "${INPUT}" \
   -preset "${PRESET}" \
-  -vf "scale=1280:-2,fps=30"
+  -vf "fps=30" \
   -c:v libx264 \
-  -crf 35 \
+  -crf 25 \
   -b:v "${VIDEO_BITRATE}" \
   -c:a aac \
   -b:a "${AUDIO_BITRATE}" \
