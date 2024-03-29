@@ -1,16 +1,16 @@
 #!/usr/bin/env bun
 
-import * as srtparsejs from 'srtparsejs';
+import { parse } from '@plussub/srt-vtt-parser';
 import * as fs from 'fs/promises';
 import * as process from 'process';
 
 const filepath = Bun.argv[2]
 
-const srt = await fs.readFile(filepath, 'utf8');
+const rawContent = await fs.readFile(filepath, 'utf8');
 
-const parsed = srtparsejs.parse(srt);
+const { entries } = parse(rawContent);
 
-const result = parsed.reduce((state, entry) => {
+const result = entries.reduce((state, entry) => {
   let text = entry.text
   let speaker = undefined
 
