@@ -4,17 +4,17 @@ import = ["~/dotfiles/apps/alacritty/colors/termorrow_dark.toml"]
 size = 8.0
 
 [font.bold]
-family = "gomme"
+family = "sf mono"
 style = "Bold"
 
 [font.bold_italic]
-family = "gomme"
+family = "sf mono"
 style = "Regular"
 
 [font.italic]
-family = "gomme"
+family = "sf mono"
 style = "Regular"
 
 [font.normal]
-family = "gomme"
+family = "sf mono"
 style = "Regular"
