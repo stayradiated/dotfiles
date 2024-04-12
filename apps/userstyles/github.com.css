@@ -1,0 +1,27 @@
+code, .text-mono {
+  font-family: monospace !important;
+}
+
+.merge-status-list {
+  max-height: 1000px !important;
+}
+
+.ActionListItem,
+.checks-list-item-name,
+.merge-status-list .merge-status-item {
+  &:has(.octicon-x),
+  &:has(.octicon-x-circle-fill) {
+    background: #d1242f;
+
+    .color-fg-muted,
+    .octicon,
+    .SideNav-subItem,
+    .ActionListItem-label {
+      color: #fff !important;
+    }
+
+    &:hover {
+      background: color-mix(in lch, #d1242f, #fff 10%);
+    }
+  }
+}

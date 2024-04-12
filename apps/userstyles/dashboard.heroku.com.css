@@ -1,0 +1,22 @@
+.top-nav .open-app-button[href*="runn-prod-"]:before  {
+  content: "PRODUCTION";
+  display: block;
+
+  width: 150px;
+  height: 32px;
+  line-height: 32px;
+
+  position: absolute;
+  right: 190px;
+
+  border: 1px solid #9f2828;
+  background: #ff3838;
+  color: #fff;
+  font-size: 14px;
+
+  border-radius: 4px;
+  letter-spacing: 2px;
+  pointer-events: none;
+
+  box-shadow: 0 0 0 4000px rgba(255, 0, 0, 0.2);
+}
