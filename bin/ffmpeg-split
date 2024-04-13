@@ -1,0 +1,81 @@
+#!/usr/bin/env zsh
+
+# Originally written by Alexis Bezverkhyy <alexis@grapsus.net> in 2011
+# This is free and unencumbered software released into the public domain.
+# For more information, please refer to <http://unlicense.org/>
+# https://stackoverflow.com/a/13289426
+
+function usage {
+  cat << EOF
+Usage : ffmpeg-split input.file chunk-duration [output-filename-format]
+  - input file may be any kind of file recognized by ffmpeg
+  - chunk duration must be in seconds or HH:MM:SS format
+  - output filename format must be printf-like, for example myvideo-part-%04d.avi
+  - if no output filename format is given, it will be computed automatically from input filename
+EOF
+}
+
+function parse_duration {
+  local duration=$1
+  if [[ $duration =~ ^([0-9]+):([0-5]?[0-9]):([0-5]?[0-9])$ ]]; then
+    # Parse HH:MM:SS format to seconds
+    local hours=${match[1]}
+    local minutes=${match[2]}
+    local seconds=${match[3]}
+    echo $((hours * 3600 + minutes * 60 + seconds))
+  elif [[ $duration =~ ^[0-9]+$ ]]; then
+    # Already in seconds
+    echo $duration
+  else
+    echo "Invalid format: $duration. Please use HH:MM:SS or seconds."
+    exit 1
+  fi
+}
+
+if [[ $# -lt 2 ]]; then
+  usage
+  exit 1
+fi
+
+IN_FILE="$1"
+CHUNK_LEN_RAW="$2"
+CHUNK_LEN=$(parse_duration "$CHUNK_LEN_RAW")
+OUT_FILE_FORMAT="$3"
+
+# Extract duration using ffmpeg
+DURATION_HMS=$(ffmpeg -i "$IN_FILE" 2>&1 | grep "Duration" | awk '{print $2}' | tr -d ',')
+DURATION_H=$(echo "$DURATION_HMS" | cut -d ':' -f 1)
+DURATION_M=$(echo "$DURATION_HMS" | cut -d ':' -f 2)
+DURATION_S=$(echo "$DURATION_HMS" | cut -d ':' -f 3 | cut -d '.' -f 1)
+DURATION=$(( (DURATION_H * 3600) + (DURATION_M * 60) + DURATION_S ))
+
+if [[ "$DURATION" -le 0 ]]; then
+  echo "Invalid input video"
+  usage
+  exit 1
+fi
+
+if [[ "$CHUNK_LEN" -le 0 ]]; then
+  echo "Invalid chunk size"
+  usage
+  exit 2
+fi
+
+if [[ -z "$OUT_FILE_FORMAT" ]]; then
+  FILE_EXT="${IN_FILE##*.}"
+  FILE_NAME="${IN_FILE%.*}"
+  OUT_FILE_FORMAT="${FILE_NAME}-%03d.${FILE_EXT}"
+  echo "Using default output file format: $OUT_FILE_FORMAT"
+fi
+
+N=1
+OFFSET=0
+N_FILES=$((DURATION / CHUNK_LEN + 1))
+
+while [[ "$OFFSET" -lt "$DURATION" ]]; do
+  OUT_FILE=$(printf "$OUT_FILE_FORMAT" "$N")
+  echo "writing $OUT_FILE ($N/$N_FILES)..."
+  ffmpeg -i "$IN_FILE" -vcodec copy -acodec copy -ss "$OFFSET" -t "$CHUNK_LEN" "$OUT_FILE"
+  ((N++))
+  ((OFFSET += CHUNK_LEN))
+done
