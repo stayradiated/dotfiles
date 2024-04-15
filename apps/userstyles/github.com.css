@@ -2,7 +2,7 @@ code, .text-mono {
   font-family: monospace !important;
 }
 
-.merge-status-list {
+.Details--on .merge-status-list {
   max-height: 1000px !important;
 }
 
