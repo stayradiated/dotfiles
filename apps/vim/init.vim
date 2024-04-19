@@ -26,7 +26,7 @@ let g:deoplete#enable_at_startup = 0
 call dein#add('Shougo/neosnippet.vim')
 
 call dein#add('neoclide/denite-git')
-call dein#add('jeetsukumaran/vim-filebeagle')
+call dein#add('stayradiated/vim-filebeagle')
 " call dein#add('tpope/vim-vinegar')
 call dein#add('nvim-lua/plenary.nvim')
 call dein#add('nvim-telescope/telescope.nvim', { 'rev': '0.1.2' })
@@ -59,7 +59,6 @@ call dein#add('github/copilot.vim')
 call dein#add('ggandor/leap.nvim')
 
 let g:coc_global_extensions = [ 'coc-json', 'coc-tsserver', 'coc-go', 'coc-svelte', 'coc-deno' ]
-
 call dein#add('neoclide/coc.nvim', {'rev': 'release'})
 
 " Languages
