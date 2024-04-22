@@ -1,0 +1,31 @@
+#!/usr/bin/env zsh
+
+# Navigate to the Vim configuration directory
+cd ~/dotfiles/apps/vim
+
+# Toggle function between init.lua and init.vim
+toggle_vim_config() {
+  # Check if init.lua is currently active
+  if [[ -f init.lua ]]; then
+    echo "Switching to init.vim configuration..."
+    # Backup current init.lua
+    mv init.lua init.lua.bak
+    # Restore init.vim if it was previously backed up
+    if [[ -f init.vim.bak ]]; then
+      mv init.vim.bak init.vim
+    fi
+  elif [[ -f init.vim ]]; then
+    echo "Switching to init.lua configuration..."
+    # Backup current init.vim
+    mv init.vim init.vim.bak
+    # Restore init.lua if it was previously backed up
+    if [[ -f init.lua.bak ]]; then
+      mv init.lua.bak init.lua
+    fi
+  else
+    echo "No valid Vim configuration found to switch."
+  fi
+}
+
+# Execute the toggle function
+toggle_vim_config
