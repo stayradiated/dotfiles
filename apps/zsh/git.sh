@@ -42,3 +42,7 @@ alias gcwip='git commit -m "work-in-progress @ $(date +''%Y.%m.%d %T'')" --no-ve
 # restore
 alias gr='git restore'
 alias grs='git restore --staged'
+
+# merge main
+alias gmm='git merge origin/main -m "Merge upstreams changes from main branch"'
+alias gmdev='git merge origin/development -m "Merge upstreams changes from development branch"'
