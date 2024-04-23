@@ -46,3 +46,6 @@ alias grs='git restore --staged'
 # merge main
 alias gmm='git merge origin/main -m "Merge upstreams changes from main branch"'
 alias gmdev='git merge origin/development -m "Merge upstreams changes from development branch"'
+
+# lazygit
+alias glz='lazygit'
