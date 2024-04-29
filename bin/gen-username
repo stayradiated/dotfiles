@@ -1,9 +1,48 @@
-#!/usr/bin/env node
-// vi:syntax=javascript
+#!/usr/bin/env bun
+// vi:syntax=typescript
 
-const COUNT = 5
+import inquirer from "inquirer";
+import clipboardy from "clipboardy";
 
-const words = `
+const COUNT = 30;
+
+const dict = getWords()
+  .split("\n")
+  .filter(Boolean)
+  .map((word) => word.trim());
+
+const randomUsername = () => pick(dict) + pick(dict);
+
+const usernames = new Array(COUNT).fill().map(randomUsername);
+
+// Create a choices array for inquirer
+const choices = usernames.map((name, index) => ({ name, value: name }));
+
+inquirer
+  .prompt([
+    {
+      type: "list",
+      name: "selectedUsername",
+      message: "Select a username to copy to clipboard:",
+      choices,
+    },
+  ])
+  .then((answers) => {
+    clipboardy.writeSync(answers.selectedUsername);
+    console.log(
+      `"${answers.selectedUsername}" has been copied to the clipboard.`,
+    );
+  })
+  .catch((error) => {
+    console.error("An error occurred:", error);
+  });
+
+function pick(array: string[]): string {
+  return array[Math.floor(array.length * Math.random())];
+}
+
+function getWords(): string {
+  return `
 abandoned
 above
 accept
@@ -1437,12 +1476,5 @@ zigzag
 zilch
 zipped
 zipper
-`
-
-const dict = words.split('\n').filter(Boolean).map((word) => word.trim())
-
-const pick = (array) => array[Math.floor(array.length * Math.random())]
-
-const randomUsername = () => pick(dict) + pick(dict)
-
-console.log(new Array(COUNT).fill().map(randomUsername).join('\n'))
+`;
+}
