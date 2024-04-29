@@ -1,9 +1,50 @@
-#!/usr/bin/env node
-// vi:syntax=javascript
+#!/usr/bin/env bun
+// vi:syntax=typescript
 
-const COUNT = 5
+import inquirer from "inquirer";
+import clipboardy from "clipboardy";
 
-const firstNames = `
+const COUNT = 30;
+
+const dict = (words) =>
+  words
+    .split("\n")
+    .filter(Boolean)
+    .map((word) => word.trim());
+
+const randomPerson = () =>
+  pick(dict(getFirstNames())) + " " + pick(dict(getLastNames()));
+
+const Persons = new Array(COUNT).fill().map(randomPerson);
+
+// Create a choices array for inquirer
+const choices = Persons.map((name, index) => ({ name, value: name }));
+
+inquirer
+  .prompt([
+    {
+      type: "list",
+      name: "selectedPerson",
+      message: "Select a Person to copy to clipboard:",
+      choices,
+    },
+  ])
+  .then((answers) => {
+    clipboardy.writeSync(answers.selectedPerson);
+    console.log(
+      `"${answers.selectedPerson}" has been copied to the clipboard.`,
+    );
+  })
+  .catch((error) => {
+    console.error("An error occurred:", error);
+  });
+
+function pick(array: string[]): string {
+  return array[Math.floor(array.length * Math.random())];
+}
+
+function getFirstNames(): string {
+  return `
 Aaron
 Abby
 Abdul
@@ -2004,9 +2045,11 @@ Zachary
 Zachery
 Zane
 Zelma
-`
+`;
+}
 
-const lastNames = `
+function getLastNames(): string {
+  return `
 Abbott
 Acevedo
 Acosta
@@ -3010,12 +3053,5 @@ Zavala
 Zhang
 Zimmerman
 Zuniga
-`
-
-const dict = (words) => words.split('\n').filter(Boolean).map((word) => word.trim())
-
-const pick = (array) => array[Math.floor(array.length * Math.random())]
-
-const randomName = () => pick(dict(firstNames)) + ' ' + pick(dict(lastNames))
-
-console.log(new Array(COUNT).fill().map(randomName).join('\n'))
+`;
+}
