@@ -1,0 +1,41 @@
+#!/usr/bin/env zsh
+
+set -euo pipefail
+
+# Configuration file path
+CONF_FILE="/etc/asound.conf"
+
+# Function to set audio output to HDMI
+set_hdmi() {
+    cat << EOF | sudo tee $CONF_FILE > /dev/null
+pcm.!default {
+  type hw
+  card PCH
+  device 3
+}
+EOF
+}
+
+# Function to set audio output to laptop speakers
+set_speakers() {
+    cat << EOF | sudo tee $CONF_FILE > /dev/null
+pcm.!default {
+  type hw
+  card PCH
+  device 0
+}
+EOF
+}
+
+# Read the current device from the configuration
+CURRENT_DEVICE=$(cat $CONF_FILE | grep device | awk '{ print $2 }')
+
+# Toggle the setting based on the current configuration
+if [[ "$CURRENT_DEVICE" == "3" ]]; then
+    set_speakers
+    echo "Audio switched to laptop speakers."
+else
+    set_hdmi
+    echo "Audio switched to HDMI."
+fi
+
