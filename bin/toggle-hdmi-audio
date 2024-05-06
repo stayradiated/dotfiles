@@ -27,6 +27,14 @@ pcm.!default {
 EOF
 }
 
+# does the $CONF_FILE exist?
+if [[ ! -f $CONF_FILE ]]; then
+    echo "Configuration file not found. Creating a new one."
+    set_hdmi
+    echo "Audio switched to HDMI."
+    exit 0
+fi
+
 # Read the current device from the configuration
 CURRENT_DEVICE=$(cat $CONF_FILE | grep device | awk '{ print $2 }')
 
