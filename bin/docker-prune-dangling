@@ -1,8 +1,10 @@
 #!/usr/bin/env zsh
 
 # delete all old dangling images that weren't referenced in a docker build
+#
+# usage:
 # $ docker build . | tee output.log
-# $ docker-prune-dangling < output.log
+# $ < output.log | docker-prune-dangling
 
 EXP=$(cat /dev/stdin \
 	| rg -o '^ ---> \w{12}' \
