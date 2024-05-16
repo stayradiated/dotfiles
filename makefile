@@ -166,6 +166,7 @@ llm:
 	@echo "llm..."
 	@mkdir -p ~/.config/io.datasette.llm
 	@ln -fs "$(apps)/llm/keys.json.enc" ~/.config/io.datasette.llm/keys.json
+	@ln -fs "$(apps)/llm/default_model.txt" ~/.config/io.datasette.llm/default_model.txt
 
 mitmproxy:
 
