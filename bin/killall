@@ -1,0 +1,15 @@
+#!/usr/bin/env zsh
+
+# Define an associative array for custom process paths
+typeset -A process_paths
+process_paths=(
+    "firefox" "/opt/firefox/firefox-bin"
+    "chrome"  "/opt/google/chrome-beta/chrome"
+)
+
+# Check if the process has a custom path, otherwise use the original name
+if [[ -n "${process_paths[$1]}" ]]; then
+    exec /usr/bin/killall "${process_paths[$1]}"
+else
+    exec /usr/bin/killall "$@"
+fi
