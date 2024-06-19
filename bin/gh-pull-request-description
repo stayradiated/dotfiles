@@ -1,5 +1,0 @@
-#!/usr/bin/env zsh
-
-comments=$(gh pr view --json commits | jq -r '.commits[] | .messageHeadline + "\n" + .messageBody + "\n\n"')
-
-echo $comments | llm -s "$(cat ~/dotfiles/apps/llm/prompts/gh-pull-request-prompt.txt)"
