@@ -278,6 +278,11 @@ nmap <leader>rn <Plug>(coc-rename)
 " Plugin Settings
 " ------------------------------------------------------------------------------
 
+" copilot.vim
+let g:copilot_filetypes = {
+  \ 'markdown': v:false,
+  \ }
+
 " leap.nvim
 lua require('leap').create_default_mappings()
 
