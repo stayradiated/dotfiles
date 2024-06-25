@@ -2,25 +2,7 @@
 
 # ANSI color codes for styling the output
 RED='\033[0;31m'    # Sets text to red
-YELLOW='\033[0;33m' # Sets text to yellow
-BLUE='\033[0;34m'   # Sets text to blue
 NC='\033[0m'        # Resets the text color to default, no color
-
-# Function to display a spinning animation during the LLM processing
-spin_animation() {
-  # Array of spinner characters for the animation
-  spinner=("⠋" "⠙" "⠹" "⠸" "⠼" "⠴" "⠦" "⠧" "⠇" "⠏")
-  # Infinite loop to keep the animation running
-  while true; do
-    for i in "${spinner[@]}"; do
-      tput civis  # Hide the cursor to enhance the animation appearance
-      tput el1    # Clear the line from the cursor to the beginning to display the spinner
-      printf "\\r${YELLOW}%s${NC} Generating LLM commit message..." "$i"  # Print the spinner and message
-      sleep 0.1   # Delay to control the speed of the animation
-      tput cub 32 # Move the cursor back 32 columns to reset the spinner position
-    done
-  done
-}
 
 # Check if the `llm` command is installed
 if ! command -v llm &> /dev/null; then
@@ -28,35 +10,11 @@ if ! command -v llm &> /dev/null; then
   exit 1
 fi
 
-# Start the spinning animation in the background
-spin_animation &
-spin_pid=$!  # Capture the process ID of the spinning animation
-
 # Maximum number of diff tokens to be processed by `llm` command
 max_diff_size=12500
 
 # Generate the commit message using `git diff` piped into `llm` command
 # The LLM command takes a system prompt from a file as input
-if ! commit_msg=$(git diff --cached -- . ':(exclude)pnpm-lock.yaml' | ttok -t $max_diff_size | llm -s "$(cat ~/dotfiles/apps/llm/prompts/commit-system-prompt.txt)" 2>&1); then
-  # Stop the spinning animation by killing its process
-  kill $spin_pid
-  wait $spin_pid 2>/dev/null  # Wait for the process to terminate and suppress error messages
-
-  # Finalizing output
-  tput cnorm  # Show the cursor again
-  printf "\\n"  # Move the cursor to the next line
-
-  printf "${RED}Error: 'llm' command failed to generate the commit message:\\n${commit_msg}${NC}\\n\\nManually set the commit message"
-  exit 1
-fi
-
-# Stop the spinning animation by killing its process
-kill $spin_pid
-wait $spin_pid 2>/dev/null  # Wait for the process to terminate and suppress error messages
-
-# Finalizing output
-tput cnorm  # Show the cursor again
-echo  # Move the cursor to the next line
-
-# Display the generated commit message with color-coded headings
-echo $commit_msg
+git diff --cached -- . ':(exclude)pnpm-lock.yaml' \
+  | ttok -t $max_diff_size \
+  | llm -s "$(cat ~/dotfiles/apps/llm/prompts/commit-system-prompt.txt)" 2>&1
