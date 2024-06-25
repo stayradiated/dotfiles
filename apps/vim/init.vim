@@ -56,6 +56,7 @@ call dein#add('dhruvasagar/vim-table-mode')
 call dein#add('airblade/vim-rooter')
 call dein#add('othree/eregex.vim')
 call dein#add('github/copilot.vim')
+call dein#add('supermaven/supermaven-nvim')
 call dein#add('ggandor/leap.nvim')
 
 let g:coc_global_extensions = [ 'coc-json', 'coc-tsserver', 'coc-go', 'coc-svelte', 'coc-deno' ]
