@@ -1,0 +1,10 @@
+/* gosee */
+#outer.markdown-body {
+  padding: 0 4em;
+  width: calc(100% - 8em);
+
+  & img {
+   font-style: italic;
+   background-color: #eee !important;
+  }
+}
