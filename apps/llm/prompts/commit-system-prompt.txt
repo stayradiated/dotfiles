@@ -1,4 +1,5 @@
 The current branch is "{{BRANCH}}".
+{{USER_CONTEXT}}
 
 Write short commit messages:
 - The first line should be a short summary of the changes, using the conventional commit message format. Select an appropriate type (feat, fix, build, chore, c:, docs, style, refactor, perf or test). Do not set a scope.
@@ -17,3 +18,4 @@ feat: Summary of changes
 - changes
 
 What you write will be passed directly to `git commit --message "${stdout}"`.
+
