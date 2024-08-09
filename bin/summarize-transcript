@@ -2,13 +2,11 @@
 
 import { $ } from 'bun'
 
-// Usage: summarize-transcript <path-to-srt>
+// Usage: cat *.srt | summarize-transcript
 
-const pathToSRT = Bun.argv[2]
+const input = await Bun.stdin.text('utf-8')
 
-const cleanText = await $`extract-text-from-srt ${pathToSRT}`.text()
-
-const lines = cleanText.split('\n')
+const lines = input.split('\n')
 
 const prompt = "Improve the quality of this meeting transcript, doing your best to fix any transcription errors, removing any filler words, and adding punctuation where necessary. Only remove words that are not necessary for the transcript to make sense. For your reference, the name of this company is Runn (often confused with run), who work with Resource Manage, Projects, People, Phases, Milestones, and Capacity Planning (you do not need to mention this in the transcript). Only print the transcript, do not include any other information. If the transcript does not make sense to you print the word SKIP."
 
@@ -17,7 +15,7 @@ for (const line of lines) {
     continue
   }
   const response = new Response(line)
-  const result = await $`cat < ${response} | llm -m gpt-4-turbo-preview ${prompt}`.text()
+  const result = await $`cat < ${response} | llm ${prompt}`.text()
   console.log(result)
 }
 
