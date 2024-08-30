@@ -22,4 +22,4 @@ max_diff_size=12500
 # The LLM command takes a system prompt from a file as input
 git diff --cached -- . ':(exclude)pnpm-lock.yaml' ':(exclude)yarn.lock' ':(exclude)services/heroku/bin/index.js' ':(exclude)services/api/openapi-schema.json' \
   | ttok -t $max_diff_size \
-  | llm -s "${prompt}" 2>&1
+  | llm -m claude-3.5-sonnet -s "${prompt}" 2>&1
