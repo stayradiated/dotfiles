@@ -9,3 +9,5 @@ source "${HOME}/dotfiles/apps/zsh/stayradiated.sh"
 # zCLI
 export ZCLI_INSTALL="/home/admin/.zcli"
 export PATH="$ZCLI_INSTALL/bin:$PATH"
+
+. "$HOME/.cargo/env"
