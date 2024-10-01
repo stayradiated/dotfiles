@@ -12,9 +12,6 @@ alias ghco='gh pr checkout'
 # copy a commit
 alias gcp='git cherry-pick'
 
-# prune remote branches
-alias gfp='git fetch --prune'
-
 # fetch with rebase
 alias gfr='git pull --rebase'
 
