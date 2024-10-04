@@ -43,7 +43,7 @@ PRESET="medium"
 AUDIO_BITRATE_KBITS=$((128)) # 128k audio bitrate in kbits
 
 # Get duration in seconds
-DURATION=$(ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 "${INPUT}")
+DURATION=300 #$(ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 "${INPUT}")
 
 # Constants for bitrate calculations
 BITRATE_CONVERSION_FACTOR=8388.608 # Convert MiB to kbits
