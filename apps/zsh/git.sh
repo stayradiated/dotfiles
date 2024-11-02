@@ -11,6 +11,7 @@ alias ghco='gh pr checkout'
 
 # copy a commit
 alias gcp='git cherry-pick'
+alias gmb='f() { git cherry-pick $(git merge-base "${2:main}" "$1").."$1"; }; f'
 
 # fetch with rebase
 alias gfr='git pull --rebase'
