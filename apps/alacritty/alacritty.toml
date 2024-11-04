@@ -1,4 +1,3 @@
-import = ["~/dotfiles/apps/alacritty/colors/termorrow_dark.toml"]
 
 [font]
 size = 8.0
@@ -18,3 +17,6 @@ style = "Regular"
 [font.normal]
 family = "SF Mono"
 style = "Regular"
+
+[general]
+import = ["~/dotfiles/apps/alacritty/colors/termorrow_dark.toml"]
