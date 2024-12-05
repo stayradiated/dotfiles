@@ -1,0 +1,3 @@
+#!/usr/env/bin zsh
+
+sudo chmod -R o+w /sys/class/backlight/intel_backlight
