@@ -166,7 +166,8 @@ colorscheme termorrow
 set background=dark
 
 " Digraphs
-digraphs lh 9829  " ♥ love heart
+digraphs lh 9829 " ♥ love heart
+digraphs fl 10086 " ❦ floral heart
 digraphs cr 8627  " ↳ carriage return
 digraphs d4 10294 " ⠶ braille pattern dots 2356
 
