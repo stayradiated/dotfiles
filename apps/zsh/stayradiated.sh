@@ -79,9 +79,7 @@ alias ncu='ncu --cache'
 export WATSON_DIR="${HOME}/dotfiles/apps/watson"
 
 # pomo
-export POMO_DATABASE_URL="${HOME}/dotfiles/apps/pomo/pomo.db.enc"
 export POMO_DIR="${HOME}/dotfiles/apps/pomo/"
-export POMO_DAEMON_HOST="http://localhost:45230"
 
 # typos
 alias celar='clear'
