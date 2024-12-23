@@ -1,0 +1,35 @@
+#!/bin/bash
+
+# Check if directory path is provided
+if [ $# -ne 1 ]; then
+    echo "Usage: $0 <directory_path>"
+    exit 1
+fi
+
+# Check if directory exists
+if [ ! -d "$1" ]; then
+    echo "Error: Directory '$1' does not exist"
+    exit 1
+fi
+
+# Check if heif-convert is installed
+if ! command -v heif-convert &> /dev/null; then
+    echo "Error: heif-convert is not installed"
+    exit 1
+fi
+
+# Convert HEIC files
+find "$1" -type f -iname "*.heic" | while read -r heic_file; do
+    # Generate output filename by replacing extension
+    jpg_file="${heic_file%.*}.jpg"
+    
+    # Check if JPG already exists
+    if [ ! -f "$jpg_file" ]; then
+        echo "Converting: $heic_file"
+        heif-convert "$heic_file" "$jpg_file"
+    else
+        echo "Skipping: $heic_file (JPG already exists)"
+    fi
+done
+
+echo "Conversion complete!"
