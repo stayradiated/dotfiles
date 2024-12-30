@@ -1,0 +1,72 @@
+#!/bin/bash
+
+# Default values
+output_format="mp4"
+preset="medium"
+crf=23
+output_dir="converted"
+
+# Function to display usage
+usage() {
+    echo "Usage: $0 [options]"
+    echo "Options:"
+    echo "  -f FORMAT   Output format (default: mp4)"
+    echo "  -p PRESET   FFmpeg preset (default: medium)"
+    echo "  -q CRF     Quality (0-51, lower is better, default: 23)"
+    echo "  -o DIR     Output directory (default: converted)"
+    echo "  -h         Show this help message"
+}
+
+# Parse command line options
+while getopts "f:p:q:o:h" opt; do
+    case $opt in
+        f) output_format="$OPTARG" ;;
+        p) preset="$OPTARG" ;;
+        q) crf="$OPTARG" ;;
+        o) output_dir="$OPTARG" ;;
+        h) usage; exit 0 ;;
+        ?) usage; exit 1 ;;
+    esac
+done
+
+# Create output directory if it doesn't exist
+mkdir -p "$output_dir"
+
+# Counter for progress tracking
+total_files=$(ls *.MOV 2>/dev/null | wc -l)
+current=0
+
+# Process each MOV file
+for input in *.MOV; do
+    # Skip if no MOV files found
+    [[ -f "$input" ]] || { echo "No MOV files found"; exit 1; }
+    
+    # Increment counter
+    ((current++))
+    
+    # Generate output filename
+    output="$output_dir/${input%.*}.$output_format"
+    
+    echo "[$current/$total_files] Converting: $input"
+    
+    # Convert file with HDR metadata preservation
+    ffmpeg -i "$input" \
+        -c:v libx264 \
+        -preset "$preset" \
+        -crf "$crf" \
+        -c:a aac \
+        -b:a 192k \
+        -movflags +faststart \
+        -metadata:s:v:0 rotate=0 \
+        "$output" \
+        -hide_banner \
+        -loglevel warning
+        
+    if [ $? -eq 0 ]; then
+        echo "✓ Successfully converted: $input -> $output"
+    else
+        echo "✗ Failed to convert: $input"
+    fi
+done
+
+echo "Conversion complete! Files saved in: $output_dir"

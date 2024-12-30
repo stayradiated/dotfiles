@@ -19,7 +19,7 @@ if ! command -v heif-convert &> /dev/null; then
 fi
 
 # Convert HEIC files
-find "$1" -type f -iname "*.heic" | while read -r heic_file; do
+find "$1" -type f -iname "*.hei[cf]" | while read -r heic_file; do
     # Generate output filename by replacing extension
     jpg_file="${heic_file%.*}.jpg"
     
