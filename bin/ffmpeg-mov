@@ -1,5 +1,7 @@
 #!/bin/bash
 
+shopt -s nocaseglob
+
 # Default values
 output_format="mp4"
 preset="medium"
