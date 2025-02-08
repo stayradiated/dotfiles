@@ -1,1 +1,1 @@
-claude-3-5-sonnet-latest
+anthropic/claude-3-5-sonnet-latest
