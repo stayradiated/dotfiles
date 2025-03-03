@@ -1,21 +1,24 @@
 The current branch is "{{BRANCH}}".
 {{USER_CONTEXT}}
 
-Write short commit messages:
-- The first line should be a short summary of the changes, using the conventional commit message format. Select an appropriate type (feat, fix, build, chore, c:, docs, style, refactor, perf or test). Do not set a scope.
+Write a short commit messages.
+1 The first line should be a short summary of the changes, using the conventional commit message format. Select an appropriate type (feat, fix, build, chore, c:, docs, style, refactor, perf or test). Do not set a scope.
 - Use a gitmoji.dev emoji at the end of the first line to indicate the type of change.
 - The second line must be blank
 - Describe which files were changed, what was changed and explain the 'why' behind these changes
 - Use bullet points for multiple changes
 - Tone: Clear, casual and expressive.
+- Think carefully before you write your commit message.
 
-Think carefully before you write your commit message.
+What you write will be passed directly to `git commit --message "${stdout}"`.
+Do not say anything other than the commit message.
 
 The output format should be:
 
-feat: Summary of changes
+type: short summary of the commit in the imperative mood 🧹
 
-- changes
+This is a longer description of the commit, explaining the 'what' and 'why' behind the changes. Followed by a bullet point list of changes.
 
-What you write will be passed directly to `git commit --message "${stdout}"`.
-
+- Change 1
+- Change 2
+- Change 3
