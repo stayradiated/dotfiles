@@ -111,7 +111,7 @@ const containers = {
     "www.walklakes.co.uk",
     "www.wunderground.com",
     "www.yha.org.uk",
-    "www2.logon.realme.govt.nz"
+    "www2.logon.realme.govt.nz",
   ],
 
   // Rough.app container
@@ -141,19 +141,11 @@ const containers = {
     "gist.github.com",
     {
       host: "github.com",
-      conditions: [
-        // Skip authentication pages
-        { path: "/session/", skip: true },
-        // Specific organization patterns
-        { path: "/runn-fast/", skip: true },
-      ],
+      skip: ["/session/", "/Runn-Fast/"],
     },
     {
       host: "linear.app",
-      conditions: [
-        // Skip Runn pages
-        { path: "/runn/", skip: true },
-      ],
+      skip: ["/runn/"],
     },
   ],
 
@@ -179,11 +171,11 @@ const containers = {
     "www.validatemysaas.com",
     {
       host: "www.google.co.nz",
-      conditions: [{ path: "/maps/" }],
+      only: ["/maps"],
     },
     {
       host: "www.google.com",
-      conditions: [{ path: "/maps/" }],
+      only: ["/maps"],
     },
   ],
 
@@ -245,11 +237,11 @@ const containers = {
     "zoom.us",
     {
       host: "github.com",
-      conditions: [{ path: "/runn-fast/" }],
+      only: ["/Runn-Fast/"],
     },
     {
       host: "linear.app",
-      conditions: [{ path: "/runn/" }],
+      only: ["/runn/"],
     },
   ],
 
@@ -331,34 +323,24 @@ function getContainer(url) {
         const hostMatches = url.host === rule.host;
 
         if (hostMatches) {
-          // No conditions means always match
-          if (!rule.conditions || rule.conditions.length === 0) {
-            return container;
-          }
-
-          // Check all conditions
-          let skip = false;
-          let matched = false;
-
-          for (const condition of rule.conditions) {
-            const pathMatches = url.pathname.toLowerCase().startsWith(condition.path.toLowerCase());
-
-            if (pathMatches) {
-              if (condition.skip) {
-                skip = true;
-                break;
-              }
-              matched = true;
+          // Check skip conditions
+          if (rule.skip) {
+            if (rule.skip.some((path) => url.pathname.startsWith(path))) {
+              continue;
             }
           }
 
-          if (skip) {
-            continue;
+          // Check only conditions
+          if (rule.only) {
+            if (rule.only.some((path) => url.pathname.startsWith(path))) {
+              return container;
+            } else {
+              continue;
+            }
           }
 
-          if (matched || rule.conditions.length === 0) {
-            return container;
-          }
+          // No conditions means always match
+          return container;
         }
       }
     }
@@ -369,4 +351,8 @@ function getContainer(url) {
 }
 
 // Main entry point
-return getContainer(url);
+if (typeof url !== "undefined") {
+  return getContainer(url);
+}
+
+module.exports.getContainer = getContainer;
