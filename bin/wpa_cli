@@ -1,0 +1,3 @@
+#!/usr/bin/env zsh
+
+exec as-host wpa_cli "$@"
