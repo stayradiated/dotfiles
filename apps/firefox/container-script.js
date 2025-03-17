@@ -112,6 +112,7 @@ const containers = {
     "www.wunderground.com",
     "www.yha.org.uk",
     "www2.logon.realme.govt.nz",
+    "safetywing.com"
   ],
 
   // Rough.app container
@@ -181,6 +182,7 @@ const containers = {
 
   // Work email container
   "george@runn.io": [
+    "dashboard.advancedscheduler.io",
     "segment.com",
     "app.runn.io",
     "action.parabol.co",
