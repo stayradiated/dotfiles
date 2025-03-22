@@ -2,7 +2,7 @@ SHELL := /bin/bash
 
 apps := $(CURDIR)/apps
 
-apps: 1password aerc anki beets bspwm charles darktable dbxcli docker exeditor electrum expo firefox gcloud gh git githubcopilot greenclip khal logview llm mitmproxy mycli ngrok npm obsidian pgcli pgp ranger sc-im ssh sxhkd tmux urlview vdirsyncer vim weechat xinput x11 xournalpp xscreensaver zoom zsh
+apps: 1password aerc anki beets bspwm charles darktable dbxcli docker exeditor electrum expo firefox gcloud gh git githubcopilot greenclip jj khal logview llm mitmproxy mycli ngrok npm obsidian pgcli pgp ranger sc-im ssh sxhkd tmux urlview vdirsyncer vim weechat xinput x11 xournalpp xscreensaver zoom zsh
 
 1password:
 
@@ -145,6 +145,12 @@ greenclip:
 	@echo "grenclip..."
 	@mkdir -p ~/.config
 	@ln -fs "$(apps)/greenclip/greenclip.toml" ~/.config/greenclip.toml
+
+jj:
+
+	@echo "jj..."
+	@mkdir -p ~/.config/jj
+	@ln -fs "$(apps)/jj/config.toml" ~/.config/jj/config.toml
 
 khal:
 
