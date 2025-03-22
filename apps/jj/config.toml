@@ -2,6 +2,8 @@
 name = "George Czabania"
 email = "1140167+stayradiated@users.noreply.github.com"
 
+[git]
+auto-local-bookmark = true
 
 [template-aliases]
 'format_short_signature(signature)' = 'signature.name()'
