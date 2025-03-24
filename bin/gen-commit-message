@@ -20,6 +20,10 @@ max_diff_size=12500
 
 # Generate the commit message using `git diff` piped into `llm` command
 # The LLM command takes a system prompt from a file as input
-git diff --cached -- . ':(exclude)pnpm-lock.yaml' ':(exclude)yarn.lock' ':(exclude)services/heroku/bin/index.js' ':(exclude)services/api/openapi-schema.json' \
+git diff --cached -- . \
+  ':(exclude)pnpm-lock.yaml' \
+  ':(exclude)yarn.lock' \
+  ':(exclude)services/heroku/bin/index.js' \
+  ':(exclude)services/api/openapi-schema.json' \
   | ttok -t $max_diff_size \
   | llm -m claude-3.7-sonnet -s "${prompt}" 2>&1
