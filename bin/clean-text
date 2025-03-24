@@ -1,0 +1,36 @@
+#!/usr/bin/env zsh
+
+# clean-text - A simple text linting script
+# Usage: command | clean-text
+#        clean-text < input.txt
+#        clean-text file.txt
+
+# Process stdin or file arguments
+process_text() {
+  # Replace various single quotes with standard single quote
+  sed "s/[‘’]/'/g" |
+
+  # Replace various double quotes with standard double quote
+  # Handles: " " " "
+  sed 's/[“”]/"/g' |
+
+  # Replace em dash with spaced hyphen
+  # Add spaces around the hyphen if not already present
+  sed 's/—/ - /g' |
+
+  # Clean up multiple spaces that might be created
+  sed 's/\s\s*/ /g'
+}
+
+# Read from files if provided, otherwise from stdin
+if [ $# -eq 0 ]; then
+  process_text
+else
+  for file in "$@"; do
+    if [ -f "$file" ]; then
+      process_text < "$file"
+    else
+      echo "Error: File '$file' not found." >&2
+    fi
+  done
+fi
