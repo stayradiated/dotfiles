@@ -30,4 +30,7 @@ export SXHKD_SHELL=/bin/bash
 export PATH=$HOME/dotfiles/bin:$PATH
 sxhkd -c /home/admin/.config/sxhkd/sxhkdrc &
 
+# configure external displays
+/home/admin/dotfiles/bin/use-external-display
+
 exec bspwm -c /home/admin/.config/bspwm/bspwmrc
