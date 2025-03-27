@@ -1,0 +1,45 @@
+#!/usr/bin/env zsh
+
+set -euo pipefail
+
+# Function to log messages
+log_msg() {
+  echo "[$(date '+%Y-%m-%d %H:%M:%S')] $1"
+}
+
+log_msg "Starting monitor configuration..."
+
+# Always disable the broken laptop screen
+log_msg "Disabling laptop screen (eDP-1)..."
+xrandr --output eDP-1 --off
+
+# Get a list of connected displays (excluding eDP-1)
+connected_displays=$(xrandr --query | grep " connected " | grep -v "eDP-1" | cut -d ' ' -f1)
+
+if [ -z "$connected_displays" ]; then
+  log_msg "No external displays detected! Re-enabling laptop screen as fallback."
+  xrandr --output eDP-1 --auto --primary
+  exit 0
+fi
+
+log_msg "Connected displays: $connected_displays"
+
+# For each connected display, find the highest resolution available
+for display in $connected_displays; do
+  log_msg "Configuring $display..."
+  
+  # Get the highest resolution for this display
+  # The sort with -V ensures proper version sorting, and head -1 gets the first (highest) resolution
+  highest_res=$(xrandr --query | grep -A 20 "^$display connected" | grep -o '[0-9]\+x[0-9]\+' | sort -rV | head -1)
+  
+  if [ -n "$highest_res" ]; then
+    log_msg "Setting $display to $highest_res"
+    xrandr --output $display --mode $highest_res --primary
+    
+    # Set the first external display as primary and exit
+    # If you want to extend across multiple displays, remove this exit
+    exit 0
+  fi
+done
+
+log_msg "Monitor configuration complete!"
