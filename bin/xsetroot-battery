@@ -2,7 +2,7 @@
 
 set -e
 
-battery=$(acpi -b | tail -n 1 | rg -o --pcre2 '\d+(?=%)')
+battery=$(acpi -b | grep -v unavailable | tail -n 1 | rg -o --pcre2 '\d+(?=%)')
 
 if [ "${battery}" -lt "10" ]; then
   color='#FC440F'
