@@ -1,0 +1,6 @@
+#!/usr/bin/env zsh
+
+set -euxo pipefail
+
+sudo /usr/local/kolide-k2/bin/launcher \
+  -config /etc/kolide-k2/launcher.flags
