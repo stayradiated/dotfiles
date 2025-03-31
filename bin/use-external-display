@@ -2,27 +2,17 @@
 
 set -euo pipefail
 
-# Function to log messages
-log_msg() {
-  echo "[$(date '+%Y-%m-%d %H:%M:%S')] $1"
-}
-
-log_msg "Starting monitor configuration..."
-
-# Always disable the broken laptop screen
-log_msg "Disabling laptop screen (eDP-1)..."
-xrandr --output eDP-1 --off
+echo "Starting monitor configuration..."
 
 # Get a list of connected displays (excluding eDP-1)
-connected_displays=$(xrandr --query | grep " connected " | grep -v "eDP-1" | cut -d ' ' -f1)
+connected_displays=$(xrandr --query | grep " connected " | grep -v "eDP-1" | cut -d ' ' -f1 || true)
 
 if [ -z "$connected_displays" ]; then
-  log_msg "No external displays detected! Re-enabling laptop screen as fallback."
-  xrandr --output eDP-1 --auto --primary
+  echo "No external displays detected!"
   exit 0
 fi
 
-log_msg "Connected displays: $connected_displays"
+echo "Connected displays: $connected_displays"
 
 # Check if a custom resolution was provided as an argument
 custom_resolution=""
@@ -30,34 +20,34 @@ if [ $# -ge 1 ]; then
   # Validate that the argument matches the resolution format (e.g., 1280x800)
   if [[ $1 =~ ^[0-9]+x[0-9]+$ ]]; then
     custom_resolution=$1
-    log_msg "Using custom resolution: $custom_resolution"
+    echo "Using custom resolution: $custom_resolution"
   else
-    log_msg "Invalid resolution format. Expected format: WIDTHxHEIGHT (e.g., 1280x800)"
+    echo "Invalid resolution format. Expected format: WIDTHxHEIGHT (e.g., 1280x800)"
     exit 1
   fi
 fi
 
 # For each connected display, apply resolution
 for display in $connected_displays; do
-  log_msg "Configuring $display..."
+  echo "Configuring $display..."
   
   if [ -n "$custom_resolution" ]; then
     # Check if the requested resolution is available
     available_res=$(xrandr --query | grep -A 20 "^$display connected" | grep -o '[0-9]\+x[0-9]\+' | grep -x "$custom_resolution")
     
     if [ -n "$available_res" ]; then
-      log_msg "Setting $display to custom resolution $custom_resolution"
+      echo "Setting $display to custom resolution $custom_resolution"
       xrandr --output $display --mode $custom_resolution --primary
     else
-      log_msg "Warning: Custom resolution $custom_resolution not available for $display"
-      log_msg "Available resolutions:"
+      echo "Warning: Custom resolution $custom_resolution not available for $display"
+      echo "Available resolutions:"
       xrandr --query | grep -A 20 "^$display connected" | grep -o '[0-9]\+x[0-9]\+' | sort -rV
       
       # Get the highest resolution as fallback
       highest_res=$(xrandr --query | grep -A 20 "^$display connected" | grep -o '[0-9]\+x[0-9]\+' | sort -rV | head -1)
       
       if [ -n "$highest_res" ]; then
-        log_msg "Falling back to highest available resolution: $highest_res"
+        echo "Falling back to highest available resolution: $highest_res"
         xrandr --output $display --mode $highest_res --primary
       fi
     fi
@@ -66,7 +56,7 @@ for display in $connected_displays; do
     highest_res=$(xrandr --query | grep -A 20 "^$display connected" | grep -o '[0-9]\+x[0-9]\+' | sort -rV | head -1)
     
     if [ -n "$highest_res" ]; then
-      log_msg "Setting $display to $highest_res"
+      echo "Setting $display to $highest_res"
       xrandr --output $display --mode $highest_res --primary
     fi
   fi
@@ -76,4 +66,4 @@ for display in $connected_displays; do
   exit 0
 done
 
-log_msg "Monitor configuration complete!"
+echo "Monitor configuration complete!"
