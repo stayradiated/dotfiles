@@ -20,15 +20,10 @@ if [ -n "$EXTERNAL_MONITOR" ] && is_monitor_active "$EXTERNAL_MONITOR"; then
 
     # Use only the external monitor for all desktops
     bspc monitor "$EXTERNAL_MONITOR" -d 1 2 3 4 5 6 7 8 9 10
-
-    # Make sure laptop display is not used
-    if is_monitor_active "eDP-1"; then
-        bspc monitor "eDP-1" -r
-    fi
 else
     echo "No external monitor detected, falling back to laptop display"
     # Fallback to laptop display
-    bspc monitor "eDP-1" -d 1 2 3 4 5 6 7 8 9 10
+    bspc monitor -d 1 2 3 4 5 6 7 8 9 10
 fi
 
 # Set windows styles for all desktops
