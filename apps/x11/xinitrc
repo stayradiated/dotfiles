@@ -31,6 +31,10 @@ export PATH=$HOME/dotfiles/bin:$PATH
 sxhkd -c /home/admin/.config/sxhkd/sxhkdrc &
 
 # configure external displays
-/home/admin/dotfiles/bin/use-external-display
+use-external-display
 
+# run kolide in background
+kolide &
+
+# configure bspwm window manager
 exec bspwm -c /home/admin/.config/bspwm/bspwmrc
