@@ -1,8 +1,9 @@
-*.enc                filter=git-crypt diff=git-crypt
-apps/khal/state/**   filter=git-crypt diff=git-crypt
-apps/pgp/**          filter=git-crypt diff=git-crypt
-apps/ranger/data/**  filter=git-crypt diff=git-crypt
-apps/vdirsyncer/**   filter=git-crypt diff=git-crypt
-apps/watson/**       filter=git-crypt diff=git-crypt
-apps/zoxide/**       filter=git-crypt diff=git-crypt
-apps/pomo/**         filter=git-crypt diff=git-crypt
+*.enc                       filter=git-crypt diff=git-crypt
+apps/khal/state/**          filter=git-crypt diff=git-crypt
+apps/pgp/**                 filter=git-crypt diff=git-crypt
+apps/ranger/data/**         filter=git-crypt diff=git-crypt
+apps/vdirsyncer/**          filter=git-crypt diff=git-crypt
+apps/watson/**              filter=git-crypt diff=git-crypt
+apps/zoxide/**              filter=git-crypt diff=git-crypt
+apps/pomo/**                filter=git-crypt diff=git-crypt
+apps/obsidian/state.enc/**  filter=git-crypt diff=git-crypt

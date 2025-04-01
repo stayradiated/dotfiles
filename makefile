@@ -205,6 +205,12 @@ obsidian:
 	@echo "obsidian..."
 	@mkdir -p ~/.config/obsidian
 	@ln -fs "$(apps)/obsidian/obsidian.json.enc" ~/.config/obsidian/obsidian.json
+	@if test ! -d ~/.config/obsidian/IndexedDB; then\
+		ln -fs "$(apps)/obsidian/state.enc/IndexedDB/" ~/.config/obsidian/IndexedDB;\
+	fi
+	@if test ! -d ~/.config/obsidian/Local\ Storage; then\
+		ln -fs "$(apps)/obsidian/state.enc/Local Storage/" ~/.config/obsidian/Local\ Storage;\
+	fi
 
 pgcli:
 
