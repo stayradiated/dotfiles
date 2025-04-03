@@ -1,5 +1,15 @@
 #!/usr/bin/env zsh
 
+#
+# xd --right
+# xd --left
+# xd --above
+# xd --mirror
+# xd --resolution 1920x1080
+# xd --reset
+#
+
+
 set -euo pipefail
 
 echo "Starting monitor configuration..."
