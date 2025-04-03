@@ -2,7 +2,7 @@ SHELL := /bin/bash
 
 apps := $(CURDIR)/apps
 
-apps: 1password aerc anki beets bspwm charles darktable dbxcli docker exeditor electrum expo firefox gcloud gh git githubcopilot greenclip jj khal logview llm mitmproxy mycli ngrok npm obsidian pgcli pgp ranger sc-im ssh sxhkd tmux urlview vdirsyncer vim weechat xinput x11 xournalpp xscreensaver zoom zsh
+apps: 1password aerc anki beets bspwm charles claude-code darktable dbxcli docker exeditor electrum expo firefox gcloud gh git githubcopilot greenclip jj khal logview llm mitmproxy mycli ngrok npm obsidian pgcli pgp ranger sc-im ssh sxhkd tmux urlview vdirsyncer vim weechat xinput x11 xournalpp xscreensaver zoom zsh
 
 1password:
 
@@ -63,6 +63,11 @@ charles-import:
 	@echo "grabbing charles config..."
 	@cp ~/.charles.config "$(apps)/charles/config.enc"
 	@cp ~/.charles/profiles/default.cfg.xml "$(apps)/charles/profiles/default.cfg.xml.enc"
+
+claude-code:
+
+	@echo "claude-code..."
+	@ln -fs "$(apps)/claude-code/claude.json.enc" ~/.claude.json
 
 darktable:
 
