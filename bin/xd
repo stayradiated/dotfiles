@@ -1,0 +1,129 @@
+#!/usr/bin/env zsh
+
+#
+# Usage:
+#   xd --right         # Position external display to the right of laptop
+#   xd --left          # Position external display to the left of laptop
+#   xd --above         # Position external display above laptop
+#   xd --mirror        # Mirror laptop display to external
+#   xd --resolution WxH # Set specific resolution (e.g., 1920x1080)
+#   xd --reset         # Reset to laptop display only
+#
+
+set -euo pipefail
+
+LAPTOP_DISPLAY="eDP-1"
+POSITION="--right-of"
+RESOLUTION=""
+MIRROR=false
+RESET=false
+
+echo "Starting monitor configuration..."
+
+# Parse command-line arguments
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    --right)
+      POSITION="--right-of"
+      shift
+      ;;
+    --left)
+      POSITION="--left-of"
+      shift
+      ;;
+    --above)
+      POSITION="--above"
+      shift
+      ;;
+    --mirror)
+      MIRROR=true
+      shift
+      ;;
+    --resolution)
+      if [[ $# -lt 2 || ! $2 =~ ^[0-9]+x[0-9]+$ ]]; then
+        echo "Error: --resolution requires a valid WxH format (e.g., 1920x1080)"
+        exit 1
+      fi
+      RESOLUTION="$2"
+      shift 2
+      ;;
+    --reset)
+      RESET=true
+      shift
+      ;;
+    *)
+      echo "Unknown option: $1"
+      echo "Usage: xd [--right|--left|--above|--mirror|--reset|--resolution WxH]"
+      exit 1
+      ;;
+  esac
+done
+
+# Get list of connected displays (excluding laptop display)
+CONNECTED_DISPLAYS=$(xrandr --query | grep " connected " | grep -v "$LAPTOP_DISPLAY" | cut -d ' ' -f1 || true)
+
+# Handle reset option
+if [[ "$RESET" == true ]]; then
+  echo "Resetting display configuration..."
+  xrandr --output "$LAPTOP_DISPLAY" --auto --primary
+  
+  for display in $CONNECTED_DISPLAYS; do
+    xrandr --output "$display" --off
+  done
+  
+  echo "Reset complete. Using laptop display only."
+  exit 0
+fi
+
+# Check if any external displays are connected
+if [[ -z "$CONNECTED_DISPLAYS" ]]; then
+  echo "No external displays detected!"
+  exit 0
+fi
+
+echo "Connected displays: $CONNECTED_DISPLAYS"
+
+# Configure each connected display
+for display in $CONNECTED_DISPLAYS; do
+  echo "Configuring $display..."
+  
+  # Determine resolution to use
+  if [[ -n "$RESOLUTION" ]]; then
+    # Check if the requested resolution is available
+    AVAILABLE_RES=$(xrandr --query | grep -A 20 "^$display connected" | grep -o '[0-9]\+x[0-9]\+' | grep -x "$RESOLUTION" || true)
+    
+    if [[ -n "$AVAILABLE_RES" ]]; then
+      DISPLAY_RES="$RESOLUTION"
+      echo "Setting $display to requested resolution $DISPLAY_RES"
+    else
+      echo "Warning: Requested resolution $RESOLUTION not available for $display"
+      echo "Available resolutions:"
+      xrandr --query | grep -A 20 "^$display connected" | grep -o '[0-9]\+x[0-9]\+' | sort -rV
+      
+      # Get the highest resolution as fallback
+      DISPLAY_RES=$(xrandr --query | grep -A 20 "^$display connected" | grep -o '[0-9]\+x[0-9]\+' | sort -rV | head -1)
+      echo "Falling back to highest available resolution: $DISPLAY_RES"
+    fi
+  else
+    # No custom resolution provided, use highest available
+    DISPLAY_RES=$(xrandr --query | grep -A 20 "^$display connected" | grep -o '[0-9]\+x[0-9]\+' | sort -rV | head -1)
+    echo "Setting $display to highest resolution: $DISPLAY_RES"
+  fi
+  
+  # Apply the configuration
+  if [[ "$MIRROR" == true ]]; then
+    echo "Mirroring laptop display to $display"
+    xrandr --output "$LAPTOP_DISPLAY" --auto --primary
+    xrandr --output "$display" --mode "$DISPLAY_RES" --same-as "$LAPTOP_DISPLAY"
+  else
+    echo "Positioning $display $POSITION $LAPTOP_DISPLAY"
+    xrandr --output "$LAPTOP_DISPLAY" --auto
+    xrandr --output "$display" --mode "$DISPLAY_RES" --primary "$POSITION" "$LAPTOP_DISPLAY"
+  fi
+  
+  # For simplicity, we only configure the first external display
+  # If you want to extend across multiple displays, remove this break
+  break
+done
+
+echo "Monitor configuration complete!"
