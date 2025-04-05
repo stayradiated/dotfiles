@@ -17,6 +17,7 @@ ls \
   -I .cargo \
   -I .charles \
   -I .charles.config \
+  -I .claude.json \
   -I .config \
   -I .docker \
   -I .electrum \
@@ -30,6 +31,7 @@ ls \
   -I .mitmproxy \
   -I .mozilla \
   -I .myclirc \
+  -I .ncu-cache.json \
   -I .netrc \
   -I .ngrok2 \
   -I .node_repl_history \
