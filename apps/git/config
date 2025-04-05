@@ -12,7 +12,6 @@
 [core]
 	pager = diff-so-fancy | less --tabs=4 -RFX
 	excludesFile = ~/.gitignore
-	hooksPath = /home/admin/dotfiles/apps/git/hooks
 [color]
 	ui = true
 [color "diff-highlight"]
