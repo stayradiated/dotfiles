@@ -2,7 +2,7 @@ SHELL := /bin/bash
 
 apps := $(CURDIR)/apps
 
-apps: 1password aerc anki beets bspwm charles claude-code darktable dbxcli docker exeditor electrum expo firefox gcloud gh git githubcopilot greenclip jj khal logview llm mitmproxy mycli ngrok npm obsidian pgcli pgp ranger sc-im ssh sxhkd tmux urlview vdirsyncer vim weechat xinput x11 xournalpp xscreensaver zoom zsh
+apps: 1password aerc anki beets bspwm charles claude-code darktable dbxcli docker exeditor electrum expo firefox gcloud gh git githubcopilot greenclip jj khal lazycommit logview llm mitmproxy mycli ngrok npm obsidian pgcli pgp ranger sc-im ssh sxhkd tmux urlview vdirsyncer vim weechat xinput x11 xournalpp xscreensaver zoom zsh
 
 1password:
 
@@ -165,6 +165,12 @@ khal:
 	@if test ! -d ~/.local/share/khal; then\
 		ln -fs "$(apps)/khal/state" ~/.local/share/khal;\
 	fi
+
+lazycommit:
+
+	@echo "lazycommit..."
+	@mkdir -p ~/.config/lazycommit
+	@ln -fs "$(apps)/lazycommit/config.toml" ~/.config/lazycommit/config.toml
 
 logview:
 
