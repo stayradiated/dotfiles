@@ -1,5 +1,5 @@
-The current branch is "{{BRANCH}}".
-{{USER_CONTEXT}}
+The current branch is "{{.Branch}}".
+{{.UserContext}}
 
 Write a short commit messages.
 1 The first line should be a short summary of the changes, using the conventional commit message format. Select an appropriate type (feat, fix, build, chore, c:, docs, style, refactor, perf or test). Do not set a scope.
