@@ -5,4 +5,4 @@ max_diff_tokens = 12500
 prompt_path = "/home/admin/dotfiles/apps/lazycommit/prompt.txt"
 
 # Specific model to use with the llm tool
-model_name = "claude-3.7-sonnet"
+model_name = "claude-3.5-haiku"
