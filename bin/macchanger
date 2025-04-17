@@ -1,18 +1,105 @@
 #!/usr/bin/env zsh
 
-set -euxo pipefail
+set -euo pipefail
 
+# Default network interface - can be overridden with -i/--interface
 device_id='wlp0s20f3'
 
-macchanger_args="--random --bia"
+# Process command line arguments
+mac_address=""
+show_help=false
+reset_to_permanent=false
 
-if [[ -v 1 ]]
-then
-  mac=$1
-  macchanger_args="--mac '${mac}'"
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    -h|--help)
+      show_help=true
+      shift
+      ;;
+    -i|--interface)
+      if [[ -n "$2" && "$2" != -* ]]; then
+        device_id="$2"
+        shift 2
+      else
+        echo "Error: Interface argument is missing" >&2
+        exit 1
+      fi
+      ;;
+    -r|--random)
+      mac_address="random"
+      shift
+      ;;
+    -p|--permanent|--reset)
+      reset_to_permanent=true
+      shift
+      ;;
+    *)
+      # Assume it's a MAC address if no flag is specified
+      if [[ -z "$mac_address" && "$1" =~ ^([0-9A-Fa-f]{2}[:-]){5}[0-9A-Fa-f]{2}$ ]]; then
+        mac_address="$1"
+        shift
+      else
+        echo "Error: Unknown option or invalid MAC format: $1" >&2
+        show_help=true
+        shift
+      fi
+      ;;
+  esac
+done
+
+# Show help if requested or if no valid arguments were provided
+if $show_help; then
+  cat << EOF
+Usage: $(basename "$0") [OPTIONS] [MAC_ADDRESS]
+
+Change the MAC address of network interface (default: $device_id)
+
+Options:
+  -h, --help              Show this help message
+  -i, --interface IFACE   Specify network interface
+  -r, --random            Use a random MAC address (vendor-preserving)
+  -p, --permanent, --reset Reset to the permanent (hardware) MAC address
+  
+  If no MAC address is provided and no options are specified, a fully random MAC
+  will be assigned (equivalent to macchanger --random --bia)
+
+Examples:
+  $(basename "$0") -i wlan0 00:11:22:33:44:55
+  $(basename "$0") --random
+  $(basename "$0") --permanent
+  $(basename "$0") -i eth0 --random
+EOF
+  exit 0
 fi
 
-as-host "\
-  sudo ip link set '${device_id}' down;\
-  sudo macchanger ${macchanger_args} '${device_id}';\
-  sudo ip link set '${device_id}' up;"
+# Check for conflicting options
+if [[ "$reset_to_permanent" == true && -n "$mac_address" ]]; then
+  echo "Error: Cannot specify both a MAC address and --permanent/--reset" >&2
+  exit 1
+fi
+
+# Determine macchanger arguments
+if [[ "$reset_to_permanent" == true ]]; then
+  macchanger_cmd="sudo macchanger --permanent '${device_id}'"
+  echo "Resetting ${device_id} to permanent hardware MAC address..."
+elif [[ "$mac_address" == "random" ]]; then
+  macchanger_cmd="sudo macchanger --random '${device_id}'"
+  echo "Setting ${device_id} to random vendor MAC address..."
+elif [[ -n "$mac_address" ]]; then
+  macchanger_cmd="sudo macchanger --mac '${mac_address}' '${device_id}'"
+  echo "Setting ${device_id} to MAC address: ${mac_address}..."
+else
+  macchanger_cmd="sudo macchanger --random --bia '${device_id}'"
+  echo "Setting ${device_id} to fully random MAC address..."
+fi
+
+# Execute commands on host
+as-host "sudo ip link set '${device_id}' down && ${macchanger_cmd} && sudo ip link set '${device_id}' up"
+
+# Check if the command succeeded
+if [[ $? -eq 0 ]]; then
+  echo "MAC address operation completed successfully."
+else
+  echo "Failed to change MAC address." >&2
+  exit 1
+fi
