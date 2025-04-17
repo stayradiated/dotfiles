@@ -1,0 +1,17 @@
+services:
+  nix:
+    image: nixos/nix
+    container_name: nix-environment
+    privileged: true
+    stdin_open: true
+    tty: true
+    volumes:
+      - nix-store:/nix
+      - nix-config:/root/.config/nix
+      - nix-var:/var/nix
+    command: bash
+
+volumes:
+  nix-store:
+  nix-config:
+  nix-var:
