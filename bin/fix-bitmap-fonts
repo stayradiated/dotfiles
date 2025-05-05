@@ -3,5 +3,5 @@
 # sometimes after installing with apt
 # the font config gets reset
 
-sudo rm -f /etc/fonts/conf.d/70-no-bitmaps.conf
+sudo rm -f /etc/fonts/conf.d/70-no-bitmaps-*.conf
 fc-cache -fv
