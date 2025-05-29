@@ -71,6 +71,7 @@ call dein#add('jidn/vim-dbml')
 call dein#add('mracos/mermaid.vim')
 call dein#add('elel-dev/vim-astro-syntax')
 call dein#add('evanleck/vim-svelte')
+call dein#add('elixir-editors/vim-elixir')
 " call dein#add('nvim-treesitter/nvim-treesitter')
 " call dein#add('nvim-treesitter/nvim-treesitter-context')
 
