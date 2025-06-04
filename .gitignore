@@ -22,3 +22,5 @@ __pycache__
 *.db.enc-journal
 
 /apps/1password/*.enc-*
+
+node_modules

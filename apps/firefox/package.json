@@ -1,0 +1,17 @@
+{
+	"name": "firefox",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"test": "node ./container-script.test.ts",
+		"check": "biome check --unsafe --write ."
+	},
+	"keywords": [],
+	"author": "George Czabania",
+	"license": "ISC",
+	"packageManager": "pnpm@10.11.0",
+	"devDependencies": {
+		"@biomejs/biome": "1.9.4"
+	}
+}
