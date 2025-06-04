@@ -133,6 +133,11 @@ const containers = {
 		"www.vpscity.co.nz",
 		"www.vpscity.co.nz65000",
 		"dozzle.rough.app",
+		{
+			host: "fly.io",
+			only: ["/dashboard/rough/", "/apps/rough-"],
+			skip: ["/app/"],
+		},
 	],
 
 	// Projects container
@@ -147,6 +152,10 @@ const containers = {
 		{
 			host: "linear.app",
 			skip: ["/runn/"],
+		},
+		{
+			host: "fly.io",
+			skip: ["/dashboard/rough/", "/apps/", "/app/"],
 		},
 	],
 
@@ -288,6 +297,8 @@ const containers = {
 		"www.tsb.co.nz",
 		"www1.assert.realme.govt.nz",
 		"www1.logon.realme.govt.nz",
+		"app.simplicity.kiwi",
+		"investnow.co.nz",
 	],
 
 	// 1Password
