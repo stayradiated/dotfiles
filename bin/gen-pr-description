@@ -1,5 +1,5 @@
 #!/usr/bin/env zsh
 
-comments=$(git log main..HEAD --pretty=format:"%s%n%b---")
+comments=$(jj diff --from main)
 
 echo $comments | llm -s "$(cat ~/dotfiles/apps/llm/prompts/gh-pull-request-prompt.txt)"

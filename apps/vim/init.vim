@@ -58,6 +58,7 @@ call dein#add('othree/eregex.vim')
 call dein#add('github/copilot.vim')
 " call dein#add('supermaven/supermaven-nvim')
 call dein#add('ggandor/leap.nvim')
+call dein#add('wellle/context.vim')
 
 let g:coc_global_extensions = [ 'coc-json', 'coc-tsserver', 'coc-go', 'coc-svelte', 'coc-deno' ]
 call dein#add('neoclide/coc.nvim', {'rev': 'release'})

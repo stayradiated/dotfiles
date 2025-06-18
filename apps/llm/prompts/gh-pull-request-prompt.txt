@@ -1,2 +1,2 @@
-Write a short description for a Github Pull Request based on these commit messages.
+Write a short description for a Github Pull Request based on this diff.
 Keep it brief, but make sure it's clear what the PR does.
