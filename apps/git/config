@@ -3,7 +3,7 @@
 	name = George Czabania
 	signingkey = 130FA94F279AE060AC6345B21CC302FD07E9879B
 [push]
-	default = simple
+	default = current
   followTags = true
 [url "git@github.com:"]
 	insteadOf = https://github.com/
