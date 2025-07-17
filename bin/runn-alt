@@ -1,4 +1,0 @@
-#!/usr/bin/env zsh
-
-export RUNN_DIR=~/src/github.com/Runn-Fast/runn-alt
-exec runn $@
