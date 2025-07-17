@@ -19,4 +19,4 @@ family = "SF Mono"
 style = "Regular"
 
 [general]
-import = ["~/dotfiles/apps/alacritty/colors/high_contrast.toml"]
+import = ["~/dotfiles/apps/alacritty/colors/termorrow_dark.toml"]
