@@ -1,5 +1,54 @@
 #!/usr/bin/env zsh
 
-comments=$(jj diff --from main)
+set -e
 
-echo $comments | llm -s "$(cat ~/dotfiles/apps/llm/prompts/gh-pull-request-prompt.txt)"
+# Get current branch name
+current_branch=$(jj log --no-graph -T 'local_bookmarks' --limit 1 | tr -d '()' | xargs)
+
+if [[ -z "$current_branch" || "$current_branch" == "main" ]]; then
+    echo "❌ Error: Not on a feature branch or unable to determine branch name"
+    exit 1
+fi
+
+echo "🔍 Current branch: $current_branch"
+
+# Check if PR exists for this branch
+if ! gh pr view "$current_branch" --json number >/dev/null 2>&1; then
+    echo "❌ Error: No PR found for branch '$current_branch'"
+    echo "   Create a PR first with: gh pr create"
+    exit 1
+fi
+
+pr_number=$(gh pr view "$current_branch" --json number --jq '.number')
+echo "📋 Found PR #$pr_number"
+
+# Get diff from GitHub
+echo "⬇️  Fetching diff from GitHub..."
+diff_content=$(gh pr diff "$pr_number")
+
+# Get commit messages from GitHub
+echo "📝 Fetching commit messages from GitHub..."
+commit_messages=$(gh pr view "$pr_number" --json commits --jq '.commits[] | "- \(.messageHeadline)\n  \(.messageBody // "")"' | sed '/^  $/d')
+
+# Combine all information for the LLM
+combined_input="# Pull Request Diff:
+$diff_content
+
+# Commit Messages:
+$commit_messages"
+
+# Generate new description using LLM
+echo "🤖 Generating PR description..."
+echo "============================================================"
+
+new_description=$(echo "$combined_input" | llm -s "$(cat ~/dotfiles/apps/llm/prompts/gh-pull-request-prompt.txt)" | tee /dev/tty)
+
+echo
+echo "============================================================"
+
+# Update the PR description
+echo "📤 Updating PR description..."
+echo "$new_description" | gh pr edit "$pr_number" --body-file -
+
+echo "✅ PR description updated successfully!"
+echo "🔗 View at: $(gh pr view "$pr_number" --json url --jq '.url')"
