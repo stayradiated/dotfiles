@@ -1,0 +1,60 @@
+#!/usr/bin/env zsh
+
+# exec-appimage - Extract and run AppImage files
+# Usage: exec-appimage <path-to-appimage>
+
+set -e
+
+if [[ $# -ne 1 ]]; then
+    echo "Usage: $0 <path-to-appimage>" >&2
+    exit 1
+fi
+
+APPIMAGE_PATH="$1"
+
+# Check if the AppImage file exists
+if [[ ! -f "$APPIMAGE_PATH" ]]; then
+    echo "Error: AppImage file '$APPIMAGE_PATH' not found" >&2
+    exit 1
+fi
+
+# Get absolute path and create deterministic extraction directory
+APPIMAGE_ABSOLUTE=$(realpath "$APPIMAGE_PATH")
+APPIMAGE_BASENAME=$(basename "$APPIMAGE_ABSOLUTE")
+APPIMAGE_HASH=$(echo -n "$APPIMAGE_ABSOLUTE" | sha256sum | cut -d' ' -f1)
+EXTRACT_DIR="$HOME/.cache/appimage-extracted/${APPIMAGE_BASENAME%.*}-${APPIMAGE_HASH:0:16}"
+
+# Check if already extracted by looking for the squashfs-root directory
+if [[ -d "$EXTRACT_DIR/squashfs-root" ]]; then
+    echo "AppImage already extracted to: $EXTRACT_DIR"
+else
+    echo "Extracting AppImage to: $EXTRACT_DIR"
+
+    # Create extraction directory
+    mkdir -p "$EXTRACT_DIR"
+
+    # Change to extraction directory and extract
+    cd "$EXTRACT_DIR"
+    "$APPIMAGE_ABSOLUTE" --appimage-extract > /dev/null
+
+    if [[ ! -d "squashfs-root" ]]; then
+        echo "Error: Extraction failed - squashfs-root directory not found" >&2
+        exit 1
+    fi
+fi
+
+# Find and execute the AppRun file
+APPRUN_PATH="$EXTRACT_DIR/squashfs-root/AppRun"
+
+if [[ ! -f "$APPRUN_PATH" ]]; then
+    echo "Error: AppRun file not found in extracted contents" >&2
+    exit 1
+fi
+
+if [[ ! -x "$APPRUN_PATH" ]]; then
+    echo "Error: AppRun file is not executable" >&2
+    exit 1
+fi
+
+echo "Starting application..."
+exec "$APPRUN_PATH"
