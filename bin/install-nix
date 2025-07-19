@@ -1,6 +1,17 @@
-#!/bin/bash
+#!/usr/bin/env zsh
 
-curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix > ~/Downloads/install-nix.sh
-chmod +x ~/Downloads/install-nix.sh
-~/Downloads/install-nix.sh install
-# \rm -f ~/Downloads/install-nix.sh
+set -euo pipefail
+
+export TMPDIR="$HOME/Downloads/nix"
+mkdir -p "$TMPDIR"
+
+curl \
+  --proto '=https' --tlsv1.2 -sSf -L \
+  https://install.determinate.systems/nix \
+> "$TMPDIR/install-nix.sh"
+
+chmod +x "$TMPDIR/install-nix.sh"
+
+"$TMPDIR/install-nix.sh" install
+
+rm -rf "$TMPDIR"
