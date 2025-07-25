@@ -3,7 +3,7 @@
 set -e
 
 # Get current branch name
-current_branch=$(jj log --no-graph -T 'local_bookmarks' --limit 1 | tr -d '()' | xargs)
+current_branch=$(jj log --no-graph -T 'local_bookmarks' --limit 2 | cut -d ' ' -f 1)
 
 if [[ -z "$current_branch" || "$current_branch" == "main" ]]; then
     echo "❌ Error: Not on a feature branch or unable to determine branch name"
@@ -36,6 +36,10 @@ $diff_content
 
 # Commit Messages:
 $commit_messages"
+
+echo "............................................................"
+echo $combined_input
+echo "............................................................"
 
 # Generate new description using LLM
 echo "🤖 Generating PR description..."
