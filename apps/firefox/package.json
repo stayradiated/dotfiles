@@ -5,7 +5,7 @@
 	"main": "index.js",
 	"scripts": {
 		"test": "node ./container-script.test.ts",
-		"check": "biome check --unsafe --write ."
+		"tidy": "biome check --unsafe --write ."
 	},
 	"keywords": [],
 	"author": "George Czabania",
