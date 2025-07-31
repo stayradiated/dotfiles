@@ -55,10 +55,11 @@ call dein#add('dhruvasagar/vim-table-mode')
 " Changes Vim working directory to project root
 call dein#add('airblade/vim-rooter')
 call dein#add('othree/eregex.vim')
-call dein#add('github/copilot.vim')
-" call dein#add('supermaven/supermaven-nvim')
+" call dein#add('github/copilot.vim')
 call dein#add('ggandor/leap.nvim')
 " call dein#add('wellle/context.vim')
+
+call dein#add('supermaven-inc/supermaven-nvim')
 
 let g:coc_global_extensions = [ 'coc-json', 'coc-tsserver', 'coc-go', 'coc-svelte', 'coc-deno' ]
 call dein#add('neoclide/coc.nvim', {'rev': 'release'})
@@ -84,6 +85,8 @@ syntax enable
 if dein#check_install()
   call dein#install()
 endif
+
+lua require("supermaven-nvim").setup({ })
 
 " Settings
 " ------------------------------------------------------------------------------
