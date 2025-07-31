@@ -2,7 +2,7 @@ SHELL := /bin/bash
 
 apps := $(CURDIR)/apps
 
-apps: 1password aerc anki aws beets bspwm charles claude-code darktable dbxcli docker exeditor electrum expo firefox gcloud gh git githubcopilot greenclip jj khal lazycommit logview llm mitmproxy mycli ngrok npm obsidian pgcli pgp ranger sc-im ssh sxhkd tmux urlview vdirsyncer vim weechat xinput x11 xournalpp xscreensaver zoom zsh
+apps: 1password aerc anki aws beets bspwm charles claude-code darktable dbxcli docker exeditor electrum expo firefox fly gcloud gh git githubcopilot greenclip jj khal lazycommit logview llm mitmproxy mycli ngrok npm obsidian pgcli pgp ranger sc-im ssh sxhkd tmux urlview vdirsyncer vim weechat xinput x11 xournalpp xscreensaver zoom zsh
 
 1password:
 
@@ -124,6 +124,11 @@ firefox:
 		xdg-settings set default-web-browser firefox.desktop; \
 	fi
 
+fly:
+
+	@echo "fly..."
+	@mkdir -p ~/.fly
+	@ln -fs "$(apps)/fly/config.yml.enc" ~/.fly/config.yml
 
 gcloud:
 
