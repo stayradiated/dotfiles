@@ -1,0 +1,221 @@
+#!/usr/bin/env zsh
+
+# VPN Helper Script for Tailscale
+# Usage: vpn [--list | --reset | EXIT_NODE_NAME]
+
+# Colors for output
+readonly GREEN='\033[0;32m'
+readonly YELLOW='\033[0;33m'
+readonly RED='\033[0;31m'
+readonly BLUE='\033[0;34m'
+readonly NC='\033[0m' # No Color
+
+# Print colored output
+print_info() {
+    echo -e "${BLUE}ℹ${NC}  $1"
+}
+
+print_success() {
+    echo -e "${GREEN}✓${NC}  $1"
+}
+
+print_error() {
+    echo -e "${RED}✗${NC}  $1" >&2
+}
+
+print_warning() {
+    echo -e "${YELLOW}⚠${NC}  $1"
+}
+
+# Show usage information
+usage() {
+    cat << EOF
+Usage: ${0:t} [OPTIONS] [EXIT_NODE]
+
+A friendly wrapper for Tailscale VPN exit node management.
+
+OPTIONS:
+    --list, -l     List all available exit nodes
+    --reset, -r    Remove current exit node (direct connection)
+    --help, -h     Show this help message
+    --status, -s   Show current VPN status
+
+ARGUMENTS:
+    EXIT_NODE      Name of the exit node to connect to
+
+EXAMPLES:
+    ${0:t} --list              # Show all available exit nodes
+    ${0:t} <ip_or_hostname>    # Connect to specific exit node
+    ${0:t} --reset             # Disconnect from exit node
+    ${0:t} --status            # Show current connection status
+
+EOF
+}
+
+# List available exit nodes
+list_exit_nodes() {
+    print_info "Available exit nodes:"
+    echo
+
+    # Check if tailscale is accessible via as-host
+    if ! command -v as-host &> /dev/null; then
+        tailscale exit-node list
+    else
+        as-host tailscale exit-node list
+    fi
+
+    local exit_code=$?
+    if [[ $exit_code -ne 0 ]]; then
+        print_error "Failed to list exit nodes"
+        return $exit_code
+    fi
+}
+
+# Set exit node
+set_exit_node() {
+    local node="$1"
+
+    print_info "Connecting to exit node: ${node}"
+
+    # Determine if we need to use as-host
+    local cmd_prefix=""
+    if command -v as-host &> /dev/null; then
+        cmd_prefix="as-host"
+    fi
+
+    # Set the exit node
+    if ${cmd_prefix} sudo tailscale set --exit-node="${node}" --exit-node-allow-lan-access=true; then
+        print_success "Successfully connected to ${node}"
+
+        # Update DNS if the command exists
+        if command -v update-dns &> /dev/null; then
+            print_info "Updating DNS configuration..."
+            update-dns
+        fi
+
+        # Show new IP information
+        show_ip_info
+    else
+        print_error "Failed to connect to exit node: ${node}"
+        return 1
+    fi
+}
+
+# Reset exit node (disconnect)
+reset_exit_node() {
+    print_info "Disconnecting from exit node..."
+
+    # Determine if we need to use as-host
+    local cmd_prefix=""
+    if command -v as-host &> /dev/null; then
+        cmd_prefix="as-host"
+    fi
+
+    # Clear the exit node
+    if ${cmd_prefix} sudo tailscale set --exit-node=; then
+        print_success "Successfully disconnected from exit node"
+
+        # Update DNS if the command exists
+        if command -v update-dns &> /dev/null; then
+            print_info "Updating DNS configuration..."
+            update-dns
+        fi
+
+        # Show new IP information
+        show_ip_info
+    else
+        print_error "Failed to disconnect from exit node"
+        return 1
+    fi
+}
+
+# Show current IP and location information
+show_ip_info() {
+    print_info "Current connection info:"
+    echo
+
+    # Check if we have curl or wget
+    if command -v curl &> /dev/null; then
+        curl -s http://ifconfig.co/json | jq -r '
+            "  IP: \(.ip)",
+            "  Location: \(.city), \(.region_name), \(.country)",
+            "  ISP: \(.asn_org)"
+        ' 2>/dev/null || curl -s http://ifconfig.co
+    elif command -v wget &> /dev/null; then
+        wget -qO- http://ifconfig.co
+    elif command -v http &> /dev/null; then
+        http --print=b ifconfig.co/json 2>/dev/null | jq -r '
+            "  IP: \(.ip)",
+            "  Location: \(.city), \(.region_name), \(.country)",
+            "  ISP: \(.asn_org)"
+        ' 2>/dev/null || http --print=b ifconfig.co
+    else
+        print_warning "No HTTP client found (curl, wget, or httpie)"
+    fi
+}
+
+# Show current VPN status
+show_status() {
+    print_info "Current Tailscale status:"
+    echo
+
+    # Get current exit node status
+    local cmd_prefix=""
+    if command -v as-host &> /dev/null; then
+        cmd_prefix="as-host"
+    fi
+
+    # Show tailscale status
+    ${cmd_prefix} tailscale status --json 2>/dev/null | jq -r '
+        if .ExitNodeStatus then
+            "Exit Node: \(.ExitNodeStatus.TailscaleIPs[0] // "Unknown")"
+        else
+            "Exit Node: None (Direct connection)"
+        end
+    ' 2>/dev/null || ${cmd_prefix} tailscale status | grep -E "Exit node:|ExitNode:"
+
+    echo
+    show_ip_info
+}
+
+# Main function
+main() {
+    # Check if tailscale is available
+    if ! command -v tailscale &> /dev/null && ! command -v as-host &> /dev/null; then
+        print_error "Tailscale not found. Please install Tailscale first."
+        return 1
+    fi
+
+    # Parse arguments
+    case "${1}" in
+        --list|-l)
+            list_exit_nodes
+            ;;
+        --reset|-r)
+            reset_exit_node
+            ;;
+        --help|-h)
+            usage
+            ;;
+        --status|-s)
+            show_status
+            ;;
+        "")
+            # No arguments, show status
+            show_status
+            ;;
+        -*)
+            print_error "Unknown option: ${1}"
+            echo
+            usage
+            return 1
+            ;;
+        *)
+            # Assume it's an exit node name
+            set_exit_node "${1}"
+            ;;
+    esac
+}
+
+# Run main function with all arguments
+main "$@"
