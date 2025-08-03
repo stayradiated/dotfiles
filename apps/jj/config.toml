@@ -7,3 +7,7 @@ auto-local-bookmark = true
 
 [template-aliases]
 'format_short_signature(signature)' = 'signature.name()'
+
+[ui]
+diff.format = "git"
+pager = ["sh", "-c", "diff-so-fancy | less -FRX"]
