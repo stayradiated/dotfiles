@@ -10,8 +10,10 @@
 [url "git@bitbucket.org:"]
 	insteadOf = https://bitbucket.org/
 [core]
-	pager = diff-so-fancy | less --tabs=4 -RFX
+	pager = delta --diff-so-fancy
 	excludesFile = ~/.gitignore
+[interactive]
+  diffFilter = delta --color-only
 [color]
 	ui = true
 [color "diff-highlight"]
@@ -28,7 +30,7 @@
 	whitespace = red reverse
 [merge]
 	tool = nvim
-	conflictstyle = diff3
+  conflictstyle = zdiff3
 [mergetool "nvim"]
 	cmd = nvim -f -c \"Gvdiffsplit!\" \"$MERGED\"
 [mergetool]
@@ -51,3 +53,6 @@
 [credential "https://gist.github.com"]
 	helper = 
 	helper = !/usr/local/bin/gh auth git-credential
+[delta]
+  navigate = true  # use n and N to move between diff sections
+  dark = true      # or light = true, or omit for auto-detection

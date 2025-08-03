@@ -9,5 +9,5 @@ auto-local-bookmark = true
 'format_short_signature(signature)' = 'signature.name()'
 
 [ui]
-diff.format = "git"
-pager = ["sh", "-c", "diff-so-fancy | less -FRX"]
+pager = ["delta", "--diff-so-fancy"]
+diff-formatter = ":git"
