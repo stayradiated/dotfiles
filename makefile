@@ -285,6 +285,7 @@ ssh:
 ssh-agent:
 
 	@echo "ssh-agent..."
+	@mkdir -p ~/.ssh/sockets
 	@ln -fs "$(apps)/ssh/config.agent.enc" ~/.ssh/config
 	@ln -fs "$(apps)/ssh/known_hosts" ~/.ssh/known_hosts
 
