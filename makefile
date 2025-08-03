@@ -116,9 +116,12 @@ expo:
 firefox:
 
 	@echo "firefox..."
-	@if command -v xdg-settings; then \
-		xdg-settings set default-web-browser firefox.desktop; \
-	fi
+	@for dir in /usr/share/applications /usr/local/share/applications ~/.local/share/applications; do \
+		if test -f "$$dir/firefox.desktop" && command -v xdg-settings >/dev/null 2>&1; then \
+			echo "setting firefox as default browser..."; \
+			xdg-settings set default-web-browser firefox.desktop 2>/dev/null && break; \
+		fi; \
+	done
 
 fly:
 
