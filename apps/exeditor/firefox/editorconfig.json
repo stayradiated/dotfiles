@@ -1,9 +1,0 @@
-{
-  "editorPath": "/usr/bin/alacritty",
-  "cmdArgs": [
-    "--config-file",
-    "/home/admin/dotfiles/apps/alacritty/alacritty.yml",
-    "-e",
-    "nvim"
-  ]
-}

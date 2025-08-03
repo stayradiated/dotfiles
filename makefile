@@ -1,8 +1,18 @@
 SHELL := /bin/bash
 
+# Check if running as agent
+ifdef AGENT
+SSH_TARGET := ssh-agent
+else
+SSH_TARGET := ssh
+endif
+
 apps := $(CURDIR)/apps
 
-apps: 1password aerc anki aws beets bspwm charles claude-code darktable dbxcli docker exeditor electrum expo firefox fly gcloud gh git githubcopilot greenclip jj khal lazycommit logview llm mitmproxy mycli ngrok npm obsidian pgcli pgp ranger sc-im ssh sxhkd tmux urlview vdirsyncer vim weechat xinput x11 xournalpp xscreensaver zoom zsh
+apps: 1password aerc anki aws beets bspwm charles claude-code darktable dbxcli docker expo firefox fly gcloud gh git githubcopilot greenclip jj khal lazycommit logview llm mitmproxy mycli ngrok npm obsidian pgcli pgp ranger sc-im $(SSH_TARGET) sxhkd tmux urlview vdirsyncer vim weechat xinput x11 xournalpp xscreensaver zoom zsh
+# Agent target
+as-agent:
+	@$(MAKE) AGENT=1
 
 1password:
 
@@ -96,20 +106,6 @@ docker:
 	@echo "docker..."
 	@mkdir -p ~/.docker
 	@ln -fs "$(apps)/docker/config.json.enc" ~/.docker/config.json
-
-
-exeditor:
-
-	@echo "exeditor..."
-	@mkdir -p ~/.config/withexeditorhost/config/firefox
-	@ln -fs "$(apps)/exeditor/firefox/editorconfig.json" ~/.config/withexeditorhost/config/firefox/editorconfig.json
-	@ln -fs "$(apps)/exeditor/firefox/withexeditorhost.sh" ~/.config/withexeditorhost/config/firefox/withexeditorhost.sh
-
-electrum:
-
-	@echo "electrum..."
-	@mkdir -p ~/.electrum
-	@ln -fs "$(apps)/electrum/config.enc" ~/.electrum/config
 
 expo:
 
@@ -278,6 +274,25 @@ ssh:
 	done
 
 	@for file in $(apps)/ssh/*.pub; do\
+		name=$$(basename $$file);\
+		ln -fs $$file ~/.ssh/$$name;\
+		echo "🔒 $$name";\
+	done
+
+ssh-agent:
+
+	@echo "ssh-agent..."
+	@ln -fs "$(apps)/ssh/config.agent.enc" ~/.ssh/config
+	@ln -fs "$(apps)/ssh/known_hosts" ~/.ssh/known_hosts
+
+	@for file in $(apps)/ssh/*-agent.enc; do\
+		name=$$(basename --suffix=.enc $$file);\
+		ln -fs $$file ~/.ssh/$$name;\
+		chmod 600 ~/.ssh/$$name;\
+		echo "🔑 $$name";\
+	done
+
+	@for file in $(apps)/ssh/*-agent.pub; do\
 		name=$$(basename $$file);\
 		ln -fs $$file ~/.ssh/$$name;\
 		echo "🔒 $$name";\
