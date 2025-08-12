@@ -1,2 +1,3 @@
 Write a short description for a Github Pull Request based on this diff.
-Keep it brief, but make sure it's clear what the PR does.
+Your response will written directly into the PR description.
+Keep the description brief, but make sure it's clear what the PR does.
