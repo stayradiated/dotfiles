@@ -35,6 +35,7 @@ Usage: ${0:t} [OPTIONS] [EXIT_NODE]
 A friendly wrapper for Tailscale VPN exit node management.
 
 OPTIONS:
+    --suggest, -s  Suggest an exit node to use
     --list, -l     List all available exit nodes
     --reset, -r    Remove current exit node (direct connection)
     --help, -h     Show this help message
@@ -44,12 +45,31 @@ ARGUMENTS:
     EXIT_NODE      Name of the exit node to connect to
 
 EXAMPLES:
+    ${0:t} --suggest           # Suggest an exit node to use
     ${0:t} --list              # Show all available exit nodes
     ${0:t} <ip_or_hostname>    # Connect to specific exit node
     ${0:t} --reset             # Disconnect from exit node
     ${0:t} --status            # Show current connection status
 
 EOF
+}
+
+# Suggest an exit node to use
+suggest_exit_node() {
+    print_info "Suggesting exit node..."
+
+    # Check if tailscale is accessible via as-host
+    if ! command -v as-host &> /dev/null; then
+        tailscale exit-node suggest
+    else
+        as-host tailscale exit-node suggest
+    fi
+
+    local exit_code=$?
+    if [[ $exit_code -ne 0 ]]; then
+        print_error "Failed to suggest exit node"
+        return $exit_code
+    fi
 }
 
 # List available exit nodes
@@ -188,6 +208,9 @@ main() {
 
     # Parse arguments
     case "${1}" in
+        --suggest|-s)
+            suggest_exit_node
+            ;;
         --list|-l)
             list_exit_nodes
             ;;

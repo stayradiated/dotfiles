@@ -86,7 +86,7 @@ if dein#check_install()
   call dein#install()
 endif
 
-lua require("supermaven-nvim").setup({ })
+lua require("supermaven-nvim").setup({ ignore_filetypes = { "markdown" } })
 
 " Settings
 " ------------------------------------------------------------------------------
