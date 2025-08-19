@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
 
-sudo /usr/bin/docker $@
+# always run as root
+sudo /usr/bin/docker "$@"
