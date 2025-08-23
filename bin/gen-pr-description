@@ -45,14 +45,22 @@ echo "............................................................"
 echo "🤖 Generating PR description..."
 echo "============================================================"
 
-new_description=$(echo "$combined_input" | llm -s "$(cat ~/dotfiles/apps/llm/prompts/gh-pull-request-prompt.txt)" | tee /dev/tty)
+output=$(printf '%s\n' "$combined_input" | llm -s "$(cat ~/dotfiles/apps/llm/prompts/gh-pull-request-prompt.txt)" | tee /dev/tty)
+
+output=$(printf '%s' "$raw_output" \
+  | sed -E 's/\x1B\[[0-9;:]*[A-Za-z]//g' \
+  | tr -d '\000-\010\013\014\016-\037') \
+  | jq .
+
+description=$(printf '%s' "$output" | jq -r '.content')
+title=$(printf '%s' "$output" | jq -r '.title')
 
 echo
 echo "============================================================"
 
 # Update the PR description
 echo "📤 Updating PR description..."
-echo "$new_description" | gh pr edit "$pr_number" --body-file -
+gh pr edit "$pr_number" --title "$title" --body "$description"
 
 echo "✅ PR description updated successfully!"
 echo "🔗 View at: $(gh pr view "$pr_number" --json url --jq '.url')"
