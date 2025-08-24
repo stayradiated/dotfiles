@@ -55,13 +55,6 @@ Content template (adapt as needed):
 ## Testing
 - <tests added/updated and how to verify locally or in CI>
 
-## Risks & Impact
-- <perf/security/compatibility notes or “Low”>
-
-## Notes
-- <breaking changes / migrations / flags / follow-ups>
-- <Closes #123, ABC-456>
-
 EDGE CASES
 - Only docs/tests/build/deps changed → say so explicitly; if deps only, add “No functional changes.”
 - Empty or unreadable diff → title “Update project metadata” and minimal description stating no code changes detected.
