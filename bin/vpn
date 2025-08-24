@@ -119,6 +119,20 @@ set_exit_node() {
         print_error "Failed to connect to exit node: ${node}"
         return 1
     fi
+
+  reset_ssh_tunnel
+}
+
+# reset ssh tunnel (if exists)
+reset_ssh_tunnel() {
+  print_info "Resetting SSH tunnel..."
+  ssh -O exit git@github.com
+  local exit_code=$?
+  if [[ $exit_code -ne 0 ]]; then
+    print_error "Failed to reset SSH tunnel"
+    return $exit_code
+  fi
+  print_success "Successfully reset SSH tunnel"
 }
 
 # Reset exit node (disconnect)
@@ -147,6 +161,8 @@ reset_exit_node() {
         print_error "Failed to disconnect from exit node"
         return 1
     fi
+
+  reset_ssh_tunnel
 }
 
 # Show current IP and location information
