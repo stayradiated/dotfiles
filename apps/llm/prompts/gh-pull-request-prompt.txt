@@ -17,8 +17,7 @@ WHAT TO DO
 5) List 3–6 notable changes, grouped by theme when possible.
 6) Call out breaking changes, migrations, config toggles, or user-visible impacts.
 7) Note tests added/updated and how to verify.
-8) If the input references issues (e.g., #123 or ABC-456), include a “Closes …” line.
-9) If the diff is trivial (only lockfiles, formatting, comments), say “No functional changes.”
+8) If the diff is trivial (only lockfiles, formatting, comments), say “No functional changes.”
 
 STYLE
 - Title: imperative mood, ≤ 72 characters, no trailing period, no emojis.
