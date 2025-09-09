@@ -74,7 +74,8 @@ call dein#add('mracos/mermaid.vim')
 call dein#add('elel-dev/vim-astro-syntax')
 call dein#add('evanleck/vim-svelte')
 call dein#add('elixir-editors/vim-elixir')
-" call dein#add('nvim-treesitter/nvim-treesitter')
+call dein#add('nvim-treesitter/nvim-treesitter')
+call dein#add('davidmh/mdx.nvim')
 " call dein#add('nvim-treesitter/nvim-treesitter-context')
 
 call dein#end()
@@ -423,9 +424,6 @@ endfunction
 " Markdown
 autocmd BufNewFile,BufRead *.md set filetype=markdown
 autocmd FileType markdown setlocal tw=79
-
-" Markdown JSX
-autocmd BufNewFile,BufRead *.mdx set filetype=javascript
 
 " Go
 autocmd FileType go setlocal ts=2 sw=2 sts=2
