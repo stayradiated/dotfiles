@@ -8,4 +8,4 @@ if [ -e /home/admin/.nix-profile/etc/profile.d/nix.sh ]; then
   source /home/admin/.nix-profile/etc/profile.d/nix.sh
 fi
 
-alias claude="/home/admin/.claude/local/claude"
+

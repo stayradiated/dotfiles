@@ -2,6 +2,34 @@
 
 set -e
 
+# Default settings
+include_diff=true
+
+# Parse command line arguments
+while [[ $# -gt 0 ]]; do
+    case $1 in
+        --no-diff|--commits-only)
+            include_diff=false
+            shift
+            ;;
+        --help|-h)
+            echo "Usage: $0 [OPTIONS]"
+            echo ""
+            echo "Update GitHub PR description using LLM based on commits and optionally diff"
+            echo ""
+            echo "Options:"
+            echo "  --no-diff, --commits-only  Generate PR description from commit messages only"
+            echo "  --help, -h                 Show this help message"
+            exit 0
+            ;;
+        *)
+            echo "❌ Unknown option: $1"
+            echo "   Use --help for usage information"
+            exit 1
+            ;;
+    esac
+done
+
 # Get current branch name
 current_branch=$(jj log --no-graph -T 'local_bookmarks' --limit 2 | cut -d ' ' -f 1)
 
@@ -22,45 +50,83 @@ fi
 pr_number=$(gh pr view "$current_branch" --json number --jq '.number')
 echo "📋 Found PR #$pr_number"
 
-# Get diff from GitHub
-echo "⬇️  Fetching diff from GitHub..."
-diff_content=$(gh pr diff "$pr_number")
-
 # Get commit messages from GitHub
 echo "📝 Fetching commit messages from GitHub..."
 commit_messages=$(gh pr view "$pr_number" --json commits --jq '.commits[] | "- \(.messageHeadline)\n  \(.messageBody // "")"' | sed '/^  $/d')
 
-# Combine all information for the LLM
-combined_input="# Pull Request Diff:
+# Build the input for LLM based on whether diff is included
+if $include_diff; then
+    # Get diff from GitHub
+    echo "⬇️  Fetching diff from GitHub..."
+    diff_content=$(gh pr diff "$pr_number")
+    
+    # Combine all information for the LLM
+    combined_input="# Pull Request Diff:
 $diff_content
 
 # Commit Messages:
 $commit_messages"
+    
+    echo "🔄 Mode: Using diff + commit messages"
+else
+    # Use only commit messages
+    combined_input="# Commit Messages:
+$commit_messages"
+    
+    echo "📝 Mode: Using commit messages only (diff excluded)"
+fi
 
-echo "............................................................"
-echo $combined_input
-echo "............................................................"
+# Optional: Show what's being sent (can be commented out for cleaner output)
+if [[ "${VERBOSE:-0}" == "1" ]]; then
+    echo "............................................................"
+    echo "$combined_input"
+    echo "............................................................"
+fi
 
 # Generate new description using LLM
 echo "🤖 Generating PR description..."
 echo "============================================================"
 
-output=$(printf '%s\n' "$combined_input" | llm -s "$(cat ~/dotfiles/apps/llm/prompts/gh-pull-request-prompt.txt)" | tee /dev/tty)
+# Run LLM and capture raw output
+raw_output=$(printf '%s\n' "$combined_input" | llm -s "$(cat ~/dotfiles/apps/llm/prompts/gh-pull-request-prompt.txt)")
 
-output=$(printf '%s' "$raw_output" \
+# Display the output
+echo "$raw_output"
+
+# Clean the output and parse JSON
+# Remove ANSI escape codes and control characters, then parse JSON
+cleaned_output=$(printf '%s' "$raw_output" \
   | sed -E 's/\x1B\[[0-9;:]*[A-Za-z]//g' \
-  | tr -d '\000-\010\013\014\016-\037') \
-  | jq .
+  | tr -d '\000-\010\013\014\016-\037')
 
-description=$(printf '%s' "$output" | jq -r '.content')
-title=$(printf '%s' "$output" | jq -r '.title')
+# Extract title and description from JSON
+description=$(printf '%s' "$cleaned_output" | jq -r '.content // .description // .')
+title=$(printf '%s' "$cleaned_output" | jq -r '.title // .')
+
+# Check if we got valid JSON output
+if [[ "$title" == "." ]] || [[ "$description" == "." ]]; then
+    echo "⚠️  Warning: Could not parse JSON output from LLM"
+    echo "   The LLM output might not be in the expected JSON format"
+    echo "   Raw output saved for debugging"
+    exit 1
+fi
 
 echo
 echo "============================================================"
 
 # Update the PR description
-echo "📤 Updating PR description..."
+echo "📤 Updating PR..."
+echo "   Title: $title"
+echo ""
+
 gh pr edit "$pr_number" --title "$title" --body "$description"
 
-echo "✅ PR description updated successfully!"
+echo "✅ PR updated successfully!"
 echo "🔗 View at: $(gh pr view "$pr_number" --json url --jq '.url')"
+
+# Show what mode was used
+if $include_diff; then
+    echo "📊 Generated from: diff + commit messages"
+else
+    echo "📊 Generated from: commit messages only"
+fi
