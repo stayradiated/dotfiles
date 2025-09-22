@@ -31,8 +31,7 @@ while [[ $# -gt 0 ]]; do
 done
 
 # Get current branch name
-current_branch=$(jj log --no-graph -T 'local_bookmarks' --limit 2 | cut -d ' ' -f 1)
-
+current_branch=$(jj bookmark list -r @ -T 'name')
 if [[ -z "$current_branch" || "$current_branch" == "main" ]]; then
     echo "❌ Error: Not on a feature branch or unable to determine branch name"
     exit 1
