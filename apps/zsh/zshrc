@@ -9,3 +9,5 @@ if [ -e /home/admin/.nix-profile/etc/profile.d/nix.sh ]; then
 fi
 
 
+
+alias claude="/home/admin/.claude/local/claude"

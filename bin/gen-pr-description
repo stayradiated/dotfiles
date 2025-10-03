@@ -57,8 +57,8 @@ commit_messages=$(gh pr view "$pr_number" --json commits --jq '.commits[] | "- \
 if $include_diff; then
     # Get diff from GitHub
     echo "⬇️  Fetching diff from GitHub..."
-    diff_content=$(gh pr diff "$pr_number")
-    
+    diff_content=$(gh pr diff "$pr_number" | ttok --truncate 120000)
+
     # Combine all information for the LLM
     combined_input="# Pull Request Diff:
 $diff_content
