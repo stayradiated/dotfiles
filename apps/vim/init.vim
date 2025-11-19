@@ -423,7 +423,6 @@ endfunction
 
 " Markdown
 autocmd BufNewFile,BufRead *.md set filetype=markdown
-autocmd FileType markdown setlocal tw=79
 
 " Go
 autocmd FileType go setlocal ts=2 sw=2 sts=2
