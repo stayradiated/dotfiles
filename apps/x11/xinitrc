@@ -18,7 +18,7 @@ setxkbmap us \
 ) &
 
 # greenclip
-greenclip daemon &
+# greenclip daemon &
 
 # wm keybindings
 export XDG_CACHE_HOME=/home/admin/.cache
@@ -32,9 +32,6 @@ sxhkd -c /home/admin/.config/sxhkd/sxhkdrc &
 
 # configure external displays
 use-external-display
-
-# run kolide in background
-kolide &
 
 # configure bspwm window manager
 exec bspwm -c /home/admin/.config/bspwm/bspwmrc
