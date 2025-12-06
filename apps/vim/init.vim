@@ -56,7 +56,7 @@ call dein#add('dhruvasagar/vim-table-mode')
 call dein#add('airblade/vim-rooter')
 call dein#add('othree/eregex.vim')
 " call dein#add('github/copilot.vim')
-call dein#add('ggandor/leap.nvim')
+" call dein#add('ggandor/leap.nvim')
 " call dein#add('wellle/context.vim')
 
 call dein#add('supermaven-inc/supermaven-nvim')
@@ -292,7 +292,7 @@ let g:copilot_filetypes = {
   \ }
 
 " leap.nvim
-lua require('leap').create_default_mappings()
+" lua require('leap').create_default_mappings()
 
 " vim-table-mode
 let g:table_mode_map_prefix = '<leader>2'
