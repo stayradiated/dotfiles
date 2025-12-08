@@ -1,0 +1,65 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+# Opens the GitHub PR for the current Jujutsu bookmark (branch) in your browser.
+#
+# Requirements:
+#   - jj
+#   - gh (authenticated)
+#
+# Behavior:
+#   - Reads current bookmark name from: jj bookmark list -r @ -T 'name'
+#   - Uses that name to find the PR: gh pr view "$branch"
+#   - Opens the PR URL in your default browser
+
+die() {
+  echo "❌ $*" >&2
+  exit 1
+}
+
+open_url() {
+  local url="$1"
+
+  if command -v open >/dev/null 2>&1; then
+    # macOS
+    open "$url"
+  elif command -v xdg-open >/dev/null 2>&1; then
+    # Linux
+    xdg-open "$url" >/dev/null 2>&1 &
+  elif command -v wslview >/dev/null 2>&1; then
+    # WSL
+    wslview "$url"
+  else
+    die "Don't know how to open a browser on this system. URL: $url"
+  fi
+}
+
+# Get current bookmark/branch name from jj
+current_branch="$(jj bookmark list -r @ -T 'name' 2>/dev/null || true)"
+
+if [[ -z "${current_branch}" ]]; then
+  die "Unable to determine current bookmark name"
+fi
+
+if [[ "${current_branch}" == "main" ]]; then
+  die "You're on 'main' — not a feature bookmark"
+fi
+
+echo "🔍 Current bookmark: ${current_branch}"
+
+# Verify PR exists for this branch
+if ! gh pr view "${current_branch}" --json number >/dev/null 2>&1; then
+  die "No PR found for bookmark '${current_branch}'. Create one with: gh pr create"
+fi
+
+pr_number="$(gh pr view "${current_branch}" --json number --jq '.number')"
+pr_url="$(gh pr view "${pr_number}" --json url --jq '.url')"
+
+echo "📋 Found PR #${pr_number}"
+echo "🔗 ${pr_url}"
+
+open_url "${pr_url}"
+
+echo "✅ Opened PR in browser"
+
