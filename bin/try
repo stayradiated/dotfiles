@@ -1,0 +1,1612 @@
+#!/usr/bin/env bun
+/* eslint-disable no-control-regex */
+
+/**
+ * try.ts - TypeScript/Node port of the Ruby "try" tool.
+ *
+ * Goals:
+ * - Keep behavior close to the Ruby version.
+ * - No external deps.
+ * - UI renders to STDERR with lightweight token-based ANSI + double buffering.
+ * - Emits shell scripts to STDOUT for eval wrappers.
+ *
+ * Notes:
+ * - The interactive selector uses async key handling (stdin raw mode).
+ * - Test flags from Ruby are supported:
+ *     --and-type, --and-exit, --and-keys, --and-confirm
+ * - Color flags:
+ *     --no-expand-tokens, --no-colors, NO_COLOR env
+ * - Default tries path:
+ *     TRY_PATH env or ~/src/tries
+ */
+
+import fs from "node:fs";
+import path from "node:path";
+import os from "node:os";
+import readline from "node:readline";
+import process from "node:process";
+
+// ------------------------- UI -------------------------
+
+type IO = NodeJS.WriteStream;
+
+class UI {
+  static TOKEN_MAP: Record<string, string> = {
+    // Text formatting
+    "{b}": "\x1b[1;33m",
+    "{/b}": "\x1b[22m\x1b[39m",
+    "{dim}": "\x1b[90m",
+    "{text}": "\x1b[0m\x1b[39m",
+    "{reset}": "\x1b[0m\x1b[39m\x1b[49m",
+    "{/fg}": "\x1b[39m",
+    // Headings
+    "{h1}": "\x1b[1;38;5;208m",
+    "{h2}": "\x1b[1;34m",
+    // Selection
+    "{section}": "\x1b[1m",
+    "{/section}": "\x1b[0m",
+    // Strikethrough (background)
+    "{strike}": "\x1b[48;5;52m",
+    "{/strike}": "\x1b[49m",
+    // Screen control
+    "{clear_screen}": "\x1b[2J",
+    "{clear_line}": "\x1b[2K",
+    "{home}": "\x1b[H",
+    "{clear_below}": "\x1b[0J",
+    "{hide_cursor}": "\x1b[?25l",
+    "{show_cursor}": "\x1b[?25h",
+    // Input cursor
+    "{cursor}": "\x1b[7m \x1b[27m",
+  };
+
+  private static buffer: string[] = [];
+  private static lastBuffer: string[] = [];
+  private static currentLine = "";
+
+  private static heightCache: number | null = null;
+  private static widthCache: number | null = null;
+
+  private static expandTokensEnabled = true;
+  private static forceColorsEnabled = false;
+
+  static print(text?: string, io: IO = process.stderr) {
+    if (text == null) return;
+    UI.currentLine += text;
+  }
+
+  static puts(text = "", io: IO = process.stderr) {
+    UI.currentLine += text;
+    UI.buffer.push(UI.currentLine);
+    UI.currentLine = "";
+  }
+
+  static flush(io: IO = process.stderr) {
+    if (UI.currentLine.length > 0) {
+      UI.buffer.push(UI.currentLine);
+      UI.currentLine = "";
+    }
+
+    const isTTY = !!io.isTTY;
+
+    // Non-TTY (unless force color): strip tokens
+    if (!isTTY && !UI.forceColorsEnabled) {
+      const plain = UI.buffer.join("\n").replace(/\{.*?\}/g, "");
+      io.write(plain);
+      if (!plain.endsWith("\n")) io.write("\n");
+      UI.lastBuffer = [];
+      UI.buffer = [];
+      UI.currentLine = "";
+      return;
+    }
+
+    if (isTTY) {
+      io.write("\x1b[H");
+    }
+
+    const maxLines = Math.max(UI.buffer.length, UI.lastBuffer.length);
+    const reset = UI.TOKEN_MAP["{reset}"];
+
+    for (let i = 0; i < maxLines; i++) {
+      const current = UI.buffer[i] ?? "";
+      const last = UI.lastBuffer[i] ?? "";
+
+      if (current !== last || UI.forceColorsEnabled) {
+        if (isTTY) {
+          io.write(`\x1b[${i + 1};1H\x1b[2K`);
+        }
+        if (current.length > 0) {
+          const processed = UI.expandTokens(current);
+          io.write(processed);
+          if (UI.expandTokensEnabled) io.write(reset);
+          if (UI.forceColorsEnabled && !isTTY) io.write("\n");
+        }
+      }
+    }
+
+    UI.lastBuffer = UI.buffer.slice();
+    UI.buffer = [];
+    UI.currentLine = "";
+  }
+
+  static cls(io: IO = process.stderr) {
+    UI.currentLine = "";
+    UI.buffer = [];
+    UI.lastBuffer = [];
+    io.write("\x1b[2J\x1b[H");
+  }
+
+  static hideCursor() {
+    process.stderr.write("\x1b[?25l");
+  }
+
+  static showCursor() {
+    process.stderr.write("\x1b[?25h");
+  }
+
+  static height(): number {
+    if (UI.heightCache != null) return UI.heightCache;
+    const env = Number(process.env.TRY_HEIGHT ?? 0);
+    if (env > 0) return (UI.heightCache = env);
+
+    const h = process.stderr.rows ?? process.stdout.rows ?? 24;
+    UI.heightCache = h > 0 ? h : 24;
+    return UI.heightCache;
+  }
+
+  static width(): number {
+    if (UI.widthCache != null) return UI.widthCache;
+    const env = Number(process.env.TRY_WIDTH ?? 0);
+    if (env > 0) return (UI.widthCache = env);
+
+    const w = process.stderr.columns ?? process.stdout.columns ?? 80;
+    UI.widthCache = w > 0 ? w : 80;
+    return UI.widthCache;
+  }
+
+  static refreshSize() {
+    UI.heightCache = null;
+    UI.widthCache = null;
+  }
+
+  static disableTokenExpansion() {
+    UI.expandTokensEnabled = false;
+  }
+
+  static disableColors() {
+    UI.expandTokensEnabled = false;
+  }
+
+  static forceColors() {
+    UI.forceColorsEnabled = true;
+  }
+
+  static expandTokens(str: string): string {
+    if (!UI.expandTokensEnabled) return str;
+    return str.replace(/\{.*?\}/g, (m) => UI.TOKEN_MAP[m] ?? m);
+  }
+}
+
+// ------------------------- Key reader -------------------------
+
+class KeyReader {
+  private queue: string[] = [];
+  private resolver: ((k: string) => void) | null = null;
+  private boundOnData: ((buf: Buffer) => void) | null = null;
+
+  constructor() {}
+
+  start() {
+    const stdin = process.stdin;
+    stdin.setEncoding("utf8");
+
+    if (stdin.isTTY) {
+      stdin.setRawMode(true);
+    }
+    stdin.resume();
+
+    this.boundOnData = (buf: Buffer) => {
+      const s = buf.toString("utf8");
+      // Push each "chunk" as-is; for raw mode, this is usually key sequence.
+      // But could contain multiple chars; split conservatively:
+      // If it's an escape sequence starting with \x1b and length > 1, keep whole.
+      if (s.startsWith("\x1b") && s.length > 1) {
+        this.enqueue(s);
+      } else {
+        for (const ch of s) this.enqueue(ch);
+      }
+    };
+
+    stdin.on("data", this.boundOnData);
+  }
+
+  stop() {
+    const stdin = process.stdin;
+    if (this.boundOnData) stdin.off("data", this.boundOnData);
+    this.boundOnData = null;
+
+    if (stdin.isTTY) {
+      try {
+        stdin.setRawMode(false);
+      } catch {}
+    }
+    stdin.pause();
+    this.queue = [];
+    this.resolver = null;
+  }
+
+  private enqueue(k: string) {
+    if (this.resolver) {
+      const r = this.resolver;
+      this.resolver = null;
+      r(k);
+    } else {
+      this.queue.push(k);
+    }
+  }
+
+  async nextKey(): Promise<string> {
+    if (this.queue.length > 0) return this.queue.shift() as string;
+    return await new Promise<string>((resolve) => {
+      this.resolver = resolve;
+    });
+  }
+}
+
+// ------------------------- TrySelector -------------------------
+
+type TryDir = {
+  name: string;
+  basename: string;
+  basename_down: string;
+  path: string;
+  is_new: boolean;
+  ctime: Date;
+  mtime: Date;
+  score?: number;
+};
+
+type Selection =
+  | { type: "cd"; path: string }
+  | { type: "mkdir"; path: string }
+  | { type: "delete"; paths: { path: string; basename: string }[]; base_path: string }
+  | { type: "cancel"; path: null }
+  | null;
+
+class TrySelector {
+  static TRY_PATH =
+    process.env.TRY_PATH || path.join(os.homedir(), "src", "tries");
+
+  private searchTerm: string;
+  private cursorPos = 0;
+  private inputCursorPos = 0;
+  private scrollOffset = 0;
+  private inputBuffer: string;
+  private selected: Selection = null;
+  private allTries: TryDir[] | null = null;
+  private basePath: string;
+
+  private deleteStatus: string | null = null;
+  private deleteMode = false;
+  private markedForDeletion: string[] = [];
+
+  private testRenderOnce: boolean;
+  private testNoCls: boolean;
+  private testKeys: string[] | null;
+  private testHadKeys: boolean;
+  private testConfirm: string | null;
+
+  private oldWinchHandler: (() => void) | null = null;
+  private needsRedraw = false;
+
+  constructor(
+    searchTerm = "",
+    opts: {
+      basePath?: string;
+      initialInput?: string | null;
+      testRenderOnce?: boolean;
+      testNoCls?: boolean;
+      testKeys?: string[] | null;
+      testConfirm?: string | null;
+    } = {}
+  ) {
+    this.searchTerm = searchTerm.replace(/\s+/g, "-");
+    this.basePath = opts.basePath ?? TrySelector.TRY_PATH;
+
+    this.inputBuffer = (opts.initialInput ?? this.searchTerm).replace(/\s+/g, "-");
+    this.inputCursorPos = this.inputBuffer.length;
+
+    this.testRenderOnce = !!opts.testRenderOnce;
+    this.testNoCls = !!opts.testNoCls;
+    this.testKeys = opts.testKeys ?? null;
+    this.testHadKeys = !!(this.testKeys && this.testKeys.length > 0);
+    this.testConfirm = opts.testConfirm ?? null;
+
+    if (!fs.existsSync(this.basePath)) {
+      fs.mkdirSync(this.basePath, { recursive: true });
+    }
+  }
+
+  async run(): Promise<Selection> {
+    this.setupTerminal();
+
+    if (this.testRenderOnce && (!this.testKeys || this.testKeys.length === 0)) {
+      const tries = this.getTries();
+      this.render(tries);
+      return null;
+    }
+
+    const stdinTTY = !!process.stdin.isTTY;
+    const stderrTTY = !!process.stderr.isTTY;
+
+    if (!stdinTTY || !stderrTTY) {
+      if (!this.testKeys || this.testKeys.length === 0) {
+        UI.puts("Error: try requires an interactive terminal");
+        UI.flush();
+        return null;
+      }
+      return await this.mainLoop();
+    }
+
+    const reader = new KeyReader();
+    reader.start();
+    try {
+      return await this.mainLoop(reader);
+    } finally {
+      reader.stop();
+    }
+  } finallyRestore = false;
+
+  private setupTerminal() {
+    if (!this.testNoCls) {
+      UI.cls();
+      UI.hideCursor();
+    }
+
+    const handler = () => {
+      this.needsRedraw = true;
+    };
+    this.oldWinchHandler = handler;
+    process.on("SIGWINCH", handler);
+  }
+
+  private restoreTerminal() {
+    if (!this.testNoCls) {
+      UI.cls();
+      UI.showCursor();
+    }
+    if (this.oldWinchHandler) {
+      process.off("SIGWINCH", this.oldWinchHandler);
+      this.oldWinchHandler = null;
+    }
+  }
+
+  private loadAllTries() {
+    if (this.allTries) return;
+
+    const tries: TryDir[] = [];
+    const entries = fs.readdirSync(this.basePath, { withFileTypes: true });
+
+    for (const ent of entries) {
+      if (ent.name.startsWith(".")) continue;
+      const p = path.join(this.basePath, ent.name);
+
+      let st: fs.Stats;
+      try {
+        st = fs.statSync(p);
+      } catch {
+        continue;
+      }
+      if (!st.isDirectory()) continue;
+
+      tries.push({
+        name: `📁 ${ent.name}`,
+        basename: ent.name,
+        basename_down: ent.name.toLowerCase(),
+        path: p,
+        is_new: false,
+        ctime: st.ctime,
+        mtime: st.mtime,
+      });
+    }
+
+    this.allTries = tries;
+  }
+
+  private getTries(): TryDir[] {
+    this.loadAllTries();
+    const all = this.allTries ?? [];
+
+    const queryDown = this.inputBuffer.toLowerCase();
+    const queryChars = Array.from(queryDown);
+
+    const scored = all.map((t) => {
+      const score = this.calculateScore(t, queryDown, queryChars, t.ctime, t.mtime);
+      return { ...t, score };
+    });
+
+    if (this.inputBuffer.length === 0) {
+      return scored.sort((a, b) => (b.score ?? 0) - (a.score ?? 0));
+    } else {
+      const filtered = scored.filter((t) => (t.score ?? 0) > 0);
+      return filtered.sort((a, b) => (b.score ?? 0) - (a.score ?? 0));
+    }
+  }
+
+  private calculateScore(
+    tryDir: TryDir,
+    queryDown: string,
+    queryChars: string[],
+    ctime?: Date,
+    mtime?: Date
+  ): number {
+    const text = tryDir.basename;
+    const textLower = tryDir.basename_down;
+
+    let score = 0.0;
+
+    // date-prefixed dirs
+    if (/^\d{4}-\d{2}-\d{2}-/.test(text)) {
+      score += 2.0;
+    }
+
+    if (queryDown.length > 0) {
+      const queryLen = queryChars.length;
+      const textLen = textLower.length;
+
+      let lastPos = -1;
+      let queryIdx = 0;
+
+      for (let i = 0; i < textLen; i++) {
+        if (queryIdx >= queryLen) break;
+        const ch = textLower[i];
+
+        if (ch === queryChars[queryIdx]) {
+          score += 1.0;
+
+          const isBoundary =
+            i === 0 || /\W/.test(textLower[i - 1] ?? "");
+          if (isBoundary) score += 1.0;
+
+          if (lastPos >= 0) {
+            const gap = i - lastPos - 1;
+            score += 2.0 / Math.sqrt(gap + 1);
+          }
+
+          lastPos = i;
+          queryIdx += 1;
+        }
+      }
+
+      if (queryIdx < queryLen) return 0.0;
+
+      if (lastPos >= 0) {
+        score *= queryLen / (lastPos + 1);
+      }
+
+      score *= 10.0 / (text.length + 10.0);
+    }
+
+    if (mtime) {
+      const hoursSince = (Date.now() - mtime.getTime()) / 3600000;
+      score += 3.0 / Math.sqrt(hoursSince + 1);
+    }
+
+    return score;
+  }
+
+  private async mainLoop(reader?: KeyReader): Promise<Selection> {
+    try {
+      while (true) {
+        const tries = this.getTries();
+        const showCreateNew = this.inputBuffer.length > 0;
+        const totalItems = tries.length + (showCreateNew ? 1 : 0);
+
+        this.cursorPos = Math.min(
+          Math.max(this.cursorPos, 0),
+          Math.max(totalItems - 1, 0)
+        );
+
+        this.render(tries);
+
+        const key = await this.readKey(reader);
+        if (key == null) continue;
+
+        switch (key) {
+          case "\r":
+          case "\n": {
+            if (this.deleteMode && this.markedForDeletion.length > 0) {
+              await this.confirmBatchDelete(tries, reader);
+              if (this.selected) break;
+            } else if (this.cursorPos < tries.length) {
+              this.handleSelection(tries[this.cursorPos]);
+              if (this.selected) break;
+            } else if (showCreateNew) {
+              await this.handleCreateNew();
+              if (this.selected) break;
+            }
+            break;
+          }
+
+          case "\x1b[A":
+          case "\x10": // Ctrl-P
+            this.cursorPos = Math.max(this.cursorPos - 1, 0);
+            break;
+
+          case "\x1b[B":
+          case "\x0E": // Ctrl-N
+            this.cursorPos = Math.min(this.cursorPos + 1, totalItems - 1);
+            break;
+
+          case "\x1b[C":
+          case "\x1b[D":
+            break;
+
+          case "\x7F":
+          case "\b":
+          case "\x08": // Ctrl-H
+            if (this.inputCursorPos > 0) {
+              this.inputBuffer =
+                this.inputBuffer.slice(0, this.inputCursorPos - 1) +
+                this.inputBuffer.slice(this.inputCursorPos);
+              this.inputCursorPos -= 1;
+            }
+            this.cursorPos = 0;
+            break;
+
+          case "\x01": // Ctrl-A
+            this.inputCursorPos = 0;
+            break;
+
+          case "\x05": // Ctrl-E
+            this.inputCursorPos = this.inputBuffer.length;
+            break;
+
+          case "\x02": // Ctrl-B
+            this.inputCursorPos = Math.max(this.inputCursorPos - 1, 0);
+            break;
+
+          case "\x06": // Ctrl-F
+            this.inputCursorPos = Math.min(
+              this.inputCursorPos + 1,
+              this.inputBuffer.length
+            );
+            break;
+
+          case "\x0B": // Ctrl-K
+            this.inputBuffer = this.inputBuffer.slice(0, this.inputCursorPos);
+            break;
+
+          case "\x17": { // Ctrl-W
+            if (this.inputCursorPos > 0) {
+              let pos = this.inputCursorPos - 1;
+
+              while (pos >= 0 && !/[a-zA-Z0-9]/.test(this.inputBuffer[pos])) {
+                pos--;
+              }
+              while (pos >= 0 && /[a-zA-Z0-9]/.test(this.inputBuffer[pos])) {
+                pos--;
+              }
+
+              const newPos = pos + 1;
+              this.inputBuffer =
+                this.inputBuffer.slice(0, newPos) +
+                this.inputBuffer.slice(this.inputCursorPos);
+              this.inputCursorPos = newPos;
+            }
+            this.cursorPos = 0;
+            break;
+          }
+
+          case "\x04": { // Ctrl-D toggle mark for deletion
+            if (this.cursorPos < tries.length) {
+              const p = tries[this.cursorPos].path;
+              const idx = this.markedForDeletion.indexOf(p);
+              if (idx >= 0) {
+                this.markedForDeletion.splice(idx, 1);
+              } else {
+                this.markedForDeletion.push(p);
+                this.deleteMode = true;
+              }
+              if (this.markedForDeletion.length === 0) {
+                this.deleteMode = false;
+              }
+            }
+            break;
+          }
+
+          case "\x03":
+          case "\x1b": { // Ctrl-C or ESC
+            if (this.deleteMode) {
+              this.markedForDeletion = [];
+              this.deleteMode = false;
+            } else {
+              this.selected = null;
+              return this.selected;
+            }
+            break;
+          }
+
+          default: {
+            if (
+              key.length === 1 &&
+              /[a-zA-Z0-9\-_\. ]/.test(key)
+            ) {
+              this.inputBuffer =
+                this.inputBuffer.slice(0, this.inputCursorPos) +
+                key +
+                this.inputBuffer.slice(this.inputCursorPos);
+              this.inputCursorPos += 1;
+              this.cursorPos = 0;
+            }
+            break;
+          }
+        }
+
+        if (this.selected) return this.selected;
+      }
+    } finally {
+      this.restoreTerminal();
+    }
+  }
+
+  private async readKey(reader?: KeyReader): Promise<string | null> {
+    if (this.testKeys && this.testKeys.length > 0) {
+      return this.testKeys.shift() as string;
+    }
+
+    if (this.testHadKeys && this.testKeys && this.testKeys.length === 0) {
+      return "\x1b";
+    }
+
+    if (!reader) {
+      // Non-interactive fallback: block on stdin line? emulate ESC.
+      return "\x1b";
+    }
+
+    // Resize check loop
+    while (true) {
+      if (this.needsRedraw) {
+        this.needsRedraw = false;
+        UI.refreshSize();
+        UI.cls();
+        return null;
+      }
+
+      // Wait for next key
+      return await reader.nextKey();
+    }
+  }
+
+  private render(tries: TryDir[]) {
+    const termWidth = UI.width();
+    const termHeight = UI.height();
+    const separator = "─".repeat(Math.max(termWidth - 1, 1));
+
+    UI.puts("{h1}📁 Try Selector{reset}");
+    UI.puts(`{dim}${separator}{/fg}`);
+
+    const before = this.inputBuffer.slice(0, this.inputCursorPos);
+    const charAt = this.inputBuffer[this.inputCursorPos] ?? " ";
+    const after = this.inputBuffer.slice(this.inputCursorPos + 1) ?? "";
+    UI.puts(
+      `{dim}Search:{/fg} {b}${before}\x1b[7m${charAt}\x1b[27m${after}{/b}`
+    );
+    UI.puts(`{dim}${separator}{/fg}`);
+
+    const maxVisible = Math.max(termHeight - 8, 3);
+    const showCreateNew = this.inputBuffer.length > 0;
+    const totalItems = tries.length + (showCreateNew ? 1 : 0);
+
+    if (this.cursorPos < this.scrollOffset) {
+      this.scrollOffset = this.cursorPos;
+    } else if (this.cursorPos >= this.scrollOffset + maxVisible) {
+      this.scrollOffset = this.cursorPos - maxVisible + 1;
+    }
+
+    const visibleEnd = Math.min(this.scrollOffset + maxVisible, totalItems);
+
+    for (let idx = this.scrollOffset; idx < visibleEnd; idx++) {
+      if (idx === tries.length && tries.length > 0 && idx >= this.scrollOffset) {
+        UI.puts("");
+      }
+
+      const isSelected = idx === this.cursorPos;
+      UI.print(isSelected ? "{b}→ {/b}" : "  ");
+
+      if (idx < tries.length) {
+        const tryDir = tries[idx];
+        const isMarked = this.markedForDeletion.includes(tryDir.path);
+        const basename = tryDir.basename;
+
+        const timeText = this.formatRelativeTime(tryDir.mtime);
+        const scoreText = (tryDir.score ?? 0).toFixed(1);
+        const metaText = `${timeText}, ${scoreText}`;
+        const metaWidth = metaText.length + 1;
+
+        const prefixWidth = 5;
+        const metaStart = termWidth - metaWidth;
+        const maxNameForMeta = metaStart - prefixWidth - 1;
+        const maxNameWidth = termWidth - prefixWidth - 1;
+
+        if (isMarked) UI.print("{strike}");
+
+        UI.print(isMarked ? "🗑️  " : "📁 ");
+        if (isSelected) UI.print("{section}");
+
+        let displayText = "";
+
+        const m = basename.match(/^(\d{4}-\d{2}-\d{2})-(.+)$/);
+        if (m) {
+          const datePart = m[1];
+          let namePart = m[2];
+          let fullName = `${datePart}-${namePart}`;
+
+          if (fullName.length > maxNameWidth && maxNameWidth > 14) {
+            const available = maxNameWidth - 11 - 1 - 1;
+            if (namePart.length > available + 1) {
+              namePart = namePart.slice(0, available) + "…";
+            }
+            fullName = `${datePart}-${namePart}`;
+          }
+
+          UI.print(`{dim}${datePart}{/fg}`);
+
+          const sepMatches =
+            this.inputBuffer.length > 0 && this.inputBuffer.includes("-");
+          UI.print(sepMatches ? "{b}-{/b}" : "{dim}-{/fg}");
+
+          if (this.inputBuffer.length > 0) {
+            UI.print(this.highlightMatchesForSelection(namePart, this.inputBuffer, isSelected));
+          } else {
+            UI.print(namePart);
+          }
+
+          displayText = fullName;
+        } else {
+          let name = basename;
+          if (name.length > maxNameWidth && maxNameWidth > 2) {
+            name = name.slice(0, maxNameWidth - 1) + "…";
+          }
+
+          if (this.inputBuffer.length > 0) {
+            UI.print(this.highlightMatchesForSelection(name, this.inputBuffer, isSelected));
+          } else {
+            UI.print(name);
+          }
+
+          displayText = name;
+        }
+
+        if (isSelected) UI.print("{/section}");
+
+        if (displayText.length <= maxNameForMeta) {
+          const paddingNeeded = metaStart - prefixWidth - displayText.length;
+          UI.print(" ".repeat(Math.max(paddingNeeded, 0)));
+          UI.print(`{dim}${metaText}{/fg}`);
+        }
+
+        if (isMarked) UI.print("{/strike}");
+      } else {
+        if (isSelected) UI.print("{section}");
+
+        const datePrefix = this.todayPrefix();
+        const displayText =
+          this.inputBuffer.length === 0
+            ? `📂 Create new: ${datePrefix}-`
+            : `📂 Create new: ${datePrefix}-${this.inputBuffer}`;
+
+        UI.print(displayText);
+
+        const textWidth = displayText.length;
+        const paddingNeeded = termWidth - 3 - textWidth;
+        UI.print(" ".repeat(Math.max(paddingNeeded, 1)));
+      }
+
+      UI.puts("");
+    }
+
+    if (totalItems > maxVisible) {
+      UI.puts(`{dim}${separator}{/fg}`);
+      UI.puts(`{dim}[${this.scrollOffset + 1}-${visibleEnd}/${totalItems}]{/fg}`);
+    }
+
+    UI.puts(`{dim}${separator}{/fg}`);
+
+    if (this.deleteStatus) {
+      UI.puts(`{b}${this.deleteStatus}{/b}`);
+      this.deleteStatus = null;
+    } else if (this.deleteMode) {
+      const count = this.markedForDeletion.length;
+      UI.puts(`{strike} DELETE MODE {/strike} ${count} marked  |  Ctrl-D: Toggle  Enter: Confirm  Esc: Cancel`);
+    } else {
+      UI.puts("{dim}↑↓: Navigate  Enter: Select  Ctrl-D: Delete  Esc: Cancel{/fg}");
+    }
+
+    UI.flush();
+  }
+
+  private formatRelativeTime(time?: Date): string {
+    if (!time) return "?";
+    const seconds = (Date.now() - time.getTime()) / 1000;
+    const minutes = seconds / 60;
+    const hours = minutes / 60;
+    const days = hours / 24;
+
+    if (seconds < 60) return "just now";
+    if (minutes < 60) return `${Math.floor(minutes)}m ago`;
+    if (hours < 24) return `${Math.floor(hours)}h ago`;
+    if (days < 7) return `${Math.floor(days)}d ago`;
+    return `${Math.floor(days / 7)}w ago`;
+  }
+
+  private highlightMatchesForSelection(text: string, query: string, isSelected: boolean): string {
+    if (!query) return text;
+
+    let result = "";
+    const textLower = text.toLowerCase();
+    const queryLower = query.toLowerCase();
+    const queryChars = Array.from(queryLower);
+    let queryIndex = 0;
+
+    for (let i = 0; i < text.length; i++) {
+      const ch = text[i];
+      if (queryIndex < queryChars.length && textLower[i] === queryChars[queryIndex]) {
+        result += `{b}${ch}{/b}`;
+        queryIndex++;
+      } else {
+        result += ch;
+      }
+    }
+
+    return result;
+  }
+
+  private handleSelection(tryDir: TryDir) {
+    this.selected = { type: "cd", path: tryDir.path };
+  }
+
+  private todayPrefix(): string {
+    const d = new Date();
+    const y = d.getFullYear();
+    const m = String(d.getMonth() + 1).padStart(2, "0");
+    const day = String(d.getDate()).padStart(2, "0");
+    return `${y}-${m}-${day}`;
+  }
+
+  private async handleCreateNew() {
+    const datePrefix = this.todayPrefix();
+
+    if (this.inputBuffer.length > 0) {
+      const finalName = `${datePrefix}-${this.inputBuffer}`.replace(/\s+/g, "-");
+      const fullPath = path.join(this.basePath, finalName);
+      this.selected = { type: "mkdir", path: fullPath };
+      return;
+    }
+
+    // Prompt for one
+    UI.cls();
+    UI.puts("{h2}Enter new try name");
+    UI.puts("");
+    UI.puts(`> {dim}${datePrefix}-{/fg}`);
+    UI.flush();
+    UI.showCursor();
+
+    const entry = await this.readLinePrompt("");
+    if (!entry.trim()) {
+      this.selected = { type: "cancel", path: null };
+      UI.hideCursor();
+      return;
+    }
+
+    const finalName = `${datePrefix}-${entry}`.replace(/\s+/g, "-");
+    const fullPath = path.join(this.basePath, finalName);
+    this.selected = { type: "mkdir", path: fullPath };
+
+    UI.hideCursor();
+  }
+
+  private async readLinePrompt(promptText: string): Promise<string> {
+    const stdin = process.stdin;
+    const wasRaw = stdin.isTTY ? (stdin as any).isRaw : false;
+
+    if (stdin.isTTY) {
+      try {
+        stdin.setRawMode(false);
+      } catch {}
+    }
+
+    const rl = readline.createInterface({
+      input: stdin,
+      output: process.stderr,
+    });
+
+    const answer: string = await new Promise((resolve) =>
+      rl.question(promptText, (ans) => resolve(ans))
+    );
+
+    rl.close();
+
+    if (stdin.isTTY) {
+      try {
+        stdin.setRawMode(!!wasRaw);
+      } catch {}
+    }
+
+    return answer;
+  }
+
+  private async confirmBatchDelete(tries: TryDir[], reader?: KeyReader) {
+    const markedItems = tries.filter((t) => this.markedForDeletion.includes(t.path));
+    if (markedItems.length === 0) return;
+
+    UI.cls();
+    UI.puts(`{h2}Delete ${markedItems.length} Director${markedItems.length === 1 ? "y" : "ies"}{reset}`);
+    UI.puts("");
+
+    for (const item of markedItems) {
+      UI.puts(`  {strike}📁 ${item.basename}{/strike}`);
+    }
+
+    UI.puts("");
+    UI.puts("{b}Type {/b}YES{b} to confirm deletion: {/b}");
+    UI.flush();
+    UI.showCursor();
+
+    let confirmation = "";
+
+    if (this.testKeys && this.testKeys.length > 0) {
+      while (this.testKeys.length > 0) {
+        const ch = this.testKeys.shift() as string;
+        if (ch === "\r" || ch === "\n") break;
+        confirmation += ch;
+      }
+    } else if (this.testConfirm || !process.stderr.isTTY) {
+      confirmation = String(this.testConfirm ?? (await this.readLinePrompt("")));
+    } else {
+      confirmation = await this.readLinePrompt("");
+    }
+
+    if (confirmation === "YES") {
+      try {
+        const baseReal = fs.realpathSync(this.basePath);
+
+        const validated: { path: string; basename: string }[] = [];
+        for (const item of markedItems) {
+          const targetReal = fs.realpathSync(item.path);
+          if (!targetReal.startsWith(baseReal + path.sep)) {
+            throw new Error(
+              `Safety check failed: ${targetReal} is not inside ${baseReal}`
+            );
+          }
+          validated.push({ path: targetReal, basename: item.basename });
+        }
+
+        this.selected = {
+          type: "delete",
+          paths: validated,
+          base_path: baseReal,
+        };
+
+        const names = validated.map((p) => p.basename).join(", ");
+        this.deleteStatus = `Deleted: {strike}${names}{/strike}`;
+        this.allTries = null;
+        this.markedForDeletion = [];
+        this.deleteMode = false;
+      } catch (e: any) {
+        this.deleteStatus = `Error: ${e?.message ?? String(e)}`;
+      }
+    } else {
+      this.deleteStatus = "Delete cancelled";
+      this.markedForDeletion = [];
+      this.deleteMode = false;
+    }
+
+    UI.hideCursor();
+  }
+}
+
+// ------------------------- CLI helpers -------------------------
+
+const VERSION = "1.2.0";
+const SCRIPT_WARNING =
+  "# if you can read this, you didn't launch try from an alias. run try --help.";
+
+function fishShell(): boolean {
+  return (process.env.SHELL ?? "").includes("fish");
+}
+
+function q(str: string): string {
+  // single-quote safe for sh
+  return "'" + str.replace(/'/g, `'"'"'`) + "'";
+}
+
+function emitScript(cmds: string[]) {
+  process.stdout.write(SCRIPT_WARNING + "\n");
+  cmds.forEach((cmd, i) => {
+    if (i === 0) {
+      process.stdout.write(cmd);
+    } else {
+      process.stdout.write("  " + cmd);
+    }
+    if (i < cmds.length - 1) {
+      process.stdout.write(" && \\\n");
+    } else {
+      process.stdout.write("\n");
+    }
+  });
+}
+
+function script_cd(p: string): string[] {
+  return [`touch ${q(p)}`, `cd ${q(p)}`];
+}
+
+function script_mkdir_cd(p: string): string[] {
+  return [`mkdir -p ${q(p)}`, ...script_cd(p)];
+}
+
+function script_clone(p: string, uri: string): string[] {
+  const msg = UI.expandTokens(
+    `Using {b}git clone{/b} to create this trial from ${uri}.`
+  );
+  return [
+    `mkdir -p ${q(p)}`,
+    `echo ${q(msg)}`,
+    `git clone '${uri}' ${q(p)}`,
+    ...script_cd(p),
+  ];
+}
+
+function script_worktree(p: string, repo?: string | null): string[] {
+  const r = repo ? q(repo) : null;
+
+  const worktreeCmd = r
+    ? `/usr/bin/env sh -c 'if git -C ${r} rev-parse --is-inside-work-tree >/dev/null 2>&1; then repo=$(git -C ${r} rev-parse --show-toplevel); git -C "$repo" worktree add --detach ${q(p)} >/dev/null 2>&1 || true; fi; exit 0'`
+    : `/usr/bin/env sh -c 'if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then repo=$(git rev-parse --show-toplevel); git -C "$repo" worktree add --detach ${q(p)} >/dev/null 2>&1 || true; fi; exit 0'`;
+
+  const src = repo ?? process.cwd();
+  const msg = UI.expandTokens(
+    `Using {b}git worktree{/b} to create this trial from ${src}.`
+  );
+
+  return [`mkdir -p ${q(p)}`, `echo ${q(msg)}`, worktreeCmd, ...script_cd(p)];
+}
+
+function script_delete(
+  items: { path: string; basename: string }[],
+  basePath: string
+): string[] {
+  const cmds = [`cd ${q(basePath)}`];
+  for (const item of items) {
+    cmds.push(`[[ -d ${q(item.basename)} ]] && rm -rf ${q(item.basename)}`);
+  }
+  cmds.push(`( cd ${q(process.cwd())} 2>/dev/null || cd "$HOME" )`);
+  return cmds;
+}
+
+function unique_dir_name(triesPath: string, dirName: string): string {
+  let candidate = dirName;
+  let i = 2;
+  while (fs.existsSync(path.join(triesPath, candidate))) {
+    candidate = `${dirName}-${i}`;
+    i += 1;
+  }
+  return candidate;
+}
+
+function resolve_unique_name_with_versioning(
+  triesPath: string,
+  datePrefix: string,
+  base: string
+): string {
+  const initial = `${datePrefix}-${base}`;
+  if (!fs.existsSync(path.join(triesPath, initial))) return base;
+
+  const m = base.match(/^(.*?)(\d+)$/);
+  if (m) {
+    const stem = m[1];
+    const n = Number(m[2]);
+    let candidateNum = n + 1;
+    while (true) {
+      const candidateBase = `${stem}${candidateNum}`;
+      const candidateFull = path.join(triesPath, `${datePrefix}-${candidateBase}`);
+      if (!fs.existsSync(candidateFull)) return candidateBase;
+      candidateNum += 1;
+    }
+  } else {
+    const full = unique_dir_name(triesPath, `${datePrefix}-${base}`);
+    return full.replace(new RegExp(`^${datePrefix}-`), "");
+  }
+}
+
+function worktree_path(
+  triesPath: string,
+  repoDir: string,
+  customName: string
+): string {
+  const base =
+    customName && customName.trim()
+      ? customName.replace(/\s+/g, "-")
+      : (() => {
+          try {
+            return path.basename(fs.realpathSync(repoDir));
+          } catch {
+            return path.basename(repoDir);
+          }
+        })();
+
+  const datePrefix = todayPrefix();
+  const resolvedBase = resolve_unique_name_with_versioning(triesPath, datePrefix, base);
+  return path.join(triesPath, `${datePrefix}-${resolvedBase}`);
+}
+
+function todayPrefix(): string {
+  const d = new Date();
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
+  return `${y}-${m}-${day}`;
+}
+
+function parse_git_uri(uri: string): { user: string; repo: string; host: string } | null {
+  const cleaned = uri.replace(/\.git$/, "");
+
+  let m;
+  m = cleaned.match(/^https?:\/\/github\.com\/([^/]+)\/([^/]+)/);
+  if (m) return { host: "github.com", user: m[1], repo: m[2] };
+
+  m = cleaned.match(/^git@github\.com:([^/]+)\/([^/]+)/);
+  if (m) return { host: "github.com", user: m[1], repo: m[2] };
+
+  m = cleaned.match(/^https?:\/\/([^/]+)\/([^/]+)\/([^/]+)/);
+  if (m) return { host: m[1], user: m[2], repo: m[3] };
+
+  m = cleaned.match(/^git@([^:]+):([^/]+)\/([^/]+)/);
+  if (m) return { host: m[1], user: m[2], repo: m[3] };
+
+  return null;
+}
+
+function generate_clone_directory_name(gitUri: string, customName?: string | null): string | null {
+  if (customName && customName.length > 0) return customName;
+  const parsed = parse_git_uri(gitUri);
+  if (!parsed) return null;
+  const datePrefix = todayPrefix();
+  return `${datePrefix}-${parsed.user}-${parsed.repo}`;
+}
+
+function is_git_uri(arg?: string | null): boolean {
+  if (!arg) return false;
+  return (
+    /^(https?:\/\/|git@)/.test(arg) ||
+    arg.includes("github.com") ||
+    arg.includes("gitlab.com") ||
+    arg.endsWith(".git")
+  );
+}
+
+function extract_option_with_value(args: string[], optName: string): string | null {
+  let idx = -1;
+  for (let i = args.length - 1; i >= 0; i--) {
+    if (args[i] === optName || args[i].startsWith(`${optName}=`)) {
+      idx = i;
+      break;
+    }
+  }
+  if (idx < 0) return null;
+
+  const arg = args.splice(idx, 1)[0];
+  if (arg.includes("=")) {
+    return arg.split("=", 2)[1] ?? "";
+  } else {
+    return args.splice(idx, 1)[0] ?? "";
+  }
+}
+
+function parse_test_keys(spec?: string | null): string[] | null {
+  if (!spec || !spec.length) return null;
+
+  const useTokenMode = spec.includes(",") || /^[A-Z\-]+$/.test(spec);
+
+  if (useTokenMode) {
+    const tokens = spec.split(/,\s*/);
+    const keys: string[] = [];
+
+    for (const tok of tokens) {
+      const up = tok.toUpperCase();
+
+      switch (up) {
+        case "UP": keys.push("\x1b[A"); break;
+        case "DOWN": keys.push("\x1b[B"); break;
+        case "LEFT": keys.push("\x1b[D"); break;
+        case "RIGHT": keys.push("\x1b[C"); break;
+        case "ENTER": keys.push("\r"); break;
+        case "ESC": keys.push("\x1b"); break;
+        case "BACKSPACE": keys.push("\x7F"); break;
+        case "CTRL-A":
+        case "CTRLA": keys.push("\x01"); break;
+        case "CTRL-B":
+        case "CTRLB": keys.push("\x02"); break;
+        case "CTRL-D":
+        case "CTRLD": keys.push("\x04"); break;
+        case "CTRL-E":
+        case "CTRLE": keys.push("\x05"); break;
+        case "CTRL-F":
+        case "CTRLF": keys.push("\x06"); break;
+        case "CTRL-H":
+        case "CTRLH": keys.push("\x08"); break;
+        case "CTRL-K":
+        case "CTRLK": keys.push("\x0B"); break;
+        case "CTRL-N":
+        case "CTRLN": keys.push("\x0E"); break;
+        case "CTRL-P":
+        case "CTRLP": keys.push("\x10"); break;
+        case "CTRL-W":
+        case "CTRLW": keys.push("\x17"); break;
+        default: {
+          const m = up.match(/^TYPE=(.*)$/);
+          if (m) {
+            for (const ch of m[1]) keys.push(ch);
+          } else if (tok.length === 1) {
+            keys.push(tok);
+          }
+          break;
+        }
+      }
+    }
+
+    return keys;
+  } else {
+    const keys: string[] = [];
+    let i = 0;
+    while (i < spec.length) {
+      if (spec[i] === "\x1b" && i + 2 < spec.length && spec[i + 1] === "[") {
+        keys.push(spec.slice(i, i + 3));
+        i += 3;
+      } else {
+        keys.push(spec[i]);
+        i += 1;
+      }
+    }
+    return keys;
+  }
+}
+
+// ------------------------- Commands -------------------------
+
+function print_global_help(currentPath: string) {
+  const text = `
+{h1}try{reset} v${VERSION} - ephemeral workspace manager
+
+To use try, add to your shell config:
+
+  {dim}# bash/zsh (~/.bashrc or ~/.zshrc){/fg}
+  {b}eval "$(try init ~/src/tries)"{/b}
+
+  {dim}# fish (~/.config/fish/config.fish){/fg}
+  {b}eval (try init ~/src/tries | string collect){/b}
+
+{h2}Usage:{reset}
+  try [query]           Interactive directory selector
+  try clone <url>       Clone repo into dated directory
+  try worktree <name>   Create worktree from current git repo
+  try --help            Show this help
+
+{h2}Commands:{reset}
+  init [path]           Output shell function definition
+  clone <url> [name]    Clone git repo into date-prefixed directory
+  worktree <name>       Create worktree in dated directory
+
+{h2}Examples:{reset}
+  try                   Open interactive selector
+  try project           Selector with initial filter
+  try clone https://github.com/user/repo
+  try worktree feature-branch
+
+{h2}Manual mode (without alias):{reset}
+  try exec [query]      Output shell script to eval
+
+{h2}Defaults:{reset}
+  Default path: {dim}~/src/tries{/fg}
+  Current: {dim}${currentPath}{/fg}
+`.trimEnd();
+
+  // Help should be plain to STDOUT.
+  let out = UI.expandTokens(text);
+
+  if (!process.stdout.isTTY && !out.includes("{")) {
+    out = text.replace(/\{.*?\}/g, "");
+  }
+
+  process.stdout.write(out + "\n");
+}
+
+function cmd_clone(args: string[], triesPath: string): string[] {
+  const gitUri = args.shift();
+  const customName = args.shift();
+
+  if (!gitUri) {
+    process.stderr.write("Error: git URI required for clone command\n");
+    process.stderr.write("Usage: try clone <git-uri> [name]\n");
+    process.exit(1);
+  }
+
+  const dirName = generate_clone_directory_name(gitUri, customName);
+  if (!dirName) {
+    process.stderr.write(`Error: Unable to parse git URI: ${gitUri}\n`);
+    process.exit(1);
+  }
+
+  return script_clone(path.join(triesPath, dirName), gitUri);
+}
+
+function cmd_init(args: string[], triesPath: string) {
+  const scriptPath = path.resolve(process.argv[1]);
+
+  if (args[0] && args[0].startsWith("/")) {
+    triesPath = path.resolve(args.shift() as string);
+  }
+
+  const pathArg = triesPath ? ` --path '${triesPath}'` : "";
+
+  const bashOrZsh = `
+try() {
+  local out
+  out=$(/usr/bin/env node '${scriptPath}' exec${pathArg} "$@" 2>/dev/tty)
+  if [ $? -eq 0 ]; then
+    eval "$out"
+  else
+    echo "$out"
+  fi
+}
+`.trimStart();
+
+  const fish = `
+function try
+  set -l out (/usr/bin/env node '${scriptPath}' exec${pathArg} $argv 2>/dev/tty | string collect)
+  if test $status -eq 0
+    eval $out
+  else
+    echo $out
+  end
+end
+`.trimStart();
+
+  process.stdout.write(fishShell() ? fish : bashOrZsh);
+}
+
+async function cmd_cd(
+  args: string[],
+  triesPath: string,
+  andType: string | null,
+  andExit: boolean,
+  andKeys: string[] | null,
+  andConfirm: string | null
+): Promise<string[] | null> {
+  if (args[0] === "clone") {
+    args.shift();
+    return cmd_clone(args, triesPath);
+  }
+
+  // Support: try . [name] and try ./path [name]
+  if (args[0] && args[0].startsWith(".")) {
+    const pathArg = args.shift() as string;
+    const custom = args.join(" ");
+    const repoDir = path.resolve(pathArg);
+
+    if (pathArg === "." && (!custom || !custom.trim())) {
+      process.stderr.write("Error: 'try .' requires a name argument\n");
+      process.stderr.write("Usage: try . <name>\n");
+      process.exit(1);
+    }
+
+    const base =
+      custom && custom.trim()
+        ? custom.replace(/\s+/g, "-")
+        : path.basename(repoDir);
+
+    const datePrefix = todayPrefix();
+    const resolvedBase = resolve_unique_name_with_versioning(
+      triesPath,
+      datePrefix,
+      base
+    );
+    const fullPath = path.join(triesPath, `${datePrefix}-${resolvedBase}`);
+
+    if (fs.existsSync(path.join(repoDir, ".git"))) {
+      return script_worktree(fullPath, repoDir);
+    } else {
+      return script_mkdir_cd(fullPath);
+    }
+  }
+
+  const searchTerm = args.join(" ");
+
+  // Git URL shorthand → clone workflow
+  const first = searchTerm.split(/\s+/, 1)[0];
+  if (is_git_uri(first)) {
+    const [gitUri, ...rest] = searchTerm.split(/\s+/);
+    const customName = rest.join(" ");
+    const dirName = generate_clone_directory_name(gitUri, customName);
+    if (!dirName) {
+      process.stderr.write(`Error: Unable to parse git URI: ${gitUri}\n`);
+      process.exit(1);
+    }
+    const full = path.join(triesPath, dirName);
+    return script_clone(full, gitUri);
+  }
+
+  const selector = new TrySelector(searchTerm, {
+    basePath: triesPath,
+    initialInput: andType,
+    testRenderOnce: andExit,
+    testNoCls: andExit || (!!andKeys && andKeys.length > 0),
+    testKeys: andKeys,
+    testConfirm: andConfirm,
+  });
+
+  let result: Selection = null;
+  try {
+    result = await selector.run();
+  } catch (e: any) {
+    // ensure terminal restored by selector
+    throw e;
+  }
+
+  if (!result) return null;
+
+  switch (result.type) {
+    case "delete":
+      return script_delete(result.paths, result.base_path);
+    case "mkdir":
+      return script_mkdir_cd(result.path);
+    case "cd":
+      return script_cd(result.path);
+    default:
+      return null;
+  }
+}
+
+// ------------------------- Main -------------------------
+
+async function main() {
+  const argv = process.argv.slice(2);
+
+  // Process color-related flags early
+  if (argv.includes("--no-expand-tokens")) {
+    argv.splice(argv.indexOf("--no-expand-tokens"), 1);
+    UI.disableTokenExpansion();
+  }
+  if (argv.includes("--no-colors")) {
+    argv.splice(argv.indexOf("--no-colors"), 1);
+    UI.disableColors();
+  }
+  if (process.env.NO_COLOR && process.env.NO_COLOR.length > 0) {
+    UI.disableColors();
+  }
+
+  // Global help anywhere
+  if (argv.includes("--help") || argv.includes("-h")) {
+    const current = path.resolve(
+      extract_option_with_value([...argv], "--path") ??
+        TrySelector.TRY_PATH
+    );
+    print_global_help(current);
+    process.exit(0);
+  }
+
+  // Version flag
+  if (argv.includes("--version") || argv.includes("-v")) {
+    process.stdout.write(`try ${VERSION}\n`);
+    process.exit(0);
+  }
+
+  // Extract options before command
+  const triesPathOpt = extract_option_with_value(argv, "--path");
+  const triesPath = path.resolve(triesPathOpt ?? TrySelector.TRY_PATH);
+
+  const andType = extract_option_with_value(argv, "--and-type");
+  const andExit = argv.includes("--and-exit");
+  if (andExit) argv.splice(argv.indexOf("--and-exit"), 1);
+
+  const andKeysRaw = extract_option_with_value(argv, "--and-keys");
+  const andConfirm = extract_option_with_value(argv, "--and-confirm");
+
+  const andKeys = parse_test_keys(andKeysRaw);
+
+  if (andExit || (andKeys && andKeys.length > 0)) {
+    UI.forceColors();
+  }
+
+  const command = argv.shift();
+
+  if (!command) {
+    print_global_help(triesPath);
+    process.exit(2);
+  }
+
+  switch (command) {
+    case "clone": {
+      const script = cmd_clone(argv, triesPath);
+      emitScript(script);
+      process.exit(0);
+    }
+
+    case "init": {
+      cmd_init(argv, triesPath);
+      process.exit(0);
+    }
+
+    case "exec": {
+      const sub = argv[0];
+
+      if (sub === "clone") {
+        argv.shift();
+        emitScript(cmd_clone(argv, triesPath));
+        process.exit(0);
+      }
+
+      if (sub === "worktree") {
+        argv.shift();
+        const repo = argv.shift();
+        const repoDir =
+          repo && repo !== "dir" ? path.resolve(repo) : process.cwd();
+        const fullPath = worktree_path(triesPath, repoDir, argv.join(" "));
+        emitScript(script_worktree(fullPath, repoDir === process.cwd() ? null : repoDir));
+        process.exit(0);
+      }
+
+      if (sub === "cd") {
+        argv.shift();
+        const script = await cmd_cd(argv, triesPath, andType, andExit, andKeys, andConfirm);
+        if (script) {
+          emitScript(script);
+          process.exit(0);
+        } else {
+          process.stdout.write("Cancelled.\n");
+          process.exit(1);
+        }
+      }
+
+      const script = await cmd_cd(argv, triesPath, andType, andExit, andKeys, andConfirm);
+      if (script) {
+        emitScript(script);
+        process.exit(0);
+      } else {
+        process.stdout.write("Cancelled.\n");
+        process.exit(1);
+      }
+      break;
+    }
+
+    case "worktree": {
+      const repo = argv.shift();
+      const repoDir =
+        repo && repo !== "dir" ? path.resolve(repo) : process.cwd();
+      const fullPath = worktree_path(triesPath, repoDir, argv.join(" "));
+      emitScript(script_worktree(fullPath, repoDir === process.cwd() ? null : repoDir));
+      process.exit(0);
+    }
+
+    default: {
+      // Default: try [query] (same as try exec [query])
+      argv.unshift(command);
+      const script = await cmd_cd(argv, triesPath, andType, andExit, andKeys, andConfirm);
+      if (script) {
+        emitScript(script);
+        process.exit(0);
+      } else {
+        process.stdout.write("Cancelled.\n");
+        process.exit(1);
+      }
+    }
+  }
+}
+
+main().catch((err) => {
+  // Best-effort error reporting without breaking terminal too badly.
+  try {
+    UI.showCursor();
+  } catch {}
+  process.stderr.write(String(err?.stack ?? err) + "\n");
+  process.exit(1);
+});
