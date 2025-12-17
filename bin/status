@@ -6,9 +6,9 @@
 # TOTAL=$(pomo summary --stream project --label "${PROJECT}" | jq -r .duration)
 
 BATTERY=$(acpi -b | grep -v unavailable | tail -n 1 | rg -o '\w+, \d+%')
-BATTERY=$(echo "${BATTERY}" | sed 's/Discharging,\s*/#[fg=colour1]▼/')
-BATTERY=$(echo "${BATTERY}" | sed 's/Charging,\s*/#[fg=colour2]▲/')
-BATTERY=$(echo "${BATTERY}" | sed 's/Full,\s*/#[fg=colour3]/')
+BATTERY=$(echo "${BATTERY}" | sed 's/Discharging,\s*/▼/')
+BATTERY=$(echo "${BATTERY}" | sed 's/Charging,\s*/▲/')
+BATTERY=$(echo "${BATTERY}" | sed 's/Full,\s*//')
 
 DATE=$(date +"%Y.%m.%d")
 TIME=$(date +"%H:%M")
@@ -17,4 +17,4 @@ VOLUME=$(awk -F"[][]" '/Mono:/ { print $2 }' <(amixer sget Master))
 
 PROFILE=$(cat /sys/firmware/acpi/platform_profile | head --bytes 1 | tr '[:lower:]' '[:upper:]')
 
-echo "#[fg=colour2]${PROFILE} #[fg=colour10]${TOTAL} #[fg=colour4]${PROJECT}#[fg=colour12] #[fg=colour3]${ELAPSED} #[fg=colour8]• ${BATTERY} #[fg=colour8]• #[fg=colour6]${DATE} #[fg=colour7]${TIME} #[fg=colour8]• #[fg=colour4]${VOLUME}"
+echo "${PROFILE} ${TOTAL} ${PROJECT} ${ELAPSED} • ${BATTERY} • ${DATE} ${TIME} • ${VOLUME}"
