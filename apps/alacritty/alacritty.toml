@@ -3,20 +3,20 @@
 size = 8.0
 
 [font.bold]
-family = "SF Mono"
+family = "gomme"
 style = "Bold"
 
 [font.bold_italic]
-family = "SF Mono"
+family = "gomme"
 style = "Regular"
 
 [font.italic]
-family = "SF Mono"
+family = "gomme"
 style = "Regular"
 
 [font.normal]
-family = "SF Mono"
+family = "gomme"
 style = "Regular"
 
 [general]
-import = ["~/dotfiles/apps/alacritty/colors/termorrow_light.toml"]
+import = ["~/dotfiles/apps/alacritty/colors/termorrow_dark.toml"]
