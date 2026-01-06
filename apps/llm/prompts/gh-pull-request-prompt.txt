@@ -30,8 +30,8 @@ STYLE
 OUTPUT FORMAT (STRICT)
 Return ONLY a single JSON object with these keys:
 {
-  "title": "<string>",
-  "content": "<markdown string>"
+  "content": "<markdown string>",
+  "title": "<string>"
 }
 - Do NOT include backticks, comments, extra keys, or surrounding text.
 
