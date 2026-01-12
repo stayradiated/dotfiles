@@ -16,8 +16,7 @@ WHAT TO DO
 4) Summarize behavior change at a high level. Do not paste code or long hunks.
 5) List 3–6 notable changes, grouped by theme when possible.
 6) Call out breaking changes, migrations, config toggles, or user-visible impacts.
-7) Note tests added/updated and how to verify.
-8) If the diff is trivial (only lockfiles, formatting, comments), say “No functional changes.”
+7) If the diff is trivial (only lockfiles, formatting, comments), say “No functional changes.”
 
 STYLE
 - Title: imperative mood, ≤ 72 characters, no trailing period, no emojis.
@@ -50,10 +49,3 @@ Content template (adapt as needed):
 - <bullet of notable change>
 - <bullet of notable change>
 - <group similar tiny changes into one bullet>
-
-## Testing
-- <tests added/updated and how to verify locally or in CI>
-
-EDGE CASES
-- Only docs/tests/build/deps changed → say so explicitly; if deps only, add “No functional changes.”
-- Empty or unreadable diff → title “Update project metadata” and minimal description stating no code changes detected.
