@@ -1,0 +1,3 @@
+#!/usr/bin/env zsh
+
+exec exec-appimage /opt/polypane.AppImage
