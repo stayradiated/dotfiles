@@ -10,4 +10,4 @@ pager = ["delta", "--diff-so-fancy"]
 diff-formatter = ":git"
 
 [remotes.origin]
-auto-track-bookmarks = "glob:george/*"
+auto-track-bookmarks = "glob:*"
