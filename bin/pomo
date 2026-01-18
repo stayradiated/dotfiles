@@ -1,1 +1,3 @@
-/home/admin/src/github.com/stayradiated/pomo/apps/cli/bin/pomo
+#!/usr/bin/env zsh
+
+exec /home/admin/src/github.com/stayradiated/aeon/__legacy/apps/cli/bin/pomo "$@"
