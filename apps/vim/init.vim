@@ -16,6 +16,7 @@ call dein#add('$HOME/.config/nvim/dein/repos/github.com/Shougo/dein.vim')
 " Themes
 call dein#add('stayradiated/vim-termorrow')
 call dein#add('reedes/vim-colors-pencil')
+call dein#add('sderev/alabaster.vim')
 
 " Extensions
 call dein#add('Shougo/denite.nvim')
@@ -107,7 +108,7 @@ set relativenumber
 set inccommand=split     " live substitution
 
 set list
-set listchars=tab:»\ ,trail:•,eol:\ 
+set listchars=tab:»\ ,trail:•
 
 " Backup swap files
 set backup
@@ -168,7 +169,8 @@ let g:pencil_terminal_italics=1
 let g:pencil_spell_undercurl=1
 let g:hybrid_use_Xresources=1
 
-colorscheme termorrow
+" colorscheme termorrow
+colorscheme alabaster-dark
 set background=dark
 
 " Digraphs
