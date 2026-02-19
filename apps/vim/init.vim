@@ -169,10 +169,10 @@ let g:pencil_terminal_italics=1
 let g:pencil_spell_undercurl=1
 let g:hybrid_use_Xresources=1
 
-colorscheme alabaster
+" colorscheme alabaster
 " colorscheme termorrow
-" colorscheme alabaster-dark
-" set background=dark
+colorscheme alabaster-dark
+set background=dark
 
 " Digraphs
 digraphs lh 9829 " ♥ love heart
