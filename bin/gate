@@ -1,0 +1,104 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+usage() {
+  cat <<'EOF'
+Usage:
+  gate --only <days...> -- <command> [args...]
+  gate --except <days...> -- <command> [args...]
+  gate --deny-message "..." --only|--except ... -- <command> [args...]
+
+Days can be: mon monday tue tuesday wed wednesday thu thursday fri friday sat saturday sun sunday
+Examples:
+  gate --only monday tuesday -- gh
+  gate --except sat sun -- claude
+EOF
+}
+
+die() { echo "gate: $*" >&2; exit 64; }
+
+deny_msg="Blocked by gate for today."
+
+mode=""
+days=()
+
+# Parse options until we hit "--"
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    --only|--except)
+      [[ -z "${mode}" ]] || die "use only one of --only or --except"
+      mode="${1#--}"
+      shift
+      # collect day tokens until "--" or another option
+      while [[ $# -gt 0 && "$1" != "--" && "$1" != --* ]]; do
+        days+=("$1")
+        shift
+      done
+      ;;
+    --deny-message)
+      shift
+      [[ $# -gt 0 ]] || die "--deny-message requires a value"
+      deny_msg="$1"
+      shift
+      ;;
+    -h|--help)
+      usage; exit 0
+      ;;
+    --)
+      shift
+      break
+      ;;
+    *)
+      die "unknown arg: $1 (try --help)"
+      ;;
+  esac
+done
+
+[[ -n "${mode}" ]] || die "missing --only or --except"
+[[ ${#days[@]} -gt 0 ]] || die "no days provided"
+[[ $# -gt 0 ]] || die "missing command after --"
+
+# Normalize day tokens to 1..7 (Mon=1 .. Sun=7)
+day_to_num() {
+  local d="${1,,}"
+  case "$d" in
+    mon|monday) echo 1 ;;
+    tue|tues|tuesday) echo 2 ;;
+    wed|wednesday) echo 3 ;;
+    thu|thur|thurs|thursday) echo 4 ;;
+    fri|friday) echo 5 ;;
+    sat|saturday) echo 6 ;;
+    sun|sunday) echo 7 ;;
+    *) return 1 ;;
+  esac
+}
+
+today="$(date +%u)"  # 1..7 (Mon..Sun)
+
+allowed=false
+case "$mode" in
+  only)
+    for d in "${days[@]}"; do
+      n="$(day_to_num "$d")" || die "invalid day: $d"
+      [[ "$today" == "$n" ]] && allowed=true
+    done
+    ;;
+  except)
+    allowed=true
+    for d in "${days[@]}"; do
+      n="$(day_to_num "$d")" || die "invalid day: $d"
+      [[ "$today" == "$n" ]] && allowed=false
+    done
+    ;;
+  *)
+    die "internal: bad mode"
+    ;;
+esac
+
+if ! $allowed; then
+  echo "gate: $(date +%A): $deny_msg" >&2
+  echo "gate: blocked: $*" >&2
+  exit 126
+fi
+
+exec "$@"

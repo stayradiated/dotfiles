@@ -10,14 +10,9 @@ prompt pure
 export GOPATH=/home/admin
 export GOROOT=/usr/local/go
 
-# ruby gems
-export GEM_HOME=/home/admin/src/ruby/gems
-export GEM_PATH=/home/admin/src/ruby/gems
-export PATH="${PATH}:${GEM_PATH}/bin"
-
 # pnpm
 export PNPM_HOME="/home/admin/.local/share/pnpm"
-export PATH="${PNPM_HOME}:${PATH}"
+export PATH="${PATH}:${PNPM_HOME}"
 
 export GPG_TTY=$(tty)
 
