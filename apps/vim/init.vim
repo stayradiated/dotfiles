@@ -60,7 +60,7 @@ call dein#add('othree/eregex.vim')
 " call dein#add('ggandor/leap.nvim')
 " call dein#add('wellle/context.vim')
 
-call dein#add('supermaven-inc/supermaven-nvim')
+" call dein#add('supermaven-inc/supermaven-nvim')
 
 let g:coc_global_extensions = [ 'coc-json', 'coc-tsserver', 'coc-go', 'coc-svelte', 'coc-deno' ]
 call dein#add('neoclide/coc.nvim', {'rev': 'release'})
@@ -88,7 +88,7 @@ if dein#check_install()
   call dein#install()
 endif
 
-lua require("supermaven-nvim").setup({ ignore_filetypes = { "markdown" } })
+" lua require("supermaven-nvim").setup({ ignore_filetypes = { "markdown" } })
 
 " Settings
 " ------------------------------------------------------------------------------

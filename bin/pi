@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-exec gate --only monday tuesday wednesday thursday -- pi "$@"
+exec gate --only monday tuesday wednesday thursday -- $PNPM_HOME/pi "$@"
