@@ -456,3 +456,6 @@ function SetVimPresentationMode()
     Goyo
   endif
 endfunction
+
+" disable auto indenting in svelte
+autocmd FileType svelte setlocal indentexpr=

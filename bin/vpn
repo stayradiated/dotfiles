@@ -170,24 +170,11 @@ show_ip_info() {
     print_info "Current connection info:"
     echo
 
-    # Check if we have curl or wget
-    if command -v curl &> /dev/null; then
-        curl -s http://ifconfig.co/json | jq -r '
-            "  IP: \(.ip)",
-            "  Location: \(.city), \(.region_name), \(.country)",
-            "  ISP: \(.asn_org)"
-        ' 2>/dev/null || curl -s http://ifconfig.co
-    elif command -v wget &> /dev/null; then
-        wget -qO- http://ifconfig.co
-    elif command -v http &> /dev/null; then
-        http --print=b ifconfig.co/json 2>/dev/null | jq -r '
-            "  IP: \(.ip)",
-            "  Location: \(.city), \(.region_name), \(.country)",
-            "  ISP: \(.asn_org)"
-        ' 2>/dev/null || http --print=b ifconfig.co
-    else
-        print_warning "No HTTP client found (curl, wget, or httpie)"
-    fi
+    http --print=b ifconfig.co/json 2>/dev/null | jq -r '
+        "  IP: \(.ip)",
+        "  Location: \(.city), \(.region_name), \(.country)",
+        "  ISP: \(.asn_org)"
+    ' 2>/dev/null || http --print=b ifconfig.co
 }
 
 # Show current VPN status
