@@ -9,5 +9,9 @@ email = "1140167+stayradiated@users.noreply.github.com"
 pager = ["delta", "--diff-so-fancy"]
 diff-formatter = ":git"
 
+# jj diff --tool difft
+[merge-tools.difft]
+diff-args = ["--color=always", "$left", "$right"]
+
 [remotes.origin]
 auto-track-bookmarks = "glob:*"
