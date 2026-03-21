@@ -9,7 +9,7 @@ endif
 
 apps := $(CURDIR)/apps
 
-apps: 1password aerc anki aws beets bspwm charles claude-code darktable dbxcli docker expo firefox fly gcloud gh git githubcopilot greenclip jj khal lazycommit logview llm mitmproxy mycli ngrok npm obsidian pgcli pgp ranger sc-im $(SSH_TARGET) sxhkd tmux urlview vdirsyncer vim weechat xinput x11 xournalpp xscreensaver zoom zsh
+apps: 1password aerc anki aws beets bspwm charles claude-code darktable dbxcli docker expo firefox fly gcloud gh git githubcopilot greenclip jj khal lazycommit logview llm mitmproxy mycli ngrok npm obsidian obsidian-headless pgcli pgp ranger sc-im $(SSH_TARGET) sxhkd tmux urlview vdirsyncer vim weechat xinput x11 xournalpp xscreensaver zoom zsh
 # Agent target
 as-agent:
 	@$(MAKE) AGENT=1
@@ -233,6 +233,14 @@ obsidian:
 	@if test ! -d ~/.config/obsidian/Local\ Storage; then\
 		ln -fs "$(apps)/obsidian/state.enc/Local Storage/" ~/.config/obsidian/Local\ Storage;\
 	fi
+
+obsidian-headless:
+
+	@echo "obsidian-headless..."
+	@mkdir -p ~/.config/obsidian-headless
+	@ln -fs "$(apps)/obsidian-headless/auth_token.enc" ~/.config/obsidian-headless/auth_token
+	@mkdir -p ~/.config/obsidian-headless/sync/a5ed706fc7b93203a44f1937c1cdb5b6
+	@ln -fs "$(apps)/obsidian-headless/sync/a5ed706fc7b93203a44f1937c1cdb5b6/config.json.enc" ~/.config/obsidian-headless/sync/a5ed706fc7b93203a44f1937c1cdb5b6/config.json
 
 pgcli:
 
