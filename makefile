@@ -9,7 +9,8 @@ endif
 
 apps := $(CURDIR)/apps
 
-apps: 1password aerc anki aws beets bspwm charles claude-code darktable dbxcli docker expo firefox fly gcloud gh git githubcopilot greenclip jj khal lazycommit logview llm mitmproxy mycli ngrok npm obsidian obsidian-headless pgcli pgp ranger sc-im $(SSH_TARGET) sxhkd tmux urlview vdirsyncer vim weechat xinput x11 xournalpp xscreensaver zoom zsh
+apps: 1password aerc anki aws beets bspwm charles claude-code darktable dbxcli docker expo firefox fly gcloud gh git githubcopilot greenclip jj khal lazycommit logview llm mitmproxy mycli ngrok npm obsidian obsidian-headless pgcli pgp ranger sc-im $(SSH_TARGET) sxhkd tmux urlview vdirsyncer vim weechat xinput x11 xournalpp xscreensaver zellij zoom zsh
+
 # Agent target
 as-agent:
 	@$(MAKE) AGENT=1
@@ -402,6 +403,12 @@ xscreensaver:
 	@echo "x11..."
 	@ln -fs "$(apps)/xscreensaver/config" ~/.xscreensaver
 	
+zellij:
+
+	@echo "zellij..."
+	@mkdir -p ~/.config/zellij
+	@ln -fs "$(apps)/zellij/config.kdl" ~/.config/zellij/config.kdl
+
 zoom:
 
 	@echo "zoom..."
