@@ -3,12 +3,19 @@
 # delete all old dangling images that weren't referenced in a docker build
 #
 # usage:
-# $ docker build . | tee output.log
-# $ < output.log | docker-prune-dangling
+#   docker buildx build --progress=rawjson . | docker-prune-dangling
 
-EXP=$(cat /dev/stdin \
-	| rg -o '^ ---> \w{12}' \
-	| rg -o '\w{12}' \
-	| awk '/START/{ if (x) print x; x=""; next }{ x=(!x) ? $0 : x"|"$0; }END{ print "("x")"; }')
+set -euo pipefail
 
-docker images --filter dangling=true -q | rg -v "${EXP}" | xargs docker rmi
+exp=$(
+  jq -r '
+    [.vertexes[]?.digest // empty]
+    | map(select(test("^sha256:[0-9a-f]{64}$")))
+    | unique
+    | if length == 0 then "^$" else "^(?:" + (join("|")) + ")$" end
+  '
+)
+
+docker images --filter dangling=true --quiet --no-trunc \
+| rg -vx -- "$exp" \
+| xargs -r docker rmi
