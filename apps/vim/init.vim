@@ -319,7 +319,7 @@ let g:indentLine_char_list = ['|', '¦', '┆', '┊']
 let g:tmuxcomplete#trigger = ''
 
 " https://github.com/airblade/vim-rooter#how-to-identify-a-root-directory
-let g:rooter_patterns = ['.git']
+let g:rooter_patterns = ['package.json', '.git']
 
 " denite.nvim
 call denite#custom#var('file/rec', 'command', ['rg', '--sort=path', '--files', '--glob', '!.git'])

@@ -3,19 +3,19 @@
 size = 8.0
 
 [font.bold]
-family = "gomme"
+family = "SF Mono"
 style = "Bold"
 
 [font.bold_italic]
-family = "gomme"
+family = "SF Mono"
 style = "Regular"
 
 [font.italic]
-family = "gomme"
+family = "SF Mono"
 style = "Regular"
 
 [font.normal]
-family = "gomme"
+family = "SF Mono"
 style = "Regular"
 
 [general]
